@@ -162,11 +162,11 @@ class LightsScene {
         if(x>=x1 && x<=x2 && y>=y1 && y<=y2) {
           if(!this.states[index]) {
             this.states[index] = true;
-            gsap.to(this.$layers[index], {autoAlpha:1, duration:Speed*0.1})
+            gsap.to(this.$layers[index], {autoAlpha:1, duration:Speed*0.05})
           }
         } else if(this.states[index]) {
           this.states[index] = false;
-          gsap.to(this.$layers[index], {autoAlpha:0, duration:Speed*0.1})
+          gsap.to(this.$layers[index], {autoAlpha:0, duration:Speed*0.5})
         }
         
       })  
