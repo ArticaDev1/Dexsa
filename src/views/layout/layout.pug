@@ -1,0 +1,58 @@
+include ../blocks/variables
+block variables
+doctype html
+html(lang='ru')
+  head
+    meta(charset="utf-8")
+    title #{title}
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    //color
+    meta(name="theme-color" content="#000")
+    //favicons
+    link(rel="shortcut icon" href="img/favicons/favicon.ico" type="image/x-icon")
+    link(rel="icon" sizes="16x16" href="img/favicons/favicon-16x16.png" type="image/png")
+    link(rel="icon" sizes="32x32" href="img/favicons/favicon-32x32.png" type="image/png")
+    link(rel="apple-touch-icon-precomposed" href="img/favicons/apple-touch-icon-precomposed.png")
+    link(rel="apple-touch-icon" href="img/favicons/apple-touch-icon.png")
+    link(rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon-57x57.png")
+    link(rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon-60x60.png")
+    link(rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-touch-icon-72x72.png")
+    link(rel="apple-touch-icon" sizes="76x76" href="img/favicons/apple-touch-icon-76x76.png")
+    link(rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-touch-icon-114x114.png")
+    link(rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-touch-icon-120x120.png")
+    link(rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-touch-icon-144x144.png")
+    link(rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-touch-icon-152x152.png")
+    link(rel="apple-touch-icon" sizes="167x167" href="img/favicons/apple-touch-icon-167x167.png")
+    link(rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png")
+    link(rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png")
+    //open graph
+    meta(property='og:title' content=sitename)
+    meta(property='og:site_name' content='Производитель электротехнических решений')
+    meta(property='og:url' content='') 
+    meta(property='og:description' content='Занимаемся разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении.')
+    meta(property='og:image' content='')
+    //fonts
+    link(rel='preconnect' href='https://fonts.gstatic.com')
+    link(href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap' rel='stylesheet')
+    //styles
+    link(rel="stylesheet" href="./styles/theme.css")
+    block styles
+    link(rel="stylesheet" href="./styles/common.css")
+
+  body
+    .wrapper
+      include ../blocks/header
+      main.main
+        block content
+      include ../blocks/footer
+
+    //jquery
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    //scripts
+    block scripts
+    //webpack
+    script(src="./scripts/common.js")
+
+
+    //preview only
+    include ../blocks/helper
