@@ -132,6 +132,12 @@ class LightsScene {
     this.$layers = this.$parent.querySelectorAll('.homepage-scene__layer');
     this.states = [];
 
+    this.animations = {};
+    this.$triggers.forEach(($this, index)=>{
+      this.animations[index] = {};
+    })
+
+
 
     this.resizeEvent = () => {
       let h = this.$parent.getBoundingClientRect().height,
@@ -151,24 +157,28 @@ class LightsScene {
       let x = event.clientX,
           y = event.clientY;
       
-      
       this.$triggers.forEach(($trigger, index)=>{
         let x1 = $trigger.getBoundingClientRect().left,
             x2 = $trigger.getBoundingClientRect().right,
             y1 = $trigger.getBoundingClientRect().top,
             y2 = $trigger.getBoundingClientRect().bottom;
-
         
         if(x>=x1 && x<=x2 && y>=y1 && y<=y2) {
-          if(!this.states[index]) {
-            this.states[index] = true;
-            gsap.to(this.$layers[index], {autoAlpha:1, duration:Speed*0.05})
+          if(!this.animations[index].state) {
+            this.animations[index].state = true;
+
+            if(this.animations[index].exitAnim && this.animations[index].exitAnim.isActive()) {
+              this.animations[index].exitAnim.pause();
+            }
+            
+            this.animations[index].enterAnim = gsap.timeline()
+              .to(this.$layers[index], {autoAlpha:1, duration:Speed*0.05})
           }
-        } else if(this.states[index]) {
-          this.states[index] = false;
-          gsap.to(this.$layers[index], {autoAlpha:0, duration:Speed*0.5})
+        } else if(this.animations[index].state) {
+          this.animations[index].state = false;
+          this.animations[index].exitAnim = gsap.timeline()
+            .to(this.$layers[index], {autoAlpha:0, duration:Speed})
         }
-        
       })  
     }
     
