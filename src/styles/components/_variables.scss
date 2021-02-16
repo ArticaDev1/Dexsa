@@ -19,9 +19,11 @@ $grid-gutter-width:          24px;
 $mobile-container-padding-x: 16px;
 $mobile-grid-gutter-width:   16px;
 
-//fontawesome path
-$fa-font-path: '../fonts/Fontawesome/';
+$blur1: blur(20px);
 
-$trs1: .25s ease-in-out;
-$trs2: .5s ease-in-out;
+$font1: 'Manrope', sans-serif;
+$font2: 'Montserrat', sans-serif;
+
+$trs1: .15s ease-in-out;
+$trs2: .3s ease-in-out;
 $trs3: 1s ease-in-out;

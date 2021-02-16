@@ -2,9 +2,16 @@
 .image {
   display: block;
   position: relative;
-
   img {
     display: block;
+    &.lazyload, &.lazyloading {
+      opacity: 0;
+      visibility: hidden;
+    }
+    &.lazyloaded {
+      opacity: 1;
+      visibility: visible;
+    }
   }
   &_cover,
   &_contain {
@@ -14,6 +21,7 @@
       left: 0;
       width: 100%;
       height: 100%;
+      transition: opacity $trs3, visibility $trs3;
     }
   }
   &_cover {
@@ -26,6 +34,67 @@
   &_contain {
     img {
       object-fit: contain;
+    }
+  }
+}
+
+.logo {
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.splide {
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    li {
+      &:not(:last-child) {
+        margin-right: 18px;
+      }
+    }
+    button {
+      width: 32px;
+      height: 32px;
+      padding: 12px;
+      margin: -12px;
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        background-color: var(--color-muted);
+        transition: background-color $trs1, transform $trs1;
+      }
+      &[data-touch], &[data-hover] {
+        &::before {
+          transform: scale(1.75);
+        }
+      }
+      &.is-active {
+        pointer-events: none;
+        &::before {
+          background-color: var(--color-text);
+        }
+      }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__pagination {
+      li {
+        &:not(:last-child) {
+          margin-right: 14px;
+        }
+      }
+      button {
+        width: 26px;
+        height: 26px;
+        padding: 10px;
+        margin: -10px;
+      }
     }
   }
 }

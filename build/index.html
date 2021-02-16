@@ -2,7 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8">
-    <title>Dexsa — Главная</title>
+    <title>Dexsa — Производитель электротехнических решений</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--color-->
     <meta name="theme-color" content="#000">
@@ -37,8 +37,41 @@
     <link rel="stylesheet" href="./styles/common.css">
   </head>
   <body>
+    <!--include ../blocks/preloader-->
     <div class="wrapper">
-      <header class="header"></header>
+      <header class="header" data-scroll-lock-fill-gap>
+        <div class="header__bg"></div>
+        <div class="container">
+          <div class="header__container"><a class="logo header__logo" href="/"><img class="logo__image" src="./img/logos/logo.png" alt="logo"></a>
+            <nav class="header-nav">
+              <ul class="header-nav__list">
+                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="about">О компании </a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="production">Производство</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="catalogue">Продукция</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="certificates">Сертификаты и аккредитации</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="references">Референс лист</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="contacts">Контакты</a></li>
+              </ul>
+            </nav>
+            <button class="nav-toggle"><span></span></button>
+          </div>
+        </div>
+        <nav class="nav">
+          <div class="nav__bg"></div>
+          <div class="nav__container" data-scroll-lock-fill-gap>
+            <div class="nav__block">
+              <ul class="nav__list">
+                <li class="nav__item"><a class="nav__link h3" href="/" data-name="about">О компании</a></li>
+                <li class="nav__item"><a class="nav__link h3" href="/" data-name="production">Производство</a></li>
+                <li class="nav__item"><a class="nav__link h3" href="/" data-name="catalogue">Продукция</a></li>
+                <li class="nav__item"><a class="nav__link h3" href="/" data-name="certificates">Сертификаты и аккредитации</a></li>
+                <li class="nav__item"><a class="nav__link h3" href="/" data-name="references">Референс лист</a></li>
+                <li class="nav__item"><a class="nav__link h3" href="/" data-name="contacts">Контакты</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
       <main class="main">
         <section class="section homepage screen">
           <div class="homepage-scene">
@@ -58,7 +91,80 @@
               </div>
             </div>
           </div>
-          <div class="container"></div>
+          <div class="homepage__container">
+            <div class="homepage__top container">
+              <p class="homepage__label">Компания<br> Декса</p>
+              <h1 class="homepage__title">Производитель электротехнических решений</h1>
+            </div>
+            <div class="homepage__bottom container">
+              <div class="row">
+                <div class="order-xl-2 offset-xl-1 col-xl-7">
+                  <div class="items-slider">
+                    <div class="items-slider__container container">
+                      <!--arrows-->
+                      <button class="items-slider__arrow items-slider__prev" aria-label="prev slide">
+                        <svg class="icon">
+                          <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
+                        </svg>
+                      </button>
+                      <button class="items-slider__arrow items-slider__next" aria-label="next slide">
+                        <svg class="icon">
+                          <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
+                        </svg>
+                      </button>
+                      <!--images-->
+                      <div class="items-slider__images">
+                        <!--image-->
+                        <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 208.png" alt="img"></div>
+                        <!--image-->
+                        <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 207.png" alt="img"></div>
+                        <!--image-->
+                        <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 209.png" alt="img"></div>
+                      </div>
+                      <!--slider-->
+                      <div class="splide items-slider__element">
+                        <div class="splide__track">
+                          <div class="splide__list">
+                            <!--slide-->
+                            <div class="splide__slide items-slider__slide">
+                              <h4 class="items-slider__slide-title">Север-2</h4>
+                              <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
+                            </div>
+                            <!--slide-->
+                            <div class="splide__slide items-slider__slide">
+                              <h4 class="items-slider__slide-title">Компакт 1Ex</h4>
+                              <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
+                            </div>
+                            <!--slide-->
+                            <div class="splide__slide items-slider__slide">
+                              <h4 class="items-slider__slide-title">Новатор 1Ex</h4>
+                              <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="items-slider__buttons">
+                        <div class="d-none d-lg-block"><a class="button button_style-1 items-slider__button" href="/"> <span>Посмотреть весь каталог</span></a></div>
+                        <div class="d-lg-none"><a class="button button_style-3 items-slider__button" href="/"> <span>Посмотреть весь каталог</span></a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="homepage__request col-xl-4">
+                  <div class="container">
+                    <div class="row">
+                      <div class="order-xl-2 col-xl-12">
+                        <button class="button button_style-2"> <span>Оставить заявку</span></button>
+                      </div>
+                      <div class="col-xl-12">
+                        <p>Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
       <footer class="footer"></footer>

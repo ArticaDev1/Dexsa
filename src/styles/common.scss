@@ -3,6 +3,8 @@
 @import "../../node_modules/normalize.css/normalize";
 //bootstrap-grid
 @import "../../node_modules/bootstrap/scss/bootstrap-grid";
+//libs
+@import "../../node_modules/@splidejs/splide/dist/css/splide-core.min";
 
 /*========== Basic ==========*/
 @import "./components/basic";
@@ -30,6 +32,9 @@
 
 /*========== Header ==========*/
 @import 'components/header';
+
+/*========== Nav ==========*/
+@import 'components/nav';
 
 /*========== Footer ==========*/
 @import 'components/footer';

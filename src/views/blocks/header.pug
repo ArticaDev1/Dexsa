@@ -1,2 +1,24 @@
-header.header
-  
+header.header(data-scroll-lock-fill-gap)
+  .header__bg
+  .container 
+    .header__container
+      a(href="/").logo.header__logo
+        img(src="./img/logos/logo.png", alt="logo").logo__image
+      nav.header-nav 
+        ul.header-nav__list 
+          li.header-nav__item   
+            a(href=about data-name=about_name).header-nav__link О компании 
+          li.header-nav__item   
+            a(href=production data-name=production_name).header-nav__link Производство
+          li.header-nav__item   
+            a(href=catalogue data-name=catalogue_name).header-nav__link Продукция
+          li.header-nav__item   
+            a(href=certificates data-name=certificates_name).header-nav__link Сертификаты и аккредитации
+          li.header-nav__item   
+            a(href=references data-name=references_name).header-nav__link Референс лист
+          li.header-nav__item   
+            a(href=contacts data-name=contacts_name).header-nav__link Контакты
+      button.nav-toggle
+        span
+
+  include ../blocks/nav

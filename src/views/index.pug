@@ -1,8 +1,11 @@
 extends layout/layout
-block variables
-  -var title = sitename+' - Главная'
-block content
 
+block variables
+  -var title = home_title
+  -var namespace = home_namespace;
+  -var name = home_name;
+
+block content
   section.section.homepage.screen
     .homepage-scene
       .homepage-scene__container
@@ -30,7 +33,62 @@ block content
           .homepage-scene__trigger 9
           .homepage-scene__trigger 10
 
-      
-
-    .container
-
+    .homepage__container 
+      .homepage__top.container 
+        p.homepage__label Компания<br> Декса
+        h1.homepage__title Производитель электротехнических решений
+      .homepage__bottom.container
+        .row
+          .order-xl-2.offset-xl-1.col-xl-7
+            .items-slider
+              .items-slider__container.container
+                //arrows
+                button(aria-label='prev slide').items-slider__arrow.items-slider__prev
+                  svg.icon
+                    use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+                button(aria-label='next slide').items-slider__arrow.items-slider__next 
+                  svg.icon
+                    use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+                //images
+                .items-slider__images 
+                  //image
+                  .image.items-slider__image
+                    img(data-src="./img/Group 208.png", alt="img").lazyload
+                  //image
+                  .image.items-slider__image
+                    img(data-src="./img/Group 207.png", alt="img").lazyload
+                  //image
+                  .image.items-slider__image
+                    img(data-src="./img/Group 209.png", alt="img").lazyload
+                //slider
+                .splide.items-slider__element
+                  .splide__track
+                    .splide__list
+                      //slide
+                      .splide__slide.items-slider__slide 
+                        h4.items-slider__slide-title Север-2
+                        p Первый в России светильник с Возобновляемым ресурсом работы
+                      //slide
+                      .splide__slide.items-slider__slide 
+                        h4.items-slider__slide-title Компакт 1Ex
+                        p Первый в России светильник с Возобновляемым ресурсом работы
+                      //slide
+                      .splide__slide.items-slider__slide 
+                        h4.items-slider__slide-title Новатор 1Ex
+                        p Первый в России светильник с Возобновляемым ресурсом работы
+                .items-slider__buttons
+                  .d-none.d-lg-block
+                    a(href=catalogue).button.button_style-1.items-slider__button 
+                      span Посмотреть весь  каталог
+                  .d-lg-none
+                    a(href=catalogue).button.button_style-3.items-slider__button 
+                      span Посмотреть весь  каталог
+          
+          .homepage__request.col-xl-4
+            .container
+              .row 
+                .order-xl-2.col-xl-12
+                  button.button.button_style-2 
+                    span Оставить заявку
+                .col-xl-12
+                  p Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных

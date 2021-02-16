@@ -1,0 +1,16 @@
+link(rel="stylesheet" href="./styles/preloader.css")
+
+.preloader 
+  img(src="./img/preloader/loader.svg", alt="logo").preloader__icon
+  img(src="./img/preloader/shadow.png", alt="shadow").preloader__shadow
+
+
+
+script.
+  let $preloader = document.querySelector('.preloader');
+
+
+
+  setTimeout(()=>{
+    $preloader.style.opacity = '1';
+  })

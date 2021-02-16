@@ -1,39 +1,120 @@
 .button {
   position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: inline-flex;
-  justify-content: center;
-  text-align: center;
-  transition: color $trs1, border-color $trs1, background-color $trs1;
-  height: 40px;
-  line-height: 38px;
-  padding: 0 20px;
-  border-radius: 4px;
-  width: 100%;
-  font-size: 0.875rem;
-  .icon {
-    height: 16px;
-    width: 16px;
-    &:not(:last-child) {
-      margin-right: 12px;
+  &_style-1 {
+    padding-left: 40px;
+    color: var(--color-text);
+    line-height: 32px;
+    text-decoration: none;
+    span {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    &:not(:first-child) {
-      margin-left: 12px;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 12px;
+      background-color: var(--color-grayish);
+      position: absolute;
+      left: 0;
+      top: 10px;
+      transition: background-color $trs1, box-shadow $trs1;
+    }
+    &[data-touch], &[data-hover] {
+      &::before {
+        background-color: var(--color-text);
+        box-shadow: 0px 0px 21px 7px var(--color-text);
+      }
     }
   }
-  &_style-1 {
-    border: 1px solid var(--color-accent);
-    color: var(--color-light);
-    background-color: var(--color-accent);
+  &_style-2 {
+    line-height: 56px;
+    padding: 0 40px;
+    border-radius: 9px;
+    box-shadow: 0px 15px 40px rgba(190, 22, 34, 0.5);
+    background: linear-gradient(94.36deg, #E13541 0%, #BE1622 99.11%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: center;
+    text-align: center;
+    transition: box-shadow $trs1;
+    &::before, &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      transition: opacity $trs1;
+      opacity: 0;
+    }
+    &::before {
+      background: linear-gradient(94.36deg, #FF5965 0%, #FE2232 99.11%);
+      z-index: 1;
+    }
+    &::after {
+      background: linear-gradient(94.36deg, #88222b 0%, #78141B 99.11%);
+      z-index: 2;
+    }
+    span {
+      position: relative;
+      z-index: 3;
+    }
     &[data-touch], &[data-hover] {
-      background-color: var(--color-accent-hover);
-      border-color: var(--color-accent-hover);
+      box-shadow: 0px 15px 40px rgba(255, 89, 101, 0.5);
+      &::before {
+        opacity: 1;
+      }
     }
     &[data-focus] {
-      background-color: var(--color-accent-focus);
-      border-color: var(--color-accent-focus);
+      box-shadow: 0px 15px 40px rgba(190, 22, 34, 0.5);
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+  &_style-3 {
+    line-height: 54px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 39px;
+    border-radius: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: center;
+    text-align: center;
+    transition: background-color $trs1;
+    border-color: var(--color-muted);
+    color: var(--color-text);
+    text-decoration: none;
+    &[data-touch], &[data-hover] {
+      background-color: rgba(43, 43, 43, 0.5);
+    }
+    &[data-focus] {
+      background-color: var(--color-muted);
+    }
+  }
+
+  @include media-breakpoint-down(xxl) {
+    &_style-1 {
+      padding-left: 30px;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &_style-2 {
+      line-height: 50px;
+      padding: 0 30px;
+    }
+    &_style-3 {
+      padding: 0 29px;
+      line-height: 48px;
     }
   }
 }
