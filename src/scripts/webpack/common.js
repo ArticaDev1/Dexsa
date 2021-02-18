@@ -1,3 +1,5 @@
+window.dev = false;
+
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
 
@@ -66,36 +68,29 @@ const App = {
     this.$container = document.querySelector('[data-barba="container"]');
     this.namespace = this.$container.getAttribute('data-barba-namespace');
     this.name = this.$container.getAttribute('data-name');
-
     //functions
     lazySizes.init();
     TouchHoverEvents.init();
     Header.init();
     Nav.init();
-    mobileWindow.init();
+    if(mobile()) {
+      mobileWindow.init();
+    }
 
     window.addEventListener('enter', ()=>{
-      Inputmask({
-        mask: "+7 999 999-99-99",
-        showMaskOnHover: false,
-        clearIncomplete: false
-      }).mask("[data-validate='phone']");
+      //home
+      let $lightscene = document.querySelector('.homepage-scene');
+      if($lightscene) new LightsScene($lightscene).init();
+      //slider
+      let $itemslider = document.querySelector('.items-slider');
+      if($itemslider) new ItemSlider($itemslider).init();
     })
 
-    //home
-    let $lightscene = document.querySelector('.homepage-scene');
-    if($lightscene) new LightsScene($lightscene).init();
 
-    //slider
-    let $itemslider = document.querySelector('.items-slider');
-    if($itemslider) new ItemSlider($itemslider).init();
-
-    $body.style.backgroundColor = `${getComputedStyle($body).getPropertyValue('--color-main-bg')}`;
-
-
-
-    //test
-    Transitions.enter(this.$container, this.namespace);
+    Preloader.finish(()=>{
+      gsap.to($wrapper, {autoAlpha:1, duration:0.5})
+      Transitions.enter(this.$container, this.namespace);
+    })
   }
 }
 
@@ -201,7 +196,7 @@ class LightsScene {
         this.$layers.forEach(($this)=>{
           gsap.to($this, {autoAlpha:1, duration:Speed})
         })
-      }, Speed*1000);
+      }, 500);
     } 
     //desktop
     else {
@@ -460,7 +455,12 @@ class ItemSlider {
       waitForTransition: false,
       speed: this.speed*1000,
       autoplay: true,
-      interval: autoslide_interval*1000
+      interval: autoslide_interval*1000,
+      breakpoints: {
+        576: {
+          gap: mobile_gap
+        },
+      }
     })
 
     this.slider.on('move', (newIndex)=>{
