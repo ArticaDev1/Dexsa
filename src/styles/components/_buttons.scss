@@ -95,7 +95,7 @@
     color: var(--color-text);
     text-decoration: none;
     &[data-touch], &[data-hover] {
-      background-color: rgba(43, 43, 43, 0.5);
+      background-color: #919191;
     }
     &[data-focus] {
       background-color: var(--color-muted);

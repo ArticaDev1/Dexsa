@@ -24,34 +24,96 @@ gsap.defaults({
   duration: Speed
 });
 
+//barba
+import barba from '@barba/core';
+barba.init({
+  debug: true,
+  preventRunning: true,
+  transitions: [{
+    leave(data) {
+      barba.done = this.async();
+      Transitions.exit(data.current.container, data.current.namespace);
+    },
+    enter(data) {
+      Transitions.enter(data.next.container, data.next.namespace);
+    }
+  }]
+});
+
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
 
 import Inputmask from "inputmask";
 
-
 const contentWidth = () => {
   return $wrapper.getBoundingClientRect().width;
 }
-
-
-window.onload = function(){
-  lazySizes.init();
-  TouchHoverEvents.init();
-  Header.init();
-  Nav.init();
-
-  $body.style.backgroundColor = `${getComputedStyle($body).getPropertyValue('--color-main-bg')}`;
-
-  //home
-  let $lightscene = document.querySelector('.homepage-scene');
-  if($lightscene) new LightsScene($lightscene).init();
-
-  //slider
-  let $itemslider = document.querySelector('.items-slider');
-  if($itemslider) new ItemSlider($itemslider).init();
+//check device
+function mobile() {
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    return true;
+  } else {
+    return false;
+  }
 }
 
+window.onload = function(){
+  App.init(); 
+}
+
+const App = {
+  init: function() {
+    this.$container = document.querySelector('[data-barba="container"]');
+    this.namespace = this.$container.getAttribute('data-barba-namespace');
+    this.name = this.$container.getAttribute('data-name');
+
+    //functions
+    lazySizes.init();
+    TouchHoverEvents.init();
+    Header.init();
+    Nav.init();
+    mobileWindow.init();
+
+    window.addEventListener('enter', ()=>{
+      Inputmask({
+        mask: "+7 999 999-99-99",
+        showMaskOnHover: false,
+        clearIncomplete: false
+      }).mask("[data-validate='phone']");
+    })
+
+    //home
+    let $lightscene = document.querySelector('.homepage-scene');
+    if($lightscene) new LightsScene($lightscene).init();
+
+    //slider
+    let $itemslider = document.querySelector('.items-slider');
+    if($itemslider) new ItemSlider($itemslider).init();
+
+    $body.style.backgroundColor = `${getComputedStyle($body).getPropertyValue('--color-main-bg')}`;
+
+
+
+    //test
+    Transitions.enter(this.$container, this.namespace);
+  }
+}
+
+const Transitions = {
+  enter: function($container, namespace) {
+    App.$container = $container;
+    App.namespace = namespace;
+    App.name = App.$container.getAttribute('data-name');
+    
+    window.dispatchEvent(new Event("enter"));
+
+  },
+  exit: function($container) {
+    window.dispatchEvent(new Event("exit"));
+    barba.done();
+
+  }
+}
 
 const TouchHoverEvents = {
   targets: 'a, button, label, tr, .jsTouchHover',
@@ -131,94 +193,112 @@ class LightsScene {
   }
 
   init() {
-    this.$container = this.$parent.querySelector('.homepage-scene__container');
-    this.$triggers = this.$parent.querySelectorAll('.homepage-scene__trigger');
     this.$layers = this.$parent.querySelectorAll('.homepage-scene__layer');
-    this.states = [];
-    //create animations
-    this.animations = {};
-    this.$layers.forEach(($this, index)=>{
-      this.animations[index] = {};
 
-      this.animations[index].animation = gsap.timeline({paused:true})
-        .to(this.$layers[index], {autoAlpha:1, duration:Speed})
-
-      this.animations[index].animation_flick = gsap.timeline({paused:true})
-        .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.05})
-        .to($this, {autoAlpha:1, duration:Speed*0.05})
-        .to($this, {autoAlpha:0, duration:Speed*0.05})
-        .to($this, {autoAlpha:1, duration:Speed*0.05})
-        .to($this, {autoAlpha:0, duration:Speed*0.5})
-    })
-
-    this.flick = ()=> {
-      let timeout = Math.round(Math.random() * 50000) + 10000,
-          index = Math.round(Math.random()*(this.$layers.length-1)),
-          animation = this.animations[index].animation,
-          animation_flick = this.animations[index].animation_flick,
-          state = this.animations[index].state;
+    //mobile
+    if(mobile()) {
       setTimeout(() => {
-        if(!state) {
-          if(animation.isActive()) {
-            animation.pause();
-          }
-          animation_flick.play(0);
-        }
-        this.flick();
-      }, timeout);
-    }
-    this.flick();
+        this.$layers.forEach(($this)=>{
+          gsap.to($this, {autoAlpha:1, duration:Speed})
+        })
+      }, Speed*1000);
+    } 
+    //desktop
+    else {
+      this.$container = this.$parent.querySelector('.homepage-scene__container');
+      this.$triggers = this.$parent.querySelectorAll('.homepage-scene__trigger');
+      this.states = [];
+      //create animations
+      this.animations = {};
+      this.$layers.forEach(($this, index)=>{
+        this.animations[index] = {};
 
-    this.resizeEvent = () => {
-      let h = this.$parent.getBoundingClientRect().height,
-          w = contentWidth(),
-          res = 0.666;
+        this.animations[index].animation = gsap.timeline({paused:true})
+          .to(this.$layers[index], {autoAlpha:1, duration:Speed})
 
-      if (h / w < res) {
-        this.$container.style.width = `${w}px`;
-        this.$container.style.height = `${w*res}px`;
-      } else {
-        this.$container.style.width = `${h/res}px`;
-        this.$container.style.height = `${h}px`;
-      }
-    }
+        this.animations[index].animation_flick = gsap.timeline({paused:true})
+          .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.05})
+          .to($this, {autoAlpha:0, duration:Speed*0.25})
+          .to($this, {autoAlpha:1, duration:Speed*0.05})
+          .to($this, {autoAlpha:0, duration:Speed*0.05})
+          .to($this, {autoAlpha:1, duration:Speed*0.05})
+          .to($this, {autoAlpha:0, duration:Speed*0.5}, `+=${Speed*0.25}`)
+      })
 
-    this.mousemoveEvent = (event) => {
-      let x = event.clientX,
-          y = event.clientY;
-      
-      this.$triggers.forEach(($trigger, index)=>{
-        let x1 = $trigger.getBoundingClientRect().left,
-            x2 = $trigger.getBoundingClientRect().right,
-            y1 = $trigger.getBoundingClientRect().top,
-            y2 = $trigger.getBoundingClientRect().bottom,
+      this.flick = ()=> {
+        let timeout = Math.round(Math.random() * 50000) + 10000,
+            index = Math.round(Math.random()*(this.$layers.length-1)),
             animation = this.animations[index].animation,
             animation_flick = this.animations[index].animation_flick,
             state = this.animations[index].state;
-        
-        if(x>=x1 && x<=x2 && y>=y1 && y<=y2) {
+        setTimeout(() => {
           if(!state) {
-            state = true;
-            animation.duration(Speed*0.05).play();
-            if(animation_flick.isActive()) {
-              animation_flick.pause();
+            if(animation.isActive()) {
+              animation.pause();
+            }
+            animation_flick.play(0);
+          }
+          this.flick();
+        }, timeout);
+      }
+      this.flick();
+
+      this.resizeEvent = () => {
+        let h = this.$parent.getBoundingClientRect().height,
+            w = contentWidth(),
+            res = 0.666;
+
+        if (h / w < res) {
+          this.$container.style.width = `${w}px`;
+          this.$container.style.height = `${w*res}px`;
+        } else {
+          this.$container.style.width = `${h/res}px`;
+          this.$container.style.height = `${h}px`;
+        }
+      }
+
+      this.mousemoveEvent = (event) => {
+        if(event.type=='mouseleave') {
+          for(let i in this.animations) {
+            if(this.animations[i].state) {
+              this.animations[i].animation.duration(Speed).reverse();
             }
           }
-        } else if(state) {
-          state = false;
-          animation.duration(Speed).reverse();
-        }
-
-        this.animations[index].state = state;
-      })  
-    }
+        } else {
+          let x = event.clientX,
+              y = event.clientY;
+          this.$triggers.forEach(($trigger, index)=>{
+            let x1 = $trigger.getBoundingClientRect().left,
+                x2 = $trigger.getBoundingClientRect().right,
+                y1 = $trigger.getBoundingClientRect().top,
+                y2 = $trigger.getBoundingClientRect().bottom,
+                animation = this.animations[index].animation,
+                animation_flick = this.animations[index].animation_flick,
+                state = this.animations[index].state;
+            
+            if(x>=x1 && x<=x2 && y>=y1 && y<=y2) {
+              if(!state) {
+                state = true;
+                animation.duration(Speed*0.05).play();
+                if(animation_flick.isActive()) {
+                  animation_flick.pause();
+                }
+              }
+            } else if(state) {
+              state = false;
+              animation.duration(Speed).reverse();
+            }
     
-
-    this.resizeEvent();
-    window.addEventListener('resize', this.resizeEvent);
-    window.addEventListener('mousemove', this.mousemoveEvent);
-
-
+            this.animations[index].state = state;
+          })  
+        }
+      }
+      
+      this.resizeEvent();
+      window.addEventListener('resize', this.resizeEvent);
+      window.addEventListener('mousemove', this.mousemoveEvent);
+      document.addEventListener('mouseleave', this.mousemoveEvent);
+    }
   }
 }
 
@@ -274,11 +354,13 @@ const Nav = {
       let cw1 = document.querySelector('.header .container').getBoundingClientRect().width,
           cw2 = document.querySelector('.header__container').getBoundingClientRect().width,
           w2 = (contentWidth()-cw2)/2;
-          
+        
       this.bw = this.$block.getBoundingClientRect().width;
       this.pd = (cw1-cw2)/2;
 
-      this.$container.style.width = `${this.bw+w2}px`;
+      if(window.innerWidth>=brakepoints.sm) {
+        this.$container.style.width = `${this.bw+w2}px`;
+      }
 
       if(window.innerWidth>=brakepoints.xl && this.state) {
         this.close();
@@ -290,7 +372,6 @@ const Nav = {
       onStart:()=>{
         disablePageScroll();
         this.opened = true;
-        console.log('1')
       }, 
       onReverseComplete:()=>{
         enablePageScroll();
@@ -400,5 +481,22 @@ class ItemSlider {
 
   destroy() {
 
+  }
+}
+
+const mobileWindow = {
+  init: function() {
+    let $el = document.createElement('div')
+    $el.style.cssText = 'position:fixed;height:100%;';
+    $body.insertAdjacentElement('beforeend', $el);
+    this.h = $el.getBoundingClientRect().height;
+    $el.remove();
+    window.addEventListener('enter', ()=>{
+      this.check();
+    })
+  }, 
+  check: function() {
+    let $el = App.$container.querySelector('.screen');
+    if($el) $el.style.height = `${this.h}px`;
   }
 }

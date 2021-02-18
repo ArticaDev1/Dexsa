@@ -30,6 +30,7 @@
 		"webpack-stream": "^6.1.0"
 	},
 	"dependencies": {
+		"@barba/core": "^2.9.7",
 		"@fortawesome/fontawesome-free": "^5.15.1",
 		"@splidejs/splide": "^2.4.21",
 		"bootstrap": "^5.0.0-alpha1",

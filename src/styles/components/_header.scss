@@ -148,6 +148,7 @@
     height: 100%;
     background-color: var(--color-bg-transparent);
     backdrop-filter: $blur1;
+    cursor: pointer;
   }
   &__container {
     position: absolute;
@@ -168,5 +169,15 @@
   }
   @include media-breakpoint-up(xl) {
     display: none;
+  }
+  @include media-breakpoint-down(sm) {
+    &__container {
+      width: calc(100% - 76px) !important;
+      padding-right: $mobile-container-padding-x;
+      box-sizing: border-box;
+    }
+    &__block {
+      width: 100%;
+    }
   }
 }

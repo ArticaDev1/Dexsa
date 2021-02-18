@@ -26,8 +26,8 @@ html(lang='ru')
     link(rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png")
     link(rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png")
     //open graph
-    meta(property='og:title' content=sitename)
-    meta(property='og:site_name' content='Производитель электротехнических решений')
+    meta(property='og:title' content='Производитель электротехнических решений')
+    meta(property='og:site_name' content=sitename)
     meta(property='og:url' content='') 
     meta(property='og:description' content='Занимаемся разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении.')
     meta(property='og:image' content='')
@@ -41,11 +41,13 @@ html(lang='ru')
 
   body
     //include ../blocks/preloader
-    .wrapper
+    .wrapper(data-barba="wrapper")
       include ../blocks/header
-      main.main
-        block content
-      include ../blocks/footer
+
+      .content
+        main.main(data-barba="container", data-barba-namespace=namespace, data-name=name)
+          block content
+        include ../blocks/footer
 
     //jquery
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')

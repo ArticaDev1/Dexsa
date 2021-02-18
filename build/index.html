@@ -24,8 +24,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png">
     <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png">
     <!--open graph-->
-    <meta property="og:title" content="Dexsa">
-    <meta property="og:site_name" content="Производитель электротехнических решений">
+    <meta property="og:title" content="Производитель электротехнических решений">
+    <meta property="og:site_name" content="Dexsa">
     <meta property="og:url" content="">
     <meta property="og:description" content="Занимаемся разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении.">
     <meta property="og:image" content="">
@@ -38,7 +38,7 @@
   </head>
   <body>
     <!--include ../blocks/preloader-->
-    <div class="wrapper">
+    <div class="wrapper" data-barba="wrapper">
       <header class="header" data-scroll-lock-fill-gap>
         <div class="header__bg"></div>
         <div class="container">
@@ -72,102 +72,104 @@
           </div>
         </nav>
       </header>
-      <main class="main">
-        <section class="section homepage screen">
-          <div class="homepage-scene">
-            <div class="homepage-scene__container"><img class="homepage-scene__bg" src="./img/homescreen/bg.png" alt="bg">
-              <div class="homepage-scene__layers"> <img class="homepage-scene__layer" src="./img/homescreen/1.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/2.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/3.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/4.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/5.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/6.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/7.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/8.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/9.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/10.png" alt="bg"></div>
-              <div class="homepage-scene__triggers">
-                <div class="homepage-scene__trigger">1</div>
-                <div class="homepage-scene__trigger">2</div>
-                <div class="homepage-scene__trigger">3</div>
-                <div class="homepage-scene__trigger">4</div>
-                <div class="homepage-scene__trigger">5</div>
-                <div class="homepage-scene__trigger">6</div>
-                <div class="homepage-scene__trigger">7</div>
-                <div class="homepage-scene__trigger">8</div>
-                <div class="homepage-scene__trigger">9</div>
-                <div class="homepage-scene__trigger">10</div>
+      <div class="content">
+        <main class="main" data-barba="container" data-barba-namespace="home" data-name="home">
+          <section class="section homepage screen">
+            <div class="homepage-scene">
+              <div class="homepage-scene__container"><img class="homepage-scene__bg" src="./img/homescreen/bg.png" alt="bg">
+                <div class="homepage-scene__layers"> <img class="homepage-scene__layer" src="./img/homescreen/1.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/2.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/3.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/4.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/5.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/6.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/7.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/8.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/9.png" alt="bg"><img class="homepage-scene__layer" src="./img/homescreen/10.png" alt="bg"></div>
+                <div class="homepage-scene__triggers">
+                  <div class="homepage-scene__trigger">1</div>
+                  <div class="homepage-scene__trigger">2</div>
+                  <div class="homepage-scene__trigger">3</div>
+                  <div class="homepage-scene__trigger">4</div>
+                  <div class="homepage-scene__trigger">5</div>
+                  <div class="homepage-scene__trigger">6</div>
+                  <div class="homepage-scene__trigger">7</div>
+                  <div class="homepage-scene__trigger">8</div>
+                  <div class="homepage-scene__trigger">9</div>
+                  <div class="homepage-scene__trigger">10</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="homepage__container">
-            <div class="homepage__top container">
-              <p class="homepage__label">Компания<br> Декса</p>
-              <h1 class="homepage__title">Производитель электротехнических решений</h1>
-            </div>
-            <div class="homepage__bottom container">
-              <div class="row">
-                <div class="order-xl-2 offset-xl-1 col-xl-7">
-                  <div class="items-slider">
-                    <div class="items-slider__container container">
-                      <!--arrows-->
-                      <button class="items-slider__arrow items-slider__prev" aria-label="prev slide">
-                        <svg class="icon">
-                          <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
-                        </svg>
-                      </button>
-                      <button class="items-slider__arrow items-slider__next" aria-label="next slide">
-                        <svg class="icon">
-                          <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
-                        </svg>
-                      </button>
-                      <!--images-->
-                      <div class="items-slider__images">
-                        <!--image-->
-                        <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 208.png" alt="img"></div>
-                        <!--image-->
-                        <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 207.png" alt="img"></div>
-                        <!--image-->
-                        <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 209.png" alt="img"></div>
-                      </div>
-                      <!--slider-->
-                      <div class="splide items-slider__element">
-                        <div class="splide__track">
-                          <div class="splide__list">
-                            <!--slide-->
-                            <div class="splide__slide items-slider__slide">
-                              <h4 class="items-slider__slide-title">Север-2</h4>
-                              <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
-                            </div>
-                            <!--slide-->
-                            <div class="splide__slide items-slider__slide">
-                              <h4 class="items-slider__slide-title">Компакт 1Ex</h4>
-                              <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
-                            </div>
-                            <!--slide-->
-                            <div class="splide__slide items-slider__slide">
-                              <h4 class="items-slider__slide-title">Новатор 1Ex</h4>
-                              <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
+            <div class="homepage__container">
+              <div class="homepage__top container">
+                <p class="homepage__label">Компания<br> Декса</p>
+                <h1 class="homepage__title">Производитель электротехнических решений</h1>
+              </div>
+              <div class="homepage__bottom container">
+                <div class="row">
+                  <div class="order-xl-2 offset-xl-1 col-xl-7">
+                    <div class="items-slider">
+                      <div class="items-slider__container container">
+                        <!--arrows-->
+                        <button class="items-slider__arrow items-slider__prev" aria-label="prev slide">
+                          <svg class="icon">
+                            <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
+                          </svg>
+                        </button>
+                        <button class="items-slider__arrow items-slider__next" aria-label="next slide">
+                          <svg class="icon">
+                            <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
+                          </svg>
+                        </button>
+                        <!--images-->
+                        <div class="items-slider__images">
+                          <!--image-->
+                          <div class="image items-slider__image"><img class="lazyload" data-src="./img/ddsd.png" alt="img"></div>
+                          <!--image-->
+                          <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 210.png" alt="img"></div>
+                          <!--image-->
+                          <div class="image items-slider__image"><img class="lazyload" data-src="./img/Group 208.png" alt="img"></div>
+                        </div>
+                        <!--slider-->
+                        <div class="splide items-slider__element">
+                          <div class="splide__track">
+                            <div class="splide__list">
+                              <!--slide-->
+                              <div class="splide__slide items-slider__slide">
+                                <h4 class="items-slider__slide-title">Север-2</h4>
+                                <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
+                              </div>
+                              <!--slide-->
+                              <div class="splide__slide items-slider__slide">
+                                <h4 class="items-slider__slide-title">Компакт 1Ex</h4>
+                                <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
+                              </div>
+                              <!--slide-->
+                              <div class="splide__slide items-slider__slide">
+                                <h4 class="items-slider__slide-title">Новатор 1Ex</h4>
+                                <p>Первый в России светильник с Возобновляемым ресурсом работы</p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="items-slider__buttons">
-                        <div class="d-none d-lg-block"><a class="button button_style-1 items-slider__button" href="/"> <span>Посмотреть весь каталог</span></a></div>
-                        <div class="d-lg-none"><a class="button button_style-3 items-slider__button" href="/"> <span>Посмотреть весь каталог</span></a></div>
+                        <div class="items-slider__buttons">
+                          <div class="d-none d-lg-block"><a class="button button_style-1 items-slider__button" href="/"> <span>Посмотреть весь каталог</span></a></div>
+                          <div class="d-lg-none"><a class="button button_style-3 items-slider__button" href="/"> <span>Посмотреть весь каталог</span></a></div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="homepage__request col-xl-4">
-                  <div class="container">
-                    <div class="row">
-                      <div class="order-xl-2 col-xl-12">
-                        <button class="button button_style-2"> <span>Оставить заявку</span></button>
-                      </div>
-                      <div class="col-xl-12">
-                        <p>Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных</p>
+                  <div class="homepage__request col-xl-4">
+                    <div class="container">
+                      <div class="row">
+                        <div class="order-xl-2 col-xl-12">
+                          <button class="button button_style-2"> <span>Оставить заявку</span></button>
+                        </div>
+                        <div class="col-xl-12">
+                          <p>Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
-      <footer class="footer"></footer>
+          </section>
+        </main>
+        <footer class="footer"></footer>
+      </div>
     </div>
     <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
