@@ -21,13 +21,14 @@ var Preloader = {
   finish: function finish(callback) {
     var _this2 = this;
 
+    document.body.style.backgroundColor = "".concat(getComputedStyle(document.body).getPropertyValue('--color-main-bg'));
     clearInterval(this.interval);
 
     if (dev) {
+      this.$preloader.style = 'transition:0;opacity:0;visibility:hidden;';
       callback();
     } else {
       var finish = function finish() {
-        document.body.style.backgroundColor = "".concat(getComputedStyle(document.body).getPropertyValue('--color-main-bg'));
         _this2.$preloader.style = 'opacity:0;visibility:hidden;';
         setTimeout(function () {
           callback();

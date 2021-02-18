@@ -31,30 +31,30 @@ html(lang='ru')
     meta(property='og:url' content='') 
     meta(property='og:description' content='Занимаемся разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении.')
     meta(property='og:image' content='')
-    //fonts
-    link(rel='preconnect' href='https://fonts.gstatic.com')
-    link(href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap' rel='stylesheet')
-    //styles
+    //theme
     link(rel="stylesheet" href="./styles/theme.css")
-    block styles
-    link(rel="stylesheet" href="./styles/common.css")
+    
 
   body(style='overflow:hidden;')
     include ../blocks/preloader
-
     .wrapper(data-barba="wrapper" style='opacity:0;visibility:hidden;')
       include ../blocks/header
-
+      
       .content
         main.main(data-barba="container", data-barba-namespace=namespace, data-name=name)
           block content
         include ../blocks/footer
 
-    //jquery
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    
+    //fonts
+    link(rel='preconnect' href='https://fonts.gstatic.com')
+    link(href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap' rel='stylesheet')
+    //styles
+    block styles
+    link(rel="stylesheet" href="./styles/common.css")
     //scripts
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
     block scripts
-    //webpack
     script(src="./scripts/common.js")
 
 

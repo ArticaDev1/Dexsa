@@ -98,19 +98,32 @@
     height: 3px;
     background-color: currentColor;
     position: relative;
+    transition: background-color 400ms ease-in-out;
     &::before, &::after {
       content: '';
       display: block;
       position: absolute;
       width: inherit;
       height: inherit;
-      background-color: inherit;
+      background-color: currentColor;
+      transition: transform 400ms ease-in-out;
     }
     &::after {
       top: 9px;
     }
     &::before {
       bottom: 9px;
+    }
+  }
+  &.active {
+    span {
+      background-color: transparent;
+      &::after {
+        transform: translateY(-9px) rotate(45deg);
+      }
+      &::before {
+        transform: translateY(9px) rotate(-45deg);
+      }
     }
   }
   @include media-breakpoint-up(xl) {
@@ -128,6 +141,16 @@
       }
       &::before {
         bottom: 8px;
+      }
+    }
+    &.active {
+      span {
+        &::after {
+          transform: translateY(-8px) rotate(45deg);
+        }
+        &::before {
+          transform: translateY(8px) rotate(-45deg);
+        }
       }
     }
   }

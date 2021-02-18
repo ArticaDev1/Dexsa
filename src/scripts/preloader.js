@@ -18,14 +18,15 @@ const Preloader = {
 
   },
   finish: function(callback) {
+    document.body.style.backgroundColor = `${getComputedStyle(document.body).getPropertyValue('--color-main-bg')}`;
     clearInterval(this.interval);
     if(dev) {
+      this.$preloader.style = 'transition:0;opacity:0;visibility:hidden;';
       callback();
     } 
     
     else {
       let finish = ()=> {
-        document.body.style.backgroundColor = `${getComputedStyle(document.body).getPropertyValue('--color-main-bg')}`;
         this.$preloader.style = 'opacity:0;visibility:hidden;';
         setTimeout(() => {
           callback();

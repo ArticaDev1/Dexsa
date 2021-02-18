@@ -5,6 +5,7 @@ const autoslide_interval = 5; //seconds
 
 const $body = document.body;
 const $wrapper = document.querySelector('.wrapper');
+const $content = document.querySelector('.content');
 const $header = document.querySelector('.header');
 const brakepoints = {
   sm: 576,
@@ -42,6 +43,8 @@ barba.init({
   }]
 });
 
+import Scrollbar from 'smooth-scrollbar';
+
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
 
@@ -69,6 +72,7 @@ const App = {
     this.namespace = this.$container.getAttribute('data-barba-namespace');
     this.name = this.$container.getAttribute('data-name');
     //functions
+    Scroll.init();
     lazySizes.init();
     TouchHoverEvents.init();
     Header.init();
@@ -111,7 +115,7 @@ const Transitions = {
 }
 
 const TouchHoverEvents = {
-  targets: 'a, button, label, tr, .jsTouchHover',
+  targets: 'a, button, label, tr, .jsTouchHover, .scrollbar-thumb, .scrollbar-track',
   touched: false,
   touchEndDelay: 100, //ms
   init: function() {
@@ -182,6 +186,95 @@ const TouchHoverEvents = {
   }
 }
 
+const Scroll = {
+  init: function() {
+    this.y = 0;
+    if(mobile()) this.native();
+    else         this.custom(); 
+  },
+  custom: function() {
+    this.scrollbar = Scrollbar.init($content, {
+      damping: 0.1,
+      thumbMinSize: 150
+    })
+    this.scrollbar.addListener(()=>{
+      localStorage.setItem('scroll', this.scrollbar.offset.y);
+      this.y = this.scrollbar.offset.y;
+    })
+
+    this.scrollbar.setPosition(0, +localStorage.getItem('scroll'));
+
+    /* window.addEventListener('enter', ()=>{
+      this.scrollbar.track.yAxis.element.classList.remove('show');
+    }) */
+  },
+  native: function() {
+    window.addEventListener('scroll', ()=>{
+      this.y = window.pageYOffset;
+    })
+    window.addEventListener('exit', ()=>{
+      $body.style.overflow = 'hidden';
+    })
+    window.addEventListener('enter_finish', ()=>{
+      $body.style.overflow = 'auto';
+    })
+  },
+  scrollTop: function(y, speed) {
+    if(speed>0) this.inScroll=true;
+    //custom
+    if(this.scrollbar) {
+      this.animation = gsap.to(this.scrollbar, {scrollTop:y, duration:speed, ease:'power2.inOut'});
+      if(speed>0) {
+        this.animation.eventCallback('onComplete', ()=>{
+          this.inScroll=false;
+        })
+      }
+    } 
+    //native
+    else {
+      let scroll = {y:this.y};
+      if(speed>0) {
+        this.animation = gsap.to(scroll, {y:y, duration:speed, ease:'power2.inOut', onComplete:()=>{
+          this.inScroll=false;
+          cancelAnimationFrame(this.frame);
+        }})
+        this.checkScroll = ()=>{
+          window.scrollTo(0, scroll.y);
+          this.frame = requestAnimationFrame(()=>{this.checkScroll()});
+        }
+        this.checkScroll();
+      } else {
+        window.scrollTo(0, y);
+      }
+    }
+  },
+  stop: function() {
+    this.inScroll=false;
+    if(this.animation) this.animation.pause();
+    if(this.frame) cancelAnimationFrame(this.frame);
+  },
+  addListener: function(func) {
+    //custom
+    if(this.scrollbar) {
+      this.scrollbar.addListener(func);
+    }
+    //native
+    else {
+      window.addEventListener('scroll', func);
+    }
+  }, 
+  removeListener: function(func) {
+    //custom
+    if(this.scrollbar) {
+      this.scrollbar.removeListener(func);
+    }
+    //native 
+    else {
+      window.removeEventListener('scroll', func);
+    }
+  }
+}
+
 class LightsScene {
   constructor($parent) {
     this.$parent = $parent;
@@ -194,7 +287,7 @@ class LightsScene {
     if(mobile()) {
       setTimeout(() => {
         this.$layers.forEach(($this)=>{
-          gsap.to($this, {autoAlpha:1, duration:Speed})
+          gsap.to($this, {autoAlpha:1, duration:1.25})
         })
       }, 500);
     } 
@@ -212,12 +305,12 @@ class LightsScene {
           .to(this.$layers[index], {autoAlpha:1, duration:Speed})
 
         this.animations[index].animation_flick = gsap.timeline({paused:true})
-          .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.05})
-          .to($this, {autoAlpha:0, duration:Speed*0.25})
-          .to($this, {autoAlpha:1, duration:Speed*0.05})
-          .to($this, {autoAlpha:0, duration:Speed*0.05})
-          .to($this, {autoAlpha:1, duration:Speed*0.05})
-          .to($this, {autoAlpha:0, duration:Speed*0.5}, `+=${Speed*0.25}`)
+          .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:0.05})
+          .to($this, {autoAlpha:0, duration:0.25})
+          .to($this, {autoAlpha:1, duration:0.05})
+          .to($this, {autoAlpha:0, duration:0.05})
+          .to($this, {autoAlpha:1, duration:0.05})
+          .to($this, {autoAlpha:0, duration:0.5}, `+=${0.25}`)
       })
 
       this.flick = ()=> {
@@ -257,6 +350,7 @@ class LightsScene {
           for(let i in this.animations) {
             if(this.animations[i].state) {
               this.animations[i].animation.duration(Speed).reverse();
+              this.animations[i].state = false;
             }
           }
         } else {
@@ -274,7 +368,7 @@ class LightsScene {
             if(x>=x1 && x<=x2 && y>=y1 && y<=y2) {
               if(!state) {
                 state = true;
-                animation.duration(Speed*0.05).play();
+                animation.duration(0.05).play();
                 if(animation_flick.isActive()) {
                   animation_flick.pause();
                 }
@@ -300,13 +394,13 @@ class LightsScene {
 const Header = {
   init: function () {
     this.old_scroll = 0;
-    window.addEventListener('scroll', () => {
+    Scroll.addListener(()=>{
       this.check();
     })
     this.check();
   },
   check: function () {
-    let y = window.pageYOffset,
+    let y = Scroll.y,
         h = window.innerHeight/2,
         fixed = $header.classList.contains('header_fixed'),
         hidden = $header.classList.contains('header_hidden');
@@ -360,23 +454,27 @@ const Nav = {
       if(window.innerWidth>=brakepoints.xl && this.state) {
         this.close();
       }
+
+      this.animation = gsap.timeline({paused:true, 
+        onStart:()=>{
+          disablePageScroll();
+          this.opened = true;
+        }, 
+        onReverseComplete:()=>{
+          enablePageScroll();
+          this.opened = false;
+        }
+      })
+        .fromTo(this.$nav, {autoAlpha:0}, {autoAlpha:1, duration:0.1})
+        .fromTo(this.$toggle, {x:0}, {x:-this.bw-this.pd, duration:0.4}, `-=${0.1}`)
+        .fromTo(this.$container, {xPercent:100}, {xPercent:0, duration:0.5}, `-=${0.4}`)
+        .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1, duration:0.5}, `-=${0.5}`)
+
+      if(this.state) {
+        this.animation.seek(this.animation.totalDuration());
+      }
     };
     this.resize();
-
-    this.animation = gsap.timeline({paused:true, 
-      onStart:()=>{
-        disablePageScroll();
-        this.opened = true;
-      }, 
-      onReverseComplete:()=>{
-        enablePageScroll();
-        this.opened = false;
-      }
-    })
-      .set(this.$nav, {autoAlpha:1})
-      .to(this.$toggle, {x:-this.bw-this.pd, duration:Speed*0.4, ease:'power1.inOut'})
-      .fromTo(this.$container, {xPercent:100}, {xPercent:0, duration:Speed*0.5, ease:'power2.inOut'}, `-=${Speed*0.4}`)
-      .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5, ease:'power2.inOut'}, `-=${Speed*0.5}`)
 
 
     this.$bg.addEventListener('click', ()=>{
@@ -403,12 +501,14 @@ const Nav = {
   open: function() {
     $header.classList.add('header_nav-opened');
     this.$nav.classList.add('nav_opened');
+    this.$toggle.classList.add('active');
     this.state=true;
     this.animation.play();
   },
   close: function() {
     $header.classList.remove('header_nav-opened');
     this.$nav.classList.remove('nav_opened');
+    this.$toggle.classList.remove('active');
     this.state=false;
     this.animation.reverse();
   }/* ,
@@ -435,7 +535,7 @@ class ItemSlider {
     this.$prev = this.$parent.querySelector('.items-slider__prev');
     this.$next = this.$parent.querySelector('.items-slider__next');
     this.index = 0;
-    this.speed = Speed/2;
+    this.speed = 0.5;
 
     this.animations = [];
     this.$images.forEach(($image, index)=>{
