@@ -26,7 +26,8 @@ body {
   .preloader__icon {
     width: 100%;
     height: auto;
-    color: #fff; }
+    color: #fff;
+    display: block; }
   .preloader__shadow {
     position: absolute;
     transform: translateY(-50%) scale(1.5);

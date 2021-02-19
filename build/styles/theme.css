@@ -2,11 +2,14 @@
   --color-accent:       #E61515;
   --color-accent-hover: #cf1313;
   --color-accent-focus: #a71414;
+  --color-light: #fff;
   --color-text:     #fff;
   --color-grayish:  #D9D9D9;
   --color-muted:    #5B5B5B;
   --color-darker:   #4d4d4d;
+  --color-dark:     #1C1C1C;
   --color-main-bg: #0E0E0E;
-  --color-bg-transparent: rgba(255, 255, 255, 0.15); }
+  --color-bg-transparent: rgba(255, 255, 255, 0.15);
+  --color-scrollbar: #919191; }
 
 /*# sourceMappingURL=maps/theme.css.map */

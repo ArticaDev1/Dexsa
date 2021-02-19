@@ -22,6 +22,8 @@ lazySizes.cfg.init = false;
 lazySizes.cfg.expand = 100;
 
 import {gsap} from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 gsap.defaults({
   ease: "power2.inOut", 
   duration: Speed
@@ -82,12 +84,24 @@ const App = {
     }
 
     window.addEventListener('enter', ()=>{
+      if(mobile()) {
+        $body.style.overflow = 'auto';
+      }
+
       //home
       let $lightscene = document.querySelector('.homepage-scene');
       if($lightscene) new LightsScene($lightscene).init();
       //slider
       let $itemslider = document.querySelector('.items-slider');
       if($itemslider) new ItemSlider($itemslider).init();
+      //lights icons
+      let $lightsicons = document.querySelectorAll('.advantages-block__icon-animate');
+      if($lightsicons.length) {
+        $lightsicons.forEach(($block)=>{
+          new AdvantagesLights($block).init();
+        })
+        
+      }
     })
 
 
@@ -115,7 +129,7 @@ const Transitions = {
 }
 
 const TouchHoverEvents = {
-  targets: 'a, button, label, tr, .jsTouchHover, .scrollbar-thumb, .scrollbar-track',
+  targets: 'a, button, label, tr, .jsTouchHover',
   touched: false,
   touchEndDelay: 100, //ms
   init: function() {
@@ -201,12 +215,26 @@ const Scroll = {
       localStorage.setItem('scroll', this.scrollbar.offset.y);
       this.y = this.scrollbar.offset.y;
     })
-
     this.scrollbar.setPosition(0, +localStorage.getItem('scroll'));
 
     /* window.addEventListener('enter', ()=>{
       this.scrollbar.track.yAxis.element.classList.remove('show');
     }) */
+
+    //gsap trigger
+    let scrollbar = this.scrollbar;
+    ScrollTrigger.scrollerProxy($body, {
+      scrollTop(value) {
+        if (arguments.length) {
+          scrollbar.scrollTop = value
+        }
+        return scrollbar.scrollTop;
+      },
+      getBoundingClientRect() {
+        return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+      }
+    });
+    this.scrollbar.addListener(ScrollTrigger.update);
   },
   native: function() {
     window.addEventListener('scroll', ()=>{
@@ -223,11 +251,12 @@ const Scroll = {
     if(speed>0) this.inScroll=true;
     //custom
     if(this.scrollbar) {
-      this.animation = gsap.to(this.scrollbar, {scrollTop:y, duration:speed, ease:'power2.inOut'});
       if(speed>0) {
-        this.animation.eventCallback('onComplete', ()=>{
+        this.animation = gsap.to(this.scrollbar, {scrollTop:y, duration:speed, ease:'power2.inOut',onComplete:()=>{
           this.inScroll=false;
-        })
+        }});
+      } else {
+        gsap.set(this.scrollbar, {scrollTop:y});
       }
     } 
     //native
@@ -300,36 +329,9 @@ class LightsScene {
       this.animations = {};
       this.$layers.forEach(($this, index)=>{
         this.animations[index] = {};
-
         this.animations[index].animation = gsap.timeline({paused:true})
           .to(this.$layers[index], {autoAlpha:1, duration:Speed})
-
-        this.animations[index].animation_flick = gsap.timeline({paused:true})
-          .fromTo($this, {autoAlpha:0}, {autoAlpha:1, duration:0.05})
-          .to($this, {autoAlpha:0, duration:0.25})
-          .to($this, {autoAlpha:1, duration:0.05})
-          .to($this, {autoAlpha:0, duration:0.05})
-          .to($this, {autoAlpha:1, duration:0.05})
-          .to($this, {autoAlpha:0, duration:0.5}, `+=${0.25}`)
       })
-
-      this.flick = ()=> {
-        let timeout = Math.round(Math.random() * 50000) + 10000,
-            index = Math.round(Math.random()*(this.$layers.length-1)),
-            animation = this.animations[index].animation,
-            animation_flick = this.animations[index].animation_flick,
-            state = this.animations[index].state;
-        setTimeout(() => {
-          if(!state) {
-            if(animation.isActive()) {
-              animation.pause();
-            }
-            animation_flick.play(0);
-          }
-          this.flick();
-        }, timeout);
-      }
-      this.flick();
 
       this.resizeEvent = () => {
         let h = this.$parent.getBoundingClientRect().height,
@@ -362,16 +364,12 @@ class LightsScene {
                 y1 = $trigger.getBoundingClientRect().top,
                 y2 = $trigger.getBoundingClientRect().bottom,
                 animation = this.animations[index].animation,
-                animation_flick = this.animations[index].animation_flick,
                 state = this.animations[index].state;
             
             if(x>=x1 && x<=x2 && y>=y1 && y<=y2) {
               if(!state) {
                 state = true;
                 animation.duration(0.05).play();
-                if(animation_flick.isActive()) {
-                  animation_flick.pause();
-                }
               }
             } else if(state) {
               state = false;
@@ -600,3 +598,20 @@ const mobileWindow = {
     if($el) $el.style.height = `${this.h}px`;
   }
 }
+
+class AdvantagesLights {
+  constructor($block) {
+    this.$block = $block;
+  }
+  init() {
+    ScrollTrigger.create({
+      trigger: this.$block,
+      start: "top bottom",
+      end: "bottom bottom",
+      scrub: true,
+      once: true,
+      toggleClass: 'animate'
+    });
+  }
+}
+

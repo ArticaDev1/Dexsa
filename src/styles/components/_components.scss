@@ -101,27 +101,11 @@
 
 .scrollbar-track-y {
   background-color: transparent;
-  padding: 10px;
-  width: 24px;
+  padding: 9px 3px;
+  width: 9px;
   z-index: 2000;
   transition: opacity $trs2;
   transition-delay: .5s;
-  &:after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-    background-color: var(--color-text);
-    opacity: 0;
-    transition: opacity $trs2;
-    pointer-events: none;
-  }
-  &[data-touch], &[data-hover] {
-    &:after {
-      opacity: 0.3;
-    }
-  }
   .scrollbar-thumb {
     cursor: pointer;
     width: inherit;
@@ -132,18 +116,9 @@
       display: block;
       width: 100%;
       height: 100%;
-      border-radius: inherit;
-      background-color: var(--color-text);
-      transition: background-color $trs1;
+      border-radius: 3px;
+      background-color: var(--color-scrollbar);
       pointer-events: none;
-    }
-  }
-  @include media-breakpoint-down(sm) {
-    width: 16px;
-    padding: 4px 4px 4px 8px;
-    pointer-events: none;
-    &:after {
-      border-radius: 2px;
     }
   }
 }
