@@ -399,9 +399,14 @@
   }
   @include media-breakpoint-up(lg) {
     &-block {
-      &:nth-child(2), &:nth-child(4)  {
+      &:nth-child(1), &:nth-child(3)  {
         .icon {
           transition-delay: .25s;
+        }
+      }
+      &:nth-child(2), &:nth-child(4)  {
+        .icon {
+          transition-delay: .75s;
         }
       }
     }
