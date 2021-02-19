@@ -1,4 +1,4 @@
-window.dev = false;
+window.dev = true;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -95,7 +95,7 @@ const App = {
       let $itemslider = document.querySelector('.items-slider');
       if($itemslider) new ItemSlider($itemslider).init();
       //lights icons
-      let $lightsicons = document.querySelectorAll('.advantages-block__icon-animate');
+      let $lightsicons = document.querySelectorAll('.advantages-block .icon');
       if($lightsicons.length) {
         $lightsicons.forEach(($block)=>{
           new AdvantagesLights($block).init();
