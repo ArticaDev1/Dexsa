@@ -20,6 +20,8 @@ const mobile_gap = 16;
 import 'lazysizes';
 lazySizes.cfg.init = false;
 lazySizes.cfg.expand = 100;
+lazySizes.cfg.preloadAfterLoad = true;
+
 
 import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -95,6 +97,7 @@ const App = {
       this.afunctions.add(AdvantagesLights, '.advantages-block .icon');
       this.afunctions.add(Card3d, '.js-3d');
       this.afunctions.add(AboutTextBlock, '.about-text');
+      this.afunctions.add(AboutPreviewBlock, '.about-preview');
 
       this.afunctions.init();
 
@@ -210,7 +213,7 @@ const Scroll = {
   },
   custom: function() {
     this.scrollbar = Scrollbar.init($content, {
-      damping: 0.5,
+      damping: 0.2,
       thumbMinSize: 150
     })
     this.scrollbar.addListener(()=>{
@@ -747,6 +750,38 @@ class AboutTextBlock {
       trigger: this.$parent,
       start: "center center",
       end: `+=1000`,
+      pin: true,
+      pinType: 'transform',
+      scrub: true,
+      onUpdate: self => {
+        this.animation.progress(self.progress);
+      }
+    });
+  }
+}
+
+class AboutPreviewBlock {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    this.$container = this.$parent.querySelector('.about-preview__container');
+    this.$blocks = this.$parent.querySelectorAll('.about-preview-block');
+    this.$light = this.$parent.querySelectorAll('.about-preview-block__light');
+
+    this.animation = gsap.timeline({paused:true, defaults:{duration:1}})
+      .to(this.$blocks[0], {autoAlpha:0, ease:'power2.out'})
+      .fromTo(this.$blocks[1], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'}, '-=1')
+      .to(this.$blocks[1], {autoAlpha:0, ease:'power2.out'})
+      .fromTo(this.$blocks[2], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'}, '-=1')
+      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1})
+
+
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$container,
+      start: "center center",
+      end: `+=1500`,
       pin: true,
       pinType: 'transform',
       scrub: true,
