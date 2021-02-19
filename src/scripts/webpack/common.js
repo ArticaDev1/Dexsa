@@ -89,18 +89,25 @@ const App = {
     
 
     window.addEventListener('enter', ()=>{
-      if(mobile()) $body.style.overflow = 'auto';
 
       this.afunctions.add(LightsScene, '.homepage-scene');
       this.afunctions.add(ItemSlider, '.items-slider');
       this.afunctions.add(AdvantagesLights, '.advantages-block .icon');
       this.afunctions.add(Card3d, '.js-3d');
+      this.afunctions.add(AboutTextBlock, '.about-text');
 
       this.afunctions.init();
+
+      
     })
 
 
     Preloader.finish(()=>{
+      if(mobile()) {
+        $body.classList.add('scroll');
+      } else {
+        $body.classList.add('hidden');
+      }
       gsap.to($wrapper, {autoAlpha:1, duration:0.5})
       Transitions.enter(this.$container, this.namespace);
     })
@@ -717,5 +724,35 @@ class Card3d {
   }
   destroy() {
 
+  }
+}
+
+class AboutTextBlock {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    this.$blocks = this.$parent.querySelectorAll('.about-text__block');
+    this.$title = this.$parent.querySelectorAll('.about-text__title');
+    this.$ligts = this.$parent.querySelectorAll('.about-text__light');
+
+    let color1 = getComputedStyle(document.documentElement).getPropertyValue('--color-dark'),
+        color2 = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
+
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$blocks, {css:{color:color1}}, {css:{color:color2}, duration:1})
+      .fromTo(this.$ligts, {autoAlpha:0, rotate:2}, {autoAlpha:1, rotate:0, duration:1, stagger:{amount:0.15}}, '-=1')
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "center center",
+      end: `+=1000`,
+      pin: true,
+      pinType: 'transform',
+      scrub: true,
+      onUpdate: self => {
+        this.animation.progress(self.progress);
+      }
+    });
   }
 }
