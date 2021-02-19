@@ -3954,9 +3954,9 @@ h6, .h6 {
 
 @media (min-width: 1024px) {
   .advantages-block:nth-child(1) .icon, .advantages-block:nth-child(3) .icon {
-    transition-delay: .25s; }
+    transition-delay: 0.5s; }
   .advantages-block:nth-child(2) .icon, .advantages-block:nth-child(4) .icon {
-    transition-delay: .75s; } }
+    transition-delay: 0.75s; } }
 
 /*========== Header ==========*/
 .header {
