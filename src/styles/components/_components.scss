@@ -122,3 +122,21 @@
     }
   }
 }
+
+.js-3d {
+  position: relative;
+  transform: translateZ(1000px);
+  transform-style: preserve-3d;
+  &__back,
+  &__forward {
+    position: relative;
+  }
+  &__back {
+    z-index: 1;
+    transform: perspective(500px);
+  }
+  &__forward {
+    z-index: 2;
+    transform: perspective(500px) translateZ(100px) scale(0.8);
+  }
+}

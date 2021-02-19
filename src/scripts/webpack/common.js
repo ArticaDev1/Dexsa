@@ -73,6 +73,10 @@ const App = {
     this.$container = document.querySelector('[data-barba="container"]');
     this.namespace = this.$container.getAttribute('data-barba-namespace');
     this.name = this.$container.getAttribute('data-name');
+
+    this.afunctions = new ActiveFunctions();
+    this.afunctions.create();
+
     //functions
     Scroll.init();
     lazySizes.init();
@@ -82,26 +86,17 @@ const App = {
     if(mobile()) {
       mobileWindow.init();
     }
+    
 
     window.addEventListener('enter', ()=>{
-      if(mobile()) {
-        $body.style.overflow = 'auto';
-      }
+      if(mobile()) $body.style.overflow = 'auto';
 
-      //home
-      let $lightscene = document.querySelector('.homepage-scene');
-      if($lightscene) new LightsScene($lightscene).init();
-      //slider
-      let $itemslider = document.querySelector('.items-slider');
-      if($itemslider) new ItemSlider($itemslider).init();
-      //lights icons
-      let $lightsicons = document.querySelectorAll('.advantages-block .icon');
-      if($lightsicons.length) {
-        $lightsicons.forEach(($block)=>{
-          new AdvantagesLights($block).init();
-        })
-        
-      }
+      this.afunctions.add(LightsScene, '.homepage-scene');
+      this.afunctions.add(ItemSlider, '.items-slider');
+      this.afunctions.add(AdvantagesLights, '.advantages-block .icon');
+      this.afunctions.add(Card3d, '.js-3d');
+
+      this.afunctions.init();
     })
 
 
@@ -304,6 +299,32 @@ const Scroll = {
   }
 }
 
+class ActiveFunctions {
+  create() {
+    this.functions = [];
+  }
+  add(clss, blocks) {
+    let $blocks = App.$container.querySelectorAll(blocks);
+    if($blocks.length) {
+      $blocks.forEach($block => {
+        this.functions.push(new clss($block));
+      });
+    }
+  }
+  init() {
+    console.log(this.functions)
+    this.functions.forEach(func => {
+      func.init();
+    })
+  }
+  destroy() {
+    this.functions.forEach(func => {
+      func.destroy();
+    })
+    this.functions = [];
+  }
+}
+
 class LightsScene {
   constructor($parent) {
     this.$parent = $parent;
@@ -311,7 +332,7 @@ class LightsScene {
 
   init() {
     this.$layers = this.$parent.querySelectorAll('.homepage-scene__layer');
-
+    
     //mobile
     if(mobile()) {
       setTimeout(() => {
@@ -615,3 +636,86 @@ class AdvantagesLights {
   }
 }
 
+class Card3d {
+  constructor($block) {
+    this.$block = $block;
+  }
+  init() {
+    let animation1,
+        animation2,
+        $back = this.$block.querySelector('.js-3d__back'),
+        $forward = this.$block.querySelector('.js-3d__forward'),
+        moveForward = 1,
+        rotationForward = 1,
+        rotationBack = 1;
+
+    if($back!==null) {
+      if($back.getAttribute('data-rotation')!==null) {
+        rotationBack = $back.getAttribute('data-rotation');
+      }
+    }
+    if($forward!==null) {
+      if($forward.getAttribute('data-rotation')!==null) {
+        rotationForward = $forward.getAttribute('data-rotation');
+      }
+      if($forward.getAttribute('data-move')!==null) {
+        moveForward = $forward.getAttribute('data-move');
+      }
+    }
+
+    this.animation = (event)=> {
+      let x,y,w,h,xValue,yValue;
+  
+      if(event.type=='mousemove' || event.type=='touchstart') {
+        if(event.type=='mousemove') {
+          x = event.clientX;
+          y = event.clientY;
+        } else if(event.type=='touchstart') {
+          x = event.touches[0].clientX;
+          y = event.touches[0].clientY;
+        }
+        x = this.$block.getBoundingClientRect().x - x;
+        y = this.$block.getBoundingClientRect().y - y;
+        w = this.$block.getBoundingClientRect().width/2;
+        h = this.$block.getBoundingClientRect().height/2;
+        xValue = -Math.ceil(x+w)/((w+h));
+        yValue = Math.ceil(y+h)/((w+h));
+      }
+
+      function play() {
+        if($back!==null) {
+          animation1 = gsap.timeline()
+            .to($back, {duration:Speed, rotationY:xValue*rotationBack, rotationX:yValue*rotationBack, ease:'power2.out'})
+        }
+        if($forward!==null) {
+          animation2 = gsap.timeline()
+            .to($forward, {duration:Speed, x:xValue*moveForward, y:-yValue*moveForward, rotationY:xValue*rotationForward, rotationX:yValue*rotationForward, ease:'power2.out'})
+        }
+      }
+
+      function reverse() {
+        if($back!==null) {
+          animation1 = gsap.timeline()
+            .to($back, {duration:Speed, rotationY:0, rotationX:0, ease:'power2.out'})
+        }
+        if($forward!==null) {
+          animation2 = gsap.timeline()
+            .to($forward, {duration:Speed, x:0, y:0, rotationY:0, rotationX:0, ease:'power2.out'})
+        }
+      }
+
+      if(event.type=='mousemove' && !TouchHoverEvents.touched) {
+        play();
+      } else if(event.type=='mouseleave' && !TouchHoverEvents.touched) {
+        reverse();
+      } 
+    }
+
+    this.$block.addEventListener('mousemove',  this.animation);
+    this.$block.addEventListener('mouseleave', this.animation);
+
+  }
+  destroy() {
+
+  }
+}
