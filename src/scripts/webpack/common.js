@@ -210,7 +210,7 @@ const Scroll = {
   },
   custom: function() {
     this.scrollbar = Scrollbar.init($content, {
-      damping: 0.1,
+      damping: 0.5,
       thumbMinSize: 150
     })
     this.scrollbar.addListener(()=>{
