@@ -25,12 +25,6 @@ p {
   }
 }
 
-img:not([class]) {
-  display: block;
-  width: auto;
-  max-width: 100%;
-}
-
 strong, b {
   font-weight: 700;
 }

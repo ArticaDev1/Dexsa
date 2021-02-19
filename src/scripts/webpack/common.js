@@ -1,4 +1,4 @@
-window.dev = true;
+window.dev = false;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -619,7 +619,8 @@ const mobileWindow = {
     $el.style.cssText = 'position:fixed;height:100%;';
     $body.insertAdjacentElement('beforeend', $el);
     this.h = $el.getBoundingClientRect().height;
-    $el.remove();
+    console.log(this.h)
+    //$el.remove();
     window.addEventListener('enter', ()=>{
       this.check();
     })
@@ -781,7 +782,7 @@ class AboutPreviewBlock {
     this.trigger = ScrollTrigger.create({
       trigger: this.$container,
       start: "center center",
-      end: `+=1500`,
+      end: `+=2500`,
       pin: true,
       pinType: 'transform',
       scrub: true,

@@ -3502,11 +3502,6 @@ p {
   p:last-child {
     margin-bottom: 0; }
 
-img:not([class]) {
-  display: block;
-  width: auto;
-  max-width: 100%; }
-
 strong, b {
   font-weight: 700; }
 
@@ -4020,7 +4015,8 @@ h6, .h6 {
     bottom: -48px; }
 
 .about-text {
-  padding: 160px 0; }
+  padding: 160px 0;
+  position: relative; }
   .about-text__block {
     text-align: center;
     color: var(--color-dark); }
