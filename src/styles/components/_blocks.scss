@@ -720,6 +720,25 @@
     text-align: center;
     padding-top: 210px;
   }
+  &__index {
+    display: inline-block;
+    position: relative;
+    margin-right: 0.3em;
+    span {
+      display: block;
+      text-align: center;
+      &:not(:first-child) {
+        opacity: 0;
+        visibility: hidden;
+      }
+      &:not(:last-child) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
   @include media-breakpoint-down(xxl) {
     &__container {
       height: 600px;

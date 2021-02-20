@@ -236,8 +236,7 @@ block content
               img(src="./img/light1/4.png", alt="image").about-preview-block__light
           .about-preview-block__text.about-preview-block__text_3.offset-xl-2.col-xl-3
             p.h4 Замена светодиодного модуля
-
-            
+      
   section.section.warranty-preview
     .section__head.container 
       .row 
@@ -251,7 +250,15 @@ block content
       .container 
         .row 
           .offset-xl-3.col-xl-4.warranty-preview__text 
-            .h1 +5 лет
+            .h1
+              | +
+              span.warranty-preview__index
+                span 1
+                span 2
+                span 3
+                span 4
+                span 5
+              | лет
             p Новый «зип» продлевает гарантию на светильник еще на 5 лет  
 
   include blocks/contacts-blocks

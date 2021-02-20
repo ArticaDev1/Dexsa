@@ -4424,6 +4424,22 @@ h6, .h6 {
   text-align: center;
   padding-top: 210px; }
 
+.warranty-preview__index {
+  display: inline-block;
+  position: relative;
+  margin-right: 0.3em; }
+  .warranty-preview__index span {
+    display: block;
+    text-align: center; }
+    .warranty-preview__index span:not(:first-child) {
+      opacity: 0;
+      visibility: hidden; }
+    .warranty-preview__index span:not(:last-child) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%; }
+
 @media (max-width: 1599.98px) {
   .warranty-preview__container {
     height: 600px; } }

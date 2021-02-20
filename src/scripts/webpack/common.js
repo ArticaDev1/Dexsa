@@ -1,4 +1,4 @@
-window.dev = true;
+window.dev = false;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -747,12 +747,8 @@ class AboutTextBlock {
       .to(this.$blocks, {css:{color:color1}, duration:0.8, ease:'power2.out'}, '+=0.4') //2
       .fromTo(this.$ligts[0], {rotate:3}, {rotate:-3, duration:2, ease:'power1.inOut'}, '-=2') //2
       .fromTo(this.$ligts[1], {rotate:3}, {rotate:-3, duration:2, ease:'power3.inOut'}, '-=2') //2
-
       .fromTo(this.$ligts, {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:'power2.in'}, '-=2')
       .to(this.$ligts, {autoAlpha:0, duration:0.8, ease:'power2.out'}, '-=0.8')
-
-      //.to(this.$blocks, {css:{color:color1}, duration:1, ease:'power2.inOut'})
-      //.to(this.$ligts, {autoAlpha:0, rotate:-3, duration:1, ease:'power2.out', stagger:{amount:0.1, from:'end'}}, '-=1')
 
     this.trigger = ScrollTrigger.create({
       trigger: this.$parent,
@@ -839,17 +835,52 @@ class WarrantyPreviewBlock {
   }
   init() {
     this.$light = this.$parent.querySelector('.warranty-preview__image-light');
+    this.$values = this.$parent.querySelectorAll('.warranty-preview__index span');
 
     this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1})
+
+    this.$values.forEach(($value, index)=>{
+      let timeline, 
+          dur = 1/(this.$values.length-1);
+
+      if(index==0) {
+        timeline = gsap.timeline()
+          .to($value, {autoAlpha:0, scale:0.8, duration:dur, ease:'power2.out'})
+        
+        this.animation.add(timeline, `>`)
+      } 
+      else {
+        if(index==this.$values.length-1) {
+          timeline = gsap.timeline()
+            .fromTo($value, {autoAlpha:0, scale:1.2}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
+        } 
+        else {
+          timeline = gsap.timeline()
+            .fromTo($value, {autoAlpha:0, scale:1.2}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
+            .to($value, {autoAlpha:0, scale:0.8, duration:dur, ease:'power1.out'})
+        }
+
+        this.animation.add(timeline, `>-${dur}`)
+      }
+        
+    })
+
+    let timeline = gsap.timeline()
+      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:'power2.inOut'})
+      .to(this.$light, {autoAlpha:0, duration:0.8, ease:'power2.inOut'}, '+=0.4')
+
+    this.animation.add(timeline, `>`)
+    
+
 
     this.trigger = ScrollTrigger.create({
       trigger: this.$light,
-      start: "top center",
-      end: 'center center',
+      start: "center bottom",
+      end: 'center top',
       scrub: true,
       onUpdate: self => {
         this.animation.progress(self.progress);
+        console.log(self.progress)
       }
     });
   }
