@@ -14,8 +14,13 @@
   flex: 1 1 100%;
   overflow: hidden;
 }
+.container {
+  position: relative;
+  z-index: 2;
+}
 .section {
   margin: 0 0 200px 0;
+  position: relative;
   &__head {
     margin-bottom: 150px;
     &-title {

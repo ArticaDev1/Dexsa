@@ -1,4 +1,4 @@
-window.dev = false;
+window.dev = true;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -21,7 +21,6 @@ import 'lazysizes';
 lazySizes.cfg.init = false;
 lazySizes.cfg.expand = 100;
 lazySizes.cfg.preloadAfterLoad = true;
-
 
 import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -51,6 +50,7 @@ import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
+import Rellax from 'rellax';
 
 const validate = require("validate.js");
 
@@ -109,7 +109,6 @@ const App = {
 
       this.afunctions.init();
 
-      
     })
 
 
@@ -750,7 +749,7 @@ class AboutTextBlock {
     this.trigger = ScrollTrigger.create({
       trigger: this.$parent,
       start: "center center",
-      end: `+=1000`,
+      end: `+=800`,
       pin: true,
       pinType: 'transform',
       scrub: true,

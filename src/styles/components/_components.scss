@@ -141,3 +141,31 @@ img {
     transform: perspective(500px) translateZ(100px) scale(0.8);
   }
 }
+
+.bg-light {
+  position: absolute;
+  &_size-1 {
+    width: 300px;
+    height: 300px;
+  }
+  &_size-2 {
+    width: 700px;
+    height: 700px;
+  }
+  &_size-3 {
+    width: 1200px;
+    height: 1200px;
+  }
+  &_color-1 {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(190, 22, 34, 0.34) 0%, rgba(190, 22, 34, 0) 100%);
+  }
+  &_color-2 {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(190, 22, 34, 0.22) 0%, rgba(190, 22, 34, 0) 100%);
+  }
+  &_color-3 {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+  &_color-4 {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+}
