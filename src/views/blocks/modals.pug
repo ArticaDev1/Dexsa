@@ -1,0 +1,45 @@
+
+.modal.modal-succes#modal-succes
+  .modal__wrapper(data-scroll-lock-scrollable)
+    .modal-block.modal-succes__block
+      .modal__container
+          h3 Спасибо!
+          p.h5 Ваша заявка успешно отправлена
+
+.modal.modal-form#modal-form
+  .modal__wrapper(data-scroll-lock-scrollable)
+    .modal-block.modal-form__block
+      button.modal-close(data-modal='close' aria-label='close')
+      .modal__container.row
+        .modal__title.offset-xl-1.col-xl-10
+          h3 Оставьте контакты и мы вам перезвоним
+        .modal-form__content.offset-xl-3.col-xl-6
+          form.form
+            .form__group.row
+              .form__item.col-12
+                label.input
+                  span.input__title Имя
+                  input(type="text" name="name" data-validate='name' data-required).input__element
+              .form__item.col-12
+                label.input
+                  span.input__title Номер телефона
+                  input(type="text" name="phone" data-validate='phone' data-required).input__element
+              .form__item.col-12
+                label.input
+                  span.input__title Комментарий
+                  textarea(name="message" data-validate='message').input__element
+              .form__submit.offset-xl-2.col-xl-8
+                button.button.button_style-2.button_loader
+                  span Оставить заявку
+                  svg(viewBox='0 0 120 30' fill='currentColor')
+                    circle(cx='15' cy='15' r='15')
+                      animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+                      animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+                    circle(cx='60' cy='15' r='9' fill-opacity='0.3')
+                      animate(attributeName='r' from='9' to='9' begin='0s' dur='0.8s' values='9;15;9' calcMode='linear' repeatCount='indefinite')
+                      animate(attributeName='fill-opacity' from='0.5' to='0.5' begin='0s' dur='0.8s' values='.5;1;.5' calcMode='linear' repeatCount='indefinite')
+                    circle(cx='105' cy='15' r='15')
+                      animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+                      animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+                p.form__message Нажимая кнопку “Отправить” вы соглашаетесь с условиями 
+                  a(href="privacy.html" rel='noopener' target='_blank') Политики конфиденциальности

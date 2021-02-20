@@ -1,0 +1,112 @@
+.modal {
+  position: fixed;
+  z-index: 2000;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  background: var(--color-bg-transparent);
+  backdrop-filter: $blur1;
+  .scroll-content {
+    min-height: 100%;
+    display: flex;
+    .modal__wrapper {
+      height: initial;
+    }
+  }
+  &__wrapper {
+    position: relative;
+    z-index: 1;
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    padding: $container-padding-x;
+    display: flex;
+  }
+  &-close {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    z-index: 2;
+    cursor: pointer;
+    left: calc(100% + 5px);
+    top: 5px;
+    &:before, &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 11px;
+      height: 3px;
+      width: 34px;
+      background-color: var(--color-light);
+      transition: background-color $trs1;
+    }
+    &:before {
+      transform: translateY(-50%) rotate(-45deg);
+    }
+    &:after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+    &[data-touch], &[data-hover] {
+      &:before, &:after {
+        background-color: var(--color-close-hover);
+      }
+    }
+  }
+  &-block {
+    position: relative;
+    margin: auto;
+    z-index: 2;
+    border-radius: 25px;
+    width: 100%;
+  }
+  &__title {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  @include media-breakpoint-down(xxl) {
+    &__title {
+      margin-bottom: 60px;
+    }
+    &-close {
+      top: 0;
+      left: 100%;
+    }
+  }
+}
+
+
+.modal-succes {
+  text-align: center;
+  color: var(--color-text-dark);
+  &__block {
+    padding: 120px 0 140px 0;
+    max-width: 680px;
+    background-color: var(--color-light);
+    box-shadow: 0px 0px 250px var(--color-light);
+  }
+  @include media-breakpoint-down(xxl) {
+    &__block {
+      padding: 100px 0;
+      max-width: 540px;
+    }
+  }
+}
+
+.modal-form {
+  text-align: center;
+  &__block {
+    background-color: var(--color-main-bg);
+    padding: 80px 0;
+    max-width: 1160px;
+  }
+  @include media-breakpoint-down(xxl) {
+    &__block {
+      max-width: 860px;
+      padding: 70px 0;
+    }
+  }
+}

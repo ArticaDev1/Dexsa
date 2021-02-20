@@ -1,4 +1,4 @@
-window.dev = true;
+window.dev = false;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -88,6 +88,7 @@ const App = {
     Header.init();
     Nav.init();
     Validation.init();
+    Modal.init();
     inputs();
     if(mobile()) {
       mobileWindow.init();
@@ -220,8 +221,7 @@ const Scroll = {
   },
   custom: function() {
     this.scrollbar = Scrollbar.init($content, {
-      damping: 0.2,
-      thumbMinSize: 150
+      damping: 0.2
     })
     this.scrollbar.addListener(()=>{
       localStorage.setItem('scroll', this.scrollbar.offset.y);
@@ -1029,10 +1029,81 @@ const Validation = {
       })
       $submit.classList.remove('loading');
       this.reset($form);
-      Modal.open(document.querySelector('#succes'));
+      Modal.open(document.querySelector('#modal-succes'));
       setTimeout(()=>{
         Modal.close();
       }, 3000)
     }, 2000)
+  }
+}
+
+const Modal = {
+  init: function () {
+    this.$modals = document.querySelectorAll('.modal');
+
+    gsap.registerEffect({
+      name: "modal",
+      effect: ($modal, $content) => {
+        let anim = gsap.timeline({paused: true}).fromTo($modal, {autoAlpha: 0}, {autoAlpha: 1,duration: Speed / 2,ease: 'power2.inOut'})
+          .fromTo($content, {y: 20}, {y: 0,duration: Speed,ease: 'power2.out'}, `-=${Speed/2}`)
+        return anim;
+      },
+      extendTimeline: true
+    });
+
+    document.addEventListener('click', (event) => {
+      let $open = event.target.closest('[data-modal="open"]'),
+        $close = event.target.closest('[data-modal="close"]'),
+        $wrap = event.target.closest('.modal'),
+        $block = event.target.closest('.modal-block');
+
+      //open
+      if ($open) {
+        event.preventDefault();
+        let $modal = document.querySelector(`${$open.getAttribute('href')}`);
+        this.open($modal);
+      }
+      //close 
+      else if ($close || (!$block && $wrap)) {
+        this.close();
+      }
+
+    })
+
+    //add scroll
+    if(!mobile()) {
+      this.$modals.forEach(($modal)=>{
+        Scrollbar.init($modal, {
+          damping: 0.2
+        })
+      })
+    }
+  },
+  open: function ($modal) {
+    let play = () => {
+      this.$active = $modal;
+      disablePageScroll();
+      let $content = $modal.querySelector('.modal-block');
+      this.animation = gsap.effects.modal($modal, $content);
+      this.animation.play();
+    }
+    if ($modal) {
+      if (this.$active) this.close(play);
+      else play();
+    }
+  },
+  close: function (callback) {
+    if(this.$active) {
+      this.animation.timeScale(2).reverse().eventCallback('onReverseComplete', () => {
+        delete this.animation;
+        enablePageScroll();
+        if (callback) callback();
+      })
+      //reset form
+      let $form = this.$active.querySelector('form');
+      if ($form) Validation.reset($form);
+  
+      delete this.$active;
+    }
   }
 }

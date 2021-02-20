@@ -168,9 +168,7 @@
                   <div class="homepage__request col-xl-4">
                     <div class="container">
                       <div class="row">
-                        <div class="order-xl-2 col-xl-12">
-                          <button class="button button_style-2"> <span>Оставить заявку</span></button>
-                        </div>
+                        <div class="order-xl-2 col-xl-12"><a class="button button_style-2" href="#modal-form" data-modal="open"> <span>Оставить заявку</span></a></div>
                         <div class="col-xl-12">
                           <p>Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных</p>
                         </div>
@@ -379,8 +377,23 @@
                       <textarea class="input__element" name="message" data-validate="message"></textarea>
                     </label>
                   </div>
-                  <div class="form__submit form-section__submit col-xl-3">
-                    <button class="button button_style-2"> <span>Оставить заявку</span></button>
+                  <div class="form__submit col-xl-3">
+                    <button class="button button_style-2 button_loader"> <span>Оставить заявку</span>
+                      <svg viewBox="0 0 120 30" fill="currentColor">
+                        <circle cx="15" cy="15" r="15">
+                          <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                          <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                        </circle>
+                        <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+                          <animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite"></animate>
+                          <animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite"></animate>
+                        </circle>
+                        <circle cx="105" cy="15" r="15">
+                          <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                          <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                        </circle>
+                      </svg>
+                    </button>
                     <p class="form__message">Нажимая кнопку «Отправить» вы соглашаетесь с условиями <a href="privacy.html" rel="noopener" target="_blank">Политики конфиденциальности</a></p>
                   </div>
                 </div>
@@ -411,8 +424,73 @@
           </section>
         </main>
         <footer class="footer">
-          <div class="container"> </div>
+          <div class="container footer__container">
+            <div class="footer__left"><a class="footer__logo" href="/"> <img src="./img/logos/dexsa.svg" alt="logo"></a><span>Все права защищены</span></div>
+          </div>
         </footer>
+      </div>
+    </div>
+    <!--modals-->
+    <div class="modal modal-succes" id="modal-succes">
+      <div class="modal__wrapper" data-scroll-lock-scrollable>
+        <div class="modal-block modal-succes__block">
+          <div class="modal__container">
+            <h3>Спасибо!</h3>
+            <p class="h5">Ваша заявка успешно отправлена</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-form" id="modal-form">
+      <div class="modal__wrapper" data-scroll-lock-scrollable>
+        <div class="modal-block modal-form__block">
+          <button class="modal-close" data-modal="close" aria-label="close"></button>
+          <div class="modal__container row">
+            <div class="modal__title offset-xl-1 col-xl-10">
+              <h3>Оставьте контакты и мы вам перезвоним</h3>
+            </div>
+            <div class="modal-form__content offset-xl-3 col-xl-6">
+              <form class="form">
+                <div class="form__group row">
+                  <div class="form__item col-12">
+                    <label class="input"><span class="input__title">Имя</span>
+                      <input class="input__element" type="text" name="name" data-validate="name" data-required>
+                    </label>
+                  </div>
+                  <div class="form__item col-12">
+                    <label class="input"><span class="input__title">Номер телефона</span>
+                      <input class="input__element" type="text" name="phone" data-validate="phone" data-required>
+                    </label>
+                  </div>
+                  <div class="form__item col-12">
+                    <label class="input"><span class="input__title">Комментарий</span>
+                      <textarea class="input__element" name="message" data-validate="message"></textarea>
+                    </label>
+                  </div>
+                  <div class="form__submit offset-xl-2 col-xl-8">
+                    <button class="button button_style-2 button_loader"><span>Оставить заявку</span>
+                      <svg viewBox="0 0 120 30" fill="currentColor">
+                        <circle cx="15" cy="15" r="15">
+                          <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                          <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                        </circle>
+                        <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+                          <animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite"></animate>
+                          <animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite"></animate>
+                        </circle>
+                        <circle cx="105" cy="15" r="15">
+                          <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                          <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+                        </circle>
+                      </svg>
+                    </button>
+                    <p class="form__message">Нажимая кнопку «Отправить» вы соглашаетесь с условиями <a href="privacy.html" rel="noopener" target="_blank">Политики конфиденциальности</a></p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!--fonts-->

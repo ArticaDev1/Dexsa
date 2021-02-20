@@ -3,8 +3,7 @@
   position: relative;
   border-radius: 8px;
   background-color: var(--color-dark);
-  color: var(--color-text);
-  transition: background-color $trs2, color $trs2;
+  transition: background-color $trs2, opacity $trs2;
   box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
   z-index: 2;
   &__title {
@@ -32,9 +31,8 @@
     cursor: pointer;
     resize: none;
     height: 56px;
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover, 
-    &:-webkit-autofill:focus {
+    color: var(--color-text);
+    &:-webkit-autofill {
       -webkit-text-fill-color: var(--color-text);
       box-shadow: 0 0 0px 1000px transparent inset;
       transition: background-color 5000s;
@@ -68,7 +66,7 @@
   }
   &.loading {
     pointer-events: none;
-    color: var(--color-muted);
+    opacity: 0.5;
   }
 }
 
@@ -84,7 +82,7 @@
     margin-bottom: 50px;
   }
   &__message {
-    margin: 10px 0 0 0;
+    margin: 20px 0 0 0;
     font-size: 0.75rem;
     color: var(--color-muted);
     position: relative;

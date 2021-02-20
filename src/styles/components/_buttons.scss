@@ -101,6 +101,31 @@
       background-color: var(--color-muted);
     }
   }
+  &_loader {
+    span, svg {
+      transition: opacity $trs1;
+    }
+    svg {
+      position: absolute;
+      height: 10px;
+      width: 60px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      color: inherit;
+      opacity: 0;
+    }
+    &.loading {
+      pointer-events: none;
+      span {
+        opacity: 0;
+      }
+      svg {
+        opacity: 1;
+      }
+    }
+  }
 
   @include media-breakpoint-down(xxl) {
     &_style-1 {
