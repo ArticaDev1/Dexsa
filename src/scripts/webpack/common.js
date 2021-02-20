@@ -743,13 +743,13 @@ class AboutTextBlock {
         color2 = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
 
     this.animation = gsap.timeline({paused:true})
-      .to(this.$blocks, {css:{color:color2}, duration:0.75, ease:'power2.in'})
-      .to(this.$blocks, {css:{color:color1}, duration:0.75, ease:'power2.out'}, '+=0.5') //2
+      .to(this.$blocks, {css:{color:color2}, duration:0.8, ease:'power2.in'})
+      .to(this.$blocks, {css:{color:color1}, duration:0.8, ease:'power2.out'}, '+=0.4') //2
       .fromTo(this.$ligts[0], {rotate:3}, {rotate:-3, duration:2, ease:'power1.inOut'}, '-=2') //2
       .fromTo(this.$ligts[1], {rotate:3}, {rotate:-3, duration:2, ease:'power3.inOut'}, '-=2') //2
 
-      .fromTo(this.$ligts, {autoAlpha:0}, {autoAlpha:1, duration:0.9, ease:'power2.in', stagger:{amount:0.1}}, '-=2')
-      .to(this.$ligts, {autoAlpha:0, duration:0.9, ease:'power2.out', stagger:{amount:0.1, from:'end'}}, '-=1')
+      .fromTo(this.$ligts, {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:'power2.in'}, '-=2')
+      .to(this.$ligts, {autoAlpha:0, duration:0.8, ease:'power2.out'}, '-=0.8')
 
       //.to(this.$blocks, {css:{color:color1}, duration:1, ease:'power2.inOut'})
       //.to(this.$ligts, {autoAlpha:0, rotate:-3, duration:1, ease:'power2.out', stagger:{amount:0.1, from:'end'}}, '-=1')
