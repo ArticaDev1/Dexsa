@@ -2,22 +2,19 @@
   position: fixed;
   z-index: 1001;
   width: 100%;
-  transition: transform $trs2;
+  transition: opacity $trs2;
   &_fixed:not(.header_nav-opened) {
     .header__bg {
       opacity: 1;
     }
     .header__container {
-      height: 80px;
+      height: 70px;
     }
-  }
-  &_hidden {
-    transform: translateY(-100%);
   }
   &__bg {
     background-color: var(--color-bg-transparent);
     backdrop-filter: $blur1;
-    transition: opacity $trs2;
+    transition: opacity $trs2, backdrop-filter $trs2;
     opacity: 0;
     pointer-events: none;
     position: absolute;
@@ -30,7 +27,7 @@
     justify-content: space-between;
     align-items: center;
     height: 150px;
-    transition: height $trs2;
+    transition: height $trs2, opacity $trs2;
     position: relative;
   } 
   &__logo {
