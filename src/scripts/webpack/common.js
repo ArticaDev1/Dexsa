@@ -98,6 +98,8 @@ const App = {
       this.afunctions.add(Card3d, '.js-3d');
       this.afunctions.add(AboutTextBlock, '.about-text');
       this.afunctions.add(AboutPreviewBlock, '.about-preview');
+      this.afunctions.add(WarrantyPreviewBlock, '.warranty-preview');
+      
 
       this.afunctions.init();
 
@@ -739,13 +741,15 @@ class AboutPreviewBlock {
     this.$ftext = this.$parent.querySelector('.section__head-txt');
 
     this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'power2.out'}})
-      .to(this.$text[0], {autoAlpha:0})
+      .to(this.$text[0], {autoAlpha:0}, "+=1")
+      .to(this.$text[0], {x:30, ease:'power2.in'}, '-=1')
       .to(this.$blocks[0], {autoAlpha:0, duration:'0.75'})
 
       .to(this.$blocks[1], {autoAlpha:1, ease:'power2.in', duration:'0.75'}, '-=0.75')
       .fromTo(this.$text[1], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'})
       .fromTo(this.$text[1], {x:30}, {x:0}, '-=1')
       .to(this.$text[1], {autoAlpha:0},'+=1')
+      .to(this.$text[1], {x:30, ease:'power2.in'}, '-=1')
       .to(this.$blocks[1], {autoAlpha:0, duration:'0.75'})
 
       .to(this.$blocks[2], {autoAlpha:1, ease:'power2.in', duration:'0.75'}, '-=0.75')
@@ -765,7 +769,7 @@ class AboutPreviewBlock {
     this.triggers[0] = ScrollTrigger.create({
       trigger: this.$container,
       start: "center center",
-      end: '+=2500',
+      end: '+=3000',
       pin: true,
       pinType: pinType,
       scrub: true,
@@ -779,7 +783,7 @@ class AboutPreviewBlock {
       trigger: this.$ftext,
       start: "top top+=120",
       end: ()=>{
-        let val = this.triggers[0].start - (this.$ftext.getBoundingClientRect().top + Scroll.y) + 120 + 2500;
+        let val = this.triggers[0].start - (this.$ftext.getBoundingClientRect().top + Scroll.y) + 120 + 3000;
         return `+=${val}`;
       },
       pin: true,
@@ -788,5 +792,27 @@ class AboutPreviewBlock {
       scrub: true
     });
 
+  }
+}
+
+class WarrantyPreviewBlock {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    this.$light = this.$parent.querySelector('.warranty-preview__image-light');
+
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1})
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$light,
+      start: "top center",
+      end: 'center center',
+      scrub: true,
+      onUpdate: self => {
+        this.animation.progress(self.progress);
+      }
+    });
   }
 }

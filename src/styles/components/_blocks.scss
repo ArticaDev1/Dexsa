@@ -644,3 +644,37 @@
     }
   }
 }
+
+.warranty-preview {
+  &__container {
+    position: relative;
+    overflow: hidden;
+    height: 700px;
+  }
+  &__image {
+    position: absolute;
+    right: 0;
+    transform: translateX(38%);
+    height: 100%;
+    img {
+      &:first-child {
+        position: initial;
+        height: 100%;
+        width: auto;
+      }
+    }
+  }
+  &__image-light {
+    opacity: 0;
+    visibility: hidden;
+  }
+  &__text {
+    text-align: center;
+    padding-top: 210px;
+  }
+  @include media-breakpoint-down(xxl) {
+    &__container {
+      height: 600px;
+    }
+  }
+}
