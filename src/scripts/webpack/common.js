@@ -48,9 +48,11 @@ barba.init({
 });
 
 import Scrollbar from 'smooth-scrollbar';
-
+import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
+
+const validate = require("validate.js");
 
 import Inputmask from "inputmask";
 
@@ -85,6 +87,8 @@ const App = {
     TouchHoverEvents.init();
     Header.init();
     Nav.init();
+    Validation.init();
+    inputs();
     if(mobile()) {
       mobileWindow.init();
     }
@@ -99,7 +103,8 @@ const App = {
       this.afunctions.add(AboutTextBlock, '.about-text');
       this.afunctions.add(AboutPreviewBlock, '.about-preview');
       this.afunctions.add(WarrantyPreviewBlock, '.warranty-preview');
-      
+
+      autosize(document.querySelectorAll('textarea.input__element'));
 
       this.afunctions.init();
 
@@ -615,6 +620,34 @@ class ItemSlider {
   }
 }
 
+function inputs() {
+  let events = (event)=> {
+    let $input = event.target;
+    if($input.closest('.input__element')) {
+      if(event.type=='focus') {
+        $input.parentNode.classList.add('focused');
+      } else {
+        let value = $input.value;
+        if (validate.single(value, {presence: {allowEmpty: false}}) !== undefined) {
+          $input.value = '';
+          $input.parentNode.classList.remove('focused');
+          //textarea
+          if($input.tagName=='TEXTAREA') {
+            if(window.innerWidth>=brakepoints.sm) {
+              $input.style.height = '56px';
+            } else {
+              $input.style.height = '48px';
+            }
+          }
+        }
+      }
+    }
+  }
+
+  document.addEventListener('focus',  (event)=>{events(event)}, true);
+  document.addEventListener('blur',   (event)=>{events(event)}, true);
+}
+
 const mobileWindow = {
   init: function() {
     let $el = document.createElement('div')
@@ -756,7 +789,7 @@ class AboutPreviewBlock {
       .fromTo(this.$text[2], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'})
       .fromTo(this.$text[2], {x:30}, {x:0}, '-=1')
 
-      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'})
+      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.in'})
 
       
 
@@ -814,5 +847,192 @@ class WarrantyPreviewBlock {
         this.animation.progress(self.progress);
       }
     });
+  }
+}
+
+const Validation = {
+  init: function () {
+    this.namspaces = {
+      name: 'name',
+      phone: 'phone',
+      email: 'email',
+      message: 'message'
+    }
+    this.constraints = {
+      name: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваше имя'
+        },
+        format: {
+          pattern: /[A-zА-яЁё ]+/,
+          message: '^Введите корректное имя'
+        },
+        length: {
+          minimum: 2,
+          tooShort: "^Имя слишком короткое (минимум %{count} символа)",
+          maximum: 20,
+          tooLong: "^Имя слишком длинное (максимум %{count} символов)"
+        }
+      },
+      phone: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваш номер телефона'
+        },
+        format: {
+          pattern: /^\+7 \d{3}\ \d{3}\-\d{4}$/,
+          message: '^Введите корректный номер телефона'
+        }
+      },
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваш email'
+        },
+        email: {
+          message: '^Неправильный формат email-адреса'
+        }
+      },
+      message: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваше сообщение'
+        },
+        length: {
+          minimum: 2,
+          tooShort: "^Сообщение слишком короткое (минимум %{count} символа)",
+          maximum: 100,
+          tooLong: "^Сообщение слишком длинное (максимум %{count} символов)"
+        }
+      }
+    };
+    this.mask = Inputmask({
+      mask: "+7 999 999-9999",
+      showMaskOnHover: false,
+      clearIncomplete: false
+    }).mask("[data-validate='phone']");
+
+    gsap.registerEffect({
+      name: "fadeMessages",
+      effect: ($message) => {
+        return gsap.timeline({paused:true})
+          .fromTo($message, {autoAlpha: 0}, {autoAlpha:1, duration:0.3, ease:'power2.inOut'})
+      }
+    });
+
+    document.addEventListener('submit', (event) => {
+      let $form = event.target,
+        $inputs = $form.querySelectorAll('input, textarea'),
+        l = $inputs.length,
+        i = 0;
+      while (i < l) {
+        if ($inputs[i].getAttribute('data-validate')) {
+          event.preventDefault();
+          let flag = 0;
+          $inputs.forEach(($input) => {
+            if (!this.validInput($input)) flag++;
+          })
+          if (!flag) this.submitEvent($form);
+          break;
+        } else i++
+      }
+    })
+
+    document.addEventListener('input', (event) => {
+      let $input = event.target,
+        $parent = $input.parentNode;
+      if ($parent.classList.contains('error')) {
+        this.validInput($input);
+      }
+    })
+
+  },
+  validInput: function ($input) {
+    let $parent = $input.parentNode,
+      type = $input.getAttribute('data-validate'),
+      required = $input.getAttribute('data-required') !== null,
+      value = $input.value,
+      empty = validate.single(value, {
+        presence: {
+          allowEmpty: false
+        }
+      }) !== undefined,
+      resault;
+
+    for (let key in this.namspaces) {
+      if (type == key && (required || !empty)) {
+        resault = validate.single(value, this.constraints[key]);
+        break;
+      }
+    }
+    //если есть ошибки
+    if (resault) {
+      if (!$parent.classList.contains('error')) {
+        $parent.classList.add('error');
+        $parent.insertAdjacentHTML('beforeend', `<span class="input__message">${resault[0]}</span>`);
+        let $message = $parent.querySelector('.input__message');
+        gsap.effects.fadeMessages($message).play();
+      } else {
+        $parent.querySelector('.input__message').textContent = `${resault[0]}`;
+      }
+      return false;
+    }
+    //если нет ошибок
+    else {
+      if ($parent.classList.contains('error')) {
+        $parent.classList.remove('error');
+        let $message = $parent.querySelector('.input__message');
+        gsap.effects.fadeMessages($message).reverse(1).eventCallback('onReverseComplete', () => {
+          $message.remove();
+        });
+      }
+      return true;
+    }
+  },
+  reset: function ($form) {
+    let $inputs = $form.querySelectorAll('input, textarea');
+    $inputs.forEach(($input) => {
+      let $parent = $input.parentNode;
+      $input.value = '';
+      //textarea
+      if($input.tagName=='TEXTAREA') {
+        if(window.innerWidth>=brakepoints.sm) {
+          $input.style.height = '56px';
+        } else {
+          $input.style.height = '48px';
+        }
+      }
+      if ($parent.classList.contains('focused')) {
+        $parent.classList.remove('focused');
+      }
+      if ($parent.classList.contains('error')) {
+        $parent.classList.remove('error');
+        let $message = $parent.querySelector('.input__message');
+        gsap.effects.fadeMessages($message).reverse(1).eventCallback('onReverseComplete', ()=>{
+          $message.remove();
+        });
+      }
+    })
+  },
+  submitEvent: function ($form) {
+    let $submit = $form.querySelector('button'),
+        $inputs = $form.querySelectorAll('input, textarea');
+    $inputs.forEach(($input) => {
+      $input.parentNode.classList.add('loading');
+    })
+    $submit.classList.add('loading');
+    //test
+    setTimeout(() => {
+      $inputs.forEach(($input) => {
+        $input.parentNode.classList.remove('loading');
+      })
+      $submit.classList.remove('loading');
+      this.reset($form);
+      Modal.open(document.querySelector('#succes'));
+      setTimeout(()=>{
+        Modal.close();
+      }, 3000)
+    }, 2000)
   }
 }

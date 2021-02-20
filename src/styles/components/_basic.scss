@@ -8,6 +8,7 @@ body {
   font-weight: 500;
   line-height: 1.44;
   min-width: 320px;
+  text-rendering: geometricPrecision;
   @include media-breakpoint-down(xxl) {
     font-size: 1rem;
   }

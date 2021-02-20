@@ -678,3 +678,17 @@
     }
   }
 }
+
+.contacts-block {
+  &__head {
+    margin-bottom: 100px;
+  }
+  &__info {
+    margin-top: 60px;
+  }
+}
+.contacts-block-item {
+  &:not(:last-child) {
+    margin-bottom: 46px;
+  }
+}

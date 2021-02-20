@@ -14,7 +14,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   & + h4, .h4,
   & + h5, .h5,
   & + h6, .h6 {
-    margin-top: 1.375rem;
+    margin-top: 2.375rem;
   }
 }
 
@@ -29,17 +29,19 @@ strong, b {
   font-weight: 700;
 }
 
-a:not([class]), .link {
-  transition: color $trs1, border-color $trs1;
-  border-bottom: 1px solid var(--color-text);
+a {
   text-decoration: none;
   color: inherit;
-  &[data-touch], &[data-hover] {
-    color: var(--color-accent-hover);
-    border-color: transparent;
-  }
-  &[data-focus] {
-    color: var(--color-accent-focus);
+  &:not([class]), &.link {
+    transition: opacity $trs1, border-color $trs1, color $trs1;
+    border-bottom: 1px solid currentColor;
+    &[data-touch], &[data-hover] {
+      border-color: transparent;
+      color: var(--color-text);
+    }
+    &[data-focus] {
+      opacity: 0.8;
+    }
   }
 }
 

@@ -59,12 +59,12 @@
           <div class="header__container"><a class="logo header__logo" href="/"><img class="logo__image" src="./img/logos/logo.png" alt="logo"></a>
             <nav class="header-nav">
               <ul class="header-nav__list">
-                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="about">О компании </a></li>
-                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="production">Производство</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="catalogue">Продукция</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="certificates">Сертификаты и аккредитации</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="references">Референс лист</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link" href="/" data-name="contacts">Контакты</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="about">О компании </a></li>
+                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="production">Производство</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="catalogue">Продукция</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="certificates">Сертификаты и аккредитации</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="references">Референс лист</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="contacts">Контакты</a></li>
               </ul>
             </nav>
             <button class="nav-toggle"><span></span></button>
@@ -351,21 +351,68 @@
               </div>
             </div>
           </section>
-          <section class="section contacts">
+          <section class="section contacts-block">
             <div class="container">
-              <div class="section__head row">
+              <div class="section__head contacts-block__head row">
                 <div class="col-xl-2">
                   <p class="section__head-txt">Контакты</p>
                 </div>
                 <div class="col-xl-8">
                   <h3 class="section__head-title">Давайте встретимся и обсудим, где мы можем быть полезны вашему бизнесу с нашей технологией освещения</h3>
-                  <p>Оставьте контакты и мы вам перезвоним</p>
+                  <h4>Оставьте контакты и мы вам перезвоним</h4>
+                </div>
+              </div>
+              <form class="form">
+                <div class="form__group row">
+                  <div class="form__item col-xl-3">
+                    <label class="input"><span class="input__title">Имя</span>
+                      <input class="input__element" type="text" name="name" data-validate="name" data-required>
+                    </label>
+                  </div>
+                  <div class="form__item col-xl-3">
+                    <label class="input"><span class="input__title">Номер телефона</span>
+                      <input class="input__element" type="text" name="phone" data-validate="phone" data-required>
+                    </label>
+                  </div>
+                  <div class="form__item col-xl-3">
+                    <label class="input"><span class="input__title">Комментарий</span>
+                      <textarea class="input__element" name="message" data-validate="message"></textarea>
+                    </label>
+                  </div>
+                  <div class="form__submit form-section__submit col-xl-3">
+                    <button class="button button_style-2"> <span>Оставить заявку</span></button>
+                    <p class="form__message">Нажимая кнопку «Отправить» вы соглашаетесь с условиями <a href="privacy.html" rel="noopener" target="_blank">Политики конфиденциальности</a></p>
+                  </div>
+                </div>
+              </form>
+              <div class="contacts-block__info">
+                <div class="contacts-block-item row">
+                  <div class="contacts-block-item__label col-xl-3">Номер телефона</div>
+                  <div class="contacts-block-item__text col-xl-7"> <a class="h6 btn-link" href="tel:+73232323233">+7 (323-23) 2-32-33</a></div>
+                </div>
+                <div class="contacts-block-item row">
+                  <div class="contacts-block-item__label col-xl-3">E-mail</div>
+                  <div class="contacts-block-item__text col-xl-7"><a class="h6 btn-link" href="mailto:email@gmail.com">email@gmail.com</a></div>
+                </div>
+                <div class="contacts-block-item row">
+                  <div class="contacts-block-item__label col-xl-3">Офис</div>
+                  <div class="contacts-block-item__text col-xl-7">
+                    <div class="h6">107078 г. Москва, Орликов переулок, 5, стр. 1А</div>
+                  </div>
+                </div>
+                <div class="contacts-block-item row">
+                  <div class="contacts-block-item__label col-xl-3">Завод</div>
+                  <div class="contacts-block-item__text col-xl-7">
+                    <div class="h6">142715, Московская область, Ленинский район, сельское поселение Совхоз им. Ленина, территория Восточная Промзона, владение 3, стр. 1</div>
+                  </div>
                 </div>
               </div>
             </div>
           </section>
         </main>
-        <footer class="footer"></footer>
+        <footer class="footer">
+          <div class="container"> </div>
+        </footer>
       </div>
     </div>
     <!--fonts-->

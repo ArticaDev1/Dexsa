@@ -10,6 +10,7 @@
   --color-dark:     #1C1C1C;
   --color-main-bg: #0E0E0E;
   --color-bg-transparent: rgba(255, 255, 255, 0.15);
-  --color-scrollbar: #919191; }
+  --color-scrollbar: #919191;
+  --color-error: #A83535; }
 
 /*# sourceMappingURL=maps/theme.css.map */
