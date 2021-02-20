@@ -744,14 +744,12 @@ class AboutTextBlock {
 
     this.animation = gsap.timeline({paused:true})
       .fromTo(this.$blocks, {css:{color:color1}}, {css:{color:color2}, duration:1})
-      .fromTo(this.$ligts, {autoAlpha:0, rotate:2}, {autoAlpha:1, rotate:0, duration:1, stagger:{amount:0.15}}, '-=1')
+      .fromTo(this.$ligts, {autoAlpha:0, rotate:4}, {autoAlpha:1, rotate:0, duration:1, stagger:{amount:0.1}}, '-=1')
 
     this.trigger = ScrollTrigger.create({
       trigger: this.$parent,
-      start: "center center",
-      end: `+=800`,
-      pin: true,
-      pinType: 'transform',
+      start: "center bottom",
+      end: 'center center',
       scrub: true,
       onUpdate: self => {
         this.animation.progress(self.progress);
