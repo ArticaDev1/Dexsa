@@ -1,4 +1,4 @@
-window.dev = true;
+window.dev = false;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
