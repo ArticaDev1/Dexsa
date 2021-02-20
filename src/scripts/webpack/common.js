@@ -1,4 +1,4 @@
-window.dev = false;
+window.dev = true;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -652,82 +652,47 @@ class Card3d {
     this.$block = $block;
   }
   init() {
-    let animation1,
-        animation2,
-        $back = this.$block.querySelector('.js-3d__back'),
-        $forward = this.$block.querySelector('.js-3d__forward'),
-        moveForward = 1,
-        rotationForward = 1,
-        rotationBack = 1;
+    this.$back = this.$block.querySelector('.js-3d__back');
+    this.$forward = this.$block.querySelector('.js-3d__forward');
 
-    if($back!==null) {
-      if($back.getAttribute('data-rotation')!==null) {
-        rotationBack = $back.getAttribute('data-rotation');
-      }
-    }
-    if($forward!==null) {
-      if($forward.getAttribute('data-rotation')!==null) {
-        rotationForward = $forward.getAttribute('data-rotation');
-      }
-      if($forward.getAttribute('data-move')!==null) {
-        moveForward = $forward.getAttribute('data-move');
-      }
-    }
+    this.event = (event)=> {
+      if(event.type=='mousemove') {
+        if(this.backanimation) this.backanimation.pause();
 
-    this.animation = (event)=> {
-      let x,y,w,h,xValue,yValue;
-  
-      if(event.type=='mousemove' || event.type=='touchstart') {
-        if(event.type=='mousemove') {
-          x = event.clientX;
-          y = event.clientY;
-        } else if(event.type=='touchstart') {
-          x = event.touches[0].clientX;
-          y = event.touches[0].clientY;
-        }
-        x = this.$block.getBoundingClientRect().x - x;
-        y = this.$block.getBoundingClientRect().y - y;
-        w = this.$block.getBoundingClientRect().width/2;
-        h = this.$block.getBoundingClientRect().height/2;
-        xValue = -Math.ceil(x+w)/((w+h));
-        yValue = Math.ceil(y+h)/((w+h));
-      }
+        let x = this.$block.getBoundingClientRect().x - event.clientX,
+            y = this.$block.getBoundingClientRect().y - event.clientY,
+            w = this.$block.getBoundingClientRect().width/2,
+            h = this.$block.getBoundingClientRect().height/2,
+            xValue = -(1+x/w),
+            yValue = 1+y/h,
+            //
+            xr = xValue*4,
+            yr = yValue*4,
+            xm = xValue*3,
+            ym = -yValue*3;
 
-      function play() {
-        if($back!==null) {
-          animation1 = gsap.timeline()
-            .to($back, {duration:Speed, rotationY:xValue*rotationBack, rotationX:yValue*rotationBack, ease:'power2.out'})
-        }
-        if($forward!==null) {
-          animation2 = gsap.timeline()
-            .to($forward, {duration:Speed, x:xValue*moveForward, y:-yValue*moveForward, rotationY:xValue*rotationForward, rotationX:yValue*rotationForward, ease:'power2.out'})
-        }
-      }
-
-      function reverse() {
-        if($back!==null) {
-          animation1 = gsap.timeline()
-            .to($back, {duration:Speed, rotationY:0, rotationX:0, ease:'power2.out'})
-        }
-        if($forward!==null) {
-          animation2 = gsap.timeline()
-            .to($forward, {duration:Speed, x:0, y:0, rotationY:0, rotationX:0, ease:'power2.out'})
-        }
-      }
-
-      if(event.type=='mousemove' && !TouchHoverEvents.touched) {
-        play();
-      } else if(event.type=='mouseleave' && !TouchHoverEvents.touched) {
-        reverse();
+        if(this.animation) this.animation.pause();
+        this.animation = gsap.timeline({defaults:{ease:'power2.out', duration:Speed/2}})
+          .to(this.$back, {rotationY:xr, rotationX:yr})
+          .to(this.$forward, {x:xm, y:ym}, `-=${Speed/2}`)
       } 
+      else {
+        if(this.animation) this.animation.pause();
+        
+        this.backanimation = gsap.timeline({defaults:{ease:'power2.out', duration:Speed/2}})
+          .to(this.$back, {rotationY:0, rotationX:0})
+          .to(this.$forward, {x:0, y:0}, `-=${Speed/2}`)
+
+      }
     }
 
-    this.$block.addEventListener('mousemove',  this.animation);
-    this.$block.addEventListener('mouseleave', this.animation);
+    this.$block.addEventListener('mousemove',  this.event);
+    this.$block.addEventListener('mouseleave', this.event);
 
   }
   destroy() {
-
+    this.$block.removeEventListener('mousemove',  this.event);
+    this.$block.removeEventListener('mouseleave', this.event);
   }
 }
 
@@ -769,6 +734,7 @@ class AboutPreviewBlock {
     this.$container = this.$parent.querySelector('.about-preview__container');
     this.$blocks = this.$parent.querySelectorAll('.about-preview-block');
     this.$light = this.$parent.querySelectorAll('.about-preview-block__light');
+    this.$ftext = this.$parent.querySelector('.section__head-txt');
 
     this.animation = gsap.timeline({paused:true, defaults:{duration:1}})
       .to(this.$blocks[0], {autoAlpha:0, ease:'power2.out'})
@@ -777,18 +743,37 @@ class AboutPreviewBlock {
       .fromTo(this.$blocks[2], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'}, '-=1')
       .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1})
 
+      
 
+    let pinType = Scroll.scrollbar?'transform':'fixed';
+    
+    this.triggers = [];
 
-    this.trigger = ScrollTrigger.create({
+    this.triggers[0] = ScrollTrigger.create({
       trigger: this.$container,
       start: "center center",
-      end: `+=2500`,
+      end: '+=2500',
       pin: true,
-      pinType: 'transform',
+      pinType: pinType,
       scrub: true,
       onUpdate: self => {
         this.animation.progress(self.progress);
       }
     });
+
+
+    this.triggers[1] = ScrollTrigger.create({
+      trigger: this.$ftext,
+      start: "top top+=120",
+      end: ()=>{
+        let val = this.triggers[0].start - (this.$ftext.getBoundingClientRect().top + Scroll.y) + 120 + 2500;
+        return `+=${val}`;
+      },
+      pin: true,
+      pinSpacing: false,
+      pinType: pinType,
+      scrub: true
+    });
+
   }
 }

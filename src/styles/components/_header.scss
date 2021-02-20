@@ -2,6 +2,7 @@
   position: fixed;
   z-index: 1001;
   width: 100%;
+  transition: transform $trs2;
   &_fixed:not(.header_nav-opened) {
     .header__bg {
       opacity: 1;
@@ -9,6 +10,9 @@
     .header__container {
       height: 80px;
     }
+  }
+  &_hidden {
+    transform: translateY(-100%);
   }
   &__bg {
     background-color: var(--color-bg-transparent);
