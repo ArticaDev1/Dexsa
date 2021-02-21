@@ -572,13 +572,23 @@ class ItemSlider {
     this.index = 0;
     this.speed = 0.5;
 
-    this.animations = [];
+    this.animationsEnter = [];
+    this.animationsExit = [];
+
     this.$images.forEach(($image, index)=>{
-      this.animations[index] = gsap.timeline({paused:true})
+      let $light = $image.querySelector('.items-slider__image-light');
+      
+      this.animationsEnter[index] = gsap.timeline({paused:true})
         .fromTo($image, {yPercent:20}, {yPercent:0, duration:this.speed, ease:'power2.out'})
         .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed, ease:'power2.inOut'}, `-=${this.speed}`)
+        .fromTo($light, {autoAlpha:0}, {autoAlpha:1, duration:this.speed, ease:'power2.out'}, `-=${this.speed*0.5}`)
+
+      this.animationsExit [index] = gsap.timeline({paused:true})
+        .to($image, {yPercent:20, duration:this.speed, ease:'power2.in'})
+        .to($image, {autoAlpha:0, duration:this.speed, ease:'power2.out'}, `-=${this.speed}`)
     })
-    this.animations[this.index].play();
+
+    this.animationsEnter[this.index].play();
 
     this.slider = new Splide(this.$slider, {
       type: 'loop',
@@ -589,7 +599,7 @@ class ItemSlider {
       pagination: true,
       waitForTransition: false,
       speed: this.speed*1000,
-      autoplay: true,
+      //autoplay: true,
       interval: autoslide_interval*1000,
       breakpoints: {
         576: {
@@ -599,8 +609,12 @@ class ItemSlider {
     })
 
     this.slider.on('move', (newIndex)=>{
-      this.animations[this.index].reverse();
-      this.animations[newIndex].play();
+      if(this.animationsEnter[this.index].isActive()) {
+        this.animationsEnter[this.index].pause();
+      }
+      this.animationsExit[this.index].play(0);
+
+      this.animationsEnter[newIndex].play(0);
       this.index = newIndex;
     });
 
