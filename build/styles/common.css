@@ -4243,15 +4243,18 @@ h6, .h6 {
     .m-catalogue-item__container[data-touch] .m-catalogue-item__image .image img:not(:first-child), .m-catalogue-item__container[data-hover] .m-catalogue-item__image .image img:not(:first-child) {
       opacity: 1;
       visibility: visible; }
+    .m-catalogue-item__container[data-touch] .m-catalogue-item__back, .m-catalogue-item__container[data-hover] .m-catalogue-item__back {
+      background-color: var(--color-bg-transparent); }
   .m-catalogue-item__back {
-    background: var(--color-bg-transparent);
+    background-color: var(--color-bg-transparent2);
     -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
     border-radius: 25px;
     box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
     padding: 25px 30px;
     min-height: 220px;
-    position: relative; }
+    position: relative;
+    transition: background-color 0.3s ease-in-out; }
   .m-catalogue-item__title {
     position: absolute; }
     .m-catalogue-item__title_1, .m-catalogue-item__title_2, .m-catalogue-item__title_3, .m-catalogue-item__title_4 {
