@@ -14,7 +14,7 @@
     line-height: 20px;
     left: 20px;
     top: 18px;
-    transition: transform $trs2, font-size $trs2;
+    transition: transform $trs2, font-size $trs2, color $trs2;
     color: var(--color-muted);
     z-index: 2;
   }
@@ -63,6 +63,11 @@
   }
   &.error {
     background-color: rgba(168, 53, 53, 0.5);
+    &:not(.focused) {
+      .input__title {
+        color: var(--color-text);
+      }
+    }
   }
   &.loading {
     pointer-events: none;

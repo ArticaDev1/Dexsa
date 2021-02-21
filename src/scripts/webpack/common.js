@@ -794,26 +794,30 @@ class WarrantyPreviewBlock {
       .fromTo(this.$top, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5})
 
     this.$values.forEach(($value, index)=>{
-      let timeline, dur = 0.15;
+      let timeline, dur = 0.2;
 
       if(index==0) {
         timeline = gsap.timeline()
-          .to($value, {autoAlpha:0, scale:0.8, duration:dur, ease:'power2.out'})
+          .to($value, {autoAlpha:0, duration:dur*0.5, ease:'power2.out'})
         
         this.values_animation.add(timeline, `>-${Speed*0.5}`)
       } 
       else {
         if(index==this.$values.length-1) {
           timeline = gsap.timeline()
-            .fromTo($value, {autoAlpha:0, scale:1.2}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
+            .fromTo($value, {autoAlpha:0, scale:1.5}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
         } 
         else {
           timeline = gsap.timeline()
-            .fromTo($value, {autoAlpha:0, scale:1.2}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
-            .to($value, {autoAlpha:0, scale:0.8, duration:dur, ease:'power1.out'})
+            .fromTo($value, {autoAlpha:0, scale:1.5}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
+            .to($value, {autoAlpha:0, duration:dur*0.5, ease:'power2.out'})
         }
 
-        this.values_animation.add(timeline, `>-${dur}`)
+        if(index==1) {
+          this.values_animation.add(timeline, `>-${dur*0.5}`)
+        } else {
+          this.values_animation.add(timeline, `>-${dur}`)
+        }
       }
         
     })

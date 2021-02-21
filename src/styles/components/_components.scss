@@ -142,30 +142,32 @@ img {
   }
 }
 
+.lights-content {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .bg-light {
   position: absolute;
   &_size-1 {
-    width: 300px;
-    height: 300px;
+    width: 1200px;
+    height: 1200px;
   }
   &_size-2 {
     width: 700px;
     height: 700px;
   }
   &_size-3 {
-    width: 1200px;
-    height: 1200px;
+    width: 300px;
+    height: 300px;
   }
   &_color-1 {
-    background: radial-gradient(50% 50% at 50% 50%, rgba(190, 22, 34, 0.34) 0%, rgba(190, 22, 34, 0) 100%);
-  }
-  &_color-2 {
     background: radial-gradient(50% 50% at 50% 50%, rgba(190, 22, 34, 0.22) 0%, rgba(190, 22, 34, 0) 100%);
   }
-  &_color-3 {
-    background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0) 100%);
-  }
-  &_color-4 {
+  &_color-2 {
     background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
   }
 }

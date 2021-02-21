@@ -389,16 +389,9 @@
 .advantages {
   .bg-light {
     &:first-child {
-      top: -300px;
-      left: 180px;
-    }
-    &:nth-child(2) {
-      top: 55%;
-      left: 50%;
-    }
-    &:nth-child(3) {
-      top: 12%;
-      right: -30%;
+      top: -200px;
+      left: 0;
+      transform: translateX(55%);
     }
   }
 
@@ -435,13 +428,7 @@
     }
   }
   @include media-breakpoint-down(xxl) {
-    .bg-light {
-      &:first-child {
-        top: -300px;
-        left: 0;
-        transform: translateX(-30%);
-      }
-    }
+    
   }
 }
 
@@ -450,16 +437,13 @@
 
   .bg-light {
     &:first-child {
-      top: -5%;
-      left: 5%;
+      top: -250px;
+      left: 0;
     }
     &:nth-child(2) {
       top: 0;
       left: 0;
-    }
-    &:nth-child(3) {
-      bottom: -200px;
-      right: 5%;
+      transform: translateX(-55%);
     }
   }
 
@@ -577,13 +561,6 @@
       margin: 0 -30px -60px -30px;
     }
   }
-  @include media-breakpoint-down(xxl) {
-    .bg-light {
-      &:nth-child(2) {
-        transform: translateX(-40%);
-      }
-    }
-  }
 }
 
 
@@ -625,11 +602,30 @@
 
 
 .about-preview {
+  .bg-light {
+    &:first-child {
+      top: 0;
+      left: 380px;
+      transform: translateY(-40%);
+    }
+  }
+
   &__container {
     height: 370px;
     position: relative;
   }
+
+  @include media-breakpoint-down(xxl) {
+    .bg-light {
+      &:first-child {
+        left: 280px;
+      }
+    }
+  }
 }
+
+
+
 .about-preview-block {
   position: absolute;
   width: 100%;
@@ -702,6 +698,16 @@
 }
 
 .warranty-preview {
+  .bg-light {
+    &:first-child {
+      top: -220px;
+      left: 540px;
+    }
+    &:nth-child(2) {
+      top: 520px;
+      left: 400px;
+    }
+  }
   &__container {
     position: relative;
     overflow: hidden;
@@ -751,17 +757,38 @@
     &__container {
       height: 600px;
     }
+    .bg-light {
+      &:nth-child(2) {
+        top: 380px;
+        left: 340px;
+      }
+    }
   }
 }
 
 .contacts-block {
+  .bg-light {
+    &:first-child {
+      top: -120px;
+      left: 0;
+      transform: translateX(-50%);
+    }
+  }
   &__head {
     margin-bottom: 100px;
   }
   &__info {
     margin-top: 60px;
   }
+  @include media-breakpoint-down(xxl) {
+    .bg-light {
+      &:first-child {
+        top: -180px;
+      }
+    }
+  }
 }
+
 .contacts-block-item {
   &:not(:last-child) {
     margin-bottom: 46px;
@@ -769,6 +796,21 @@
 }
 
 .clients {
+  .bg-light {
+    &:first-child {
+      top: -300px;
+      left: 0;
+      transform: translateX(-80%);
+    }
+    &:nth-child(2) {
+      top: 700px;
+      left: 400px;
+    }
+    &:nth-child(3) {
+      top: 800px;
+      left: 400px;
+    }
+  }
   &__container {
     position: relative;
   }
