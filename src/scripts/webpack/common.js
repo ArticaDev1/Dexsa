@@ -105,6 +105,7 @@ const App = {
       this.afunctions.add(AboutPreviewBlock, '.about-preview');
       this.afunctions.add(WarrantyPreviewBlock, '.warranty-preview');
       this.afunctions.add(ClientsBlock, '.clients');
+      this.afunctions.add(ContactsBlock, '.contacts-block');
       
 
       autosize(document.querySelectorAll('textarea.input__element'));
@@ -787,12 +788,13 @@ class WarrantyPreviewBlock {
     this.$values = this.$parent.querySelectorAll('.warranty-preview__index span');
     this.$top = this.$parent.querySelector('.warranty-preview__top');
     this.$bottom = this.$parent.querySelector('.warranty-preview__bottom');
+    
 
     this.values_animation = gsap.timeline({paused:true})
       .fromTo(this.$top, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5})
 
     this.$values.forEach(($value, index)=>{
-      let timeline, dur = 0.1;
+      let timeline, dur = 0.15;
 
       if(index==0) {
         timeline = gsap.timeline()
@@ -817,7 +819,7 @@ class WarrantyPreviewBlock {
     })
 
     this.values_animation.add(
-      gsap.fromTo(this.$bottom, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5}), '>'
+      gsap.fromTo(this.$bottom, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5}), `>-${Speed*0.25}`
     )
 
     this.animation = gsap.timeline({paused:true})
@@ -833,16 +835,14 @@ class WarrantyPreviewBlock {
         this.animation.progress(self.progress);
       },
       onEnter: ()=> {
-        this.values_animation.play();
+        if(this.values_animation.totalProgress()==0) {
+          this.values_animation.play();
+        }
       }, 
       onEnterBack: ()=> {
-        this.values_animation.play();
-      },
-      onLeave: ()=> {
-        this.values_animation.reverse();
-      },
-      onLeaveBack: ()=> {
-        this.values_animation.reverse();
+        if(this.values_animation.totalProgress()==0) {
+          this.values_animation.play();
+        }
       }
     });
   }
@@ -960,6 +960,31 @@ class ClientsBlock {
       pinType: pinType,
       scrub: true
     });
+  }
+}
+
+class ContactsBlock {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    let pinType = Scroll.scrollbar?'transform':'fixed';
+
+    this.$head = this.$parent.querySelector('.section__head');
+    this.$ftext = this.$parent.querySelector('.section__head-txt');
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$ftext,
+      start: "center center",
+      end: ()=>{
+        let val = this.$head.getBoundingClientRect().height - this.$ftext.getBoundingClientRect().height - 2;
+        return `+=${val}`;
+      },
+      pin: true,
+      pinType: pinType,
+      scrub: true
+    });
+
   }
 }
 

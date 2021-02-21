@@ -4628,7 +4628,7 @@ h6, .h6 {
 .footer {
   flex-shrink: 0;
   background-color: var(--color-dark);
-  padding: 60px 0 45px 0;
+  padding: 44px 0 38px 0;
   color: var(--color-footer); }
   .footer__container {
     display: flex;
@@ -4641,7 +4641,7 @@ h6, .h6 {
     margin-right: 60px; }
     .footer__logo img {
       display: block;
-      width: 56px;
+      width: 48px;
       height: auto; }
 
 /*# sourceMappingURL=maps/common.css.map */
