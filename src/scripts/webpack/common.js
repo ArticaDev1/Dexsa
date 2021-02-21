@@ -50,7 +50,6 @@ import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
-import Rellax from 'rellax';
 
 const validate = require("validate.js");
 
@@ -89,6 +88,7 @@ const App = {
     Nav.init();
     Validation.init();
     Modal.init();
+    Parralax.init();
     inputs();
     if(mobile()) {
       mobileWindow.init();
@@ -1247,5 +1247,38 @@ const Modal = {
   
       delete this.$active;
     }
+  }
+}
+
+const Parralax = {
+  init: function() {
+    this.initialized = true;
+    Scroll.addListener(()=>{
+      requestAnimationFrame(()=>{this.check();})
+    })
+    window.addEventListener('enter', ()=>{
+      setTimeout(()=>{
+        this.check();
+      }, 2000);
+    })
+  },
+  check: function() {
+    let $items = App.$container.querySelectorAll('[data-parralax]');
+    $items.forEach(($this)=>{
+      let y = $this.getBoundingClientRect().y,
+          h1 = window.innerHeight,
+          h2 = $this.getBoundingClientRect().height,
+          scroll = Scroll.y,
+          factor = +$this.getAttribute('data-parralax'),
+          val;
+      if($this.getAttribute('data-parralax-top')==null) {
+        val = ((scroll+h1/2) - (y+scroll+h2/2)) * factor;
+      } else {
+        val = scroll * factor;
+      }
+
+      console.log(scroll, h1, h2, y)
+      $this.style.transform = `translate3d(0, ${val}px, 0)`;
+    })
   }
 }

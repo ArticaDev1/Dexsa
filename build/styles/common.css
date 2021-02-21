@@ -3915,7 +3915,7 @@ h6, .h6 {
 
 .homepage {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   margin-bottom: 200px; }
   .homepage-scene {
     position: absolute;
@@ -4203,8 +4203,7 @@ h6, .h6 {
 
 .advantages .bg-light:first-child {
   top: -200px;
-  left: 0;
-  transform: translateX(55%); }
+  right: -600px; }
 
 .advantages__container {
   margin-bottom: -100px; }
@@ -4235,8 +4234,7 @@ h6, .h6 {
     left: 0; }
   .m-catalogue .bg-light:nth-child(2) {
     top: 0;
-    left: 0;
-    transform: translateX(-55%); }
+    left: -650px; }
   .m-catalogue-item__container {
     display: block;
     position: relative;
@@ -4352,9 +4350,8 @@ h6, .h6 {
       top: 15%; }
 
 .about-preview .bg-light:first-child {
-  top: 0;
-  left: 380px;
-  transform: translateY(-40%); }
+  top: -120px;
+  left: 380px; }
 
 .about-preview__container {
   height: 370px;
@@ -4468,8 +4465,7 @@ h6, .h6 {
 
 .contacts-block .bg-light:first-child {
   top: -120px;
-  left: 0;
-  transform: translateX(-50%); }
+  left: -600px; }
 
 .contacts-block__head {
   margin-bottom: 100px; }
@@ -4486,8 +4482,7 @@ h6, .h6 {
 
 .clients .bg-light:first-child {
   top: -300px;
-  left: 0;
-  transform: translateX(-80%); }
+  left: -900px; }
 
 .clients .bg-light:nth-child(2) {
   top: 700px;
