@@ -246,7 +246,7 @@ block content
               img(src="./img/light1/4.png", alt="image").about-preview-block__light
           .about-preview-block__text.about-preview-block__text_3.offset-xl-2.col-xl-3
             p.h4 Замена светодиодного модуля
-      
+  
   section.section.warranty-preview
     .section__head.container 
       .row 
@@ -271,6 +271,34 @@ block content
                 span 5
               | лет
             p.warranty-preview__bottom Новый «зип» продлевает гарантию на светильник еще на 5 лет  
+
+  section.section.clients 
+    .container 
+      .section__head
+        .row 
+          .col-xl-2
+            p.section__head-txt Наши клиенты
+          .col-xl-8
+            h3.section__head-title Наше электротехническое оборудование установленно у крупнейших промышленных компаний России
+      .clients__container 
+        .clients__text.row 
+          span.offset-xl-6.col-xl-auto единиц<br> оборудования<br> установлено:
+
+        //block
+        mixin block(href, val)
+          .clients-block.row
+            .clients-block__image.offset-xl-2.col-xl-3
+              .image.image_contain 
+                img(src=href, alt="image").lazyload
+            .clients-block__value.offset-xl-3.col-xl-2
+              .clients-block__value-item.h3=val
+        +block('./img/clients/1.png', '5 430')
+        +block('./img/clients/2.png', '2 567')
+        +block('./img/clients/3.png', '2 340')
+        +block('./img/clients/4.png', '1 534')
+        +block('./img/clients/5.png', '1 500')
+        +block('./img/clients/6.png', '1 200')
+        +block('./img/clients/7.png', '531')
 
   include blocks/contacts-blocks
   
