@@ -3317,10 +3317,10 @@ table {
   z-index: 2; }
 
 .section {
-  margin: 0 0 200px 0;
+  margin: 0 0 250px 0;
   position: relative; }
   .section__head {
-    margin-bottom: 150px; }
+    margin-bottom: 180px; }
     .section__head-title {
       margin-top: -0.15em !important;
       display: block; }
@@ -3329,7 +3329,9 @@ table {
       z-index: 2; }
   @media (max-width: 1599.98px) {
     .section {
-      margin: 0 0 180px 0; } }
+      margin: 0 0 200px 0; }
+      .section__head {
+        margin-bottom: 150px; } }
 
 @media (max-width: 575.98px) {
   .container {
@@ -3908,7 +3910,8 @@ h6, .h6 {
 
 .homepage {
   position: relative;
-  z-index: 2; }
+  z-index: 2;
+  margin-bottom: 200px; }
   .homepage-scene {
     position: absolute;
     width: 100%;
