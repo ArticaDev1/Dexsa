@@ -864,19 +864,19 @@ class AboutPreviewBlock {
 
     this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'power2.out'}})
       .to(this.$text[0], {autoAlpha:0}, "+=1")
-      .to(this.$text[0], {x:30, ease:'power2.in'}, '-=1')
+      //.to(this.$text[0], {x:30, ease:'power2.in'}, '-=1')
       .to(this.$blocks[0], {autoAlpha:0, duration:'0.75'})
 
       .to(this.$blocks[1], {autoAlpha:1, ease:'power2.in', duration:'0.75'}, '-=0.75')
       .fromTo(this.$text[1], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'})
       .fromTo(this.$text[1], {x:30}, {x:0}, '-=1')
       .to(this.$text[1], {autoAlpha:0},'+=1')
-      .to(this.$text[1], {x:30, ease:'power2.in'}, '-=1')
+      //.to(this.$text[1], {x:30, ease:'power2.in'}, '-=1')
       .to(this.$blocks[1], {autoAlpha:0, duration:'0.75'})
 
       .to(this.$blocks[2], {autoAlpha:1, ease:'power2.in', duration:'0.75'}, '-=0.75')
       .fromTo(this.$text[2], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'})
-      .fromTo(this.$text[2], {x:30}, {x:0}, '-=1')
+      //.fromTo(this.$text[2], {x:30}, {x:0}, '-=1')
 
       .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.in'})
 
