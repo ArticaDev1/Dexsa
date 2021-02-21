@@ -4359,7 +4359,7 @@ h6, .h6 {
       top: 15%; }
 
 .about-preview__container {
-  height: 380px;
+  height: 370px;
   position: relative; }
 
 .about-preview-block {
@@ -4372,8 +4372,7 @@ h6, .h6 {
   .about-preview-block__index {
     align-self: center; }
   .about-preview-block__image .image {
-    height: 380px;
-    width: 330px; }
+    height: 370px; }
   .about-preview-block__text {
     position: relative;
     align-self: start; }
@@ -4391,20 +4390,24 @@ h6, .h6 {
       .about-preview-block__text_1::before {
         width: 330px; }
     .about-preview-block__text_2 {
-      top: 150px; }
+      top: 145px; }
       .about-preview-block__text_2::before {
         width: 412px; }
     .about-preview-block__text_3 {
-      top: 204px; }
+      top: 200px; }
       .about-preview-block__text_3::before {
         width: 412px; }
   @media (max-width: 1599.98px) {
     .about-preview-block__text_1::before {
       width: 298px; }
-    .about-preview-block__text_2::before {
-      width: 380px; }
-    .about-preview-block__text_3::before {
-      width: 380px; } }
+    .about-preview-block__text_2 {
+      top: 148px; }
+      .about-preview-block__text_2::before {
+        width: 358px; }
+    .about-preview-block__text_3 {
+      top: 195px; }
+      .about-preview-block__text_3::before {
+        width: 358px; } }
 
 .warranty-preview__container {
   position: relative;

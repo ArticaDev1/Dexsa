@@ -788,7 +788,6 @@ class WarrantyPreviewBlock {
     this.$top = this.$parent.querySelector('.warranty-preview__top');
     this.$bottom = this.$parent.querySelector('.warranty-preview__bottom');
 
-
     this.values_animation = gsap.timeline({paused:true})
       .fromTo(this.$top, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5})
 
@@ -854,6 +853,8 @@ class AboutPreviewBlock {
     this.$parent = $parent;
   }
   init() {
+    let pinType = Scroll.scrollbar?'transform':'fixed';
+
     this.$container = this.$parent.querySelector('.about-preview__container');
     this.$blocks = this.$parent.querySelectorAll('.about-preview-block');
     this.$images = this.$parent.querySelectorAll('.about-preview-block__image');
@@ -879,8 +880,7 @@ class AboutPreviewBlock {
 
       .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.in'})
 
-      
-    let pinType = Scroll.scrollbar?'transform':'fixed';
+    
     this.triggers = [];
 
     this.triggers[0] = ScrollTrigger.create({
@@ -895,12 +895,16 @@ class AboutPreviewBlock {
       }
     });
 
-
     this.triggers[1] = ScrollTrigger.create({
       trigger: this.$ftext,
-      start: "top top+=120",
+      start: "center center",
       end: ()=>{
-        let val = this.triggers[0].start - (this.$ftext.getBoundingClientRect().top + Scroll.y) + 120 + 3000;
+        let start = this.triggers[0].start,
+            end = this.triggers[0].end,
+            top = (this.$ftext.getBoundingClientRect().top + Scroll.y)-(window.innerHeight/2)+(this.$ftext.getBoundingClientRect().height/2),
+            scroll = end-start,
+            val = scroll+start-top;
+
         return `+=${val}`;
       },
       pin: true,
@@ -940,18 +944,15 @@ class ClientsBlock {
       scrub: true
     });
 
-    console.log(this.triggers[0])
-
     this.triggers[1] = ScrollTrigger.create({
       trigger: this.$ftext,
-      start: "top top+=120",
-      end: ()=>{
+      start: "center center",
+      end: (self)=>{
         let start = this.triggers[0].start,
             end = this.triggers[0].end,
-            top = this.$ftext.getBoundingClientRect().top + Scroll.y,
-            scroll = end-start;
-
-        let val = start - top + 120 + scroll;
+            top = (this.$ftext.getBoundingClientRect().top + Scroll.y)-(window.innerHeight/2)+(this.$ftext.getBoundingClientRect().height/2),
+            scroll = end-start,
+            val = scroll+start-top;
         return `+=${val}`;
       },
       pin: true,
@@ -959,7 +960,6 @@ class ClientsBlock {
       pinType: pinType,
       scrub: true
     });
-    
   }
 }
 

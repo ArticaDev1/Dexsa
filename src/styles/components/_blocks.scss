@@ -625,7 +625,7 @@
 
 .about-preview {
   &__container {
-    height: 380px;
+    height: 370px;
     position: relative;
   }
 }
@@ -642,8 +642,7 @@
   }
   &__image {
     .image {
-      height: 380px;
-      width: 330px;
+      height: 370px;
     }
   }
   &__text {
@@ -666,13 +665,13 @@
       }
     }
     &_2 {
-      top: 150px;
+      top: 145px;
       &::before {
         width: 412px;
       }
     }
     &_3 {
-      top: 204px;
+      top: 200px;
       &::before {
         width: 412px;
       }
@@ -686,13 +685,15 @@
         }
       }
       &_2 {
+        top: 148px;
         &::before {
-          width: 380px;
+          width: 358px;
         }
       }
       &_3 {
+        top: 195px;
         &::before {
-          width: 380px;
+          width: 358px;
         }
       }
     }
