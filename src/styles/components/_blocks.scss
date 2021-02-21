@@ -647,7 +647,7 @@
   }
   &__text {
     position: relative;
-    align-self: center;
+    align-self: start;
     &::before {
       content: '';
       position: absolute;
@@ -656,43 +656,44 @@
       height: 1px;
       top: 50%;
       background: var(--color-light);
-      transform-origin: right;
     }
     &_1 {
+      top: 155px;
       &::before {
-        width: 408px;
-        transform: rotate(-6deg);
+        width: 342px;
       }
     }
     &_2 {
+      top: 155px;
       &::before {
         width: 416px;
-        transform: rotate(4deg);
       }
     }
     &_3 {
+      top: 172px;
       &::before {
         width: 416px;
-        transform: rotate(-5deg);
       }
     }
   }
   @include media-breakpoint-down(xxl) {
     &__text {
       &_1 {
+        top: 162px;
         &::before {
-          width: 355px;
+          width: 294px;
         }
       }
       &_2 {
+        top: 162px;
         &::before {
           width: 358px;
         }
       }
       &_3 {
+        top: 170px;
         &::before {
           width: 358px;
-          transform: rotate(-5.5deg);
         }
       }
     }

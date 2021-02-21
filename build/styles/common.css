@@ -3324,6 +3324,9 @@ table {
     .section__head-title {
       margin-top: -0.15em !important;
       display: block; }
+    .section__head-txt {
+      position: relative;
+      z-index: 2; }
   @media (max-width: 1599.98px) {
     .section {
       margin: 0 0 180px 0; } }
@@ -4375,7 +4378,7 @@ h6, .h6 {
     height: 370px; }
   .about-preview-block__text {
     position: relative;
-    align-self: center; }
+    align-self: start; }
     .about-preview-block__text::before {
       content: '';
       position: absolute;
@@ -4383,25 +4386,32 @@ h6, .h6 {
       display: block;
       height: 1px;
       top: 50%;
-      background: var(--color-light);
-      transform-origin: right; }
-    .about-preview-block__text_1::before {
-      width: 408px;
-      transform: rotate(-6deg); }
-    .about-preview-block__text_2::before {
-      width: 416px;
-      transform: rotate(4deg); }
-    .about-preview-block__text_3::before {
-      width: 416px;
-      transform: rotate(-5deg); }
+      background: var(--color-light); }
+    .about-preview-block__text_1 {
+      top: 155px; }
+      .about-preview-block__text_1::before {
+        width: 342px; }
+    .about-preview-block__text_2 {
+      top: 155px; }
+      .about-preview-block__text_2::before {
+        width: 416px; }
+    .about-preview-block__text_3 {
+      top: 172px; }
+      .about-preview-block__text_3::before {
+        width: 416px; }
   @media (max-width: 1599.98px) {
-    .about-preview-block__text_1::before {
-      width: 355px; }
-    .about-preview-block__text_2::before {
-      width: 358px; }
-    .about-preview-block__text_3::before {
-      width: 358px;
-      transform: rotate(-5.5deg); } }
+    .about-preview-block__text_1 {
+      top: 162px; }
+      .about-preview-block__text_1::before {
+        width: 294px; }
+    .about-preview-block__text_2 {
+      top: 162px; }
+      .about-preview-block__text_2::before {
+        width: 358px; }
+    .about-preview-block__text_3 {
+      top: 170px; }
+      .about-preview-block__text_3::before {
+        width: 358px; } }
 
 .warranty-preview__container {
   position: relative;

@@ -25,8 +25,11 @@
     margin-bottom: 150px;
     &-title {
       margin-top: -0.15em !important;
-      
       display: block;
+    }
+    &-txt {
+      position: relative;
+      z-index: 2;
     }
   }
   @include media-breakpoint-down(xxl) {
