@@ -4247,8 +4247,6 @@ h6, .h6 {
       background-color: var(--color-bg-transparent); }
   .m-catalogue-item__back {
     background-color: var(--color-bg-transparent2);
-    -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
     border-radius: 25px;
     box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
     padding: 25px 30px;

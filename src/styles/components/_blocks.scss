@@ -463,7 +463,6 @@
     }
     &__back {
       background-color: var(--color-bg-transparent2);
-      backdrop-filter: $blur1;
       border-radius: 25px;
       box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
       padding: 25px 30px;
