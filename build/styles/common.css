@@ -4375,7 +4375,7 @@ h6, .h6 {
     height: 370px; }
   .about-preview-block__text {
     position: relative;
-    align-self: start; }
+    align-self: center; }
     .about-preview-block__text::before {
       content: '';
       position: absolute;
@@ -4383,31 +4383,25 @@ h6, .h6 {
       display: block;
       height: 1px;
       top: 50%;
-      transform: translateY(-50%);
-      background: var(--color-light); }
-    .about-preview-block__text_1 {
-      top: 170px; }
-      .about-preview-block__text_1::before {
-        width: 330px; }
-    .about-preview-block__text_2 {
-      top: 145px; }
-      .about-preview-block__text_2::before {
-        width: 412px; }
-    .about-preview-block__text_3 {
-      top: 200px; }
-      .about-preview-block__text_3::before {
-        width: 412px; }
+      background: var(--color-light);
+      transform-origin: right; }
+    .about-preview-block__text_1::before {
+      width: 408px;
+      transform: rotate(-6deg); }
+    .about-preview-block__text_2::before {
+      width: 416px;
+      transform: rotate(4deg); }
+    .about-preview-block__text_3::before {
+      width: 416px;
+      transform: rotate(-5deg); }
   @media (max-width: 1599.98px) {
     .about-preview-block__text_1::before {
-      width: 298px; }
-    .about-preview-block__text_2 {
-      top: 148px; }
-      .about-preview-block__text_2::before {
-        width: 358px; }
-    .about-preview-block__text_3 {
-      top: 195px; }
-      .about-preview-block__text_3::before {
-        width: 358px; } }
+      width: 355px; }
+    .about-preview-block__text_2::before {
+      width: 358px; }
+    .about-preview-block__text_3::before {
+      width: 358px;
+      transform: rotate(-5.5deg); } }
 
 .warranty-preview__container {
   position: relative;
