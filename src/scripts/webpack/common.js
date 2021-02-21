@@ -599,7 +599,7 @@ class ItemSlider {
       pagination: true,
       waitForTransition: false,
       speed: this.speed*1000,
-      //autoplay: true,
+      autoplay: true,
       interval: autoslide_interval*1000,
       breakpoints: {
         576: {
