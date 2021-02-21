@@ -836,18 +836,21 @@ class WarrantyPreviewBlock {
   init() {
     this.$light = this.$parent.querySelector('.warranty-preview__image-light');
     this.$values = this.$parent.querySelectorAll('.warranty-preview__index span');
+    this.$top = this.$parent.querySelector('.warranty-preview__top');
+    this.$bottom = this.$parent.querySelector('.warranty-preview__bottom');
 
-    this.animation = gsap.timeline({paused:true})
+
+    this.values_animation = gsap.timeline({paused:true})
+      .fromTo(this.$top, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5})
 
     this.$values.forEach(($value, index)=>{
-      let timeline, 
-          dur = 1/(this.$values.length-1);
+      let timeline, dur = 0.1;
 
       if(index==0) {
         timeline = gsap.timeline()
           .to($value, {autoAlpha:0, scale:0.8, duration:dur, ease:'power2.out'})
         
-        this.animation.add(timeline, `>`)
+        this.values_animation.add(timeline, `>-${Speed*0.5}`)
       } 
       else {
         if(index==this.$values.length-1) {
@@ -860,18 +863,17 @@ class WarrantyPreviewBlock {
             .to($value, {autoAlpha:0, scale:0.8, duration:dur, ease:'power1.out'})
         }
 
-        this.animation.add(timeline, `>-${dur}`)
+        this.values_animation.add(timeline, `>-${dur}`)
       }
         
     })
+    this.values_animation.add(
+      gsap.fromTo(this.$bottom, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5}), '>'
+    )
 
-    let timeline = gsap.timeline()
+    this.animation = gsap.timeline({paused:true})
       .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:'power2.inOut'})
       .to(this.$light, {autoAlpha:0, duration:0.8, ease:'power2.inOut'}, '+=0.4')
-
-    this.animation.add(timeline, `>`)
-    
-
 
     this.trigger = ScrollTrigger.create({
       trigger: this.$light,
@@ -880,7 +882,18 @@ class WarrantyPreviewBlock {
       scrub: true,
       onUpdate: self => {
         this.animation.progress(self.progress);
-        console.log(self.progress)
+      },
+      onEnter: ()=> {
+        this.values_animation.play();
+      }, 
+      onEnterBack: ()=> {
+        this.values_animation.play();
+      },
+      onLeave: ()=> {
+        this.values_animation.reverse();
+      },
+      onLeaveBack: ()=> {
+        this.values_animation.reverse();
       }
     });
   }
