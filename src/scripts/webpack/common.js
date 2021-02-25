@@ -7,6 +7,7 @@ const $body = document.body;
 const $wrapper = document.querySelector('.wrapper');
 const $content = document.querySelector('.content');
 const $header = document.querySelector('.header');
+const $footer = document.querySelector('.footer');
 const brakepoints = {
   sm: 576,
   md: 768,
@@ -88,14 +89,20 @@ const App = {
     Nav.init();
     Validation.init();
     Modal.init();
-    Parralax.init();
+    Parallax.init();
     inputs();
-    if(mobile()) {
-      mobileWindow.init();
-    }
+    windowSize.init();
+
+
+    $body.classList.add('hidden');
+    $body.style.overflow = 'scroll';
     
 
-    window.addEventListener('enter', ()=>{
+    window.addEventListener('enterstart', ()=>{
+      if(!this.initialized) {
+        this.initialized = true;
+        gsap.set($wrapper, {autoAlpha:1})
+      }
 
       this.afunctions.add(LightsScene, '.homepage-scene');
       this.afunctions.add(ItemSlider, '.items-slider');
@@ -114,16 +121,23 @@ const App = {
 
     })
 
-
-    Preloader.finish(()=>{
+    window.addEventListener('enterfinish', ()=>{
       if(mobile()) {
-        $body.classList.add('scroll');
-      } else {
+        $body.classList.remove('hidden');
+      }
+    })
+
+    window.addEventListener('exitstart', ()=>{
+      if(mobile()) {
         $body.classList.add('hidden');
       }
-      gsap.to($wrapper, {autoAlpha:1, duration:0.5})
+    })
+
+
+    Preloader.finish(()=>{
       Transitions.enter(this.$container, this.namespace);
     })
+
   }
 }
 
@@ -132,14 +146,56 @@ const Transitions = {
     App.$container = $container;
     App.namespace = namespace;
     App.name = App.$container.getAttribute('data-name');
+
+    //header
+    if(!App.initialized) {
+      gsap.timeline()  
+        .fromTo($header, {autoAlpha:0}, {autoAlpha:1})
+    }
     
-    window.dispatchEvent(new Event("enter"));
+    window.dispatchEvent(new Event("enterstart"));
+
+    this.enterAnimation = gsap.timeline()  
+      .fromTo([$container, $footer], {autoAlpha:0}, {autoAlpha:1})
+    .eventCallback('onComplete', ()=>{
+      this.active = false;
+      window.dispatchEvent(new Event("enterfinish"));
+    })
 
   },
   exit: function($container) {
-    window.dispatchEvent(new Event("exit"));
-    barba.done();
+    window.dispatchEvent(new Event("exitstart"));
+    
+    this.exitAnimation = gsap.timeline()
+      .to([$container, $footer], {autoAlpha:0})
+    .eventCallback('onComplete', ()=>{
+      window.dispatchEvent(new Event("exitfinish"));
+      barba.done();
+    })
 
+  }
+}
+
+const windowSize = {
+  init: function() {
+    let $el = document.createElement('div');
+    $el.style.cssText = 'position:fixed;height:100%;';
+    $body.insertAdjacentElement('beforeend', $el);
+    let h = $el.getBoundingClientRect().height;
+    
+    let check = (height)=> {
+      //screen
+      let $el = App.$container.querySelectorAll('.screen');
+      $el.forEach($this => {
+        $this.style.height = `${height}px`;
+      })
+    }
+
+    window.addEventListener('enterstart', ()=>{
+      if(mobile()) {
+        check(h);
+      }
+    })
   }
 }
 
@@ -662,24 +718,6 @@ function inputs() {
 
   document.addEventListener('focus',  (event)=>{events(event)}, true);
   document.addEventListener('blur',   (event)=>{events(event)}, true);
-}
-
-const mobileWindow = {
-  init: function() {
-    let $el = document.createElement('div')
-    $el.style.cssText = 'position:fixed;height:100%;';
-    $body.insertAdjacentElement('beforeend', $el);
-    this.h = $el.getBoundingClientRect().height;
-    console.log(this.h)
-    //$el.remove();
-    window.addEventListener('enter', ()=>{
-      this.check();
-    })
-  }, 
-  check: function() {
-    let $el = App.$container.querySelector('.screen');
-    if($el) $el.style.height = `${this.h}px`;
-  }
 }
 
 class AdvantagesLights {
@@ -1250,7 +1288,7 @@ const Modal = {
   }
 }
 
-const Parralax = {
+const Parallax = {
   init: function() {
     this.initialized = true;
     Scroll.addListener(()=>{
@@ -1263,15 +1301,15 @@ const Parralax = {
     })
   },
   check: function() {
-    let $items = App.$container.querySelectorAll('[data-parralax]');
+    let $items = App.$container.querySelectorAll('[data-parallax]');
     $items.forEach(($this)=>{
       let y = $this.getBoundingClientRect().y,
           h1 = window.innerHeight,
           h2 = $this.getBoundingClientRect().height,
           scroll = Scroll.y,
-          factor = +$this.getAttribute('data-parralax'),
+          factor = +$this.getAttribute('data-parallax'),
           val;
-      if($this.getAttribute('data-parralax-top')==null) {
+      if($this.getAttribute('data-parallax-top')==null) {
         val = ((scroll+h1/2) - (y+scroll+h2/2)) * factor;
       } else {
         val = scroll * factor;

@@ -2,7 +2,6 @@
   position: fixed;
   z-index: 1001;
   width: 100%;
-  transition: opacity $trs2;
   &_fixed:not(.header_nav-opened) {
     .header__bg {
       opacity: 1;

@@ -15,9 +15,6 @@ body {
   @include media-breakpoint-down(xxl) {
     font-size: 0.875rem;
   }
-  &.scroll {
-    overflow: scroll !important;
-  }
   &.hidden {
     overflow: hidden !important;
   }

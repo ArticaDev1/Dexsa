@@ -10,9 +10,16 @@ link(rel="stylesheet" href="./styles/helper.css")
   .helper__container
     //section
     .helper__section
+      span.helper__section-title Всплывающие окна:
+      .helper__section-content
+        a(href='#modal-form' data-modal='open').helper__section-button Обратная связь
+        a(href='#modal-succes' data-modal='open').helper__section-button Успех
+    //section
+    .helper__section
       span.helper__section-title Страницы:
       .helper__section-content
-        a(href="index.html").helper__section-button Главная
+        a(href=home).helper__section-button Главная
+        a(href=vo).helper__section-button Взрывозащищенное освещение
 
 script(src="./scripts/helper.js")
     
