@@ -1,6 +1,5 @@
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-  margin: 1.875rem 0 1.125rem 0;
-  line-height: 1.35;
+  margin-top: 1.875rem;
   font-weight: 700;
   font-family: $font2;
   &:first-child {
@@ -22,6 +21,14 @@ p {
   margin: 0 0 1rem 0;
   &:last-child {
     margin-bottom: 0;
+  }
+  & + .button {
+    margin-top: 2.375rem;
+  }
+  @include media-breakpoint-down(xxl) {
+    & + .button {
+      margin-top: 2rem;
+    }
   }
 }
 
@@ -47,37 +54,51 @@ a {
 
 h1, .h1 {
   font-size: 3.25rem;
+  line-height: 1.25;
+  margin-bottom: 3.875rem;
 }
 h2, .h2 {
   font-size: 2.875rem;
+  line-height: 1.25;
+  margin-bottom: 3.875rem;
 }
 h3, .h3 {
   font-size: 2.25rem;
+  line-height: 1.33;
+  margin-bottom: 1.125rem;
 }
 h4, .h4 {
   font-size: 1.375rem;
   font-family: $font1;
+  line-height: 1.35;
+  margin-bottom: 1.125rem;
 }
 h5, .h5 {
   font-size: 1.25rem;
   font-weight: 500;
   font-family: $font1;
+  line-height: 1.35;
+  margin-bottom: 1.125rem;
 }
 h6, .h6 {
   font-size: 1.25rem;
   font-family: $font1;
+  line-height: 1.35;
+  margin-bottom: 1.125rem;
 }
 
 
 @include media-breakpoint-down(xxl) {
   h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-    margin: 1.5rem 0 0.875rem 0;
+    margin-top: 1.5rem;
   }
   h1, .h1 {
     font-size: 2.625rem;
+    margin-bottom: 3rem;
   }
   h2, .h2 {
     font-size: 2.5rem;
+    margin-bottom: 3rem;
   }
   h3, .h3 {
     font-size: 1.625rem;
@@ -96,12 +117,15 @@ h6, .h6 {
 @include media-breakpoint-down(sm) {
   h1, .h1 {
     font-size: 1.5rem;
+    line-height: 1.3;
   }
   h2, .h2 {
     font-size: 1.375rem;
+    line-height: 1.3;
   }
   h3, .h3 {
     font-size: 1rem;
+    line-height: 1.35;
   }
   h4, .h4 {
     font-size: 1rem;

@@ -113,6 +113,7 @@ const App = {
       this.afunctions.add(WarrantyPreviewBlock, '.warranty-preview');
       this.afunctions.add(ClientsBlock, '.clients');
       this.afunctions.add(ContactsBlock, '.contacts-block');
+      this.afunctions.add(ProductHead, '.product-head');
       
 
       autosize(document.querySelectorAll('textarea.input__element'));
@@ -155,7 +156,7 @@ const Transitions = {
     
     window.dispatchEvent(new Event("enterstart"));
 
-    this.enterAnimation = gsap.timeline()  
+    this.enterAnimation = gsap.timeline() 
       .fromTo([$container, $footer], {autoAlpha:0}, {autoAlpha:1})
     .eventCallback('onComplete', ()=>{
       this.active = false;
@@ -387,7 +388,6 @@ class ActiveFunctions {
     }
   }
   init() {
-    console.log(this.functions)
     this.functions.forEach(func => {
       func.init();
     })
@@ -1030,6 +1030,37 @@ class ContactsBlock {
   }
 }
 
+class ProductHead {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$images_wrapper = this.$parent.querySelector('.product-head__image-wrapper');
+    this.$images = this.$parent.querySelectorAll('.image');
+    this.$items = this.$parent.querySelectorAll('.product-head__item');
+
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.85, stagger:{amount:Speed*0.15}})
+      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*0.85, ease:'power2.out', stagger:{amount:Speed*0.15}}, `-=${Speed}`)
+
+
+    if(this.$parent.classList.contains('product-head_type-1')) {
+      this.animation.add(
+        gsap.fromTo(this.$images_wrapper, {yPercent:15, xPercent:-20, scale:0.9}, {yPercent:0, xPercent:0, scale:1, ease:'power2.out'}),
+      `-=${Speed}`)
+    }
+
+    if(this.$images.length==2) {
+      this.animation.add(
+        gsap.fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1}),
+      `-=${Speed*0.5}`)
+    }
+
+    this.animation.play();
+  }
+}
+
 const Validation = {
   init: function () {
     this.namspaces = {
@@ -1314,8 +1345,6 @@ const Parallax = {
       } else {
         val = scroll * factor;
       }
-
-      console.log(scroll, h1, h2, y)
       $this.style.transform = `translate3d(0, ${val}px, 0)`;
     })
   }
