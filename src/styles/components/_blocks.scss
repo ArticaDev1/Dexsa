@@ -832,6 +832,12 @@
 }
 
 .product-head {
+  .bg-light {
+    top: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   &__container {
     height: 100%;
   }

@@ -4537,6 +4537,11 @@ h6, .h6 {
   .clients-block__value {
     text-align: center; }
 
+.product-head .bg-light {
+  top: -300px;
+  left: 50%;
+  transform: translateX(-50%); }
+
 .product-head__container {
   height: 100%; }
 

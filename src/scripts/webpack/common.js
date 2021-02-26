@@ -168,7 +168,7 @@ const Transitions = {
     window.dispatchEvent(new Event("exitstart"));
     
     this.exitAnimation = gsap.timeline()
-      .to([$container, $footer], {autoAlpha:0})
+      .to([$container, $footer], {autoAlpha:0, duration:Speed*0.5})
     .eventCallback('onComplete', ()=>{
       window.dispatchEvent(new Event("exitfinish"));
       barba.done();
