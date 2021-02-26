@@ -151,9 +151,6 @@
     margin: 0;
   }
   &__request {
-    .button {
-      margin-top: 38px;
-    }
   }
   @include media-breakpoint-up(xl) {
     &__request {
