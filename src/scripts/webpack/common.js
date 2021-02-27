@@ -122,6 +122,8 @@ const App = {
       this.afunctions.add(ContactsBlock, '.contacts-block');
       this.afunctions.add(ProductHead, '.product-head');
       this.afunctions.add(ProductBlock, '.product-item');
+      this.afunctions.add(FadeBlocks, '.js-fade-blocks');
+      
       
 
       autosize(document.querySelectorAll('textarea.input__element'));
@@ -1447,7 +1449,12 @@ class ProductBlock {
       if(!this.$morebtn.classList.contains('active')) {
         this.$morebtn.classList.add('active');
         this.$more.style.display = 'block';
-      } else {
+
+        let y = this.$more.getBoundingClientRect().top + Scroll.y - $header.getBoundingClientRect().height;
+        Scroll.scrollTop(y, Speed)
+      } 
+      
+      else {
         this.$morebtn.classList.remove('active');
         this.$more.style.display = 'none';
       }
@@ -1470,8 +1477,7 @@ class ProductBlock {
       this.animations = [];
       this.$tslides.forEach(($image, index)=>{
         this.animations[index] = gsap.timeline({paused:true})
-          .fromTo($image, {yPercent:10}, {yPercent:0, duration:this.speed, ease:'power2.out'})
-          .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed}, `-=${this.speed}`)
+          .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed})
       })
 
       let slide = (index) => {
@@ -1521,9 +1527,34 @@ class ProductBlock {
 
 
   destroy() {
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    for(let child in this) delete this[child];
   }
   
+}
+
+class FadeBlocks {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    this.$blocks = this.$parent.querySelectorAll('.js-fade-blocks__block');
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$blocks, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.8, stagger:{amount:Speed*0.2}})
+      .fromTo(this.$blocks, {y:80}, {y:0, duration:Speed*0.8, ease:'power2.out', stagger:{amount:Speed*0.2}}, `-=${Speed}`)
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "center bottom",
+      onEnter: ()=> {
+        if(this.animation.totalProgress()==0) {
+          this.animation.play();
+          console.log('ok')
+        }
+      }
+    });
+  }
+  destroy() {
+    this.trigger.kill();
+    for(let child in this) delete this[child];
+  }
 }

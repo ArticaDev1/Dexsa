@@ -4621,7 +4621,7 @@ h6, .h6 {
   margin-bottom: 40px; }
 
 .product-item__more-content {
-  margin-top: 48px;
+  padding-top: 48px;
   display: none; }
 
 .product-item__content .button {
