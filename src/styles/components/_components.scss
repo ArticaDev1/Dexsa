@@ -107,13 +107,15 @@ img {
   padding: 9px 3px;
   width: 9px;
   z-index: 2000;
-  transition: opacity $trs2;
-  transition-delay: .5s;
+  transition: none;
+  opacity: 1;
   .scrollbar-thumb {
     cursor: pointer;
     width: inherit;
     padding: inherit;
     background-color: transparent;
+    opacity: 0;
+    transition: opacity $trs2;
     &:after {
       content: '';
       display: block;
@@ -122,6 +124,11 @@ img {
       border-radius: 3px;
       background-color: var(--color-scrollbar);
       pointer-events: none;
+    }
+  }
+  &.show:not(.hidden) {
+    .scrollbar-thumb {
+      opacity: 1;
     }
   }
 }

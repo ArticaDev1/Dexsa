@@ -131,15 +131,23 @@ const App = {
     })
 
     window.addEventListener('enterfinish', ()=>{
+      if(Scroll.scrollbar.track.yAxis.element) Scroll.scrollbar.track.yAxis.element.classList.remove('hidden');
       if(mobile()) {
         $body.classList.remove('hidden');
       }
     })
 
     window.addEventListener('exitstart', ()=>{
+      Scroll.scrollTop(Math.max(Scroll.y-window.innerHeight/2, 0), Speed);
+      if(Scroll.scrollbar.track.yAxis.element) Scroll.scrollbar.track.yAxis.element.classList.add('hidden');
       if(mobile()) {
         $body.classList.add('hidden');
       }
+    })
+
+    window.addEventListener('exitfinish', ()=>{
+      Scroll.scrollTop(0, 0);
+      this.afunctions.destroy();
     })
 
 
@@ -173,10 +181,11 @@ const Transitions = {
 
   },
   exit: function($container) {
+    this.active = true;
     window.dispatchEvent(new Event("exitstart"));
     
     this.exitAnimation = gsap.timeline()
-      .to([$container, $footer], {autoAlpha:0, duration:Speed*0.5})
+      .to([$container, $footer], {autoAlpha:0})
     .eventCallback('onComplete', ()=>{
       window.dispatchEvent(new Event("exitfinish"));
       barba.done();
@@ -295,10 +304,7 @@ const Scroll = {
       this.y = this.scrollbar.offset.y;
     })
     this.scrollbar.setPosition(0, +localStorage.getItem('scroll'));
-
-    /* window.addEventListener('enter', ()=>{
-      this.scrollbar.track.yAxis.element.classList.remove('show');
-    }) */
+    this.$scrollbar = document.querySelector('.scrollbar-track-y');
 
     //gsap trigger
     let scrollbar = this.scrollbar;
@@ -491,6 +497,15 @@ class LightsScene {
       document.addEventListener('mouseleave', this.mousemoveEvent);
     }
   }
+
+  destroy() {
+    window.removeEventListener('resize', this.resizeEvent);
+    window.removeEventListener('mousemove', this.mousemoveEvent);
+    document.removeEventListener('mouseleave', this.mousemoveEvent);
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
+  }
 }
 
 const Header = {
@@ -507,9 +522,9 @@ const Header = {
         fixed = $header.classList.contains('header_fixed'),
         hidden = $header.classList.contains('header_hidden');
 
-    if (y > 0 && !fixed) {
+    if (y > 0 && !fixed && !Transitions.active) {
       $header.classList.add('header_fixed');
-    } else if (y<=0 && fixed) {
+    } else if ((y<=0 && fixed) || Transitions.active) {
       $header.classList.remove('header_fixed');
     }
 
@@ -660,7 +675,7 @@ class AdvantagesLights {
     this.$block = $block;
   }
   init() {
-    ScrollTrigger.create({
+    this.trigger = ScrollTrigger.create({
       trigger: this.$block,
       start: "top bottom",
       end: "bottom bottom",
@@ -668,6 +683,12 @@ class AdvantagesLights {
       once: true,
       toggleClass: 'animate'
     });
+  }
+  destroy() {
+    this.trigger.kill();
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
   }
 }
 
@@ -717,6 +738,9 @@ class Card3d {
   destroy() {
     this.$block.removeEventListener('mousemove',  this.event);
     this.$block.removeEventListener('mouseleave', this.event);
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
   }
 }
 
@@ -749,6 +773,12 @@ class AboutTextBlock {
         this.animation.progress(self.progress);
       }
     });
+  }
+  destroy() {
+    this.trigger.kill();
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
   }
 }
 
@@ -823,6 +853,12 @@ class WarrantyPreviewBlock {
       }
     });
   }
+  destroy() {
+    this.trigger.kill();
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
+  }
 }
 
 class AboutPreviewBlock {
@@ -891,6 +927,14 @@ class AboutPreviewBlock {
     });
 
   }
+  destroy() {
+    this.triggers.forEach($trigger => {
+      $trigger.kill();
+    })
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
+  }
 }
 
 class ClientsBlock {
@@ -938,6 +982,13 @@ class ClientsBlock {
       scrub: true
     });
   }
+
+  destroy() {
+    this.triggers.forEach($trigger => {
+      $trigger.kill();
+    })
+    for(let child in this) delete this[child];
+  }
 }
 
 class ContactsBlock {
@@ -945,7 +996,6 @@ class ContactsBlock {
     this.$parent = $parent;
   }
   init() {
-    
     let pinType = Scroll.scrollbar?'transform':'fixed';
 
     this.$head = this.$parent.querySelector('.section__head');
@@ -968,6 +1018,12 @@ class ContactsBlock {
     }, 1000);
 
   }
+  destroy() {
+    this.trigger.kill();
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
+  }
 }
 
 class ProductHead {
@@ -984,7 +1040,6 @@ class ProductHead {
       .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.85, stagger:{amount:Speed*0.15}})
       .fromTo(this.$items, {y:40}, {y:0, duration:Speed*0.85, ease:'power2.out', stagger:{amount:Speed*0.15}}, `-=${Speed}`)
 
-
     if(this.$parent.classList.contains('product-head_type-1')) {
       this.animation.add(
         gsap.fromTo(this.$images_wrapper, {yPercent:15, xPercent:-20, scale:0.9}, {yPercent:0, xPercent:0, scale:1, ease:'power2.out'}),
@@ -998,6 +1053,12 @@ class ProductHead {
     }
 
     this.animation.play();
+  }
+
+  destroy() {
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
   }
 }
 
@@ -1359,7 +1420,10 @@ class ItemSlider {
   }
 
   destroy() {
-
+    this.slider.destroy();
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
   }
 }
 
@@ -1456,6 +1520,10 @@ class ProductBlock {
   }
 
 
-
+  destroy() {
+    setTimeout(() => {
+      for(let child in this) delete this[child];
+    }, 1000);
+  }
   
 }

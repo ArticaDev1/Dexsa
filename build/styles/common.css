@@ -3431,13 +3431,15 @@ img {
   padding: 9px 3px;
   width: 9px;
   z-index: 2000;
-  transition: opacity 0.3s ease-in-out;
-  transition-delay: .5s; }
+  transition: none;
+  opacity: 1; }
   .scrollbar-track-y .scrollbar-thumb {
     cursor: pointer;
     width: inherit;
     padding: inherit;
-    background-color: transparent; }
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; }
     .scrollbar-track-y .scrollbar-thumb:after {
       content: '';
       display: block;
@@ -3446,6 +3448,8 @@ img {
       border-radius: 3px;
       background-color: var(--color-scrollbar);
       pointer-events: none; }
+  .scrollbar-track-y.show:not(.hidden) .scrollbar-thumb {
+    opacity: 1; }
 
 .js-3d {
   position: relative;
