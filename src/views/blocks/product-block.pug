@@ -1,0 +1,77 @@
+mixin block(title, text, images, doc)
+  section.section.product-item 
+    .container 
+      .product-item__head.row 
+        h3.product-item__title.offset-xl-6.col-xl-3=title
+        p.col-xl-3=text
+      .product-item__container.row 
+        .product-item__images.col-xl-5 
+          .product-item__top-slides 
+            each val in images
+              //slide
+              .image.image_contain 
+                img(data-src=val, alt="image").lazyload
+
+          .product-item__bottom-slides.splide
+            .splide__track
+              .splide__list
+                each val in images
+                  //slide
+                  .splide__slide.product-item__bottom-slide 
+                    .image.image_contain 
+                      img(data-src=val, alt="image").lazyload
+
+        .product-item__content.offset-xl-1.col-xl-6   
+          ul.info-list.product-item__list
+            li.info-list__item.row
+              span.col-6 
+                span Ресурс:
+              span.col-6 100000 часов работы
+            li.info-list__item.row
+              span.col-6  
+                span Световой поток:
+              span.col-6 От 1000 до 8000 lm
+            li.info-list__item.row
+              span.col-6 
+                span Мощность:
+              span.col-6 От 10 до 70 Вт
+            li.info-list__item.row
+              span.col-6 
+                span Ударопрочность:
+              span.col-6 IKO8
+          ul.features-list.product-item__list
+            li.features-list__item Модульная замена компонентов
+            li.features-list__item Может комплектоваться блоком аварийного питания
+
+          button.product-item__more-button 
+            span Показать подробные характеристики ↓
+            span Свернуть подробные характеристики ↑
+
+          a(href=doc target='_blank' rel='noopener').button.button_style-2 
+            span Техническая документация (PDF) 
+
+      .product-item__more-content
+        ul.info-list.row
+          mixin item(text1, text2)
+            li.info-list__item.col-xl-6 
+              .row
+                span.col-6 
+                  span=text1
+                span.col-6=text2
+          +item('Класс взрывоопасной зоны', '1')
+          +item('Класс защиты от поражения электрическим током', '1')
+          +item('Вид взрывозащиты', 'Ex d')
+          +item('Ударопрочность', 'IK08')
+          +item('Группа электрооборудования', 'IIC')
+          +item('Группа механического исполнения', 'M1, M2')
+          +item('Температурный класс', 'T6')
+          +item('Температура эксплуатации', '-60°C … +55°C')
+          +item('Питание от сети', '90-305 В AC (по запросу 9-36 В DC)')
+          +item('Степень защиты от проникновения влаги и пыли', 'IP 66')
+          +item('Цветовая температура', '3000 / 4000 / 5000 °К')
+          +item('Масса в базовой комплектации', '2 кг')
+          +item('Индекс цветопередачи', '70 / 80 / 90 Ra')
+          +item('Гарантия', '5 лет')
+          +item('Коэффициент мощности', 'COS ф ≥ 0,95')
+          +item('Габариты упаковки', '205х190х215 мм')
+          +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')

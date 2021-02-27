@@ -51,6 +51,7 @@ import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
+import SwipeListener from 'swipe-listener';
 
 const validate = require("validate.js");
 
@@ -93,6 +94,12 @@ const App = {
     inputs();
     windowSize.init();
 
+    setInterval(() => {
+      if(!mobile()) {
+        ScrollTrigger.refresh();
+      }
+    }, 500);
+
 
     $body.classList.add('hidden');
     $body.style.overflow = 'scroll';
@@ -114,6 +121,7 @@ const App = {
       this.afunctions.add(ClientsBlock, '.clients');
       this.afunctions.add(ContactsBlock, '.contacts-block');
       this.afunctions.add(ProductHead, '.product-head');
+      this.afunctions.add(ProductBlock, '.product-item');
       
 
       autosize(document.querySelectorAll('textarea.input__element'));
@@ -619,79 +627,6 @@ const Nav = {
   } */
 }
 
-class ItemSlider {
-  constructor($parent) {
-    this.$parent = $parent;
-  } 
-  init() {
-    this.$slider = this.$parent.querySelector('.items-slider__element');
-    this.$images = this.$parent.querySelectorAll('.items-slider__image');
-    this.$prev = this.$parent.querySelector('.items-slider__prev');
-    this.$next = this.$parent.querySelector('.items-slider__next');
-    this.index = 0;
-    this.speed = 0.5;
-
-    this.animationsEnter = [];
-    this.animationsExit = [];
-
-    this.$images.forEach(($image, index)=>{
-      let $light = $image.querySelector('.items-slider__image-light');
-      
-      this.animationsEnter[index] = gsap.timeline({paused:true})
-        .fromTo($image, {yPercent:20}, {yPercent:0, duration:this.speed, ease:'power2.out'})
-        .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed, ease:'power2.inOut'}, `-=${this.speed}`)
-        .fromTo($light, {autoAlpha:0}, {autoAlpha:1, duration:this.speed, ease:'power2.out'}, `-=${this.speed*0.5}`)
-
-      this.animationsExit [index] = gsap.timeline({paused:true})
-        .to($image, {yPercent:20, duration:this.speed, ease:'power2.in'})
-        .to($image, {autoAlpha:0, duration:this.speed, ease:'power2.out'}, `-=${this.speed}`)
-    })
-
-    this.animationsEnter[this.index].play();
-
-    this.slider = new Splide(this.$slider, {
-      type: 'loop',
-      perPage: 1,
-      perMove: 1,
-      gap: desktop_gap,
-      arrows: false,
-      pagination: true,
-      waitForTransition: false,
-      speed: this.speed*1000,
-      autoplay: true,
-      interval: autoslide_interval*1000,
-      breakpoints: {
-        576: {
-          gap: mobile_gap
-        },
-      }
-    })
-
-    this.slider.on('move', (newIndex)=>{
-      if(this.animationsEnter[this.index].isActive()) {
-        this.animationsEnter[this.index].pause();
-      }
-      this.animationsExit[this.index].play(0);
-
-      this.animationsEnter[newIndex].play(0);
-      this.index = newIndex;
-    });
-
-    this.$prev.addEventListener('click', ()=>{
-      this.slider.go('<');
-    })
-    this.$next.addEventListener('click', ()=>{
-      this.slider.go('>');
-    })
-
-    this.slider.mount();
-  }
-
-  destroy() {
-
-  }
-}
-
 function inputs() {
   let events = (event)=> {
     let $input = event.target;
@@ -1010,6 +945,7 @@ class ContactsBlock {
     this.$parent = $parent;
   }
   init() {
+    
     let pinType = Scroll.scrollbar?'transform':'fixed';
 
     this.$head = this.$parent.querySelector('.section__head');
@@ -1026,6 +962,10 @@ class ContactsBlock {
       pinType: pinType,
       scrub: true
     });
+
+    this.updateInterval = setInterval(() => {
+      
+    }, 1000);
 
   }
 }
@@ -1348,4 +1288,174 @@ const Parallax = {
       $this.style.transform = `translate3d(0, ${val}px, 0)`;
     })
   }
+}
+
+class ItemSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  } 
+  init() {
+    this.$slider = this.$parent.querySelector('.items-slider__element');
+    this.$images = this.$parent.querySelectorAll('.items-slider__image');
+    this.$prev = this.$parent.querySelector('.items-slider__prev');
+    this.$next = this.$parent.querySelector('.items-slider__next');
+    this.index = 0;
+    this.speed = 0.5;
+
+    this.animationsEnter = [];
+    this.animationsExit = [];
+
+    this.$images.forEach(($image, index)=>{
+      let $light = $image.querySelector('.items-slider__image-light');
+      
+      this.animationsEnter[index] = gsap.timeline({paused:true})
+        .fromTo($image, {yPercent:20}, {yPercent:0, duration:this.speed, ease:'power2.out'})
+        .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed, ease:'power2.inOut'}, `-=${this.speed}`)
+        .fromTo($light, {autoAlpha:0}, {autoAlpha:1, duration:this.speed, ease:'power2.out'}, `-=${this.speed*0.5}`)
+
+      this.animationsExit [index] = gsap.timeline({paused:true})
+        .to($image, {yPercent:20, duration:this.speed, ease:'power2.in'})
+        .to($image, {autoAlpha:0, duration:this.speed, ease:'power2.out'}, `-=${this.speed}`)
+    })
+
+    this.animationsEnter[this.index].play();
+
+    this.slider = new Splide(this.$slider, {
+      type: 'loop',
+      perPage: 1,
+      perMove: 1,
+      gap: desktop_gap,
+      arrows: false,
+      pagination: true,
+      waitForTransition: false,
+      speed: this.speed*1000,
+      autoplay: true,
+      interval: autoslide_interval*1000,
+      breakpoints: {
+        576: {
+          gap: mobile_gap
+        },
+      }
+    })
+
+    this.slider.on('move', (newIndex)=>{
+      if(this.animationsEnter[this.index].isActive()) {
+        this.animationsEnter[this.index].pause();
+      }
+      this.animationsExit[this.index].play(0);
+
+      this.animationsEnter[newIndex].play(0);
+      this.index = newIndex;
+    });
+
+    this.$prev.addEventListener('click', ()=>{
+      this.slider.go('<');
+    })
+    this.$next.addEventListener('click', ()=>{
+      this.slider.go('>');
+    })
+
+    this.slider.mount();
+  }
+
+  destroy() {
+
+  }
+}
+
+class ProductBlock {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    this.$bslider = this.$parent.querySelector('.product-item__bottom-slides');
+    this.$tslider = this.$parent.querySelector('.product-item__top-slides');
+    this.$tslides = this.$parent.querySelectorAll('.product-item__top-slides .image');
+    this.$bslides = this.$parent.querySelectorAll('.product-item__bottom-slide');
+    this.$more = this.$parent.querySelector('.product-item__more-content');
+    this.$morebtn = this.$parent.querySelector('.product-item__more-button');
+
+    this.index = 0;
+    this.length = this.$tslides.length;
+    this.speed = 0.5;
+
+    let toggleContent = ()=> {
+      if(!this.$morebtn.classList.contains('active')) {
+        this.$morebtn.classList.add('active');
+        this.$more.style.display = 'block';
+      } else {
+        this.$morebtn.classList.remove('active');
+        this.$more.style.display = 'none';
+      }
+    }
+    this.$morebtn.addEventListener('click', toggleContent)
+
+
+    let initDesktop = ()=> {
+      let flag;
+
+      let getNext = (index)=> {
+        let val = index==this.length-1?0:index+1;
+        return val;
+      }
+      let getPrev = (index)=> {
+        let val = index==0?this.length-1:index-1;
+        return val;
+      }
+
+      this.animations = [];
+      this.$tslides.forEach(($image, index)=>{
+        this.animations[index] = gsap.timeline({paused:true})
+          .fromTo($image, {yPercent:10}, {yPercent:0, duration:this.speed, ease:'power2.out'})
+          .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed}, `-=${this.speed}`)
+      })
+
+      let slide = (index) => {
+        if(!flag) {
+          this.$tslides[this.index].style.zIndex = '1';
+          this.animations[this.index].duration(this.speed/2).reverse();
+          this.$bslides[this.index].classList.remove('active');
+        } 
+        else flag = true;
+
+        this.$tslides[index].style.zIndex = '2';
+        this.animations[index].duration(this.speed).play();
+        this.$bslides[index].classList.add('active');
+
+        this.index = index;
+      }
+
+      slide(this.index);
+
+      this.$bslides.forEach(($this, index)=>{
+        $this.addEventListener('mouseenter', ()=>{slide(index)})
+        $this.addEventListener('click', ()=>{slide(index)})
+      })
+      this.swipes = SwipeListener(this.$tslider);
+      this.$tslider.addEventListener('swipe', (event)=> {
+        let dir = event.detail.directions;
+        if(dir.left) slide(getNext(this.index))
+        else if(dir.right) slide(getPrev(this.index))
+      });
+    }
+
+    //mobile
+    if(window.innerWidth < brakepoints.lg && (!this.initialized || !this.flag)) {
+
+    } 
+
+    //desktop
+    else if(window.innerWidth>=brakepoints.lg && (!this.initialized || this.flag)) {
+      initDesktop();
+    }
+
+
+    
+
+    this.initialized = true;
+  }
+
+
+
+  
 }

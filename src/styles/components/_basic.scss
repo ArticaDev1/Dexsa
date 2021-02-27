@@ -12,7 +12,7 @@ body {
   @include media-breakpoint-down(xxl) {
     font-size: 1rem;
   }
-  @include media-breakpoint-down(xxl) {
+  @include media-breakpoint-down(lg) {
     font-size: 0.875rem;
   }
   &.hidden {

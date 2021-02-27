@@ -10,18 +10,61 @@ block content
   section.section.product-head.product-head_type-1.screen
     .container.lights-content 
       .bg-light.bg-light_size-1.bg-light_color-1
-
     .container.product-head__container
       .row.product-head__row
         .product-head__image.col-xl-5
-          .product-head__image-wrapper
+          .product-head__image-wrapper.product-head__image-wrapper_type-1
             .image.image_contain
-              img(data-src="./img/products/Group 313.png", alt="image").lazyload
+              img(data-src="./img/products/Group 316.png", alt="image").lazyload
             .image.image_contain
-              img(data-src="./img/products/Group 312.png", alt="image").lazyload
+              img(data-src="./img/products/Group 317.png", alt="image").lazyload
             
         .product-head__content.offset-xl-1.col-xl-6 
           h1.h2.product-head__item Взрывозащищённое освещение
           p.product-head__item Первый в России взрывозащищённый светодиодный светильник с возобновляемым ресурсом работы!
           a(href='#modal-form' data-modal='open').button.button_style-2.product-head__item 
             span Оставить заявку
+
+  section.section.product-destination
+    .container
+      .row.product-destination__head
+        h6.product-destination__title.col-xl-8.offset-xl-2 Предназначены для наружного и внутреннего освещения взрывоопасных зон всех классов помещений предприятий, а также объектов, где присутствует взрывоопасный газ и (или) горючая пыль
+      .row 
+        .product-destination__block.col-xl-3
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#gasproduction')
+          p Нефтегазовая отрасль
+        .product-destination__block.col-xl-3 
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#atom')
+          p Нефтехимическая отрасль
+        .product-destination__block.col-xl-3
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#oilproduction')
+          p Добыча , хранение и транспортировка нефти
+        .product-destination__block.col-xl-3 
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#spikelet')
+          p Объекты пищевой промышленности
+
+  include blocks/product-block
+  +block(
+    'Компакт 1Ex', 
+    'Самый компактный на рынке светильник с возобновляемым ресурсом работы',
+    ['./img/products/1_1.png', './img/products/1_2.png', './img/products/1_3.png'],
+    './docs/Prom-inn_A4_v3.pdf#page=7'
+  )
+  +block(
+    'Новатор 1Ex', 
+    'Самый компактный на рынке светильник с возобновляемым ресурсом работы',
+    ['./img/products/2_1.png', './img/products/2_2.png', './img/products/2_3.png'],
+    './docs/Prom-inn_A4_v3.pdf#page=11'
+  )
+  +block(
+    'EXTREME-C 1Ex', 
+    'Самый мощный',
+    ['./img/products/3_1.png', './img/products/3_2.png', './img/products/3_3.png'],
+    './docs/Prom-inn_A4_v3.pdf#page=14'
+  )
+
+  include blocks/contacts-blocks
