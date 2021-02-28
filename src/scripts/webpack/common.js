@@ -1569,7 +1569,7 @@ class ProductBlock {
       pagination: true,
       perPage: 1,
       trimSpace: false,
-      easing: 'ease-in-out',
+      waitForTransition: false,
       speed: this.speed*1000,
       gap: desktop_gap,
       start: this.index,
