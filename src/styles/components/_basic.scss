@@ -17,6 +17,7 @@ body {
   }
   &.hidden {
     overflow: hidden !important;
+    pointer-events: none;
   }
 }
 

@@ -100,12 +100,12 @@ const App = {
       }
     }, 500);
 
-
     $body.classList.add('hidden');
     $body.style.overflow = 'auto';
     
 
     window.addEventListener('enterstart', ()=>{
+
       if(!this.initialized) {
         this.initialized = true;
         gsap.set($wrapper, {autoAlpha:1})
