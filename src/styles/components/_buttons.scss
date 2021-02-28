@@ -147,11 +147,14 @@
 .btn-link {
   transition: border-color $trs1, opacity $trs1;
   border-bottom: 1px solid transparent;
-  &[data-touch], &[data-hover] {
+  &[data-touch], &[data-hover], &.active {
     border-color: currentColor;
   }
   &[data-focus] {
     opacity: 0.8;
     border-color: transparent;
+  }
+  &.active {
+    pointer-events: none;
   }
 }

@@ -102,7 +102,7 @@ const App = {
 
 
     $body.classList.add('hidden');
-    $body.style.overflow = 'scroll';
+    $body.style.overflow = 'auto';
     
 
     window.addEventListener('enterstart', ()=>{
@@ -133,7 +133,7 @@ const App = {
     })
 
     window.addEventListener('enterfinish', ()=>{
-      if(Scroll.scrollbar.track.yAxis.element) Scroll.scrollbar.track.yAxis.element.classList.remove('hidden');
+      if(Scroll.scrollbar) Scroll.scrollbar.track.yAxis.element.classList.remove('hidden');
       if(mobile()) {
         $body.classList.remove('hidden');
       }
@@ -141,7 +141,7 @@ const App = {
 
     window.addEventListener('exitstart', ()=>{
       Scroll.scrollTop(Math.max(Scroll.y-window.innerHeight/2, 0), Speed);
-      if(Scroll.scrollbar.track.yAxis.element) Scroll.scrollbar.track.yAxis.element.classList.add('hidden');
+      if(Scroll.scrollbar) Scroll.scrollbar.track.yAxis.element.classList.add('hidden');
       if(mobile()) {
         $body.classList.add('hidden');
       }
@@ -603,6 +603,12 @@ const Nav = {
       if(!this.state) this.open(); 
       else this.close();
     })
+
+    if(!mobile()) {
+      Scrollbar.init(this.$container, {
+        damping: 1
+      })
+    }
 
 
 
@@ -1288,7 +1294,7 @@ const Modal = {
     if(!mobile()) {
       this.$modals.forEach(($modal)=>{
         Scrollbar.init($modal, {
-          damping: 0.2
+          damping: 1
         })
       })
     }

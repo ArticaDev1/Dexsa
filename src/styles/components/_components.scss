@@ -133,6 +133,32 @@ img {
   }
 }
 
+.dev-label {
+  font-size: 0.875rem;
+  span {
+    color: var(--color-muted);
+  }
+  a {
+    font-size: 0;
+    display: inline-block;
+    transform: translateY(7%);
+    border: none;
+    color: var(--color-grayish);
+  }
+  svg {
+    width: 90px;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 0.75rem;
+    a {
+      transform: translateY(10%);
+    }
+    svg {
+      width: 84px;
+    }
+  }
+}
+
 .js-3d {
   position: relative;
   transform: translateZ(1000px);
@@ -157,6 +183,7 @@ img {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .bg-light {

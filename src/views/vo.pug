@@ -7,24 +7,25 @@ block variables
 
 block content
 
-  section.section.product-head.product-head_type-1.screen
+  section.section.product-head.product-head_type-1.screen.stp.sbp
     .container.lights-content 
       .bg-light.bg-light_size-1.bg-light_color-1
     .container.product-head__container
       .row.product-head__row
-        .product-head__image.col-xl-5
+        h1.h2.product-head__title.product-head__item.offset-lg-6.col-lg-6 Взрывозащищённое освещение
+        .product-head__image.offset-3.offset-lg-0.col-9.col-lg-5
           .product-head__image-wrapper.product-head__image-wrapper_type-1
             .image.image_contain
               img(data-src="./img/products/Group 316.png", alt="image").lazyload
             .image.image_contain
               img(data-src="./img/products/Group 317.png", alt="image").lazyload
-            
-        .product-head__content.offset-xl-1.col-xl-6 
-          h1.h2.product-head__item Взрывозащищённое освещение
-          p.product-head__item Первый в России взрывозащищённый светодиодный светильник с возобновляемым ресурсом работы!
-          a(href='#modal-form' data-modal='open').button.button_style-2.product-head__item 
-            span Оставить заявку
-
+        .product-head__text.offset-lg-6.col-lg-6
+          .row
+            p.product-head__text.product-head__item.order-sm-2.order-lg-1.col-sm.col-md-8.col-lg-12 Первый в России взрывозащищённый светодиодный светильник с возобновляемым ресурсом работы!
+            .order-sm-1.order-lg-2.col-sm-auto.col-md-4.col-lg-12
+              a(href='#modal-form' data-modal='open').button.button_style-2.product-head__item 
+                span Оставить заявку
+                
   section.section.product-destination
     .container
       .row.product-destination__head
