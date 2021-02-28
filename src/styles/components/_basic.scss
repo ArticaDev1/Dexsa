@@ -14,6 +14,7 @@ body {
   }
   @include media-breakpoint-down(sm) {
     font-size: 0.875rem;
+    line-height: 1.5;
   }
   &.hidden {
     overflow: hidden !important;

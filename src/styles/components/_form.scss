@@ -73,6 +73,29 @@
     pointer-events: none;
     opacity: 0.5;
   }
+  @include media-breakpoint-down(sm) {
+    &__title {
+      top: 14px;
+      left: 22px;
+    }
+    &__message {
+      top: calc(100% + 4px);
+    }
+    &__element {
+      height: 48px;
+      line-height: 20px;
+      padding: 14px 22px;
+    }
+    &.focused {
+      .input__element {
+        cursor: auto;
+      }
+      .input__title {
+        transform: translate(-10px, -36px);
+        font-size: 0.75rem;
+      }
+    }
+  }
 }
 
 
@@ -92,5 +115,23 @@
     color: var(--color-muted);
     position: relative;
     z-index: 2;
+  }
+  @include media-breakpoint-up(lg) {
+    &__message {
+      br {
+        display: none;
+      }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__group {
+      margin-bottom: -40px;
+    }
+    &__item {
+      margin-bottom: 40px;
+    }
+    &__submit {
+      margin-bottom: 40px;
+    }
   }
 }

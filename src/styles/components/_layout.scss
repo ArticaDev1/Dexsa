@@ -5,6 +5,7 @@
   overflow: hidden;
   background-color: var(--color-main-bg);
 }
+
 .content {
   &[data-scrollbar="true"] {
     height: 100vh;
@@ -20,14 +21,17 @@
     min-height: 100vh;
   }
 }
+
 .main {
   flex: 1 1 100%;
   overflow: hidden;
 }
+
 .container {
   position: relative;
   z-index: 2;
 }
+
 .section {
   margin: 0 0 250px 0;
   position: relative;
@@ -48,8 +52,22 @@
       margin-bottom: 150px;
     }
   }
+  @include media-breakpoint-down(lg) {
+    &__head {
+      &-txt {
+        margin-bottom: 40px !important;
+      }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    margin: 0 0 120px 0;
+    &__head {
+      &-txt {
+        margin-bottom: 30px !important;
+      }
+    }
+  }
 }
-
 
 @include media-breakpoint-down(sm) {
   .container {

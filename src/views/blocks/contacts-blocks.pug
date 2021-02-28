@@ -4,27 +4,27 @@ section.section.contacts-block
 
   .container 
     .section__head.contacts-block__head.row 
-        .col-xl-2
-          p.section__head-txt Контакты
-        .col-xl-8
-          h3.section__head-title Давайте встретимся и обсудим, где мы можем быть полезны вашему бизнесу с нашей технологией освещения
-          h4 Оставьте контакты и мы вам перезвоним
+      .col-lg-3.col-xl-2
+        p.section__head-txt Контакты
+      .col-lg-9.col-xl-8
+        h3.section__head-title Давайте встретимся и обсудим, где мы можем быть полезны вашему бизнесу с нашей технологией освещения
+        h4.contacts-block__sub-title Оставьте контакты и мы вам перезвоним
     
     form.form
       .form__group.row
-        .form__item.col-xl-3
+        .form__item.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
           label.input
             span.input__title Имя
             input(type="text" name="name" data-validate='name' data-required).input__element
-        .form__item.col-xl-3
+        .form__item.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
           label.input
             span.input__title Номер телефона
             input(type="text" name="phone" data-validate='phone' data-required).input__element
-        .form__item.col-xl-3
+        .form__item.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
           label.input
             span.input__title Комментарий
             textarea(name="message" data-validate='message').input__element
-        .form__submit.col-xl-3
+        .form__submit.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
           button.button.button_style-2.button_loader 
             span Оставить заявку
             svg(viewBox='0 0 120 30' fill='currentColor')
@@ -37,26 +37,27 @@ section.section.contacts-block
               circle(cx='105' cy='15' r='15')
                 animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
                 animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
-          p.form__message Нажимая кнопку “Отправить” вы соглашаетесь с условиями 
-            a(href="privacy.html" rel='noopener' target='_blank') Политики конфиденциальности
+          p.form__message Нажимая кнопку “Отправить” вы принимаете 
+            <br>
+            a(href="privacy.html" rel='noopener' target='_blank') Политику конфиденциальности
 
     .contacts-block__info 
       .contacts-block-item.row  
-        .contacts-block-item__label.col-xl-3 Номер телефона
-        .contacts-block-item__text.col-xl-7   
+        .contacts-block-item__label.col-sm-4.col-lg-3 Номер телефона
+        .contacts-block-item__text.col-sm-8.col-lg-7   
           a(href="tel:+73232323233").h6.btn-link +7 323 232-3233
       
       .contacts-block-item.row  
-        .contacts-block-item__label.col-xl-3 E-mail
-        .contacts-block-item__text.col-xl-7
+        .contacts-block-item__label.col-sm-4.col-lg-3 E-mail
+        .contacts-block-item__text.col-sm-8.col-lg-7
           a(href="mailto:email@gmail.com").h6.btn-link email@gmail.com
 
       .contacts-block-item.row  
-        .contacts-block-item__label.col-xl-3 Офис
-        .contacts-block-item__text.col-xl-7
+        .contacts-block-item__label.col-sm-4.col-lg-3 Офис
+        .contacts-block-item__text.col-sm-8.col-lg-7
           .h6 107078 г. Москва, Орликов переулок, 5, стр.1А
 
       .contacts-block-item.row  
-        .contacts-block-item__label.col-xl-3 Завод
-        .contacts-block-item__text.col-xl-7
+        .contacts-block-item__label.col-sm-4.col-lg-3 Завод
+        .contacts-block-item__text.col-sm-8.col-lg-7
           .h6 142715, Московская область, Ленинский район, сельское поселение Совхоз им. Ленина, территория Восточная Промзона, владение 3, стр. 1

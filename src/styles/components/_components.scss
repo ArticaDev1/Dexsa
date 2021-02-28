@@ -206,4 +206,10 @@ img {
   &_color-2 {
     background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
   }
+  @include media-breakpoint-down(lg) {
+    &_size-1 {
+      width: 1000px;
+      height: 1000px;
+    }
+  }
 }

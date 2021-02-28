@@ -1008,32 +1008,40 @@ class ContactsBlock {
   }
   init() {
     let pinType = Scroll.scrollbar?'transform':'fixed';
-
     this.$head = this.$parent.querySelector('.section__head');
     this.$ftext = this.$parent.querySelector('.section__head-txt');
 
-    this.trigger = ScrollTrigger.create({
-      trigger: this.$ftext,
-      start: "center center",
-      end: ()=>{
-        let val = this.$head.getBoundingClientRect().height - this.$ftext.getBoundingClientRect().height - 2;
-        return `+=${val}`;
-      },
-      pin: true,
-      pinType: pinType,
-      scrub: true
-    });
+    this.checkVersion = () => {
+      if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        this.trigger = ScrollTrigger.create({
+          trigger: this.$ftext,
+          start: "center center",
+          end: ()=>{
+            let val = this.$head.getBoundingClientRect().height - this.$ftext.getBoundingClientRect().height - 2;
+            return `+=${val}`;
+          },
+          pin: true,
+          pinType: pinType,
+          scrub: true
+        });
+        this.flag = true;
+      } 
+      else if(window.innerWidth < brakepoints.lg && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.trigger.kill();
+        }
+        this.flag = false;
+      }
+    }
 
-    this.updateInterval = setInterval(() => {
-      
-    }, 1000);
-
+    this.checkVersion();
+    window.addEventListener('resize', this.checkVersion);
+    this.initialized = true;
   }
+
   destroy() {
-    this.trigger.kill();
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    if(this.flag) this.trigger.kill();
+    for(let child in this) delete this[child];
   }
 }
 
@@ -1444,12 +1452,11 @@ class ProductBlock {
   }
   init() {
     this.$bslider = this.$parent.querySelector('.product-item__bottom-slides');
+    this.$bslides = this.$parent.querySelectorAll('.product-item__bottom-slide');
     this.$tslider = this.$parent.querySelector('.product-item__top-slides');
     this.$tslides = this.$parent.querySelectorAll('.product-item__top-slides .image');
-    this.$bslides = this.$parent.querySelectorAll('.product-item__bottom-slide');
     this.$more = this.$parent.querySelector('.product-item__more-content');
     this.$morebtn = this.$parent.querySelector('.product-item__more-button');
-
     this.index = 0;
     this.length = this.$tslides.length;
     this.speed = 0.5;
@@ -1459,7 +1466,7 @@ class ProductBlock {
         this.$morebtn.classList.add('active');
         this.$more.style.display = 'block';
 
-        let y = this.$more.getBoundingClientRect().top + Scroll.y - $header.getBoundingClientRect().height;
+        let y = this.$more.getBoundingClientRect().top + Scroll.y - $header.getBoundingClientRect().height + 1;
         Scroll.scrollTop(y, Speed)
       } 
       
@@ -1470,75 +1477,125 @@ class ProductBlock {
     }
     this.$morebtn.addEventListener('click', toggleContent)
 
-
-    let initDesktop = ()=> {
-      let flag;
-
-      let getNext = (index)=> {
-        let val = index==this.length-1?0:index+1;
-        return val;
+    this.checkVersion = () => {
+      //mobile
+      if(window.innerWidth < brakepoints.lg && (!this.initialized || !this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.initMobile();
+        this.flag = true;
+      } 
+      //desktop
+      else if(window.innerWidth>=brakepoints.lg && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyMobile();
+        }
+        this.initDesktop();
+        this.flag = false;
       }
-      let getPrev = (index)=> {
-        let val = index==0?this.length-1:index-1;
-        return val;
-      }
-
-      this.animations = [];
-      this.$tslides.forEach(($image, index)=>{
-        this.animations[index] = gsap.timeline({paused:true})
-          .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed})
-      })
-
-      let slide = (index) => {
-        if(!flag) {
-          this.$tslides[this.index].style.zIndex = '1';
-          this.animations[this.index].duration(this.speed/2).reverse();
-          this.$bslides[this.index].classList.remove('active');
-        } 
-        else flag = true;
-
-        this.$tslides[index].style.zIndex = '2';
-        this.animations[index].duration(this.speed).play();
-        this.$bslides[index].classList.add('active');
-
-        this.index = index;
-      }
-
-      slide(this.index);
-
-      this.$bslides.forEach(($this, index)=>{
-        $this.addEventListener('mouseenter', ()=>{slide(index)})
-        $this.addEventListener('click', ()=>{slide(index)})
-      })
-      this.swipes = SwipeListener(this.$tslider);
-      this.$tslider.addEventListener('swipe', (event)=> {
-        let dir = event.detail.directions;
-        if(dir.left) slide(getNext(this.index))
-        else if(dir.right) slide(getPrev(this.index))
-      });
     }
+    this.checkVersion();
 
-    //mobile
-    if(window.innerWidth < brakepoints.lg && (!this.initialized || !this.flag)) {
-
-    } 
-
-    //desktop
-    else if(window.innerWidth>=brakepoints.lg && (!this.initialized || this.flag)) {
-      initDesktop();
-    }
-
-
-    
+    window.addEventListener('resize', this.checkVersion);
 
     this.initialized = true;
   }
 
+  initDesktop() {
+    let flag;
 
-  destroy() {
-    for(let child in this) delete this[child];
+    let getNext = (index)=> {
+      let val = index==this.length-1?0:index+1;
+      return val;
+    }
+    let getPrev = (index)=> {
+      let val = index==0?this.length-1:index-1;
+      return val;
+    }
+
+    this.animations = [];
+    this.$tslides.forEach(($image, index)=>{
+      this.animations[index] = gsap.timeline({paused:true})
+        .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed})
+    })
+
+    this.slide = (index) => {
+      if(!flag) {
+        this.$tslides[this.index].style.zIndex = '1';
+        this.animations[this.index].duration(this.speed/2).reverse();
+        this.$bslides[this.index].classList.remove('active');
+      } 
+      else flag = true;
+
+      this.$tslides[index].style.zIndex = '2';
+      this.animations[index].duration(this.speed).play();
+      this.$bslides[index].classList.add('active');
+
+      this.index = index;
+    }
+
+    this.slide(this.index);
+
+    this.events = [];
+    this.$bslides.forEach(($this, index)=>{
+      this.events[index] = ()=> {
+        this.slide(index);
+      }
+      $this.addEventListener('mouseenter', this.events[index])
+      $this.addEventListener('click', this.events[index])
+    })
+
+    this.swipes = SwipeListener(this.$tslider);
+    this.$tslider.addEventListener('swipe', (event)=> {
+      let dir = event.detail.directions;
+      if(dir.left) this.slide(getNext(this.index))
+      else if(dir.right) this.slide(getPrev(this.index))
+    });
   }
   
+  destroyDesktop() {
+    this.swipes.off();
+    this.$bslides.forEach(($this, index)=>{
+      $this.removeEventListener('mouseenter', this.events[index])
+      $this.removeEventListener('click', this.events[index])
+    })
+  }
+
+  initMobile() {
+    this.slider = new Splide(this.$bslider, {
+      type: 'loop',
+      arrows: false,
+      pagination: true,
+      perPage: 1,
+      trimSpace: false,
+      easing: 'ease-in-out',
+      speed: this.speed*1000,
+      gap: desktop_gap,
+      start: this.index,
+      perMove: 1,
+      breakpoints: {
+        576: {
+          gap: mobile_gap
+        },
+      }
+    })
+    this.slider.mount();
+  }
+
+  destroyMobile() {
+    this.slider.destroy();
+  }
+
+  destroy() {
+    if(this.flag) {
+      this.destroyMobile();
+    } else {
+      this.destroyDesktop();
+    }
+    window.removeEventListener('resize', this.checkVersion);
+    for(let child in this) delete this[child];
+  }
 }
 
 class FadeBlocks {
@@ -1546,24 +1603,28 @@ class FadeBlocks {
     this.$parent = $parent;
   }
   init() {
-    this.$blocks = this.$parent.querySelectorAll('.js-fade-blocks__block');
-    this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$blocks, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.8, stagger:{amount:Speed*0.2}})
-      .fromTo(this.$blocks, {y:80}, {y:0, duration:Speed*0.8, ease:'power2.out', stagger:{amount:Speed*0.2}}, `-=${Speed}`)
-
-    this.trigger = ScrollTrigger.create({
-      trigger: this.$parent,
-      start: "center bottom",
-      onEnter: ()=> {
-        if(this.animation.totalProgress()==0) {
-          this.animation.play();
-          console.log('ok')
+    if(window.innerWidth>=brakepoints.lg) {
+      this.$blocks = this.$parent.querySelectorAll('.js-fade-blocks__block');
+      this.animation = gsap.timeline({paused:true})
+        .fromTo(this.$blocks, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.8, stagger:{amount:Speed*0.2}})
+        .fromTo(this.$blocks, {y:80}, {y:0, duration:Speed*0.8, ease:'power2.out', stagger:{amount:Speed*0.2}}, `-=${Speed}`)
+  
+      this.trigger = ScrollTrigger.create({
+        trigger: this.$parent,
+        start: "center bottom",
+        onEnter: ()=> {
+          if(this.animation.totalProgress()==0) {
+            this.animation.play();
+            console.log('ok')
+          }
         }
-      }
-    });
+      });
+    }
   }
   destroy() {
-    this.trigger.kill();
+    if(this.trigger) {
+      this.trigger.kill();
+    }
     for(let child in this) delete this[child];
   }
 }
