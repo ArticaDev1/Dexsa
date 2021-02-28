@@ -46,6 +46,9 @@ button, input, textarea {
   border-radius: 0;
   color: inherit;
 }
+textarea {
+  overflow-wrap: break-word;
+}
 a, button, label {
   user-select: none;
   -webkit-user-drag: none;

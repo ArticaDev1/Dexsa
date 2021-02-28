@@ -3283,6 +3283,9 @@ button, input, textarea {
   border-radius: 0;
   color: inherit; }
 
+textarea {
+  overflow-wrap: break-word; }
+
 a, button, label {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -3838,14 +3841,15 @@ img {
     padding: 16px 22px;
     display: block;
     width: 100%;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     font-size: inherit;
     cursor: pointer;
     resize: none;
     height: 56px;
     color: var(--color-text); }
+    .input__element:not(textarea) {
+      white-space: nowrap;
+      text-overflow: ellipsis; }
     .input__element:-webkit-autofill {
       -webkit-text-fill-color: var(--color-text);
       box-shadow: 0 0 0px 1000px transparent inset;
