@@ -100,11 +100,19 @@ const App = {
       }
     }, 500);
 
-    $body.classList.add('hidden');
-    $body.style.overflow = 'auto';
+
+    if(mobile()) {
+      $body.style.cssText = 'position:initial;height:initial;width:initial;overflow:auto;';
+      disablePageScroll();
+    } else {
+      $body.classList.add('hidden');
+    }
     
 
     window.addEventListener('enterstart', ()=>{
+      if(mobile()) {
+        enablePageScroll();
+      }
 
       if(!this.initialized) {
         this.initialized = true;
@@ -124,8 +132,6 @@ const App = {
       this.afunctions.add(ProductBlock, '.product-item');
       this.afunctions.add(FadeBlocks, '.js-fade-blocks');
       
-      
-
       autosize(document.querySelectorAll('textarea.input__element'));
 
       this.afunctions.init();
@@ -134,17 +140,14 @@ const App = {
 
     window.addEventListener('enterfinish', ()=>{
       if(Scroll.scrollbar) Scroll.scrollbar.track.yAxis.element.classList.remove('hidden');
-      if(mobile()) {
-        $body.classList.remove('hidden');
-      }
     })
 
     window.addEventListener('exitstart', ()=>{
       Scroll.scrollTop(Math.max(Scroll.y-window.innerHeight/2, 0), Speed);
       if(Scroll.scrollbar) Scroll.scrollbar.track.yAxis.element.classList.add('hidden');
       if(mobile()) {
-        $body.classList.add('hidden');
-      }
+        disablePageScroll();
+      } 
     })
 
     window.addEventListener('exitfinish', ()=>{
