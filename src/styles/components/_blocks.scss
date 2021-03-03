@@ -493,7 +493,6 @@
 
 .m-catalogue {
   padding-top: 90px;
-
   .bg-light {
     &:first-child {
       top: -160px;
@@ -501,93 +500,6 @@
     }
   }
 
-  &-item {
-    &__container {
-      position: relative;
-      color: inherit;
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-      &[data-touch], &[data-hover] {
-        .m-catalogue-item__image img:not(:first-child) {
-          opacity: 1;
-          visibility: visible;
-        }
-        .m-catalogue-item__back {
-          background-color: var(--color-bg-transparent);
-        }
-      }
-    }
-    &__back {
-      background-color: var(--color-bg-transparent2);
-      border-radius: 24px;
-      box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
-      padding: 25px 30px;
-      min-height: 220px;
-      position: relative;
-      transition: background-color $trs2;
-      width: 100%;
-    }
-    &__title {
-      position: absolute;
-      &_1, &_2, &_3, &_4 {
-        bottom: 25px;
-      }
-    }
-    &__image {
-      position: absolute;
-      z-index: 2;
-      img {
-        transition: opacity $trs2, visibility $trs2;
-        &:not(:first-child) {
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
-      &_1, &_2, &_3 {
-        height: 220px;
-        top: -88px;
-      }
-      &_1 {
-        width: 237px;
-      }
-      &_2 {
-        width: 237px;
-      }
-      &_3 {
-        width: 166px;
-      }
-      &_4 {
-        width: 160px;
-        height: 200px;
-        top: -22px;
-      }
-      &_5 {
-        height: 98px;
-        width: 174px;
-        bottom: -12px;
-        right: 32px;
-      }
-      &_6 {
-        height: 182px;
-        width: 138px;
-        bottom: -20px;
-        right: 47px;
-      }
-      &_7 {
-        height: 243px;
-        width: 194px;
-        bottom: -58px;
-        right: 83px;
-      }
-      &_8 {
-        height: 247px;
-        width: 288px;
-        right: 70px;
-        bottom: -58px;
-      }
-    }
-  }
   @include media-breakpoint-up(lg) {
     &-item {
       padding: 0 30px 60px 30px;
@@ -613,12 +525,190 @@
   }
 }
 
+.m-catalogue-item {
+  &__container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    &[data-touch], &[data-hover] {
+      .m-catalogue-item__image img:not(:first-child) {
+        opacity: 1;
+        visibility: visible;
+      }
+      .m-catalogue-item__back {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+  &__back {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
+    padding: 25px 30px;
+    min-height: 220px;
+    position: relative;
+    transition: background-color $trs2;
+    width: 100%;
+  }
+  &__title {
+    position: absolute;
+    &_1, &_2, &_3, &_4 {
+      bottom: 25px;
+    }
+  }
+  &__image {
+    position: absolute;
+    z-index: 2;
+    img {
+      transition: opacity $trs2, visibility $trs2;
+      &:not(:first-child) {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    &_1, &_2, &_3 {
+      height: 220px;
+      top: -88px;
+    }
+    &_1 {
+      width: 237px;
+    }
+    &_2 {
+      width: 237px;
+    }
+    &_3 {
+      width: 166px;
+    }
+    &_4 {
+      width: 160px;
+      height: 200px;
+      top: -22px;
+    }
+    &_5 {
+      height: 98px;
+      width: 174px;
+      bottom: -12px;
+      right: 32px;
+    }
+    &_6 {
+      height: 182px;
+      width: 138px;
+      bottom: -20px;
+      right: 47px;
+    }
+    &_7 {
+      height: 243px;
+      width: 194px;
+      bottom: -58px;
+      right: 83px;
+    }
+    &_8 {
+      height: 247px;
+      width: 288px;
+      right: 70px;
+      bottom: -58px;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    padding: 0 30px 60px 30px;
+    &:first-child, &:nth-child(6) {
+      flex: 0 0 38%;
+    }
+    &:nth-child(2), &:nth-child(5) {
+      flex: 0 0 32%;
+    }
+    &:nth-child(3), &:nth-child(4) {
+      flex: 0 0 30%;
+    }
+    &:nth-child(7) {
+      flex: 0 0 47%;
+    }
+    &:nth-child(8) {
+      flex: 0 0 53%;
+    }
+  }
+}
+
+.catalogue-item {
+  &__container {
+    display: block;
+    position: relative;
+    border-radius: 24px;
+    &::before, &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: inherit;
+    }
+    &::before {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%), linear-gradient(180deg, rgba(32, 32, 32, 0.85) 0%, rgba(104, 104, 104, 0.85) 100%);
+    }
+    &::after {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%), linear-gradient(180deg, #272727 0%, #3F3F3F 50%, #747474 100%);
+      opacity: 0;
+      transition: opacity $trs2;
+    }
+    &[data-touch], &[data-hover] {
+      &::after {
+        opacity: 1;
+      }
+      .catalogue-item__images .image:not(:first-child) {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  &__inner {
+    border-radius: inherit;
+    padding: 40px $grid-gutter-width 50px $grid-gutter-width;
+    box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 3;
+  }
+  &__images {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    .image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transition: opacity $trs2, visibility $trs2;
+      &:not(:first-child) {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+  &__title {
+    margin: 20px 0 0 0;
+    text-align: center;
+  }
+  @include media-breakpoint-down(xxl) {
+    &__inner {
+      padding: 40px $grid-gutter-width;
+    }
+    &__images {
+      height: 180px;
+    }
+    &__title {
+      margin: 0;
+    }
+  }
+}
+
 .catalogue-xl-item {
   &__container {
     position: relative;
     border-radius: 24px;
     box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
-    background-color: var(--color-bg-transparent2);
+    background-color: rgba(255, 255, 255, 0.05);
     padding: 55px 40px 55px 90px;
     overflow: hidden;
   }
@@ -664,80 +754,33 @@
       top: -40px;
     }
   }
-}
-
-
-.catalogue-item {
-  &__container {
-    display: block;
-    border-radius: inherit;
-    position: relative;
-    text-decoration: none;
-    border-radius: 24px;
-    transition: background-color $trs2;
-    &::before, &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      transition: opacity $trs2;
-      top: 0;
-      left: 0;
-    }
-    &::before {
-      background: linear-gradient(135.72deg, rgba(255, 255, 255, 0.05) 2.29%, rgba(0, 0, 0, 0.05) 100%), linear-gradient(180deg, rgba(32, 32, 32, 0.85) 0%, rgba(104, 104, 104, 0.85) 100%);
-    }
-    &::after {
-      background: linear-gradient(135.72deg, rgba(255, 255, 255, 0.05) 2.29%, rgba(0, 0, 0, 0.05) 100%), linear-gradient(180deg, #272727 0%, #3F3F3F 49.26%, #747474 100%);
-      opacity: 0;
-    }
-    &[data-touch], &[data-hover] {
-      &::after {
-        opacity: 1;
-      }
-
-      .catalogue-item__images .image:not(:first-child) {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-  }
-  &__inner {
-    border-radius: inherit;
-    padding: 40px $grid-gutter-width 50px $grid-gutter-width;
-    box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
-    position: relative;
-    z-index: 3;
-  }
-  &__images {
-    width: 100%;
-    height: 200px;
-    position: relative;
-    .image {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      transition: opacity $trs2, visibility $trs2;
-      &:not(:first-child) {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-  }
-  &__title {
-    margin: 20px 0 0 0;
-    text-align: center;
-  }
   @include media-breakpoint-down(xxl) {
-    &__inner {
-      padding: 40px $grid-gutter-width;
+    .button {
+      bottom: 24px;
     }
-    &__images {
-      height: 180px;
+    &__container {
+      padding: 46px 40px 46px 70px;
+    }
+    &__image {
+      &_1 {
+        width: 600px;
+      }
+      &_2 {
+        width: 335px;
+        right: 315px;
+      }
+      &_3 {
+        width: 180px;
+        right: 20px;
+        right: 360px;
+      }
+      &_4 {
+        width: 160px;
+      }
+      &_5 {
+        width: 170px;
+        right: 100px;
+      }
     }
   }
 }
@@ -943,7 +986,7 @@
 .contacts-block {
   &_type-2 {
     margin: 0;
-    padding: 200px 0;
+    padding: 250px 0;
   }
   &__bg {
     position: absolute;
@@ -965,6 +1008,9 @@
     margin-top: 60px;
   }
   @include media-breakpoint-down(xxl) {
+    &_type-2 {
+      padding: 200px 0;
+    }
     .bg-light {
       &:first-child {
         top: -180px;
@@ -1247,12 +1293,14 @@
       margin-bottom: 10px;
     }
     .row {
-      align-items: flex-end;
       flex-wrap: nowrap;
     }
     span {
       &:first-child {
         color: var(--color-gray);
+      }
+      &:last-child {
+        align-self: flex-end;
       }
     }
   }
@@ -1527,12 +1575,15 @@
     left: $xxl-field;
   }
   @include media-breakpoint-down(xxl) {
-    margin-top: -220px;
+    margin-top: -210px;
     .splide__pagination {
       left: $xl-field;
     }
     &__slide {
       height: 500px;
+      .row {
+        padding-bottom: 60px;
+      }
     }
   }
 }

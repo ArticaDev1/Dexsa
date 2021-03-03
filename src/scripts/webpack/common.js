@@ -1,4 +1,4 @@
-window.dev = true;
+window.dev = false;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -1044,6 +1044,7 @@ class ContactsBlock {
 
   destroy() {
     if(this.flag) this.trigger.kill();
+    window.removeEventListener('resize', this.checkVersion);
     for(let child in this) delete this[child];
   }
 }
@@ -1465,7 +1466,7 @@ class ProductBlock {
         this.$morebtn.classList.add('active');
         this.$more.style.display = 'block';
 
-        let y = this.$more.getBoundingClientRect().top + Scroll.y - $header.getBoundingClientRect().height + 1;
+        let y = this.$more.getBoundingClientRect().bottom + Scroll.y + 50 - window.innerHeight;
         Scroll.scrollTop(y, Speed)
       } 
       
