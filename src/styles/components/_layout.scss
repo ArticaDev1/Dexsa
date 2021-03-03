@@ -36,9 +36,24 @@
   margin: 0 0 120px 0;
   position: relative;
   z-index: 2;
-  &__title {
-    margin: 0 0 30px 0;
-    padding-left: $grid-gutter-width;
+  @include media-breakpoint-up(lg) {
+    &__title {
+      margin: 0 0 30px 0;
+      padding-left: $grid-gutter-width;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    margin: 0 0 150px 0;
+    &__title {
+      margin: 0 0 40px 0;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    margin: 0 0 80px 0;
+    &__title {
+      margin: 0 0 20px 0;
+      text-align: center;
+    }
   }
 }
 
@@ -96,5 +111,23 @@
   .row > * {
     padding-left: calc(#{$mobile-grid-gutter-width} / 2);
     padding-right: calc(#{$mobile-grid-gutter-width} / 2);
+  }
+}
+
+.grid {
+  display: flex;
+  .row {
+    margin-bottom: -34px;
+  }
+  &__item {
+    margin-bottom: 34px;
+  }
+  @include media-breakpoint-down(sm) {
+    .row {
+      margin-bottom: -20px;
+    }
+    &__item {
+      margin-bottom: 20px;
+    }
   }
 }

@@ -52,23 +52,23 @@ block content
                 //images
                 .items-slider__images 
                   //image
-                  .items-slider__image
+                  a(href=vo).items-slider__image
                     .image
                       img(data-src="./img/homeslider/1_1.png", alt="img").lazyload
                     .image.items-slider__image-light
                       img(data-src="./img/homeslider/1_2.png", alt="img").lazyload
                   //image
-                  .items-slider__image
+                  a(href='#').items-slider__image
                     .image
-                      img(data-src="./img/homeslider/2_1.png", alt="img").lazyload
-                    .image.items-slider__image-light
-                      img(data-src="./img/homeslider/2_2.png", alt="img").lazyload
+                      img(data-src="./img/homeslider/2.png", alt="img").lazyload
                   //image
-                  .items-slider__image
+                  a(href='#').items-slider__image
                     .image
-                      img(data-src="./img/homeslider/3_1.png", alt="img").lazyload
-                    .image.items-slider__image-light
-                      img(data-src="./img/homeslider/3_2.png", alt="img").lazyload
+                      img(data-src="./img/homeslider/3.png", alt="img").lazyload
+                  //image
+                  a(href='#').items-slider__image
+                    .image
+                      img(data-src="./img/homeslider/4.png", alt="img").lazyload
                   
                 //slider
                 .splide.items-slider__element
@@ -76,16 +76,20 @@ block content
                     .splide__list
                       //slide
                       .splide__slide.items-slider__slide 
-                        h4.items-slider__slide-title Север-2
-                        p Первый в России светильник с Возобновляемым ресурсом работы
+                        h4.items-slider__slide-title Взрывозащищенное освещение
+                        p Первые в России светильники с возобновляемым ресурсом работы
                       //slide
                       .splide__slide.items-slider__slide 
-                        h4.items-slider__slide-title Компакт 1Ex
-                        p Первый в России светильник с Возобновляемым ресурсом работы
+                        h4.items-slider__slide-title СУМО
+                        p Уникальная Система Управления Мониторингом Осветительного оборудования
                       //slide
                       .splide__slide.items-slider__slide 
-                        h4.items-slider__slide-title Новатор 1Ex
-                        p Первый в России светильник с Возобновляемым ресурсом работы
+                        h4.items-slider__slide-title Электрообогрев
+                        p Комплексные решения по промышленному электрообогреву
+                      //slide
+                      .splide__slide.items-slider__slide 
+                        h4.items-slider__slide-title Щитовое оборудование
+                        p Весь спектр промышленного электрощитового оборудования
                 .items-slider__buttons
                   .d-none.d-lg-block
                     a(href=catalogue).button.button_style-1.items-slider__button 
@@ -110,23 +114,23 @@ block content
 
     .container.advantages__content
       .row.advantages__container
-        .advantages-block.col-xl-5 
+        .advantages-block.offset-sm-1.offset-lg-0.col-lg-5.col-sm-10
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#lightning')
           h4 Разработки
           p Разрабатываем электротехнические решения под конкретные проекты, делаем шеф-монтаж и сервисное обслуживание.
 
-        .advantages-block.offset-xl-1.col-xl-5
+        .advantages-block.offset-sm-1.col-lg-5.col-sm-10
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#clock')
           h4 Сроки
           p Производим в максимально короткие сроки. Минимальный срок производства – от 2х- недель.
-        .advantages-block.col-xl-5 
+        .advantages-block.offset-sm-1.offset-lg-0.col-lg-5.col-sm-10
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#slider')
           h4 Умное освещение
           p Настраиваем сценарии умного освещения для технологических процессов индивидуально для каждого завода.
-        .advantages-block.offset-xl-1.col-xl-5 
+        .advantages-block.offset-sm-1.col-lg-5.col-sm-10 
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#experience')
           h4 Грандиозный опыт

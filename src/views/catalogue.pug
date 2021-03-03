@@ -6,14 +6,14 @@ block variables
   -var name = catalogue_name;
 
 block content
-  section.section.category-head.screen
+  section.section.category-head.screen.stp
     .category-head__scene(data-parallax='0.2' data-parallax-top)
       .category-head__scene-content.image.image_cover.image_mask-1
         img(data-src="./img/ldlslld.jpg", alt="bg").lazyload
     .container.category-head__container
       .category-head__content.row
-        h1.category-head__title.category-head__item.col-xl-6 Продукция
-        p.category-head__item.col-xl-6 Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
+        h1.category-head__title.category-head__item.col-lg-6 Продукция
+        p.category-head__item.category-head__text.col-lg-6 Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
 
   section.section.advantages
     .container.lights-content 
@@ -22,23 +22,23 @@ block content
 
     .container.advantages__content
       .row.advantages__container
-        .advantages-block.col-xl-5 
+        .advantages-block.offset-sm-1.offset-lg-0.col-lg-5.col-sm-10
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#quality')
           h4 Контроль качества
           p Каждая комплектующая проходит контроль качества: 1 входной контроль, 2 проверка на работоспособность.
 
-        .advantages-block.offset-xl-1.col-xl-5
+        .advantages-block.offset-sm-1.col-lg-5.col-sm-10
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#check')
           h4 Проверка изделий
           p Проверка светильника после сборки в режиме реальной работы (24 часовой тест на работоспособность).
-        .advantages-block.col-xl-5 
+        .advantages-block.offset-sm-1.offset-lg-0.col-lg-5.col-sm-10
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#engineer')
           h4 Инженерный подход
           p Двойной запас прочности позволяет избежать нагрузки на матрицу в течение всего срока эксплуатации).
-        .advantages-block.offset-xl-1.col-xl-5 
+        .advantages-block.offset-sm-1.col-lg-5.col-sm-10
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#benefit')
           h4 Экономическая выгода
@@ -52,23 +52,24 @@ block content
     section.small-section.catalogue-items-section__top-section
       .container 
         h3.small-section__title Освещение
-        .row.grid   
-          mixin block(link, title, img1, img2)
-            //block
-            .catalogue-item.grid__item.col-xl-3
-              a(href=link).catalogue-item__container
-                .catalogue-item__inner
-                  .catalogue-item__images   
-                    .image.image_contain
-                      img(data-src=img1, alt="image").lazyload
-                    .image.image_contain
-                      img(data-src=img2, alt="image").lazyload
-                  h5.catalogue-item__title=title
+        .grid
+          .row   
+            mixin block(link, title, img1, img2, classes)
+              //block
+              .catalogue-item.grid__item(class=classes)
+                a(href=link).catalogue-item__container
+                  .catalogue-item__inner
+                    .catalogue-item__images   
+                      .image.image_contain
+                        img(data-src=img1, alt="image").lazyload
+                      .image.image_contain
+                        img(data-src=img2, alt="image").lazyload
+                    h5.catalogue-item__title !{title}
           
-          +block(ov, 'Общепромышленное',    './img/catalogue/1.png', './img/catalogue/1_2.png')
-          +block(vo, 'Взрывозащищённое',    './img/catalogue/2.png', './img/catalogue/2_2.png')
-          +block(pv, 'Прожекторное',        './img/catalogue/3.png', './img/catalogue/3_2.png')
-          +block(zv, 'Заградительные огни', './img/catalogue/4.png', './img/catalogue/4_2.png')
+            +block(ov, 'Обще&shy;промышленное',    './img/catalogue/1.png', './img/catalogue/1_2.png', 'col-xl-3 col-md-7 col-6')
+            +block(vo, 'Взрыво&shy;защищённое',    './img/catalogue/2.png', './img/catalogue/2_2.png', 'col-xl-3 col-md-5 col-6')
+            +block(pv, 'Прожекторное',        './img/catalogue/3.png', './img/catalogue/3_2.png', 'col-xl-3 col-6')
+            +block(zv, 'Заградитель&shy;ные огни', './img/catalogue/4.png', './img/catalogue/4_2.png', 'col-xl-3 col-6')
 
 
     section.small-section.image-slider 
@@ -95,6 +96,9 @@ block content
         h3.small-section__title Коммутационное оборудование
         .catalogue-xl-item
           .catalogue-xl-item__container
+            .catalogue-xl-item__image.catalogue-xl-item__image_1.image 
+              img(data-src="./img/catalogue/ooo.png", alt="img").lazyload
+
             ul
               li Клееммные коробки из алюминиевого сплава из полиэстера
               li Взрывозвщищённые протяжные и распределительные коробки
@@ -106,14 +110,16 @@ block content
               span.icon  
                 svg
                   use(xlink:href='./img/icons/icons-sprite.svg#arrow')
-            .catalogue-xl-item__image.catalogue-xl-item__image_1.image 
-              img(data-src="./img/catalogue/ooo.png", alt="img").lazyload
+            
 
     section.small-section 
       .container 
         h3.small-section__title Щитовое оборудование
         .catalogue-xl-item
           .catalogue-xl-item__container
+            .catalogue-xl-item__image.catalogue-xl-item__image_2.image 
+              img(data-src="./img/catalogue/8.png", alt="img").lazyload
+
             ul
               li Низковольтные комплектные устройства управления и распределения
               li Вводно-распределительные устройства
@@ -124,14 +130,20 @@ block content
               span.icon  
                 svg
                   use(xlink:href='./img/icons/icons-sprite.svg#arrow')
-            .catalogue-xl-item__image.catalogue-xl-item__image_2.image 
-              img(data-src="./img/catalogue/8.png", alt="img").lazyload
+            
     
     section.small-section 
       .container 
         h3.small-section__title Система электрообогрева
         .catalogue-xl-item
           .catalogue-xl-item__container
+            .catalogue-xl-item__image.catalogue-xl-item__image_3.image 
+              img(data-src="./img/catalogue/7.png", alt="img").lazyload
+            .catalogue-xl-item__image.catalogue-xl-item__image_4.image 
+              img(data-src="./img/catalogue/dsds.png", alt="img").lazyload
+            .catalogue-xl-item__image.catalogue-xl-item__image_5.image 
+              img(data-src="./img/catalogue/lfld.png", alt="img").lazyload
+              
             ul
               li Греющие кабели
               li Аксессуары TubeTrace
@@ -142,12 +154,7 @@ block content
               span.icon  
                 svg
                   use(xlink:href='./img/icons/icons-sprite.svg#arrow')
-            .catalogue-xl-item__image.catalogue-xl-item__image_3.image 
-              img(data-src="./img/catalogue/7.png", alt="img").lazyload
-            .catalogue-xl-item__image.catalogue-xl-item__image_4.image 
-              img(data-src="./img/catalogue/dsds.png", alt="img").lazyload
-            .catalogue-xl-item__image.catalogue-xl-item__image_5.image 
-              img(data-src="./img/catalogue/lfld.png", alt="img").lazyload
+            
 
 
   -var contacts_type = 2;

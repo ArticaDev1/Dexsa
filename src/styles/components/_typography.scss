@@ -73,6 +73,26 @@ ul:not([class]) {
       background-color: currentColor;
     }
   }
+  @include media-breakpoint-down(lg) {
+    li {
+      padding: 0 0 0 20px;
+      &:not(:last-child) {
+        margin-bottom: 1.25rem;
+      }
+      &::before {
+        width: 6px;
+        height: 6px;
+        top: calc(0.72em - 3px);
+      }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    li {
+      &:not(:last-child) {
+        margin-bottom: 0.875rem;
+      }
+    }
+  }
 }
 
 h1, .h1 {
@@ -94,7 +114,7 @@ h4, .h4 {
   font-size: 1.375rem;
   font-family: $font1;
   line-height: 1.35;
-  margin-bottom: 1.125rem;
+  margin-bottom: 1rem;
 }
 h5, .h5 {
   font-size: 1.25rem;
@@ -112,9 +132,6 @@ h6, .h6 {
 
 
 @include media-breakpoint-down(xxl) {
-  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-    margin-top: 1.5rem;
-  }
   h1, .h1 {
     font-size: 2.625rem;
     margin-bottom: 3rem;
@@ -149,6 +166,9 @@ h6, .h6 {
 }
 
 @include media-breakpoint-down(sm) {
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin-top: 1.375rem;
+  }
   h1, .h1 {
     font-size: 1.5rem;
     line-height: 1.3;

@@ -95,11 +95,8 @@ const App = {
     windowSize.init();
 
     setInterval(() => {
-      if(!mobile()) {
-        ScrollTrigger.refresh();
-      }
+      ScrollTrigger.refresh();
     }, 500);
-
 
     if(mobile()) {
       $body.style.cssText = 'position:initial;height:initial;width:initial;overflow:auto;';
@@ -108,7 +105,6 @@ const App = {
       $body.classList.add('hidden');
     }
     
-
     window.addEventListener('enterstart', ()=>{
       if(mobile()) {
         enablePageScroll();
@@ -134,11 +130,9 @@ const App = {
       this.afunctions.add(CategoryHead, '.category-head');
       this.afunctions.add(ImageSlider, '.image-slider');
       
-      
       autosize(document.querySelectorAll('textarea.input__element'));
 
       this.afunctions.init();
-
     })
 
     window.addEventListener('enterfinish', ()=>{
@@ -617,17 +611,22 @@ const Nav = {
     }
 
 
-
     window.addEventListener('resize', this.resize);
 
-    //this.open();
-
-    /* window.addEventListener('enter', ()=>{
-      this.change(App.name);
-    })
-    window.addEventListener('exit', ()=>{
+    window.addEventListener('exitstart', (event)=>{
       if(this.state) this.close();
-    }) */
+    })
+
+    //change
+    window.addEventListener('exitstart', ()=>{
+      if(this.$active_links) {
+        this.$active_links.forEach( $link => { $link.classList.remove('active') });
+      }
+    })
+    window.addEventListener('enterstart', ()=>{
+      this.$active_links = document.querySelectorAll(`[data-name='${App.name}']`);
+      this.$active_links.forEach($link => { $link.classList.add('active') });
+    })
   },
   open: function() {
     $header.classList.add('header_nav-opened');
@@ -642,18 +641,7 @@ const Nav = {
     this.$toggle.classList.remove('active');
     this.state=false;
     this.animation.reverse();
-  }/* ,
-  change: function(namespace) {
-    if(this.$active_links) {
-      this.$active_links.forEach(($link)=>{
-        $link.classList.remove('active');
-      })
-    }
-    this.$active_links = document.querySelectorAll(`[data-name='${namespace}']`);
-    this.$active_links.forEach(($link)=>{
-      $link.classList.add('active');
-    })
-  } */
+  }
 }
 
 function inputs() {
@@ -1421,13 +1409,15 @@ class ItemSlider {
     })
 
     this.slider.on('move', (newIndex)=>{
-      if(this.animationsEnter[this.index].isActive()) {
-        this.animationsEnter[this.index].pause();
+      if(this.index!==newIndex) {
+        if(this.animationsEnter[this.index].isActive()) {
+          this.animationsEnter[this.index].pause();
+        }
+        this.animationsExit[this.index].play(0);
+  
+        this.animationsEnter[newIndex].play(0);
+        this.index = newIndex;
       }
-      this.animationsExit[this.index].play(0);
-
-      this.animationsEnter[newIndex].play(0);
-      this.index = newIndex;
     });
 
     this.$prev.addEventListener('click', ()=>{
@@ -1615,7 +1605,6 @@ class FadeBlocks {
         onEnter: ()=> {
           if(this.animation.totalProgress()==0) {
             this.animation.play();
-            console.log('ok')
           }
         }
       });
