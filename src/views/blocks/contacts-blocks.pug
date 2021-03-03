@@ -1,5 +1,10 @@
-section.section.contacts-block 
-  .container.lights-content 
+section.section.contacts-block(class=contacts_type==2?'contacts-block_type-2':'')
+  if contacts_type==2
+    .contacts-block__bg.image.image_cover.image_mask-2
+      img(src="./img/ghk.jpg", alt="bg")
+      
+  else
+    .container.lights-content 
       .bg-light.bg-light_size-1.bg-light_color-1
 
   .container 

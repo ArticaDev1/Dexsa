@@ -131,6 +131,9 @@ const App = {
       this.afunctions.add(ProductHead, '.product-head');
       this.afunctions.add(ProductBlock, '.product-item');
       this.afunctions.add(FadeBlocks, '.js-fade-blocks');
+      this.afunctions.add(CategoryHead, '.category-head');
+      this.afunctions.add(ImageSlider, '.image-slider');
+      
       
       autosize(document.querySelectorAll('textarea.input__element'));
 
@@ -1075,9 +1078,7 @@ class ProductHead {
   }
 
   destroy() {
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    for(let child in this) delete this[child];
   }
 }
 
@@ -1440,9 +1441,7 @@ class ItemSlider {
 
   destroy() {
     this.slider.destroy();
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    for(let child in this) delete this[child];
   }
 }
 
@@ -1625,6 +1624,60 @@ class FadeBlocks {
     if(this.trigger) {
       this.trigger.kill();
     }
+    for(let child in this) delete this[child];
+  }
+}
+
+class CategoryHead {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$items = this.$parent.querySelectorAll('.category-head__item');
+    this.$bg = this.$parent.querySelectorAll('.category-head__scene-content');
+
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1})
+      .fromTo(this.$bg, {scale:1.3}, {scale:1, ease:'power2.out'}, `-=${Speed}`)
+      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.85, stagger:{amount:Speed*0.15}},  `-=${Speed}`)
+      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*0.85, ease:'power2.out', stagger:{amount:Speed*0.15}}, `-=${Speed}`)
+
+    this.animation.play();
+
+  }
+
+  destroy() {
+    for(let child in this) delete this[child];
+  }
+}
+
+class ImageSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  } 
+
+  init() {
+    this.$slider = this.$parent.querySelector('.image-slider .splide');
+    this.speed = Speed/2;
+
+    this.slider = new Splide(this.$slider, {
+      type: 'loop',
+      perPage: 1,
+      perMove: 1,
+      arrows: false,
+      pagination: true,
+      waitForTransition: false,
+      speed: this.speed*1000,
+      autoplay: true,
+      interval: autoslide_interval*1000
+    })
+
+    this.slider.mount();
+  }
+
+  destroy() {
+    this.slider.destroy();
     for(let child in this) delete this[child];
   }
 }

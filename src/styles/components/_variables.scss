@@ -19,6 +19,21 @@ $grid-gutter-width:          24px;
 $mobile-container-padding-x: 16px;
 $mobile-grid-gutter-width:   16px;
 
+$xxl-field: calc((100vw - #{map-get($container-max-widths, xxl) - $container-padding-x * 2})/2);
+$xxl-field-negative: calc((-100vw + #{map-get($container-max-widths, xxl) - $container-padding-x * 2})/2);
+
+$xl-field: calc((100vw - #{map-get($container-max-widths, xl) - $container-padding-x * 2})/2);
+$xl-field-negative: calc((-100vw + #{map-get($container-max-widths, xl) - $container-padding-x * 2})/2);
+
+$lg-field: calc((100vw - #{map-get($container-max-widths, lg) - $container-padding-x * 2})/2);
+$lg-field-negative: calc((-100vw + #{map-get($container-max-widths, lg) - $container-padding-x * 2})/2);
+
+$md-field: calc((100vw - #{map-get($container-max-widths, md) - $container-padding-x * 2})/2);
+$md-field-negative: calc((-100vw + #{map-get($container-max-widths, md) - $container-padding-x * 2})/2);
+
+$sm-field: calc((100vw - #{map-get($container-max-widths, sm) - $container-padding-x * 2})/2);
+$sm-field-negative: calc((-100vw + #{map-get($container-max-widths, sm) - $container-padding-x * 2})/2);
+
 $blur1: blur(20px);
 
 $font1: 'Manrope', sans-serif;

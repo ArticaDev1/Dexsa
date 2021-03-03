@@ -105,99 +105,99 @@ block content
 
   section.section.advantages
     .container.lights-content 
-      .bg-light.bg-light_size-1.bg-light_color-1(data-parallax='-0.1')
+      .bg-light.bg-light_size-1.bg-light_color-1
+      .bg-light.bg-light_size-2.bg-light_color-2(data-parallax='-0.2')
 
-    .container 
+    .container.advantages__content
       .row.advantages__container
         .advantages-block.col-xl-5 
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#lightning')
           h4 Разработки
-          p Разрабатываем электротехнические решения под конкретные проекты, делаем шеф-монтаж и сервисное обслуживание
+          p Разрабатываем электротехнические решения под конкретные проекты, делаем шеф-монтаж и сервисное обслуживание.
 
         .advantages-block.offset-xl-1.col-xl-5
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#clock')
           h4 Сроки
-          p Производим в максимально короткие сроки. Минимальный срок производства – от 2х- недель
+          p Производим в максимально короткие сроки. Минимальный срок производства – от 2х- недель.
         .advantages-block.col-xl-5 
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#slider')
           h4 Умное освещение
-          p Настраиваем сценарии умного освещения для технологических процессов индивидуально для каждого завода
+          p Настраиваем сценарии умного освещения для технологических процессов индивидуально для каждого завода.
         .advantages-block.offset-xl-1.col-xl-5 
           svg.icon
             use(xlink:href='./img/icons/icons-sprite.svg#experience')
           h4 Грандиозный опыт
-          p Постоянно накапливаем новый опыт, работаем с EPC проектами, комплексным оснащением объектов строительтва ТЭК
+          p Постоянно накапливаем новый опыт, работаем с EPC проектами, комплексным оснащением объектов строительтва ТЭК.
 
   section.section.m-catalogue 
     .container.lights-content 
-      .bg-light.bg-light_size-2.bg-light_color-2(data-parallax='-0.3')
       .bg-light.bg-light_size-1.bg-light_color-1
 
     .container 
       .row.m-catalogue__container
+        //block
         .m-catalogue-item.col-6
           a(href="/").m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_1 Общепромышленное<br> освещение
-            .m-catalogue-item__image.m-catalogue-item__image_1
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/1.png", alt="image").lazyload
-                img(data-src="./img/catalogue/1_2.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_1.js-3d__forward
+              img(data-src="./img/catalogue/1.png", alt="image").lazyload
+              img(data-src="./img/catalogue/1_2.png", alt="image").lazyload
+        //block
         .m-catalogue-item.col-6
-          a(href="/").m-catalogue-item__container.js-3d
+          a(href=vo).m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_2 Взрывозащищённые<br> светильники
-            .m-catalogue-item__image.m-catalogue-item__image_2
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/2.png", alt="image").lazyload
-                img(data-src="./img/catalogue/2_2.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_2.js-3d__forward
+              img(data-src="./img/catalogue/2.png", alt="image").lazyload
+              img(data-src="./img/catalogue/2_2.png", alt="image").lazyload
+        //block
         .m-catalogue-item.col-6
           a(href="/").m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_3 Прожекторное<br> светильники
-            .m-catalogue-item__image.m-catalogue-item__image_3
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/3.png", alt="image").lazyload
-                img(data-src="./img/catalogue/3_2.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_3.js-3d__forward
+              img(data-src="./img/catalogue/3.png", alt="image").lazyload
+              img(data-src="./img/catalogue/3_2.png", alt="image").lazyload
+        //block
         .m-catalogue-item.col-6
           a(href="/").m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_4 Заградительные огни
-            .m-catalogue-item__image.m-catalogue-item__image_4
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/4.png", alt="image").lazyload
-                img(data-src="./img/catalogue/4_2.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_4.js-3d__forward
+              img(data-src="./img/catalogue/4.png", alt="image").lazyload
+              img(data-src="./img/catalogue/4_2.png", alt="image").lazyload
+        //block
         .m-catalogue-item.col-sm-6.col-md-5
           a(href="/").m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_5 Коммутационное<br> оборудование
-            .m-catalogue-item__image.m-catalogue-item__image_5
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/5.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_5.js-3d__forward
+              img(data-src="./img/catalogue/5.png", alt="image").lazyload
+        //block
         .m-catalogue-item.col-sm-6.col-md-7
           a(href="/").m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_6 Системы управления<br> и мониторинга<br> освещения
-            .m-catalogue-item__image.m-catalogue-item__image_6
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/6.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_6.js-3d__forward
+              img(data-src="./img/catalogue/6.png", alt="image").lazyload
+        //block
         .m-catalogue-item.col-12
           a(href="/").m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_7 Электрообогрев
-            .m-catalogue-item__image.m-catalogue-item__image_7
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/7.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_7.js-3d__forward
+              img(data-src="./img/catalogue/7.png", alt="image").lazyload
+        //block
         .m-catalogue-item.col-12
           a(href="/").m-catalogue-item__container.js-3d
             .m-catalogue-item__back.js-3d__back
               h5.m-catalogue-item__title.m-catalogue-item__title_8 Щитовое оборудование
-            .m-catalogue-item__image.m-catalogue-item__image_8
-              .image.image_contain.js-3d__forward
-                img(data-src="./img/catalogue/8.png", alt="image").lazyload
+            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_8.js-3d__forward
+              img(data-src="./img/catalogue/8.png", alt="image").lazyload
 
   section.section.about-text
     .about-text__light.about-text__light_1

@@ -2,6 +2,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-top: 1.875rem;
   font-weight: 700;
   font-family: $font2;
+  color: var(--color-title);
   &:first-child {
     margin-top: 0;
   }
@@ -44,10 +45,32 @@ a {
     border-bottom: 1px solid currentColor;
     &[data-touch], &[data-hover] {
       border-color: transparent;
-      color: var(--color-text);
+      color: var(--color-light);
     }
     &[data-focus] {
       opacity: 0.8;
+    }
+  }
+}
+
+ul:not([class]) {
+  li {
+    position: relative;
+    padding: 0 0 0 30px;
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      position: absolute;
+      left: 0;
+      top: calc(0.72em - 4px);
+      background-color: currentColor;
     }
   }
 }

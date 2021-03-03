@@ -1,0 +1,154 @@
+extends layout/layout
+
+block variables
+  -var title = catalogue_title
+  -var namespace = catalogue_namespace;
+  -var name = catalogue_name;
+
+block content
+  section.section.category-head.screen
+    .category-head__scene(data-parallax='0.2' data-parallax-top)
+      .category-head__scene-content.image.image_cover.image_mask-1
+        img(data-src="./img/ldlslld.jpg", alt="bg").lazyload
+    .container.category-head__container
+      .category-head__content.row
+        h1.category-head__title.category-head__item.col-xl-6 Продукция
+        p.category-head__item.col-xl-6 Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
+
+  section.section.advantages
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+      .bg-light.bg-light_size-2.bg-light_color-2(data-parallax='-0.2')
+
+    .container.advantages__content
+      .row.advantages__container
+        .advantages-block.col-xl-5 
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#quality')
+          h4 Контроль качества
+          p Каждая комплектующая проходит контроль качества: 1 входной контроль, 2 проверка на работоспособность.
+
+        .advantages-block.offset-xl-1.col-xl-5
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#check')
+          h4 Проверка изделий
+          p Проверка светильника после сборки в режиме реальной работы (24 часовой тест на работоспособность).
+        .advantages-block.col-xl-5 
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#engineer')
+          h4 Инженерный подход
+          p Двойной запас прочности позволяет избежать нагрузки на матрицу в течение всего срока эксплуатации).
+        .advantages-block.offset-xl-1.col-xl-5 
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#benefit')
+          h4 Экономическая выгода
+          p Сокращается стоимость простоя производства и увеличивается экономическая выгода от владения светильником.
+
+  section.section.catalogue-items-section
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+      .bg-light.bg-light_size-1.bg-light_color-1
+
+    section.small-section.catalogue-items-section__top-section
+      .container 
+        h3.small-section__title Освещение
+        .row.grid   
+          mixin block(link, title, img1, img2)
+            //block
+            .catalogue-item.grid__item.col-xl-3
+              a(href=link).catalogue-item__container
+                .catalogue-item__inner
+                  .catalogue-item__images   
+                    .image.image_contain
+                      img(data-src=img1, alt="image").lazyload
+                    .image.image_contain
+                      img(data-src=img2, alt="image").lazyload
+                  h5.catalogue-item__title=title
+          
+          +block(ov, 'Общепромышленное',    './img/catalogue/1.png', './img/catalogue/1_2.png')
+          +block(vo, 'Взрывозащищённое',    './img/catalogue/2.png', './img/catalogue/2_2.png')
+          +block(pv, 'Прожекторное',        './img/catalogue/3.png', './img/catalogue/3_2.png')
+          +block(zv, 'Заградительные огни', './img/catalogue/4.png', './img/catalogue/4_2.png')
+
+
+    section.small-section.image-slider 
+      .splide
+        .splide__track
+          .splide__list
+            //slide
+            .image-slider__slide.splide__slide
+              .image.image_cover.image_mask-1
+                img(src="../img/GettyImages-1195765543 2.jpg", alt="image")
+              .container
+                .row
+                  .h4.col-xl-5 Передача данных от светильника к светильнику и автоматический контроль освещенности
+            //slide
+            .image-slider__slide.splide__slide
+              .image.image_cover.image_mask-1
+                img(src="./img/GettyImages-1195765543 1.jpg", alt="image")
+              .container
+                .row
+                  .h4.col-xl-5 Доступ к каждому светильнику с планшета или телефона
+            
+    section.small-section 
+      .container 
+        h3.small-section__title Коммутационное оборудование
+        .catalogue-xl-item
+          .catalogue-xl-item__container
+            ul
+              li Клееммные коробки из алюминиевого сплава из полиэстера
+              li Взрывозвщищённые протяжные и распределительные коробки
+              li Взрывозащищённые корпуса из алюминиевого сплава
+              li Посты управления из алюминия, нержавеющей стали и полиэстера
+
+            a(href='#').button.button_style-4
+              | Перейти к каталогу
+              span.icon  
+                svg
+                  use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+            .catalogue-xl-item__image.catalogue-xl-item__image_1.image 
+              img(data-src="./img/catalogue/ooo.png", alt="img").lazyload
+
+    section.small-section 
+      .container 
+        h3.small-section__title Щитовое оборудование
+        .catalogue-xl-item
+          .catalogue-xl-item__container
+            ul
+              li Низковольтные комплектные устройства управления и распределения
+              li Вводно-распределительные устройства
+              li Низковольтные комплектные устройства
+
+            a(href='#').button.button_style-4
+              | Перейти к каталогу
+              span.icon  
+                svg
+                  use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+            .catalogue-xl-item__image.catalogue-xl-item__image_2.image 
+              img(data-src="./img/catalogue/8.png", alt="img").lazyload
+    
+    section.small-section 
+      .container 
+        h3.small-section__title Система электрообогрева
+        .catalogue-xl-item
+          .catalogue-xl-item__container
+            ul
+              li Греющие кабели
+              li Аксессуары TubeTrace
+              li Силовые трансформаторы
+
+            a(href='#').button.button_style-4
+              | Перейти к каталогу
+              span.icon  
+                svg
+                  use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+            .catalogue-xl-item__image.catalogue-xl-item__image_3.image 
+              img(data-src="./img/catalogue/7.png", alt="img").lazyload
+            .catalogue-xl-item__image.catalogue-xl-item__image_4.image 
+              img(data-src="./img/catalogue/dsds.png", alt="img").lazyload
+            .catalogue-xl-item__image.catalogue-xl-item__image_5.image 
+              img(data-src="./img/catalogue/lfld.png", alt="img").lazyload
+
+
+  -var contacts_type = 2;
+  include blocks/contacts-blocks
