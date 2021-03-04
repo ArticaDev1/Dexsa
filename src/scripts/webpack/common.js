@@ -798,22 +798,46 @@ class DecorationLight {
     this.$images = this.$parent.querySelectorAll('.image');
     this.$container = this.$parent.querySelector('.decoration-light__container ');
 
-    this.animation = gsap.timeline({paused:true})
+    let val = window.innerHeight/this.$container.getBoundingClientRect().height;
+    this.animations = [];
+    this.animations[0] = gsap.timeline({paused:true})
       .fromTo(this.$image, {scale:0.6, yPercent:-20}, {scale:1, yPercent:0, duration:1, ease:'none'})
       .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.75')
 
-    this.trigger = ScrollTrigger.create({
+    let val1 = 1 + 0.4*val,
+        val2 = -(val1-1)*50;
+
+    console.log(val1, val2)
+
+    this.animations[1] = gsap.timeline({paused:true})
+      .to(this.$image, {scale:val1, yPercent:val2, duration:1, ease:'none'})
+
+
+    this.triggers = [];
+    this.triggers[0] = ScrollTrigger.create({
       trigger: this.$container,
       start: "top bottom",
-      end: ()=> {
+      end: "bottom bottom",
+      /* end: ()=> {
         let val = window.getComputedStyle(this.$parent).getPropertyValue("margin-bottom").replace(/\D/g, "");
         return `bottom+=${val} bottom`;
-      },
+      }, */
       scrub: true,
       onUpdate: self => {
-        this.animation.progress(self.progress);
+        this.animations[0].progress(self.progress);
       }
     });
+    this.triggers[1] = ScrollTrigger.create({
+      trigger: this.$container,
+      start: "bottom bottom",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: self => {
+        this.animations[1].progress(self.progress);
+      }
+    });
+
+
   }
   destroy() {
     this.trigger.kill();

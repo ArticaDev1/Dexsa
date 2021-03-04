@@ -5048,7 +5048,7 @@ img {
 .decoration-light__image {
   position: relative;
   margin: 0 auto;
-  width: 38vw; }
+  width: 34vw; }
   .decoration-light__image::before {
     content: '';
     display: block;
