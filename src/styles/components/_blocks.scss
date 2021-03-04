@@ -305,7 +305,7 @@
     display: flex;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--color-grayish);
+    color: #D9D9D9;
     transition: color $trs1;
     z-index: 2;
     .icon {
@@ -314,7 +314,7 @@
       margin: auto;
     }
     &[data-touch], &[data-hover] {
-      color: var(--color-text);
+      color: #fff;
     }
   }
   &__next {
@@ -332,7 +332,7 @@
     bottom: 0;
     left: 0;
     .image {
-      transition: transform $trs2;
+      transition: transform $trs1;
       &:not(:first-child) {
         position: absolute;
         width: 100%;
@@ -1204,7 +1204,7 @@
   &__image {
     position: relative;
     margin: 0 auto;
-    width: 34vw;
+    width: 32vw;
     &::before {
       content: '';
       display: block;
@@ -1350,6 +1350,7 @@
   }
   &__value {
     text-align: center;
+    text-shadow: 0 0 4px #D9D9D9;
   }
 }
 

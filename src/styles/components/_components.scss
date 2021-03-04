@@ -63,6 +63,9 @@ img {
   }
 }
 
+.pin-spacer {
+  pointer-events: none;
+}
 .logo {
   &__image {
     display: block;

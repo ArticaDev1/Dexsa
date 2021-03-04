@@ -801,17 +801,14 @@ class DecorationLight {
     let val = window.innerHeight/this.$container.getBoundingClientRect().height;
     this.animations = [];
     this.animations[0] = gsap.timeline({paused:true})
-      .fromTo(this.$image, {scale:0.6, yPercent:-20}, {scale:1, yPercent:0, duration:1, ease:'none'})
-      .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.75')
+      .fromTo(this.$image, {scale:0.8, yPercent:-10}, {scale:1, yPercent:0, duration:1, ease:'none'})
+      .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
 
-    let val1 = 1 + 0.4*val,
+    let val1 = 1 + 0.2*val,
         val2 = -(val1-1)*50;
-
-    console.log(val1, val2)
 
     this.animations[1] = gsap.timeline({paused:true})
       .to(this.$image, {scale:val1, yPercent:val2, duration:1, ease:'none'})
-
 
     this.triggers = [];
     this.triggers[0] = ScrollTrigger.create({
@@ -840,7 +837,7 @@ class DecorationLight {
 
   }
   destroy() {
-    this.trigger.kill();
+    for(let child in this.triggers) this.triggers[child].kill();
     for(let child in this) delete this[child];
   }
 }
@@ -865,17 +862,17 @@ class AboutPreviewBlock {
       .to(this.$text_item[0], {y:-30})
       .to(this.$text_item[0], {autoAlpha:0, duration:0.5}, '-=0.5')
       .to(this.$lines[0], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
-      .to(this.$blocks[0], {autoAlpha:0, duration:0.75, ease:'power2.out'}, '-=0.25')
+      .to(this.$blocks[0], {autoAlpha:0, duration:0.5, ease:'power2.out'}, '-=0.25')
 
-      .to(this.$blocks[1],    {autoAlpha:1, duration:0.75, ease:'power2.in'}, '-=0.75')
+      .to(this.$blocks[1],    {autoAlpha:1, duration:0.5, ease:'power2.in'}, '-=0.5')
       .fromTo(this.$lines[1], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
       .fromTo(this.$text_item[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
       .fromTo(this.$text_item[1], {y:30}, {y:-30, duration:2}, '-=0.5')
       .to(this.$text_item[1], {autoAlpha:0, duration:0.5}, '-=0.5')
       .to(this.$lines[1], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
-      .to(this.$blocks[1], {autoAlpha:0, duration:0.75, ease:'power2.out'}, '-=0.25')
+      .to(this.$blocks[1], {autoAlpha:0, duration:0.5, ease:'power2.out'}, '-=0.25')
 
-      .to(this.$blocks[2], {autoAlpha:1, duration:0.75, ease:'power2.in'}, '-=0.75')
+      .to(this.$blocks[2], {autoAlpha:1, duration:0.5, ease:'power2.in'}, '-=0.5')
       .fromTo(this.$lines[2], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
       .fromTo(this.$text_item[2], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
       .fromTo(this.$text_item[2], {y:30}, {y:0}, '-=0.5')
@@ -941,7 +938,6 @@ class ClientsBlock {
     this.animation = gsap.timeline({paused:true})
     
     this.triggers = [];
-
     this.triggers[0] = ScrollTrigger.create({
       trigger: this.$text,
       start: "center center",
@@ -953,7 +949,6 @@ class ClientsBlock {
       pinType: pinType,
       scrub: true
     });
-
     this.triggers[1] = ScrollTrigger.create({
       trigger: this.$ftext,
       start: "center center",
@@ -970,12 +965,57 @@ class ClientsBlock {
       pinType: pinType,
       scrub: true
     });
+
+    this.blocksTriggers = [];
+    this.$blocks.forEach(($block, index)=>{
+      let $image = $block.querySelector('.clients-block__image'),
+          $value = $block.querySelector('.clients-block__value'),
+          start_shadow = '0 0 4px transparent',
+          end_shadow = '0 0 4px #D9D9D9',
+          animation;
+
+      if(index==0) {
+        animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+          .to([$image, $value], {autoAlpha:0.1}, '+=1')
+          .to($value, {css:{textShadow:start_shadow}}, '-=1')
+      } 
+      else if(index==this.$blocks.length-1) {
+        animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+          .fromTo([$image, $value], {autoAlpha:0.1}, {autoAlpha:1})
+          .fromTo($value, {css:{textShadow:start_shadow}}, {css:{textShadow:end_shadow}}, '-=1')
+          .to([$image, $value], {autoAlpha:1})
+      } 
+      else {
+        animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+          .fromTo([$image, $value], {autoAlpha:0.1}, {autoAlpha:1})
+          .fromTo($value, {css:{textShadow:start_shadow}}, {css:{textShadow:end_shadow}}, '-=1')
+          .to([$image, $value], {autoAlpha:0.1})
+          .to($value, {css:{textShadow:start_shadow}}, '-=1')
+      }
+
+      let getm = ()=> {
+        return +window.getComputedStyle(this.$blocks[0]).getPropertyValue("margin-bottom").replace(/\D/g, "");
+      }
+      this.blocksTriggers[index] = ScrollTrigger.create({
+        trigger: $block,
+        start: ()=> {
+          return `top-=${getm()} center`;
+        },
+        end: ()=> {
+          return `bottom+=${getm()} center`;
+        },
+        scrub: true,
+        onUpdate: self => {
+          animation.progress(self.progress);
+        }
+      });
+
+    })
   }
 
   destroy() {
-    this.triggers.forEach($trigger => {
-      $trigger.kill();
-    })
+    for(let child in this.triggers) this.triggers[child].kill();
+    for(let child in this.blocksTriggers) this.blocksTriggers[child].kill();
     for(let child in this) delete this[child];
   }
 }
