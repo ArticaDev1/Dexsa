@@ -799,7 +799,7 @@ class DecorationLight {
     this.$container = this.$parent.querySelector('.decoration-light__container ');
 
     this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$image, {scale:0.5, yPercent:-25}, {scale:1, yPercent:0, duration:1, ease:'none'})
+      .fromTo(this.$image, {scale:0.6, yPercent:-20}, {scale:1, yPercent:0, duration:1, ease:'none'})
       .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.75')
 
     this.trigger = ScrollTrigger.create({
@@ -841,17 +841,17 @@ class AboutPreviewBlock {
       .to(this.$text_item[0], {y:-30})
       .to(this.$text_item[0], {autoAlpha:0, duration:0.5}, '-=0.5')
       .to(this.$lines[0], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
-      .to(this.$blocks[0], {autoAlpha:0, duration:0.75}, '-=0.25')
+      .to(this.$blocks[0], {autoAlpha:0, duration:0.75, ease:'power2.out'}, '-=0.25')
 
-      .to(this.$blocks[1],    {autoAlpha:1, duration:0.75}, '-=0.75')
+      .to(this.$blocks[1],    {autoAlpha:1, duration:0.75, ease:'power2.in'}, '-=0.75')
       .fromTo(this.$lines[1], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
       .fromTo(this.$text_item[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
       .fromTo(this.$text_item[1], {y:30}, {y:-30, duration:2}, '-=0.5')
       .to(this.$text_item[1], {autoAlpha:0, duration:0.5}, '-=0.5')
       .to(this.$lines[1], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
-      .to(this.$blocks[1], {autoAlpha:0, duration:0.75}, '-=0.25')
+      .to(this.$blocks[1], {autoAlpha:0, duration:0.75, ease:'power2.out'}, '-=0.25')
 
-      .to(this.$blocks[2], {autoAlpha:1, duration:0.75}, '-=0.75')
+      .to(this.$blocks[2], {autoAlpha:1, duration:0.75, ease:'power2.in'}, '-=0.75')
       .fromTo(this.$lines[2], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
       .fromTo(this.$text_item[2], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
       .fromTo(this.$text_item[2], {y:30}, {y:0}, '-=0.5')

@@ -5037,7 +5037,7 @@ img {
       .about-preview-block__text_1 span {
         width: 370px; }
     .about-preview-block__text_2 {
-      top: 95px; }
+      top: 94px; }
       .about-preview-block__text_2 span {
         width: 308px; }
     .about-preview-block__text_3 {
@@ -5048,7 +5048,7 @@ img {
 .decoration-light__image {
   position: relative;
   margin: 0 auto;
-  width: 70vw; }
+  width: 38vw; }
   .decoration-light__image::before {
     content: '';
     display: block;
