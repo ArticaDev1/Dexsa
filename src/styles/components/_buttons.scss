@@ -3,7 +3,7 @@
   display: inline-flex;
   &_style-1 {
     padding-left: 40px;
-    color: var(--color-light);
+    color: #fff;
     line-height: 32px;
     text-decoration: none;
     span {
@@ -19,7 +19,7 @@
       width: 12px;
       height: 12px;
       border-radius: 12px;
-      background-color: var(--color-grayish);
+      background-color: #D9D9D9;
       position: absolute;
       left: 0;
       top: 10px;
@@ -27,12 +27,13 @@
     }
     &[data-touch], &[data-hover] {
       &::before {
-        background-color: var(--color-light);
-        box-shadow: 0px 0px 21px 7px var(--color-light);
+        background-color: #fff;
+        box-shadow: 0px 0px 21px 7px #fff;
       }
     }
   }
   &_style-2 {
+    color: #fff;
     line-height: 56px;
     padding: 0 40px;
     border-radius: 9px;
@@ -91,14 +92,14 @@
     justify-content: center;
     text-align: center;
     transition: background-color $trs1;
-    border-color: var(--color-muted);
-    color: var(--color-text);
+    border-color: #5B5B5B;
+    color: #fff;
     text-decoration: none;
     &[data-touch], &[data-hover] {
       background-color: #919191;
     }
     &[data-focus] {
-      background-color: var(--color-muted);
+      background-color: #5B5B5B;
     }
   }
   &_loader {

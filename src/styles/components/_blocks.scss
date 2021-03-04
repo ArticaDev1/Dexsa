@@ -293,6 +293,9 @@
     transform: translateX(-100%);
     left: -$grid-gutter-width;
     bottom: -43px;
+    button:not(.is-active)::before {
+      background-color: #919191;
+    }
   }
 
   &__arrow {
@@ -481,7 +484,10 @@
       color: var(--color-dark);
       transition: color $trs3, filter $trs3;
       filter: drop-shadow(0 0 5px transparent);
-      &.animate {
+      &.mobile {
+        transition: none;
+      }
+      &.animate, &.mobile {
         color: var(--color-light);
         filter: drop-shadow(0 0 4px var(--color-grayish));
       }
@@ -1090,11 +1096,14 @@
   }
 
   &__container {
-    height: 370px;
+    height: 418px;
     position: relative;
   }
 
   @include media-breakpoint-down(xxl) {
+    &__container {
+      height: 355px;
+    }
     .bg-light {
       &:first-child {
         left: 280px;
@@ -1107,6 +1116,9 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  .row {
+    height: 100%;
+  }
   &:not(:first-child) {
     opacity: 0;
     visibility: hidden;
@@ -1115,129 +1127,97 @@
     align-self: center;
   }
   &__image {
+    align-self: center;
     .image {
-      height: 370px;
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
     }
+  }
+  &__light {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
   &__text {
     position: relative;
     align-self: start;
-    &::before {
-      content: '';
+    p {
+      margin: 0 !important;
+    }
+    span {
+      display: block;
       position: absolute;
       right: calc(100% + #{$grid-gutter-width/2});
-      display: block;
       height: 1px;
       top: 50%;
       background: var(--color-light);
     }
     &_1 {
-      top: 155px;
-      &::before {
-        width: 342px;
+      top: 190px;
+      span {
+        width: 430px;
       }
     }
     &_2 {
-      top: 155px;
-      &::before {
-        width: 416px;
+      top: 112px;
+      span {
+        width: 355px;
       }
     }
     &_3 {
-      top: 172px;
-      &::before {
-        width: 416px;
+      top: 224px;
+      span {
+        width: 460px;
       }
     }
   }
   @include media-breakpoint-down(xxl) {
     &__text {
       &_1 {
-        top: 162px;
-        &::before {
-          width: 294px;
+        top: 160px;
+        span {
+          width: 370px;
         }
       }
       &_2 {
-        top: 162px;
-        &::before {
-          width: 358px;
+        top: 95px;
+        span {
+          width: 308px;
         }
       }
       &_3 {
-        top: 170px;
-        &::before {
-          width: 358px;
+        top: 190px;
+        span {
+          width: 398px;
         }
       }
     }
   }
 }
 
-.warranty-preview {
-  .bg-light {
-    &:first-child {
-      top: -220px;
-      left: 540px;
-    }
-    &:nth-child(2) {
-      top: 520px;
-      left: 400px;
-    }
-  }
-  &__container {
-    position: relative;
-    overflow: hidden;
-    height: 700px;
-  }
+.decoration-light {
   &__image {
-    position: absolute;
-    right: 0;
-    transform: translateX(38%);
-    height: 100%;
-    img {
-      &:first-child {
-        position: initial;
-        height: 100%;
-        width: auto;
-      }
-    }
-  }
-  &__image-light {
-    opacity: 0;
-    visibility: hidden;
-  }
-  &__text {
-    text-align: center;
-    padding-top: 210px;
-  }
-  &__index {
-    display: inline-block;
     position: relative;
-    margin: 0 0.3em 0 0.1em;
-    span {
+    margin: 0 auto;
+    width: 70vw;
+    &::before {
+      content: '';
       display: block;
-      text-align: center;
-      &:not(:first-child) {
-        opacity: 0;
-        visibility: hidden;
-      }
-      &:not(:last-child) {
-        position: absolute;
-        top: 0;
-        left: 0;
+      padding-top: 90%;
+    }
+    .image {
+      position: absolute;
+      width: 162%;
+      top: 0;
+      right: 0;
+      img {
+        display: block;
         width: 100%;
-      }
-    }
-  }
-  @include media-breakpoint-down(xxl) {
-    &__container {
-      height: 600px;
-    }
-    .bg-light {
-      &:nth-child(2) {
-        top: 380px;
-        left: 340px;
       }
     }
   }
@@ -1484,6 +1464,7 @@
       width: 110px;
       height: 110px;
       margin-bottom: 50px;
+      color: #fff;
     }
   }
   @include media-breakpoint-down(xl) {
@@ -1699,7 +1680,6 @@
       border: 2px solid transparent;
       border-radius: 2px;
       width: calc(25% - 10px);
-      cursor: pointer;
       margin-right: 10px;
       .image {
         img {

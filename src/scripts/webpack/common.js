@@ -90,13 +90,16 @@ const App = {
     Nav.init();
     Validation.init();
     Modal.init();
-    Parallax.init();
     inputs();
     windowSize.init();
 
-    setInterval(() => {
-      ScrollTrigger.refresh();
-    }, 500);
+    if(!mobile()) {
+      Parallax.init();
+      setInterval(() => {
+        //ScrollTrigger.refresh();
+      }, 500);
+    }
+    
 
     if(mobile()) {
       $body.style.cssText = 'position:initial;height:initial;width:initial;overflow:auto;';
@@ -121,7 +124,7 @@ const App = {
       this.afunctions.add(Card3d, '.js-3d');
       this.afunctions.add(AboutTextBlock, '.about-text');
       this.afunctions.add(AboutPreviewBlock, '.about-preview');
-      this.afunctions.add(WarrantyPreviewBlock, '.warranty-preview');
+      this.afunctions.add(DecorationLight, '.decoration-light');
       this.afunctions.add(ClientsBlock, '.clients');
       this.afunctions.add(ContactsBlock, '.contacts-block');
       this.afunctions.add(ProductHead, '.product-head');
@@ -677,20 +680,22 @@ class AdvantagesLights {
     this.$block = $block;
   }
   init() {
-    this.trigger = ScrollTrigger.create({
-      trigger: this.$block,
-      start: "top bottom",
-      end: "bottom bottom",
-      scrub: true,
-      once: true,
-      toggleClass: 'animate'
-    });
+    if(!mobile()) {
+      this.trigger = ScrollTrigger.create({
+        trigger: this.$block,
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: true,
+        once: true,
+        toggleClass: 'animate'
+      });
+    } else {
+      this.$block.classList.add('mobile');
+    }
   }
   destroy() {
-    this.trigger.kill();
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    if(this.trigger) this.trigger.kill();
+    for(let child in this) delete this[child];
   }
 }
 
@@ -784,82 +789,35 @@ class AboutTextBlock {
   }
 }
 
-class WarrantyPreviewBlock {
+class DecorationLight {
   constructor($parent) {
     this.$parent = $parent;
   }
   init() {
-    this.$light = this.$parent.querySelector('.warranty-preview__image-light');
-    this.$values = this.$parent.querySelectorAll('.warranty-preview__index span');
-    this.$top = this.$parent.querySelector('.warranty-preview__top');
-    this.$bottom = this.$parent.querySelector('.warranty-preview__bottom');
-    
-
-    this.values_animation = gsap.timeline({paused:true})
-      .fromTo(this.$top, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5})
-
-    this.$values.forEach(($value, index)=>{
-      let timeline, dur = 0.2;
-
-      if(index==0) {
-        timeline = gsap.timeline()
-          .to($value, {autoAlpha:0, duration:dur*0.5, ease:'power2.out'})
-        
-        this.values_animation.add(timeline, `>-${Speed*0.5}`)
-      } 
-      else {
-        if(index==this.$values.length-1) {
-          timeline = gsap.timeline()
-            .fromTo($value, {autoAlpha:0, scale:1.5}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
-        } 
-        else {
-          timeline = gsap.timeline()
-            .fromTo($value, {autoAlpha:0, scale:1.5}, {autoAlpha:1, scale:1, duration:dur, ease:'power2.in'})
-            .to($value, {autoAlpha:0, duration:dur*0.5, ease:'power2.out'})
-        }
-
-        if(index==1) {
-          this.values_animation.add(timeline, `>-${dur*0.5}`)
-        } else {
-          this.values_animation.add(timeline, `>-${dur}`)
-        }
-      }
-        
-    })
-
-    this.values_animation.add(
-      gsap.fromTo(this.$bottom, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5}), `>-${Speed*0.25}`
-    )
+    this.$image = this.$parent.querySelector('.decoration-light__image');
+    this.$images = this.$parent.querySelectorAll('.image');
+    this.$container = this.$parent.querySelector('.decoration-light__container ');
 
     this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:'power2.inOut'})
-      .to(this.$light, {autoAlpha:0, duration:0.8, ease:'power2.inOut'}, '+=0.4')
+      .fromTo(this.$image, {scale:0.5, yPercent:-25}, {scale:1, yPercent:0, duration:1, ease:'none'})
+      .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.75')
 
     this.trigger = ScrollTrigger.create({
-      trigger: this.$light,
-      start: "center bottom",
-      end: 'center top',
+      trigger: this.$container,
+      start: "top bottom",
+      end: ()=> {
+        let val = window.getComputedStyle(this.$parent).getPropertyValue("margin-bottom").replace(/\D/g, "");
+        return `bottom+=${val} bottom`;
+      },
       scrub: true,
       onUpdate: self => {
         this.animation.progress(self.progress);
-      },
-      onEnter: ()=> {
-        if(this.values_animation.totalProgress()==0) {
-          this.values_animation.play();
-        }
-      }, 
-      onEnterBack: ()=> {
-        if(this.values_animation.totalProgress()==0) {
-          this.values_animation.play();
-        }
       }
     });
   }
   destroy() {
     this.trigger.kill();
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    for(let child in this) delete this[child];
   }
 }
 
@@ -874,26 +832,31 @@ class AboutPreviewBlock {
     this.$blocks = this.$parent.querySelectorAll('.about-preview-block');
     this.$images = this.$parent.querySelectorAll('.about-preview-block__image');
     this.$text = this.$parent.querySelectorAll('.about-preview-block__text');
+    this.$text_item = this.$parent.querySelectorAll('.about-preview-block__text p');
+    this.$lines = this.$parent.querySelectorAll('.about-preview-block__text span');
     this.$light = this.$parent.querySelectorAll('.about-preview-block__light');
     this.$ftext = this.$parent.querySelector('.section__head-txt');
 
-    this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'power2.out'}})
-      .to(this.$text[0], {autoAlpha:0}, "+=1")
-      .to(this.$text[0], {x:30, ease:'power2.in'}, '-=1')
-      .to(this.$blocks[0], {autoAlpha:0, duration:'0.75'})
+    this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+      .to(this.$text_item[0], {y:-30})
+      .to(this.$text_item[0], {autoAlpha:0, duration:0.5}, '-=0.5')
+      .to(this.$lines[0], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
+      .to(this.$blocks[0], {autoAlpha:0, duration:0.75}, '-=0.25')
 
-      .to(this.$blocks[1], {autoAlpha:1, ease:'power2.in', duration:'0.75'}, '-=0.75')
-      .fromTo(this.$text[1], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'})
-      .fromTo(this.$text[1], {x:30}, {x:0}, '-=1')
-      .to(this.$text[1], {autoAlpha:0},'+=1')
-      .to(this.$text[1], {x:30, ease:'power2.in'}, '-=1')
-      .to(this.$blocks[1], {autoAlpha:0, duration:'0.75'})
+      .to(this.$blocks[1],    {autoAlpha:1, duration:0.75}, '-=0.75')
+      .fromTo(this.$lines[1], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
+      .fromTo(this.$text_item[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
+      .fromTo(this.$text_item[1], {y:30}, {y:-30, duration:2}, '-=0.5')
+      .to(this.$text_item[1], {autoAlpha:0, duration:0.5}, '-=0.5')
+      .to(this.$lines[1], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
+      .to(this.$blocks[1], {autoAlpha:0, duration:0.75}, '-=0.25')
 
-      .to(this.$blocks[2], {autoAlpha:1, ease:'power2.in', duration:'0.75'}, '-=0.75')
-      .fromTo(this.$text[2], {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'})
-      .fromTo(this.$text[2], {x:30}, {x:0}, '-=1')
-
-      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1, duration:1.5, ease:'power2.in'})
+      .to(this.$blocks[2], {autoAlpha:1, duration:0.75}, '-=0.75')
+      .fromTo(this.$lines[2], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
+      .fromTo(this.$text_item[2], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
+      .fromTo(this.$text_item[2], {y:30}, {y:0}, '-=0.5')
+     
+      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1}, '-=1')
 
     
     this.triggers = [];
@@ -1456,7 +1419,12 @@ class ProductBlock {
         this.$morebtn.classList.add('active');
         this.$more.style.display = 'block';
 
-        let y = this.$more.getBoundingClientRect().bottom + Scroll.y + 50 - window.innerHeight;
+        let y;
+        if(window.innerWidth>=brakepoints.sm) {
+          y = this.$more.getBoundingClientRect().bottom + Scroll.y + 50 - window.innerHeight;
+        } else {
+          y = this.$more.getBoundingClientRect().top + Scroll.y - $header.getBoundingClientRect().height + 1;
+        }
         Scroll.scrollTop(y, Speed)
       } 
       
