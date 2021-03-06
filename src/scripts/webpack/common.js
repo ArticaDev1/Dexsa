@@ -846,7 +846,12 @@ class AboutPreviewBlock {
   constructor($parent) {
     this.$parent = $parent;
   }
+
   init() {
+    this.initDesktop();
+  }
+
+  initDesktop() {
     let pinType = Scroll.scrollbar?'transform':'fixed';
 
     this.$container = this.$parent.querySelector('.about-preview__container');
@@ -857,9 +862,24 @@ class AboutPreviewBlock {
     this.$lines = this.$parent.querySelectorAll('.about-preview-block__text span');
     this.$light = this.$parent.querySelectorAll('.about-preview-block__light');
     this.$ftext = this.$parent.querySelector('.section__head-txt');
+    this.$mouse = this.$parent.querySelector('.mouse-icon');
+
+
+    this.mousepos = ()=> {
+      let h1 = this.$container.getBoundingClientRect().height,
+          h2 = this.$mouse.getBoundingClientRect().height,
+          val = (window.innerHeight-h1)/4 + h1 - h2/2;
+
+
+      this.$mouse.style.top = `${val}px`;
+
+    }
+    this.mousepos();
+    window.addEventListener('resize', this.mousepos);
+
 
     this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
-      .to(this.$text_item[0], {y:-30})
+      .to(this.$text_item[0], {y:-30}, '-=1')
       .to(this.$text_item[0], {autoAlpha:0, duration:0.5}, '-=0.5')
       .to(this.$lines[0], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
       .to(this.$blocks[0], {autoAlpha:0, duration:0.5, ease:'power2.out'}, '-=0.25')
@@ -879,7 +899,8 @@ class AboutPreviewBlock {
      
       .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1}, '-=1')
 
-    
+      .to(this.$mouse, {autoAlpha:0, duration:1}, '-=5')
+
     this.triggers = [];
 
     this.triggers[0] = ScrollTrigger.create({
@@ -896,7 +917,7 @@ class AboutPreviewBlock {
 
     this.triggers[1] = ScrollTrigger.create({
       trigger: this.$ftext,
-      start: "center center+=10",
+      start: "center center",
       end: ()=>{
         let start = this.triggers[0].start,
             end = this.triggers[0].end,
@@ -913,6 +934,7 @@ class AboutPreviewBlock {
     });
 
   }
+
   destroy() {
     this.triggers.forEach($trigger => {
       $trigger.kill();

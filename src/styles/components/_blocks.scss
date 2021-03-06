@@ -1100,6 +1100,13 @@
     position: relative;
   }
 
+  .mouse-icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% + 50px);
+  }
+
   @include media-breakpoint-down(xxl) {
     &__container {
       height: 355px;
@@ -1158,7 +1165,7 @@
       background: var(--color-light);
     }
     &_1 {
-      top: 190px;
+      top: 180px;
       span {
         width: 430px;
       }
@@ -1204,7 +1211,7 @@
   &__image {
     position: relative;
     margin: 0 auto;
-    width: 32vw;
+    width: 30vw;
     &::before {
       content: '';
       display: block;
