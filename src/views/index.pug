@@ -9,18 +9,32 @@ block content
   section.section.homepage.screen
     .homepage-scene(data-parallax='0.2' data-parallax-top)
       .homepage-scene__container
-        img(src="./img/homescreen/bg.png", alt="bg").homepage-scene__bg
+        .homepage-scene__bg.image.image_cover
+          img(data-src="./img/homescreen/bg.png", alt="bg").lazyload
+        .homepage-scene__light.image.image_cover
+          img(data-src="./img/homescreen/bg-light.jpg", alt="bg").lazyload
         .homepage-scene__layers 
-          img(src="./img/homescreen/1.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/2.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/3.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/4.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/5.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/6.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/7.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/8.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/9.png", alt="bg").homepage-scene__layer
-          img(src="./img/homescreen/10.png", alt="bg").homepage-scene__layer
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/1.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/2.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/3.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/4.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/5.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/6.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/7.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/8.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/9.png", alt="bg").lazyload
+          .homepage-scene__layer.image.image_cover
+            img(data-src="./img/homescreen/10.png", alt="bg").lazyload
+
         .homepage-scene__triggers
           .homepage-scene__trigger 1
           .homepage-scene__trigger 2

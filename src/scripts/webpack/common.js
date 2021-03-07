@@ -19,9 +19,9 @@ const desktop_gap = 24;
 const mobile_gap = 16;
 
 import 'lazysizes';
+lazySizes.cfg.loadHidden = false;
 lazySizes.cfg.init = false;
-lazySizes.cfg.expand = 100;
-lazySizes.cfg.preloadAfterLoad = true;
+//lazySizes.cfg.preloadAfterLoad = true;
 
 import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -458,21 +458,30 @@ class LightsScene {
   }
 
   init() {
-    this.$layers = this.$parent.querySelectorAll('.homepage-scene__layer');
-    
+
     //mobile
     if(mobile()) {
+      this.$light = this.$parent.querySelector('.homepage-scene__light');
+      this.$light.style.display = 'block';
+      let animation = gsap.timeline({paused:true})
+        .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1})
       setTimeout(() => {
-        this.$layers.forEach(($this)=>{
-          gsap.to($this, {autoAlpha:1, duration:1.25})
-        })
+        animation.play();
       }, 500);
     } 
+
     //desktop
     else {
+      this.$layers_container = this.$parent.querySelector('.homepage-scene__layers');
+      this.$triggers_container = this.$parent.querySelector('.homepage-scene__triggers');
       this.$container = this.$parent.querySelector('.homepage-scene__container');
+      this.$layers = this.$parent.querySelectorAll('.homepage-scene__layer');
       this.$triggers = this.$parent.querySelectorAll('.homepage-scene__trigger');
       this.states = [];
+
+      this.$layers_container.style.display = 'block';
+      this.$triggers_container.style.display = 'block';
+
       //create animations
       this.animations = {};
       this.$layers.forEach(($this, index)=>{
@@ -534,15 +543,14 @@ class LightsScene {
       window.addEventListener('mousemove', this.mousemoveEvent);
       document.addEventListener('mouseleave', this.mousemoveEvent);
     }
+
   }
 
   destroy() {
-    window.removeEventListener('resize', this.resizeEvent);
-    window.removeEventListener('mousemove', this.mousemoveEvent);
-    document.removeEventListener('mouseleave', this.mousemoveEvent);
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    if(this.resizeEvent) window.removeEventListener('resize', this.resizeEvent);
+    if(this.mousemoveEvent) window.removeEventListener('mousemove', this.mousemoveEvent);
+    if(this.mousemoveEvent) document.removeEventListener('mouseleave', this.mousemoveEvent);
+    for(let child in this) delete this[child];
   }
 }
 
