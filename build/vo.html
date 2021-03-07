@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
+    <!--base(href="https://articadev1.github.io/Dexsa/build")-->
     <meta charset="utf-8">
     <title>Dexsa — Взрывозащищенное освещение</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,15 +57,38 @@
       <header class="header" data-scroll-lock-fill-gap>
         <div class="header__bg"></div>
         <div class="container">
-          <div class="header__container"><a class="logo header__logo" href="index.html"><img class="logo__image" src="./img/logos/logo.png" alt="logo"></a>
+          <div class="header__container"><a class="logo header__logo" href="/"><img class="logo__image" src="./img/logos/logo.png" alt="logo"></a>
             <nav class="header-nav">
               <ul class="header-nav__list">
-                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="about">О компании </a></li>
-                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="production">Производство</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="catalogue.html" data-name="catalogue">Продукция</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="certificates">Сертификаты и аккредитации</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="references">Референс лист</a></li>
-                <li class="header-nav__item"> <a class="header-nav__link btn-link" href="/" data-name="contacts">Контакты</a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="#"> <span>О компании </span></a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="#"><span>Производство</span></a></li>
+                <li class="header-nav__item">
+                  <div class="header-nav__link-toggle" data-toggle-trigger><a class="header-nav__link" href="/catalogue.html"><span>Продукция</span>
+                      <svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.0205 20.276L0.0205078 20.276L0.0205096 0.275955C0.0205096 0.275955 -0.342781 8.03841 5.74934 14.3194C11.8415 20.6004 20.0205 20.276 20.0205 20.276Z" fill="currentColor"></path>
+                      </svg></a></div>
+                  <div class="header-nav__toggle-content" data-toggle-content>
+                    <ul class="header-nav__toggle-content-list">
+                      <li> <span>Освещение</span></li>
+                      <li>
+                        <ul class="header-nav__toggle-content-list">
+                          <li> <a class="header-nav__toggle-content-link" href="#">Общепромыщленное</a></li>
+                          <li> <a class="header-nav__toggle-content-link" href="/vo.html">Взрывозащищённое</a></li>
+                          <li> <a class="header-nav__toggle-content-link" href="#">Прожекторное</a></li>
+                          <li> <a class="header-nav__toggle-content-link" href="#">Заградительные огни </a></li>
+                        </ul>
+                      </li>
+                      <li> <a class="header-nav__toggle-content-link" href="#">Коммутационное оборудование</a></li>
+                      <li><a class="header-nav__toggle-content-link" href="#">Системы управления и мониторинга освещения</a></li>
+                      <li><a class="header-nav__toggle-content-link" href="#">Коммутационное оборудование</a></li>
+                      <li><a class="header-nav__toggle-content-link" href="#">Электрообогрев</a></li>
+                      <li><a class="header-nav__toggle-content-link" href="#">Щитовое оборудование</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="#"><span>Сертификаты и аккредитации</span></a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="#"><span>Референс лист</span></a></li>
+                <li class="header-nav__item"> <a class="header-nav__link" href="#"> <span>Контакты</span></a></li>
               </ul>
             </nav>
             <button class="nav-toggle"><span></span></button>
@@ -75,12 +99,29 @@
           <div class="nav__container" data-scroll-lock-scrollable>
             <div class="nav__block">
               <ul class="nav__list">
-                <li class="nav__item"><a class="nav__link h3 btn-link" href="/" data-name="about">О компании</a></li>
-                <li class="nav__item"><a class="nav__link h3 btn-link" href="/" data-name="production">Производство</a></li>
-                <li class="nav__item"><a class="nav__link h3 btn-link" href="catalogue.html" data-name="catalogue">Продукция</a></li>
-                <li class="nav__item"><a class="nav__link h3 btn-link" href="/" data-name="certificates">Сертификаты и аккредитации</a></li>
-                <li class="nav__item"><a class="nav__link h3 btn-link" href="/" data-name="references">Референс лист</a></li>
-                <li class="nav__item"><a class="nav__link h3 btn-link" href="/" data-name="contacts">Контакты</a></li>
+                <li class="nav__item"><a class="nav__link h3 btn-link" href="#">О компании</a></li>
+                <li class="nav__item"><a class="nav__link h3 btn-link" href="#">Производство</a></li>
+                <li class="nav__item"><a class="nav__link h3 btn-link" href="/catalogue.html">Продукция</a>
+                  <ul class="nav__sub-items">
+                    <li class="nav__sub-item">Освещение</li>
+                    <li class="nav__sub-item">
+                      <ul class="nav__sub-items">
+                        <li class="nav__sub-item"> <a class="nav__sub-link btn-link" href="#">Общепромыщленное</a></li>
+                        <li class="nav__sub-item"> <a class="nav__sub-link btn-link" href="/vo.html">Взрывозащищённое</a></li>
+                        <li class="nav__sub-item"> <a class="nav__sub-link btn-link" href="#">Прожекторное</a></li>
+                        <li class="nav__sub-item"> <a class="nav__sub-link btn-link" href="#">Заградительные огни </a></li>
+                      </ul>
+                    </li>
+                    <li class="nav__sub-item"> <a class="nav__sub-link btn-link" href="#">Коммутационное оборудование</a></li>
+                    <li class="nav__sub-item"><a class="nav__sub-link btn-link" href="#">Системы управления и мониторинга освещения</a></li>
+                    <li class="nav__sub-item"><a class="nav__sub-link btn-link" href="#">Коммутационное оборудование</a></li>
+                    <li class="nav__sub-item"><a class="nav__sub-link btn-link" href="#">Электрообогрев</a></li>
+                    <li class="nav__sub-item"><a class="nav__sub-link btn-link" href="#">Щитовое оборудование</a></li>
+                  </ul>
+                </li>
+                <li class="nav__item"><a class="nav__link h3 btn-link" href="#">Сертификаты и аккредитации</a></li>
+                <li class="nav__item"><a class="nav__link h3 btn-link" href="#">Референс лист</a></li>
+                <li class="nav__item"><a class="nav__link h3 btn-link" href="#">Контакты</a></li>
               </ul>
               <div class="dev-label"><span>Разработка сайта — </span><a href="https://artica.art/" rel="noopener" target="_blank">artica.art
                   <svg viewBox="0 0 74 15" fill="currentColor">
@@ -96,7 +137,7 @@
         </nav>
       </header>
       <div class="content">
-        <main class="main" data-barba="container" data-barba-namespace="product" data-name="vo">
+        <main class="main" data-barba="container" data-barba-namespace="product">
           <section class="section product-head product-head_type-1 screen stp">
             <div class="container lights-content">
               <div class="bg-light bg-light_size-1 bg-light_color-1"></div>
@@ -668,7 +709,7 @@
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Страницы:</span>
-          <div class="helper__section-content"><a class="helper__section-button" href="index.html">Главная</a><a class="helper__section-button" href="vo.html">Взрывозащищенное освещение</a><a class="helper__section-button" href="catalogue.html">Продукция</a></div>
+          <div class="helper__section-content"><a class="helper__section-button" href="/">Главная</a><a class="helper__section-button" href="/vo.html">Взрывозащищенное освещение</a><a class="helper__section-button" href="/catalogue.html">Продукция</a></div>
         </div>
       </div>
     </div>

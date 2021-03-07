@@ -214,16 +214,14 @@
 }
 
 .btn-link {
-  transition: border-color $trs1, opacity $trs1;
+  transition: border-color $trs1, opacity $trs1, color $trs1;
   border-bottom: 1px solid transparent;
-  &[data-touch], &[data-hover], &.active {
+  &[data-touch], &[data-hover], &.is-active-page {
     border-color: currentColor;
+    color: #fff;
   }
   &[data-focus] {
     opacity: 0.8;
     border-color: transparent;
-  }
-  &.active {
-    pointer-events: none;
   }
 }

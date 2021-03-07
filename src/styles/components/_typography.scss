@@ -40,6 +40,9 @@ strong, b {
 a {
   text-decoration: none;
   color: inherit;
+  &.is-active-page {
+    pointer-events: none;
+  }
   &:not([class]), &.link {
     transition: opacity $trs1, border-color $trs1, color $trs1;
     border-bottom: 1px solid currentColor;
@@ -96,12 +99,12 @@ ul:not([class]) {
 }
 
 h1, .h1 {
-  font-size: 3.25rem;
+  font-size: 2.5rem;
   line-height: 1.25;
   margin-bottom: 3.875rem;
 }
 h2, .h2 {
-  font-size: 2.875rem;
+  font-size: 2.375rem;
   line-height: 1.25;
   margin-bottom: 3.875rem;
 }
@@ -145,6 +148,7 @@ h6, .h6 {
   }
   h4, .h4 {
     font-size: 1.25rem;
+    margin-bottom: 0.875rem;
   }
   h5, .h5 {
     font-size: 1.125rem;
@@ -183,6 +187,7 @@ h6, .h6 {
   }
   h4, .h4 {
     font-size: 1rem;
+    margin-bottom: 0.75rem;
   }
   h5, .h5 {
     font-size: 0.875rem;

@@ -4,6 +4,9 @@
   min-height: 100vh;
   overflow: hidden;
   background-color: var(--color-main-bg);
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 .content {

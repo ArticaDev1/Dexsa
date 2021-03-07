@@ -1,4 +1,4 @@
-window.dev = false;
+window.dev = true;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -68,6 +68,15 @@ function mobile() {
     return false;
   }
 }
+//url clean
+function cleanUp(url) {
+  var url = $.trim(url);
+  if(url.search(/^https?\:\/\//) != -1)
+      url = url.match(/^https?\:\/\/([^?#]+)(?:[?#]|$)/i, "");
+  else
+      url = url.match(/^([^?#]+)(?:[?#]|$)/i, "");
+  return url[1];
+}
 
 window.onload = function(){
   App.init(); 
@@ -91,16 +100,16 @@ const App = {
     Validation.init();
     Modal.init();
     inputs();
+    toggle();
     windowSize.init();
 
     if(!mobile()) {
       Parallax.init();
       setInterval(() => {
-        //ScrollTrigger.refresh();
-      }, 500);
+        ScrollTrigger.refresh();
+      }, 2000);
     }
     
-
     if(mobile()) {
       $body.style.cssText = 'position:initial;height:initial;width:initial;overflow:auto;';
       disablePageScroll();
@@ -109,6 +118,8 @@ const App = {
     }
     
     window.addEventListener('enterstart', ()=>{
+      ActiveLinks.check();
+      $wrapper.classList.remove('disabled');
       if(mobile()) {
         enablePageScroll();
       }
@@ -143,6 +154,8 @@ const App = {
     })
 
     window.addEventListener('exitstart', ()=>{
+      ActiveLinks.reset();
+      $wrapper.classList.add('disabled');
       Scroll.scrollTop(Math.max(Scroll.y-window.innerHeight/2, 0), Speed);
       if(Scroll.scrollbar) Scroll.scrollbar.track.yAxis.element.classList.add('hidden');
       if(mobile()) {
@@ -154,7 +167,6 @@ const App = {
       Scroll.scrollTop(0, 0);
       this.afunctions.destroy();
     })
-
 
     Preloader.finish(()=>{
       Transitions.enter(this.$container, this.namespace);
@@ -196,6 +208,27 @@ const Transitions = {
       barba.done();
     })
 
+  }
+}
+
+const ActiveLinks = {
+  check: ()=> {
+    let value = cleanUp(location.pathname),
+        $links = document.querySelectorAll('a');
+    $links.forEach($this=>{
+      let href = $this.getAttribute('href');
+      if(href==value) {
+        $this.classList.add('is-active-page');
+      } else {
+        $this.classList.remove('is-active-page');
+      }
+    })
+  },
+  reset: ()=> {
+    let $links = document.querySelectorAll('a');
+    $links.forEach($this=>{
+      $this.classList.remove('is-active-page');
+    })
   }
 }
 
@@ -558,6 +591,7 @@ const Nav = {
     this.$container = document.querySelector('.nav__container');
     this.$block = document.querySelector('.nav__block');
     this.$toggle = document.querySelector('.nav-toggle');
+    this.$navitems = document.querySelectorAll('.nav__item, .nav__sub-item');
     this.state = false;
     this.opened = false;
     
@@ -588,9 +622,10 @@ const Nav = {
         }
       })
         .fromTo(this.$nav, {autoAlpha:0}, {autoAlpha:1, duration:0.1})
-        .fromTo(this.$toggle, {x:0}, {x:-this.bw-this.pd, duration:0.4}, `-=${0.1}`)
-        .fromTo(this.$container, {xPercent:100}, {xPercent:0, duration:0.5}, `-=${0.4}`)
-        .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1, duration:0.5}, `-=${0.5}`)
+        .fromTo(this.$toggle, {x:0}, {x:-this.bw-this.pd, duration:0.4}, `-=0.1`)
+        .fromTo(this.$container, {xPercent:100}, {xPercent:0, duration:0.5}, `-=0.4`)
+        .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1, duration:0.5}, `-=0.5`)
+        .fromTo(this.$navitems, {autoAlpha:0, y:30}, {autoAlpha:1, y:0, duration:0.45, stagger:{amount:0.05}}, `-=0.5`)
 
       if(this.state) {
         this.animation.seek(this.animation.totalDuration());
@@ -612,23 +647,13 @@ const Nav = {
         damping: 1
       })
     }
-
+    
+    //this.open()
 
     window.addEventListener('resize', this.resize);
 
     window.addEventListener('exitstart', (event)=>{
       if(this.state) this.close();
-    })
-
-    //change
-    window.addEventListener('exitstart', ()=>{
-      if(this.$active_links) {
-        this.$active_links.forEach( $link => { $link.classList.remove('active') });
-      }
-    })
-    window.addEventListener('enterstart', ()=>{
-      this.$active_links = document.querySelectorAll(`[data-name='${App.name}']`);
-      this.$active_links.forEach($link => { $link.classList.add('active') });
     })
   },
   open: function() {
@@ -673,6 +698,27 @@ function inputs() {
 
   document.addEventListener('focus',  (event)=>{events(event)}, true);
   document.addEventListener('blur',   (event)=>{events(event)}, true);
+}
+
+function toggle() {
+  let $targets;
+
+  let events = (event)=> {
+    let $target = event.target!==document?event.target.closest('[data-toggle-trigger], [data-toggle-content]'):null;
+
+    if(event.type=='mouseenter' && $target==event.target && !$targets) {
+      $targets = $target.parentNode.querySelectorAll('[data-toggle-trigger], [data-toggle-content]');
+      $targets.forEach($this=>{$this.classList.add('is-active')});
+      console.log('1')
+    } else if(event.type=='mouseleave' && $target==event.target) {
+      $targets.forEach($this=>{$this.classList.remove('is-active')});
+      $targets = false;
+      console.log('2')
+    }
+  }
+
+  document.addEventListener('mouseenter', (event)=>{events(event)}, true);
+  document.addEventListener('mouseleave', (event)=>{events(event)}, true);
 }
 
 class AdvantagesLights {
@@ -899,7 +945,7 @@ class AboutPreviewBlock {
      
       .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1}, '-=1')
 
-      .to(this.$mouse, {autoAlpha:0, duration:1}, '-=5')
+      .to(this.$mouse, {autoAlpha:0, duration:1}, '-=4')
 
     this.triggers = [];
 
@@ -1448,8 +1494,8 @@ class ItemSlider {
       pagination: true,
       waitForTransition: false,
       speed: this.speed*1000,
-      autoplay: true,
-      interval: autoslide_interval*1000,
+      //autoplay: true,
+      //interval: autoslide_interval*1000,
       breakpoints: {
         576: {
           gap: mobile_gap

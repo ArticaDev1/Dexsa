@@ -7,17 +7,54 @@ header.header(data-scroll-lock-fill-gap)
       nav.header-nav 
         ul.header-nav__list 
           li.header-nav__item   
-            a(href=about data-name=about_name).header-nav__link.btn-link О компании 
+            a(href=about).header-nav__link 
+              span О компании 
           li.header-nav__item   
-            a(href=production data-name=production_name).header-nav__link.btn-link Производство
+            a(href=production).header-nav__link
+              span Производство
+          li.header-nav__item
+            div(data-toggle-trigger).header-nav__link-toggle
+              a(href=catalogue).header-nav__link
+                span Продукция
+                svg(viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg')
+                  path(d='M20.0205 20.276L0.0205078 20.276L0.0205096 0.275955C0.0205096 0.275955 -0.342781 8.03841 5.74934 14.3194C11.8415 20.6004 20.0205 20.276 20.0205 20.276Z' fill='currentColor')
+            
+            .header-nav__toggle-content(data-toggle-content)
+              ul.header-nav__toggle-content-list
+                li 
+                  span Освещение
+                li 
+                  ul.header-nav__toggle-content-list 
+                    li 
+                      a(href="#").header-nav__toggle-content-link Общепромыщленное
+                    li 
+                      a(href=vo).header-nav__toggle-content-link Взрывозащищённое
+                    li 
+                      a(href="#").header-nav__toggle-content-link Прожекторное
+                    li  
+                      a(href="#").header-nav__toggle-content-link Заградительные огни    
+                li 
+                  a(href="#").header-nav__toggle-content-link Коммутационное оборудование
+                li
+                  a(href="#").header-nav__toggle-content-link Системы управления и мониторинга освещения
+                li
+                  a(href="#").header-nav__toggle-content-link Коммутационное оборудование
+                li
+                  a(href="#").header-nav__toggle-content-link Электрообогрев
+                li
+                  a(href="#").header-nav__toggle-content-link Щитовое оборудование
+
+
+
           li.header-nav__item   
-            a(href=catalogue data-name=catalogue_name).header-nav__link.btn-link Продукция
+            a(href=certificates data-name=certificates_name).header-nav__link
+              span Сертификаты и аккредитации
           li.header-nav__item   
-            a(href=certificates data-name=certificates_name).header-nav__link.btn-link Сертификаты и аккредитации
+            a(href=references data-name=references_name).header-nav__link
+              span Референс лист
           li.header-nav__item   
-            a(href=references data-name=references_name).header-nav__link.btn-link Референс лист
-          li.header-nav__item   
-            a(href=contacts data-name=contacts_name).header-nav__link.btn-link Контакты
+            a(href=contacts data-name=contacts_name).header-nav__link 
+              span Контакты
       button.nav-toggle
         span
 

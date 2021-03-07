@@ -4,17 +4,39 @@ nav.nav
     .nav__block
       ul.nav__list
         li.nav__item
-          a(href=about data-name=about_name).nav__link.h3.btn-link О компании
+          a(href=about).nav__link.h3.btn-link О компании
         li.nav__item
-          a(href=production data-name=production_name).nav__link.h3.btn-link Производство
+          a(href=production).nav__link.h3.btn-link Производство
         li.nav__item
-          a(href=catalogue data-name=catalogue_name).nav__link.h3.btn-link Продукция
+          a(href=catalogue).nav__link.h3.btn-link Продукция
+          ul.nav__sub-items
+            li.nav__sub-item Освещение
+            li.nav__sub-item 
+              ul.nav__sub-items
+                li.nav__sub-item 
+                  a(href="#").nav__sub-link.btn-link Общепромыщленное
+                li.nav__sub-item 
+                  a(href=vo).nav__sub-link.btn-link Взрывозащищённое
+                li.nav__sub-item 
+                  a(href="#").nav__sub-link.btn-link Прожекторное
+                li.nav__sub-item  
+                  a(href="#").nav__sub-link.btn-link Заградительные огни    
+            li.nav__sub-item 
+              a(href="#").nav__sub-link.btn-link Коммутационное оборудование
+            li.nav__sub-item
+              a(href="#").nav__sub-link.btn-link Системы управления и мониторинга освещения
+            li.nav__sub-item
+              a(href="#").nav__sub-link.btn-link Коммутационное оборудование
+            li.nav__sub-item
+              a(href="#").nav__sub-link.btn-link Электрообогрев
+            li.nav__sub-item
+              a(href="#").nav__sub-link.btn-link Щитовое оборудование
         li.nav__item
-          a(href=certificates data-name=certificates_name).nav__link.h3.btn-link Сертификаты и аккредитации
+          a(href=certificates).nav__link.h3.btn-link Сертификаты и аккредитации
         li.nav__item
-          a(href=references data-name=references_name).nav__link.h3.btn-link Референс лист
+          a(href=references).nav__link.h3.btn-link Референс лист
         li.nav__item
-          a(href=contacts data-name=contacts_name).nav__link.h3.btn-link Контакты
+          a(href=contacts).nav__link.h3.btn-link Контакты
             
       .dev-label
         span Разработка сайта – 

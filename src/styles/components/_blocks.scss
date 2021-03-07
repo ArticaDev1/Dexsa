@@ -156,12 +156,10 @@
     padding-bottom: 65px;
   }
   &__label {
-    margin: 0 0 70px 0;
+    margin: 0 0 50px 0;
   }
   &__title {
     margin: 0;
-  }
-  &__request {
   }
   @include media-breakpoint-up(xl) {
     &__request {
@@ -390,19 +388,13 @@
   @include media-breakpoint-down(lg) {
     border-radius: 0;
     &__container {
-      padding-top: 30px;
-      padding-bottom: 30px;
+      padding: 30px 65px;
     }
     &__images {
-      margin-left: 60px;
-      margin-bottom: 75px;
+      margin-bottom: 74px;
     }
     &__element {
-      margin-right: 60px;
-      margin-bottom: 75px;
-    }
-    &__buttons {
-      padding-left: 250px;
+      margin-bottom: 74px;
     }
     &__next {
       right: 6px;
@@ -411,31 +403,25 @@
       left: 6px;
     }
     .splide__pagination {
-      bottom: -69px;
+      bottom: -70px;
     }
   }
   @include media-breakpoint-down(md) {
-    &__images {
-      margin-left: 0;
-    }
-    &__element {
-      margin-right: 0;
-    }
-    &__buttons {
-      padding-left: 190px;
-    }
     &__arrow {
       display: none;
+    }
+    &__container {
+      padding: 30px $container-padding-x;
     }
   }
   @include media-breakpoint-down(sm) {
     &__container {
-      padding-top: 16px;
-      padding-bottom: 24px;
+      padding: 16px $mobile-container-padding-x 24px $mobile-container-padding-x;
     }
     &__images {
-      margin-right: 20px;
+      margin-right: $mobile-container-padding-x;
       flex: 0 0 94px;
+      margin-bottom: 104px;
     }
     &__buttons {
       padding-left: 0;
@@ -446,14 +432,12 @@
       bottom: 24px;
     }
     &__image {
-      img {
-        transform: translateY(-20px);
-      }
+      
     }
     .splide__pagination {
       bottom: 3px;
       width: 94px;
-      left: -20px;
+      left: -$mobile-container-padding-x;
     }
   }
 }
