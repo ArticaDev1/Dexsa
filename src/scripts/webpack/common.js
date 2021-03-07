@@ -1461,6 +1461,7 @@ class ItemSlider {
   } 
   init() {
     this.$slider = this.$parent.querySelector('.items-slider__element');
+    this.$images_container = this.$parent.querySelector('.items-slider__images');
     this.$images = this.$parent.querySelectorAll('.items-slider__image');
     this.$prev = this.$parent.querySelector('.items-slider__prev');
     this.$next = this.$parent.querySelector('.items-slider__next');
@@ -1513,6 +1514,13 @@ class ItemSlider {
         this.animationsEnter[newIndex].play(0);
         this.index = newIndex;
       }
+    });
+
+    this.swipes = SwipeListener(this.$images_container);
+    this.$images_container.addEventListener('swipe', (event)=> {
+      let dir = event.detail.directions;
+      if(dir.left) this.slider.go('>');
+      else if(dir.right) this.slider.go('<');
     });
 
     this.$prev.addEventListener('click', ()=>{

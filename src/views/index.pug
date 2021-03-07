@@ -34,9 +34,10 @@ block content
           .homepage-scene__trigger 10
 
     .homepage__container
-      .homepage__top.container 
+      .homepage__top.stp.container 
         p.homepage__label Компания<br> Декса
-        h1.homepage__title Производитель энергоэффективного электротехнического оборудования для предприятий ТЭК
+        h1.homepage__title Производитель энергоэффективного электротехнического оборудования 
+          span.d-none.d-sm-inline для предприятий ТЭК
       .homepage__bottom.container
         .row
           .homepage__request.col-xl-4
@@ -44,9 +45,11 @@ block content
               p Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных
               a(href='#modal-form' data-modal='open').button.button_style-2 
                 span Оставить заявку
-                
+
           .offset-xl-1.col-xl-7
             .items-slider
+              svg.icon.d-sm-none.items-slider__sliding-icon
+                use(xlink:href='./img/icons/icons-sprite.svg#slide')
               .items-slider__container.container
                 //arrows
                 button(aria-label='prev slide').items-slider__arrow.items-slider__prev
@@ -103,7 +106,18 @@ block content
                   .d-lg-none
                     a(href=catalogue).button.button_style-3.items-slider__button 
                       span Посмотреть весь  каталог
-          
+
+
+  //
+  section.section.homepage-form.d-xl-none
+    .container 
+      .row
+        p.homepage-form__text.order-md-2.col-md-8.col-lg Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных         
+        .col-md-4.col-lg-auto
+          a(href='#modal-form' data-modal='open').button.button_style-2 
+            span Оставить заявку
+
+        
 
 
   section.section.advantages

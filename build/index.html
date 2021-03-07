@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <!--base(href="https://articadev1.github.io/Dexsa/build")-->
+    <base href="https://articadev1.github.io/Dexsa/build">
     <meta charset="utf-8">
     <title>Dexsa — Производитель электротехнических решений</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -157,9 +157,9 @@
               </div>
             </div>
             <div class="homepage__container">
-              <div class="homepage__top container">
+              <div class="homepage__top stp container">
                 <p class="homepage__label">Компания<br> Декса</p>
-                <h1 class="homepage__title">Производитель энергоэффективного электротехнического оборудования для предприятий ТЭК</h1>
+                <h1 class="homepage__title">Производитель энергоэффективного электротехнического оборудования <span class="d-none d-sm-inline">для предприятий ТЭК</span></h1>
               </div>
               <div class="homepage__bottom container">
                 <div class="row">
@@ -170,6 +170,9 @@
                   </div>
                   <div class="offset-xl-1 col-xl-7">
                     <div class="items-slider">
+                      <svg class="icon d-sm-none items-slider__sliding-icon">
+                        <use xlink:href="./img/icons/icons-sprite.svg#slide"></use>
+                      </svg>
                       <div class="items-slider__container container">
                         <!--arrows-->
                         <button class="items-slider__arrow items-slider__prev" aria-label="prev slide">
@@ -229,6 +232,15 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+          <!---->
+          <section class="section homepage-form d-xl-none">
+            <div class="container">
+              <div class="row">
+                <p class="homepage-form__text order-md-2 col-md-8 col-lg">Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных </p>
+                <div class="col-md-4 col-lg-auto"><a class="button button_style-2" href="#modal-form" data-modal="open"> <span>Оставить заявку</span></a></div>
               </div>
             </div>
           </section>
