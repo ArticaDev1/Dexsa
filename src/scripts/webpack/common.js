@@ -1,4 +1,4 @@
-window.dev = true;
+window.dev = false;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -19,9 +19,8 @@ const desktop_gap = 24;
 const mobile_gap = 16;
 
 import 'lazysizes';
-lazySizes.cfg.loadHidden = false;
+lazySizes.cfg.preloadAfterLoad = true;
 lazySizes.cfg.init = false;
-//lazySizes.cfg.preloadAfterLoad = true;
 
 import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -105,9 +104,6 @@ const App = {
 
     if(!mobile()) {
       Parallax.init();
-      setInterval(() => {
-        ScrollTrigger.refresh();
-      }, 2000);
     }
     
     if(mobile()) {
@@ -150,6 +146,7 @@ const App = {
     })
 
     window.addEventListener('enterfinish', ()=>{
+      ScrollTrigger.refresh();
       if(Scroll.scrollbar) Scroll.scrollbar.track.yAxis.element.classList.remove('hidden');
     })
 
@@ -762,46 +759,44 @@ class Card3d {
     this.$forward = this.$block.querySelector('.js-3d__forward');
 
     this.event = (event)=> {
-      if(event.type=='mousemove') {
-        if(this.backanimation) this.backanimation.pause();
-
-        let x = this.$block.getBoundingClientRect().x - event.clientX,
-            y = this.$block.getBoundingClientRect().y - event.clientY,
-            w = this.$block.getBoundingClientRect().width/2,
-            h = this.$block.getBoundingClientRect().height/2,
-            xValue = -(1+x/w),
-            yValue = 1+y/h,
-            //
-            xr = xValue*4,
-            yr = yValue*4,
-            xm = xValue*3,
-            ym = -yValue*3;
-
-        if(this.animation) this.animation.pause();
-        this.animation = gsap.timeline({defaults:{ease:'power2.out', duration:Speed/2}})
-          .to(this.$back, {rotationY:xr, rotationX:yr})
-          .to(this.$forward, {x:xm, y:ym}, `-=${Speed/2}`)
-      } 
-      else {
-        if(this.animation) this.animation.pause();
-        
-        this.backanimation = gsap.timeline({defaults:{ease:'power2.out', duration:Speed/2}})
-          .to(this.$back, {rotationY:0, rotationX:0})
-          .to(this.$forward, {x:0, y:0}, `-=${Speed/2}`)
-
+      if(!TouchHoverEvents.touched) {
+        if(event.type=='mousemove') {
+          if(this.backanimation) this.backanimation.pause();
+  
+          let x = this.$block.getBoundingClientRect().x - event.clientX,
+              y = this.$block.getBoundingClientRect().y - event.clientY,
+              w = this.$block.getBoundingClientRect().width/2,
+              h = this.$block.getBoundingClientRect().height/2,
+              xValue = -(1+x/w),
+              yValue = 1+y/h,
+              //
+              xr = xValue*4,
+              yr = yValue*4,
+              xm = xValue*3,
+              ym = -yValue*3;
+  
+          if(this.animation) this.animation.pause();
+          this.animation = gsap.timeline({defaults:{ease:'power2.out', duration:Speed/2}})
+            .to(this.$back, {rotationY:xr, rotationX:yr})
+            .to(this.$forward, {x:xm, y:ym}, `-=${Speed/2}`)
+        } 
+        else {
+          if(this.animation) this.animation.pause();
+          this.backanimation = gsap.timeline({defaults:{ease:'power2.out', duration:Speed/2}})
+            .to(this.$back, {rotationY:0, rotationX:0})
+            .to(this.$forward, {x:0, y:0}, `-=${Speed/2}`)
+        }
       }
     }
 
     this.$block.addEventListener('mousemove',  this.event);
     this.$block.addEventListener('mouseleave', this.event);
-
   }
+
   destroy() {
     this.$block.removeEventListener('mousemove',  this.event);
     this.$block.removeEventListener('mouseleave', this.event);
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    for(let child in this) delete this[child];
   }
 }
 
@@ -810,6 +805,25 @@ class AboutTextBlock {
     this.$parent = $parent;
   }
   init() {
+    this.check = ()=> {
+      if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        this.initDesktop();
+        this.flag = true;
+      } 
+      else if(window.innerWidth<brakepoints.lg && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.flag = false;
+      }
+    }
+
+    this.check();
+    window.addEventListener('resize', this.check);
+    this.initialized = true;
+  }
+
+  initDesktop() {
     this.$blocks = this.$parent.querySelectorAll('.about-text__block');
     this.$title = this.$parent.querySelectorAll('.about-text__title');
     this.$ligts = this.$parent.querySelectorAll('.about-text__light');
@@ -818,7 +832,7 @@ class AboutTextBlock {
         color2 = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
 
     this.animation = gsap.timeline({paused:true})
-      .to(this.$blocks, {css:{color:color2}, duration:0.8, ease:'power2.in'})
+      .fromTo(this.$blocks, {css:{color:color1}}, {css:{color:color2}, duration:0.8, ease:'power2.in'})
       .to(this.$blocks, {css:{color:color1}, duration:0.8, ease:'power2.out'}, '+=0.4') //2
       .fromTo(this.$ligts[0], {rotate:3}, {rotate:-3, duration:2, ease:'power1.inOut'}, '-=2') //2
       .fromTo(this.$ligts[1], {rotate:3}, {rotate:-3, duration:2, ease:'power3.inOut'}, '-=2') //2
@@ -835,11 +849,19 @@ class AboutTextBlock {
       }
     });
   }
-  destroy() {
+
+  destroyDesktop() {
+    this.animation.kill();
     this.trigger.kill();
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    gsap.set([this.$ligts, this.$blocks], {clearProps: "all"})
+  }
+
+  destroy() {
+    window.addEventListener('resize', this.check);
+    if(this.flag) {
+      this.destroyDesktop();
+    }
+    for(let child in this) delete this[child];
   }
 }
 
@@ -847,10 +869,33 @@ class DecorationLight {
   constructor($parent) {
     this.$parent = $parent;
   }
+
   init() {
+    this.check = ()=> {
+      if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        if(this.initialized) {
+          this.destroyMobile();
+        }
+        this.initDesktop();
+        this.flag = true;
+      } 
+      else if(window.innerWidth<brakepoints.lg && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.initMobile();
+        this.flag = false;
+      }
+    }
+    this.check();
+    window.addEventListener('resize', this.check);
+    this.initialized = true;
+  }
+
+  initDesktop() {
+    this.$container = this.$parent.querySelector('.decoration-light__container');
     this.$image = this.$parent.querySelector('.decoration-light__image');
     this.$images = this.$parent.querySelectorAll('.image');
-    this.$container = this.$parent.querySelector('.decoration-light__container ');
 
     let val = window.innerHeight/this.$container.getBoundingClientRect().height;
     this.animations = [];
@@ -869,10 +914,6 @@ class DecorationLight {
       trigger: this.$container,
       start: "top bottom",
       end: "bottom bottom",
-      /* end: ()=> {
-        let val = window.getComputedStyle(this.$parent).getPropertyValue("margin-bottom").replace(/\D/g, "");
-        return `bottom+=${val} bottom`;
-      }, */
       scrub: true,
       onUpdate: self => {
         this.animations[0].progress(self.progress);
@@ -887,11 +928,48 @@ class DecorationLight {
         this.animations[1].progress(self.progress);
       }
     });
-
-
   }
-  destroy() {
+
+  initMobile() {
+    this.$container = this.$parent.querySelector('.decoration-light__container');
+    this.$images = this.$parent.querySelectorAll('.image');
+
+    this.mobanimation = gsap.timeline({paused:true})
+      .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1})
+
+    this.mobtrigger = ScrollTrigger.create({
+      trigger: this.$container,
+      start: "center bottom",
+      end: "center top",
+      onEnter: () => {
+        if(this.mobanimation.totalProgress()==0) {
+          this.mobanimation.play();
+        }
+      },
+      onEnterBack: () => {
+        if(this.mobanimation.totalProgress()==0) {
+          this.mobanimation.play();
+        }
+      }
+    });
+  }
+
+  destroyDesktop() {
+    gsap.set([this.$image, this.$images], {clearProps: "all"})
+    for(let child in this.animations) this.animations[child].kill();
     for(let child in this.triggers) this.triggers[child].kill();
+  }
+
+  destroyMobile() {
+    gsap.set([this.$images], {clearProps: "all"})
+    this.mobanimation.kill();
+    this.mobtrigger.kill();
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.check);
+    if(this.flag) this.destroyDesktop();
+    else this.destroyMobile();
     for(let child in this) delete this[child];
   }
 }
@@ -902,12 +980,25 @@ class AboutPreviewBlock {
   }
 
   init() {
-    this.initDesktop();
+    this.check = ()=> {
+      if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        this.initDesktop();
+        this.flag = true;
+      } 
+      else if(window.innerWidth<brakepoints.lg && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.flag = false;
+      }
+    }
+    this.check();
+    window.addEventListener('resize', this.check);
+    this.initialized = true;
   }
 
   initDesktop() {
     let pinType = Scroll.scrollbar?'transform':'fixed';
-
     this.$container = this.$parent.querySelector('.about-preview__container');
     this.$blocks = this.$parent.querySelectorAll('.about-preview-block');
     this.$images = this.$parent.querySelectorAll('.about-preview-block__image');
@@ -918,12 +1009,10 @@ class AboutPreviewBlock {
     this.$ftext = this.$parent.querySelector('.section__head-txt');
     this.$mouse = this.$parent.querySelector('.mouse-icon');
 
-
     this.mousepos = ()=> {
       let h1 = this.$container.getBoundingClientRect().height,
           h2 = this.$mouse.getBoundingClientRect().height,
           val = (window.innerHeight-h1)/4 + h1 - h2/2;
-
 
       this.$mouse.style.top = `${val}px`;
 
@@ -989,13 +1078,19 @@ class AboutPreviewBlock {
 
   }
 
-  destroy() {
+  destroyDesktop() {
+    window.removeEventListener('resize', this.mousepos);
+    this.animation.kill();
     this.triggers.forEach($trigger => {
       $trigger.kill();
     })
-    setTimeout(() => {
-      for(let child in this) delete this[child];
-    }, 1000);
+    gsap.set([this.$text_item, this.$lines, this.$blocks, this.$light, this.$mouse], {clearProps: "all"})
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.check);
+    if(this.flag) this.destroyDesktop();
+    for(let child in this) delete this[child];
   }
 }
 
@@ -1003,15 +1098,32 @@ class ClientsBlock {
   constructor($parent) {
     this.$parent = $parent;
   }
+
   init() {
+    this.check = ()=> {
+      if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        this.initDesktop();
+        this.flag = true;
+      } 
+      else if(window.innerWidth<brakepoints.lg && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.flag = false;
+      }
+    }
+    this.check();
+    window.addEventListener('resize', this.check);
+    this.initialized = true;
+  }
+
+  initDesktop() {
     let pinType = Scroll.scrollbar?'transform':'fixed';
 
     this.$container = this.$parent.querySelector('.clients__container');
     this.$text = this.$parent.querySelector('.clients__text');
     this.$blocks = this.$parent.querySelectorAll('.clients-block');
     this.$ftext = this.$parent.querySelector('.section__head-txt');
-
-    this.animation = gsap.timeline({paused:true})
     
     this.triggers = [];
     this.triggers[0] = ScrollTrigger.create({
@@ -1043,26 +1155,26 @@ class ClientsBlock {
     });
 
     this.blocksTriggers = [];
+    this.blockAnimations = [];
     this.$blocks.forEach(($block, index)=>{
       let $image = $block.querySelector('.clients-block__image'),
           $value = $block.querySelector('.clients-block__value'),
           start_shadow = '0 0 4px transparent',
-          end_shadow = '0 0 4px #D9D9D9',
-          animation;
+          end_shadow = '0 0 4px #D9D9D9';
 
       if(index==0) {
-        animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+        this.blockAnimations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
           .to([$image, $value], {autoAlpha:0.1}, '+=1')
           .to($value, {css:{textShadow:start_shadow}}, '-=1')
       } 
       else if(index==this.$blocks.length-1) {
-        animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+        this.blockAnimations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
           .fromTo([$image, $value], {autoAlpha:0.1}, {autoAlpha:1})
           .fromTo($value, {css:{textShadow:start_shadow}}, {css:{textShadow:end_shadow}}, '-=1')
           .to([$image, $value], {autoAlpha:1})
       } 
       else {
-        animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+        this.blockAnimations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
           .fromTo([$image, $value], {autoAlpha:0.1}, {autoAlpha:1})
           .fromTo($value, {css:{textShadow:start_shadow}}, {css:{textShadow:end_shadow}}, '-=1')
           .to([$image, $value], {autoAlpha:0.1})
@@ -1082,16 +1194,24 @@ class ClientsBlock {
         },
         scrub: true,
         onUpdate: self => {
-          animation.progress(self.progress);
+          this.blockAnimations[index].progress(self.progress);
         }
       });
 
     })
   }
 
-  destroy() {
+  destroyDesktop() {
+    let $items = this.$parent.querySelectorAll('.clients-block__image, .clients-block__value');
+    gsap.set($items, {clearProps: "all"});
+    for(let child in this.blockAnimations) this.blockAnimations[child].kill();
     for(let child in this.triggers) this.triggers[child].kill();
     for(let child in this.blocksTriggers) this.blocksTriggers[child].kill();
+  }
+
+  destroy() {
+    if(this.flag) this.destroyDesktop();
+    window.removeEventListener('resize', this.check);
     for(let child in this) delete this[child];
   }
 }
@@ -1100,42 +1220,51 @@ class ContactsBlock {
   constructor($parent) {
     this.$parent = $parent;
   }
-  init() {
-    let pinType = Scroll.scrollbar?'transform':'fixed';
-    this.$head = this.$parent.querySelector('.section__head');
-    this.$ftext = this.$parent.querySelector('.section__head-txt');
 
-    this.checkVersion = () => {
+  init() {
+    this.check = ()=> {
       if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
-        this.trigger = ScrollTrigger.create({
-          trigger: this.$ftext,
-          start: "center center",
-          end: ()=>{
-            let val = this.$head.getBoundingClientRect().height - this.$ftext.getBoundingClientRect().height - 2;
-            return `+=${val}`;
-          },
-          pin: true,
-          pinType: pinType,
-          scrub: true
-        });
+        this.initDesktop();
+        console.log('int')
         this.flag = true;
       } 
-      else if(window.innerWidth < brakepoints.lg && (!this.initialized || this.flag)) {
+      else if(window.innerWidth<brakepoints.lg && (!this.initialized || this.flag)) {
         if(this.initialized) {
-          this.trigger.kill();
+          this.destroyDesktop();
         }
         this.flag = false;
       }
     }
-
-    this.checkVersion();
-    window.addEventListener('resize', this.checkVersion);
+    this.check();
+    window.addEventListener('resize', this.check);
     this.initialized = true;
   }
 
+  initDesktop() {
+    let pinType = Scroll.scrollbar?'transform':'fixed';
+    this.$head = this.$parent.querySelector('.section__head');
+    this.$ftext = this.$parent.querySelector('.section__head-txt');
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$ftext,
+      start: "center center",
+      end: ()=>{
+        let val = this.$head.getBoundingClientRect().height - this.$ftext.getBoundingClientRect().height - 2;
+        return `+=${val}`;
+      },
+      pin: true,
+      pinType: pinType,
+      scrub: true
+    });
+  }
+
+  destroyDesktop() {
+    this.trigger.kill();
+  }
+
   destroy() {
-    if(this.flag) this.trigger.kill();
-    window.removeEventListener('resize', this.checkVersion);
+    if(this.flag) this.destroyDesktop();
+    window.removeEventListener('resize', this.check);
     for(let child in this) delete this[child];
   }
 }

@@ -70,13 +70,24 @@
   }
   &__head {
     margin-bottom: 180px;
-    &-title {
-      margin-top: -0.15em !important;
-      display: block;
-    }
     &-txt {
       position: relative;
       z-index: 2;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    &__head {
+      align-items: flex-start;
+      &-title {
+        margin-top: -0.1em;
+      }
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    &__head {
+      &-title {
+        margin-top: -0.15em;
+      }
     }
   }
   @include media-breakpoint-down(xxl) {
@@ -87,8 +98,14 @@
   }
   @include media-breakpoint-down(lg) {
     &__head {
+      margin-bottom: 100px;
       &-txt {
-        margin-bottom: 40px !important;
+        &:first-child {
+          margin-bottom: 40px
+        }
+        &:last-child {
+          margin-top: 100px;
+        }
       }
     }
   }
@@ -96,7 +113,9 @@
     margin: 0 0 120px 0;
     &__head {
       &-txt {
-        margin-bottom: 30px !important;
+        &:first-child {
+          margin-bottom: 30px
+        }
       }
     }
   }
@@ -119,14 +138,14 @@
 
 .grid {
   display: flex;
-  .row {
+  &__row {
     margin-bottom: -34px;
   }
   &__item {
     margin-bottom: 34px;
   }
   @include media-breakpoint-down(sm) {
-    .row {
+    &__row {
       margin-bottom: -20px;
     }
     &__item {

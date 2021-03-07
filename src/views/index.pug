@@ -168,120 +168,126 @@ block content
       .bg-light.bg-light_size-1.bg-light_color-1
 
     .container 
-      .row.m-catalogue__container
-        //block
-        .m-catalogue-item.col-6
-          a(href="/").m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_1 Общепромышленное<br> освещение
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_1.js-3d__forward
-              img(data-src="./img/catalogue/1.png", alt="image").lazyload
-              img(data-src="./img/catalogue/1_2.png", alt="image").lazyload
-        //block
-        .m-catalogue-item.col-6
-          a(href=vo).m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_2 Взрывозащищённые<br> светильники
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_2.js-3d__forward
-              img(data-src="./img/catalogue/2.png", alt="image").lazyload
-              img(data-src="./img/catalogue/2_2.png", alt="image").lazyload
-        //block
-        .m-catalogue-item.col-6
-          a(href="/").m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_3 Прожекторное<br> светильники
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_3.js-3d__forward
-              img(data-src="./img/catalogue/3.png", alt="image").lazyload
-              img(data-src="./img/catalogue/3_2.png", alt="image").lazyload
-        //block
-        .m-catalogue-item.col-6
-          a(href="/").m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_4 Заградительные огни
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_4.js-3d__forward
-              img(data-src="./img/catalogue/4.png", alt="image").lazyload
-              img(data-src="./img/catalogue/4_2.png", alt="image").lazyload
-        //block
-        .m-catalogue-item.col-sm-6.col-md-5
-          a(href="/").m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_5 Коммутационное<br> оборудование
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_5.js-3d__forward
-              img(data-src="./img/catalogue/5.png", alt="image").lazyload
-        //block
-        .m-catalogue-item.col-sm-6.col-md-7
-          a(href="/").m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_6 Системы управления<br> и мониторинга<br> освещения
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_6.js-3d__forward
-              img(data-src="./img/catalogue/6.png", alt="image").lazyload
-        //block
-        .m-catalogue-item.col-12
-          a(href="/").m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_7 Электрообогрев
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_7.js-3d__forward
-              img(data-src="./img/catalogue/7.png", alt="image").lazyload
-        //block
-        .m-catalogue-item.col-12
-          a(href="/").m-catalogue-item__container.js-3d
-            .m-catalogue-item__back.js-3d__back
-              h5.m-catalogue-item__title.m-catalogue-item__title_8 Щитовое оборудование
-            .image.image_contain.m-catalogue-item__image.m-catalogue-item__image_8.js-3d__forward
-              img(data-src="./img/catalogue/8.png", alt="image").lazyload
+      .grid
+        .row.grid__row.m-catalogue__container
+          //block
+          .m-catalogue-item.grid__item.col-6.col-md-7
+            a(href='#').m-catalogue-item__container.js-3d
+              .image.m-catalogue-item__image.m-catalogue-item__image_1.js-3d__forward
+                img(data-src="./img/catalogue/1.png", alt="image").lazyload
+                img(data-src="./img/catalogue/1_2.png", alt="image").lazyload
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_1 Обще&shy;промышленное<br> освещение
+              
+          //block
+          .m-catalogue-item.grid__item.col-6.col-md-5
+            a(href=vo).m-catalogue-item__container.js-3d  
+              .image.m-catalogue-item__image.m-catalogue-item__image_2.js-3d__forward
+                img(data-src="./img/catalogue/2.png", alt="image").lazyload
+                img(data-src="./img/catalogue/2_2.png", alt="image").lazyload
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_2 Взрыво&shy;защищённые<br> светильники
+              
+          //block
+          .m-catalogue-item.grid__item.col-6
+            a(href="#").m-catalogue-item__container.js-3d
+              .image.m-catalogue-item__image.m-catalogue-item__image_3.js-3d__forward
+                img(data-src="./img/catalogue/3.png", alt="image").lazyload
+                img(data-src="./img/catalogue/3_2.png", alt="image").lazyload
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_3 Прожекторное<br> светильники
+              
+          //block
+          .m-catalogue-item.grid__item.col-6
+            a(href="#").m-catalogue-item__container.js-3d
+              .image.m-catalogue-item__image.m-catalogue-item__image_4.js-3d__forward
+                img(data-src="./img/catalogue/4.png", alt="image").lazyload
+                img(data-src="./img/catalogue/4_2.png", alt="image").lazyload
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_4 Заградительные огни
+              
+          //block
+          .m-catalogue-item.grid__item.col-md-5
+            a(href="#").m-catalogue-item__container.js-3d
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_5 Коммутационное<br> оборудование
+              .image.m-catalogue-item__image.m-catalogue-item__image_5.js-3d__forward
+                img(data-src="./img/catalogue/5.png", alt="image").lazyload
+          //block
+          .m-catalogue-item.grid__item.col-md-7
+            a(href="#").m-catalogue-item__container.js-3d
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_6 Системы управления<br> и мониторинга<br> освещения
+              .image.m-catalogue-item__image.m-catalogue-item__image_6.js-3d__forward
+                img(data-src="./img/catalogue/6.png", alt="image").lazyload
+          
+          //block
+          .m-catalogue-item.grid__item.col-12
+            a(href="#").m-catalogue-item__container.js-3d
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_7 Электрообогрев
+              .image.m-catalogue-item__image.m-catalogue-item__image_7.js-3d__forward
+                img(data-src="./img/catalogue/7.png", alt="image").lazyload
+          //block
+          .m-catalogue-item.grid__item.col-12
+            a(href="#").m-catalogue-item__container.js-3d
+              .m-catalogue-item__back.js-3d__back
+                h5.m-catalogue-item__title.m-catalogue-item__title_8 Щитовое оборудование
+              .image.m-catalogue-item__image.m-catalogue-item__image_8.js-3d__forward
+                img(data-src="./img/catalogue/8.png", alt="image").lazyload
 
   section.section.about-text
     .about-text__light.about-text__light_1
     .about-text__light.about-text__light_2
     .container.about-text__container 
       .row 
-        .about-text__block.offset-xl-1.col-xl-4
-          h2.h1.about-text__title 50 000
-          p.about-text__text осветительных констуркций в среднем на одном предприятии
-        .about-text__block.offset-xl-2.col-xl-4
-          h2.h1.about-text__title 2-5 млрд
-          p.about-text__text рублей в год расходуется наоснащение предприятия осветительными конструкциями идругим электротехническим оборудованием
+        .about-text__block.offset-1.offset-sm-2.offset-lg-1.col-lg-4.col-sm-8.col-10
+          .h1.about-text__title.about-text__title_1 50 000
+          p.about-text__text.about-text__text_1 осветительных констуркций в среднем на одном предприятии
+        .about-text__block.offset-1.offset-sm-2.offset-lg-1.col-lg-4.col-sm-8.col-10
+          .h1.about-text__title.about-text__title_2 2-5 млрд
+          p.about-text__text.about-text__text_2 рублей в год расходуется наоснащение предприятия осветительными конструкциями идругим электротехническим оборудованием
 
   section.section.about-preview
     .container.lights-content 
       .bg-light.bg-light_size-3.bg-light_color-1(data-parallax='-0.15')
 
     .container 
-      .section__head.row 
-        .offset-xl-2.col-xl-7
-          h3.section__head-title Компания DEXSA разработала взрывозащищенное осветительное оборудование с пожизненной гарантией и разборной конструкцией
-        .offset-xl-1.col-xl-2
-          p.section__head-txt Как минимизировать затраты в работе предприятия?
+      .section__head.about-preview__head.row 
+        .section__head-title.offset-xl-2.col-xl-7.col-lg-9
+          h3 Компания DEXSA разработала взрывозащищенное осветительное оборудование с пожизненной гарантией и разборной конструкцией
+        .section__head-txt.offset-6.offset-md-8.offset-lg-0.offset-xl-1.col-xl-2.col-lg-3.col-md-4.col-6
+          p Как минимизировать затраты в работе предприятия?
+      
       .about-preview__container
-
         .about-preview-block
           .row
-            span.about-preview-block__index.offset-xl-1.col-xl-1 01
-            .about-preview-block__image.col-xl-2
+            span.about-preview-block__index.offset-xl-1.col-md-1 01
+            .about-preview-block__image.col-xl-2.col-lg-3.col-md-4
               .image
                 img(src="./img/light1/1.png", alt="image")
-            .about-preview-block__text.about-preview-block__text_1.offset-xl-3.col-xl-3
+            .about-preview-block__text.about-preview-block__text_1.offset-md-2.offset-lg-1.offset-xl-3.col-md-5.col-lg-4.col-xl-3
               span
               p.h4 Замена элементов корпуса и комплекта уплотнителей
             
         .about-preview-block
           .row
-            span.about-preview-block__index.offset-xl-1.col-xl-1 02
-            .about-preview-block__image.col-xl-2
+            span.about-preview-block__index.offset-xl-1.col-md-1 02
+            .about-preview-block__image.col-xl-2.col-lg-3.col-md-4
               .image
                 img(src="./img/light1/2.png", alt="image")
-            .about-preview-block__text.about-preview-block__text_2.offset-xl-3.col-xl-3
+            .about-preview-block__text.about-preview-block__text_2.offset-md-2.offset-lg-1.offset-xl-3.col-md-5.col-lg-4.col-xl-3
               span
               p.h4 Замена источника тока
               
         .about-preview-block
           .row
-            span.about-preview-block__index.offset-xl-1.col-xl-1 03
-            .about-preview-block__image.col-xl-2
+            span.about-preview-block__index.offset-xl-1.col-md-1 03
+            .about-preview-block__image.col-xl-2.col-lg-3.col-md-4
               .image
                 img(src="./img/light1/3.png", alt="image")
                 img(src="./img/light1/4.png", alt="image").about-preview-block__light
-            .about-preview-block__text.about-preview-block__text_3.offset-xl-3.col-xl-3
+            .about-preview-block__text.about-preview-block__text_3.offset-md-2.offset-lg-1.offset-xl-3.col-md-5.col-lg-4.col-xl-3
               span
               p.h4 Замена светодиодного модуля  
 
@@ -294,23 +300,23 @@ block content
       .bg-light.bg-light_size-1.bg-light_color-1
 
     .container 
-      .section__head
-        .row 
-          .col-xl-2
-            p.section__head-txt Наши клиенты
-          .col-xl-8
-            h3.section__head-title Наше электротехническое оборудование установленно у крупнейших промышленных компаний России
+      .section__head.clients__head.row 
+        .section__head-txt.clients__head-txt.offset-1.offset-md-2.offset-lg-0.col-4.col-md-3.col-lg-2.col-xl-2
+          p Наши клиенты
+        .section__head-title.offset-lg-1.offset-xl-0.col-lg-9.col-xl-8
+          h3 Наше электротехническое оборудование установленно у крупнейших промышленных компаний России
+      
       .clients__container 
         .clients__text.row 
-          span.offset-xl-7.col-xl-auto единиц<br> оборудования<br> установлено:
+          span.offset-6.offset-xl-7.col-6.col-md-5.col-lg-auto единиц<br> оборудования<br> установлено:
 
         //block
         mixin block(href, val)
           .clients-block.row
-            .clients-block__image.offset-xl-2.col-xl-3
+            .clients-block__image.offset-1.offset-md-2.col-4.col-md-3
               .image.image_contain 
                 img(src=href, alt="image").lazyload
-            .clients-block__value.offset-xl-3.col-xl-2
+            .clients-block__value.offset-2.offset-xl-3.col-4.col-md-3.col-xl-2
               .clients-block__value-item.h3=val
         +block('./img/clients/1.png', '9 000')
         +block('./img/clients/2.png', '6 567')
