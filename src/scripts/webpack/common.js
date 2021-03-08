@@ -1,4 +1,4 @@
-window.dev = true;
+window.dev = false;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -126,6 +126,7 @@ const App = {
       }
 
       this.afunctions.add(LightsScene, '.homepage-scene');
+      this.afunctions.add(HomeScene, '.homepage');
       this.afunctions.add(ItemSlider, '.items-slider');
       this.afunctions.add(AdvantagesLights, '.advantages-block .icon');
       this.afunctions.add(Card3d, '.js-3d');
@@ -210,15 +211,12 @@ const Transitions = {
 
 const ActiveLinks = {
   check: ()=> {
-    let value1 = cleanUp(location.pathname),
-        value2 = '.'+cleanUp(location.pathname),
+    let value = cleanUp(location.pathname),
         $links = document.querySelectorAll('a');
-
-    console.log(value1, value2, location)
     
     $links.forEach($this=>{
       let href = $this.getAttribute('href');
-      if(href==value1 || href==value2) {
+      if(href==value) {
         $this.classList.add('is-active-page');
       } else {
         $this.classList.remove('is-active-page');
@@ -683,8 +681,8 @@ const Nav = {
 
 function inputs() {
   let events = (event)=> {
-    let $input = event.target;
-    if($input.closest('.input__element')) {
+    let $input = event.target!==document?event.target.closest('.input__element'):null;
+    if($input) {
       if(event.type=='focus') {
         $input.parentNode.classList.add('focused');
       } else {
@@ -714,13 +712,14 @@ function toggle() {
 
   let events = (event)=> {
     let $target = event.target!==document?event.target.closest('[data-toggle-trigger], [data-toggle-content]'):null;
-
-    if(event.type=='mouseenter' && $target==event.target && !$targets) {
-      $targets = $target.parentNode.querySelectorAll('[data-toggle-trigger], [data-toggle-content]');
-      $targets.forEach($this=>{$this.classList.add('is-active')});
-    } else if(event.type=='mouseleave' && $target==event.target) {
-      $targets.forEach($this=>{$this.classList.remove('is-active')});
-      $targets = false;
+    if(!TouchHoverEvents.touched) {
+      if(event.type=='mouseenter' && $target==event.target && !$targets) {
+        $targets = $target.parentNode.querySelectorAll('[data-toggle-trigger], [data-toggle-content]');
+        $targets.forEach($this=>{$this.classList.add('is-active')});
+      } else if(event.type=='mouseleave' && $target==event.target) {
+        $targets.forEach($this=>{$this.classList.remove('is-active')});
+        $targets = false;
+      }
     }
   }
 
@@ -1358,40 +1357,6 @@ class ContactsBlock {
   }
 }
 
-class ProductHead {
-  constructor($parent) {
-    this.$parent = $parent;
-  }
-
-  init() {
-    this.$images_wrapper = this.$parent.querySelector('.product-head__image-wrapper');
-    this.$images = this.$parent.querySelectorAll('.image');
-    this.$items = this.$parent.querySelectorAll('.product-head__item');
-
-    this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.85, stagger:{amount:Speed*0.15}})
-      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*0.85, ease:'power2.out', stagger:{amount:Speed*0.15}}, `-=${Speed}`)
-
-    if(this.$parent.classList.contains('product-head_type-1')) {
-      this.animation.add(
-        gsap.fromTo(this.$images_wrapper, {yPercent:15, xPercent:-20, scale:0.9}, {yPercent:0, xPercent:0, scale:1, ease:'power2.out'}),
-      `-=${Speed}`)
-    }
-
-    if(this.$images.length==2) {
-      this.animation.add(
-        gsap.fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1}),
-      `-=${Speed*0.5}`)
-    }
-
-    this.animation.play();
-  }
-
-  destroy() {
-    for(let child in this) delete this[child];
-  }
-}
-
 const Validation = {
   init: function () {
     this.namspaces = {
@@ -1952,30 +1917,6 @@ class FadeBlocks {
   }
 }
 
-class CategoryHead {
-  constructor($parent) {
-    this.$parent = $parent;
-  }
-
-  init() {
-    this.$items = this.$parent.querySelectorAll('.category-head__item');
-    this.$bg = this.$parent.querySelectorAll('.category-head__scene-content');
-
-    this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1})
-      .fromTo(this.$bg, {scale:1.3}, {scale:1, ease:'power2.out'}, `-=${Speed}`)
-      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.85, stagger:{amount:Speed*0.15}},  `-=${Speed}`)
-      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*0.85, ease:'power2.out', stagger:{amount:Speed*0.15}}, `-=${Speed}`)
-
-    this.animation.play();
-
-  }
-
-  destroy() {
-    for(let child in this) delete this[child];
-  }
-}
-
 class ImageSlider {
   constructor($parent) {
     this.$parent = $parent;
@@ -2002,6 +1943,88 @@ class ImageSlider {
 
   destroy() {
     this.slider.destroy();
+    for(let child in this) delete this[child];
+  }
+}
+
+//screens anim
+class HomeScene {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$items = this.$parent.querySelectorAll('.homepage__label, .homepage__title, .homepage__request p, .homepage__request .button');
+    this.$slider = this.$parent.querySelector('.items-slider');
+    this.$scene = this.$parent.querySelector('.homepage-scene__container');
+
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$scene, {scale:1.2}, {scale:1, duration:Speed*1.5, ease:'power2.out'})
+      .fromTo([this.$items, this.$slider], {autoAlpha:0}, {autoAlpha:1, duration:Speed*1.25, stagger:{amount:Speed*0.25}}, `-=${Speed*1.5}`)
+      .fromTo([this.$items, this.$slider], {y:40}, {y:0, duration:Speed*1.25, ease:'power2.out', stagger:{amount:Speed*0.25}}, `-=${Speed*1.5}`)
+    
+    this.animation.play();
+  }
+
+  destroy() {
+    this.animation.kill();
+    for(let child in this) delete this[child];
+  }
+}
+
+class ProductHead {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$images_wrapper = this.$parent.querySelector('.product-head__image-wrapper');
+    this.$images = this.$parent.querySelectorAll('.image');
+    this.$items = this.$parent.querySelectorAll('.product-head__item');
+
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*1.25, stagger:{amount:Speed*0.25}})
+      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*1.25, ease:'power2.out', stagger:{amount:Speed*0.25}}, `-=${Speed*1.5}`)
+
+    if(this.$parent.classList.contains('product-head_type-1')) {
+      this.animation.add(
+        gsap.fromTo(this.$images_wrapper, {yPercent:15, xPercent:-20, scale:0.9}, {yPercent:0, xPercent:0, scale:1, duration:Speed*1.5, ease:'power2.out'}),
+      `-=${Speed*1.5}`)
+    }
+
+    if(this.$images.length==2) {
+      this.animation.add(
+        gsap.fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1}),
+      `-=${Speed}`)
+    }
+      
+    this.animation.play();
+  }
+
+  destroy() {
+    for(let child in this) delete this[child];
+  }
+}
+
+class CategoryHead {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$items = this.$parent.querySelectorAll('.category-head__item');
+    this.$bg = this.$parent.querySelectorAll('.category-head__scene-content');
+
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$bg, {scale:1.2}, {scale:1, duration:Speed*1.5, ease:'power2.out'})
+      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*1.25, stagger:{amount:Speed*0.25}},  `-=${Speed*1.5}`)
+      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*1.25, ease:'power2.out', stagger:{amount:Speed*0.25}}, `-=${Speed*1.5}`)
+
+    this.animation.play();
+  }
+
+  destroy() {
+    this.animation.kill();
     for(let child in this) delete this[child];
   }
 }

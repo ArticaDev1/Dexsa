@@ -17,14 +17,12 @@ var Helper = {
         state;
 
     var set_active_page = function set_active_page() {
-      var value1 = cleanUp(location.pathname),
-          value2 = '.' + cleanUp(location.pathname);
-      var $links = $block.querySelectorAll('a');
-      console.log(value1, value2);
+      var value = cleanUp(location.pathname),
+          $links = $block.querySelectorAll('a');
       $links.forEach(function ($this) {
         var href = $this.getAttribute('href');
 
-        if (href == value1 || href == value2) {
+        if (href == value) {
           $this.classList.add('active');
         } else {
           $this.classList.remove('active');

@@ -7,8 +7,7 @@
   left: 0;
   opacity: 0;
   visibility: hidden;
-  background: var(--color-bg-transparent);
-  backdrop-filter: $blur1;
+  background: rgba(86, 86, 86, 0.7);
   .scroll-content {
     min-height: 100%;
     display: flex;
@@ -103,6 +102,13 @@
         height: 2px;
       }
     }
+  }
+}
+
+.backdropfilter {
+  .modal {
+    background: rgba(91, 91, 91, 0.2);
+    backdrop-filter: blur(15px);
   }
 }
 
