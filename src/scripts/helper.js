@@ -24,6 +24,8 @@ const Helper = {
           value2 = '.'+cleanUp(location.pathname);
   
       let $links = $block.querySelectorAll('a');
+
+      console.log(value1, value2)
   
       $links.forEach(($this)=>{
         let href = $this.getAttribute('href');

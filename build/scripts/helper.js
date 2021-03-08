@@ -20,6 +20,7 @@ var Helper = {
       var value1 = cleanUp(location.pathname),
           value2 = '.' + cleanUp(location.pathname);
       var $links = $block.querySelectorAll('a');
+      console.log(value1, value2);
       $links.forEach(function ($this) {
         var href = $this.getAttribute('href');
 
