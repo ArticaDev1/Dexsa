@@ -934,22 +934,16 @@ class DecorationLight {
     this.$container = this.$parent.querySelector('.decoration-light__container');
     this.$images = this.$parent.querySelectorAll('.image');
 
-    this.mobanimation = gsap.timeline({paused:true})
+    this.mob_animation = gsap.timeline({paused:true})
       .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1})
 
-    this.mobtrigger = ScrollTrigger.create({
+    this.mob_trigger = ScrollTrigger.create({
       trigger: this.$container,
       start: "center bottom",
-      end: "center top",
-      onEnter: () => {
-        if(this.mobanimation.totalProgress()==0) {
-          this.mobanimation.play();
-        }
-      },
-      onEnterBack: () => {
-        if(this.mobanimation.totalProgress()==0) {
-          this.mobanimation.play();
-        }
+      end: "center center",
+      scrub: true,
+      onUpdate: self => {
+        this.mob_animation.progress(self.progress);
       }
     });
   }
@@ -962,8 +956,8 @@ class DecorationLight {
 
   destroyMobile() {
     gsap.set([this.$images], {clearProps: "all"})
-    this.mobanimation.kill();
-    this.mobtrigger.kill();
+    this.mob_animation.kill();
+    this.mob_trigger.kill();
   }
 
   destroy() {
@@ -982,6 +976,9 @@ class AboutPreviewBlock {
   init() {
     this.check = ()=> {
       if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        if(this.initialized) {
+          this.destroyMobile();
+        }
         this.initDesktop();
         this.flag = true;
       } 
@@ -989,6 +986,7 @@ class AboutPreviewBlock {
         if(this.initialized) {
           this.destroyDesktop();
         }
+        this.initMobile()
         this.flag = false;
       }
     }
@@ -1076,6 +1074,29 @@ class AboutPreviewBlock {
       scrub: true
     });
 
+  }
+
+  initMobile() {
+    this.$light = this.$parent.querySelectorAll('.about-preview-block__light');
+
+    this.mob_animation = gsap.timeline({paused:true})
+      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1})
+
+    this.mob_trigger = ScrollTrigger.create({
+      trigger: this.$light,
+      start: "center bottom",
+      end: "center center",
+      scrub: true,
+      onUpdate: self => {
+        this.mob_animation.progress(self.progress);
+      }
+    });
+  }
+
+  destroyMobile() {
+    gsap.set(this.$light, {clearProps: "all"})
+    this.mob_animation.kill();
+    this.mob_trigger.kill();
   }
 
   destroyDesktop() {
