@@ -1,4 +1,4 @@
-window.dev = false;
+window.dev = true;
 
 const Speed = 1; //seconds
 const autoslide_interval = 5; //seconds
@@ -214,7 +214,7 @@ const ActiveLinks = {
         value2 = '.'+cleanUp(location.pathname),
         $links = document.querySelectorAll('a');
 
-    console.log(value1, value2)
+    console.log(value1, value2, location)
     
     $links.forEach($this=>{
       let href = $this.getAttribute('href');
