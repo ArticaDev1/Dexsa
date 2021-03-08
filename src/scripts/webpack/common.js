@@ -718,11 +718,9 @@ function toggle() {
     if(event.type=='mouseenter' && $target==event.target && !$targets) {
       $targets = $target.parentNode.querySelectorAll('[data-toggle-trigger], [data-toggle-content]');
       $targets.forEach($this=>{$this.classList.add('is-active')});
-      console.log('1')
     } else if(event.type=='mouseleave' && $target==event.target) {
       $targets.forEach($this=>{$this.classList.remove('is-active')});
       $targets = false;
-      console.log('2')
     }
   }
 
@@ -1317,7 +1315,6 @@ class ContactsBlock {
     this.check = ()=> {
       if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
         this.initDesktop();
-        console.log('int')
         this.flag = true;
       } 
       else if(window.innerWidth<brakepoints.lg && (!this.initialized || this.flag)) {
