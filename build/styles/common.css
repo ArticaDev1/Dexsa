@@ -5975,7 +5975,8 @@ img {
 .header {
   position: fixed;
   z-index: 1001;
-  width: 100%; }
+  width: 100%;
+  top: -1px; }
   .header .container {
     position: initial; }
   .header_fixed:not(.header_nav-opened) .header__bg {
