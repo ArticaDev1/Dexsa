@@ -731,21 +731,16 @@ class AdvantagesLights {
     this.$block = $block;
   }
   init() {
-    if(!mobile()) {
-      this.trigger = ScrollTrigger.create({
-        trigger: this.$block,
-        start: "top bottom",
-        end: "bottom bottom",
-        scrub: true,
-        once: true,
-        toggleClass: 'animate'
-      });
-    } else {
-      this.$block.classList.add('mobile');
-    }
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$block,
+      start: "center bottom",
+      end: "center top",
+      once: true,
+      toggleClass: 'animate'
+    });
   }
   destroy() {
-    if(this.trigger) this.trigger.kill();
+    this.trigger.kill();
     for(let child in this) delete this[child];
   }
 }
@@ -807,6 +802,9 @@ class AboutTextBlock {
   init() {
     this.check = ()=> {
       if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        if(this.initialized) {
+          this.destroyMobile();
+        }
         this.initDesktop();
         this.flag = true;
       } 
@@ -814,6 +812,7 @@ class AboutTextBlock {
         if(this.initialized) {
           this.destroyDesktop();
         }
+        this.initMobile();
         this.flag = false;
       }
     }
@@ -850,17 +849,50 @@ class AboutTextBlock {
     });
   }
 
+  initMobile() {
+    this.$blocks = this.$parent.querySelectorAll('.about-text__block');
+    this.$lights = this.$parent.querySelectorAll('.about-text__block-light');
+    this.mob_triggers = [];
+    this.mob_animations = [];
+    
+    let color1 = getComputedStyle(document.documentElement).getPropertyValue('--color-dark'),
+        color2 = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
+    
+    this.$blocks.forEach(($block, index)=>{
+      let $lights = $block.querySelectorAll('.about-text__block-light');
+
+      this.mob_animations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+        .fromTo($block, {css:{color:color1}}, {css:{color:color2}})
+        .fromTo($lights, {autoAlpha:0}, {autoAlpha:1, duration:0.75, stagger:{amount:0.25}}, '-=1')
+
+      this.mob_triggers[index] = ScrollTrigger.create({
+        trigger: $block,
+        start: "center bottom",
+        end: 'center center',
+        scrub: true,
+        onUpdate: self => {
+          this.mob_animations[index].progress(self.progress);
+        }
+      });
+    })
+  }
+
   destroyDesktop() {
     this.animation.kill();
     this.trigger.kill();
     gsap.set([this.$ligts, this.$blocks], {clearProps: "all"})
   }
 
+  destroyMobile() {
+    for(let child in this.mob_animations) this.mob_animations[child].kill();
+    for(let child in this.mob_triggers) this.mob_triggers[child].kill();
+    gsap.set(this.$lights, {clearProps: "all"})
+  }
+
   destroy() {
     window.addEventListener('resize', this.check);
-    if(this.flag) {
-      this.destroyDesktop();
-    }
+    if(this.flag) this.destroyDesktop();
+    else this.destroyMobile();
     for(let child in this) delete this[child];
   }
 }
@@ -934,7 +966,7 @@ class DecorationLight {
     this.$container = this.$parent.querySelector('.decoration-light__container');
     this.$images = this.$parent.querySelectorAll('.image');
 
-    this.mob_animation = gsap.timeline({paused:true})
+    this.mob_animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
       .fromTo(this.$images[1], {autoAlpha:0}, {autoAlpha:1})
 
     this.mob_trigger = ScrollTrigger.create({
@@ -1079,12 +1111,12 @@ class AboutPreviewBlock {
   initMobile() {
     this.$light = this.$parent.querySelectorAll('.about-preview-block__light');
 
-    this.mob_animation = gsap.timeline({paused:true})
+    this.mob_animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
       .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1})
 
     this.mob_trigger = ScrollTrigger.create({
       trigger: this.$light,
-      start: "center bottom",
+      start: "bottom bottom",
       end: "center center",
       scrub: true,
       onUpdate: self => {
@@ -1111,6 +1143,7 @@ class AboutPreviewBlock {
   destroy() {
     window.removeEventListener('resize', this.check);
     if(this.flag) this.destroyDesktop();
+    else this.destroyMobile();
     for(let child in this) delete this[child];
   }
 }
@@ -1123,6 +1156,9 @@ class ClientsBlock {
   init() {
     this.check = ()=> {
       if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        if(this.initialized) {
+          this.destroyMobile();
+        }
         this.initDesktop();
         this.flag = true;
       } 
@@ -1130,6 +1166,7 @@ class ClientsBlock {
         if(this.initialized) {
           this.destroyDesktop();
         }
+        this.initMobile();
         this.flag = false;
       }
     }
@@ -1222,17 +1259,47 @@ class ClientsBlock {
     })
   }
 
+  initMobile() {
+    this.$images = this.$parent.querySelectorAll('.image');
+    this.$values = this.$parent.querySelectorAll('.clients-block__value-item');
+    this.mob_triggers = [];
+    this.mob_animations = [];
+
+    this.$images.forEach(($image, index)=>{
+
+      this.mob_animations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+        .fromTo([$image, this.$values[index]], {autoAlpha:0.1}, {autoAlpha:1})
+
+      this.mob_triggers[index] = ScrollTrigger.create({
+        trigger: $image,
+        start: "bottom bottom",
+        end: "center center",
+        scrub: true,
+        onUpdate: self => {
+          this.mob_animations[index].progress(self.progress);
+        }
+      });
+    })
+
+  }
+
   destroyDesktop() {
-    let $items = this.$parent.querySelectorAll('.clients-block__image, .clients-block__value');
-    gsap.set($items, {clearProps: "all"});
+    gsap.set(this.$parent.querySelectorAll('.clients-block__image, .clients-block__value'), {clearProps: "all"});
     for(let child in this.blockAnimations) this.blockAnimations[child].kill();
     for(let child in this.triggers) this.triggers[child].kill();
     for(let child in this.blocksTriggers) this.blocksTriggers[child].kill();
   }
 
+  destroyMobile() {
+    for(let child in this.mob_animations) this.mob_animations[child].kill();
+    for(let child in this.mob_triggers) this.mob_triggers[child].kill();
+    gsap.set([this.$images, this.$values], {clearProps: "all"})
+  }
+
   destroy() {
-    if(this.flag) this.destroyDesktop();
     window.removeEventListener('resize', this.check);
+    if(this.flag) this.destroyDesktop();
+    else this.destroyMobile();
     for(let child in this) delete this[child];
   }
 }

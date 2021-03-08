@@ -9,6 +9,9 @@
     .header__bg {
       opacity: 1;
     }
+    .header__container {
+      height: 70px;
+    }
   }
   &__bg {
     background-color: var(--color-bg-transparent);
@@ -130,14 +133,6 @@
     }
   }
 
-  @include media-breakpoint-up(sm) {
-    &_fixed:not(.header_nav-opened) {
-      .header__container {
-        height: 70px;
-      }
-    }
-  }
-
   @include media-breakpoint-down(xxl) {
     &__container {
       height: 110px;
@@ -149,6 +144,11 @@
     }
   }
   @include media-breakpoint-down(sm) {
+    &_fixed:not(.header_nav-opened) {
+      .header__container {
+        height: 60px;
+      }
+    }
     &__container {
       height: 80px;
     }

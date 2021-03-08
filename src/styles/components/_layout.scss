@@ -112,9 +112,13 @@
   @include media-breakpoint-down(sm) {
     margin: 0 0 120px 0;
     &__head {
+      margin-bottom: 70px;
       &-txt {
         &:first-child {
           margin-bottom: 30px
+        }
+        &:last-child {
+          margin-top: 70px;
         }
       }
     }
