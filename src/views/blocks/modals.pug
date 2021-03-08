@@ -3,17 +3,17 @@
   .modal__wrapper(data-scroll-lock-scrollable)
     .modal-block.modal-succes__block
       .modal__container
-          h3 Спасибо!
-          p.h5 Ваша заявка успешно отправлена
+          h3.modal-succes__title Спасибо!
+          p.modal-succes__text.h5 Ваша заявка успешно отправлена
 
 .modal.modal-form#modal-form
   .modal__wrapper(data-scroll-lock-scrollable)
     .modal-block.modal-form__block
       button.modal-close(data-modal='close' aria-label='close')
       .modal__container.row
-        .modal__title.offset-xl-1.col-xl-10
+        .modal__title.offset-lg-1.offset-sm-2.col-lg-10.col-sm-8
           h3 Оставьте контакты и мы вам перезвоним
-        .modal-form__content.offset-xl-3.col-xl-6
+        .modal-form__content.offset-lg-3.offset-sm-2.col-lg-6.col-sm-8
           form.form
             .form__group.row
               .form__item.col-12

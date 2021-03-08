@@ -4073,6 +4073,9 @@ img {
   .input.loading {
     pointer-events: none;
     opacity: 0.5; }
+  @media (max-width: 1599.98px) {
+    .input {
+      font-size: 1rem; } }
   @media (max-width: 575.98px) {
     .input__title {
       top: 14px;
@@ -4182,19 +4185,52 @@ img {
     .modal-close {
       top: 0;
       left: 100%; } }
+  @media (max-width: 1023.98px) {
+    .modal__title {
+      margin-bottom: 80px; }
+    .modal-close {
+      top: 10px;
+      right: 10px;
+      left: initial; } }
+  @media (max-width: 575.98px) {
+    .modal__wrapper {
+      padding: 16px; }
+    .modal__title {
+      margin-bottom: 32px; }
+    .modal-close {
+      width: 50px;
+      height: 50px;
+      top: 5px;
+      right: 5px; }
+      .modal-close:before, .modal-close:after {
+        width: 30px;
+        height: 2px; } }
 
 .modal-succes {
   text-align: center;
-  color: var(--color-text-dark); }
+  color: #0E0E0E; }
+  .modal-succes__title, .modal-succes__text {
+    color: inherit; }
   .modal-succes__block {
     padding: 120px 0 140px 0;
     max-width: 680px;
-    background-color: var(--color-light);
-    box-shadow: 0px 0px 250px var(--color-light); }
+    background-color: #fff;
+    box-shadow: 0px 0px 250px #fff; }
   @media (max-width: 1599.98px) {
     .modal-succes__block {
       padding: 100px 0;
       max-width: 540px; } }
+  @media (max-width: 1023.98px) {
+    .modal-succes__block {
+      padding: 80px 0;
+      max-width: 440px; } }
+  @media (max-width: 575.98px) {
+    .modal-succes__block {
+      padding: 65px 0; }
+    .modal-succes__title, .modal-succes__text {
+      margin: 0 !important; }
+    .modal-succes__text {
+      margin-top: 12px !important; } }
 
 .modal-form {
   text-align: center; }
@@ -4206,6 +4242,17 @@ img {
     .modal-form__block {
       max-width: 860px;
       padding: 70px 0; } }
+  @media (max-width: 1023.98px) {
+    .modal-form__block {
+      max-width: 672px;
+      padding: 100px 0; } }
+  @media (max-width: 767.98px) {
+    .modal-form__block {
+      max-width: 492px;
+      padding: 80px 0; } }
+  @media (max-width: 575.98px) {
+    .modal-form__block {
+      padding: 66px 16px 40px 16px; } }
 
 /*========== Blocks ==========*/
 .screen {
@@ -5566,6 +5613,15 @@ img {
   .clients__text {
     width: calc(100% + 16px);
     top: calc(-70px - 2.88em); } }
+
+@media (max-width: 360px) {
+  .clients__head-txt p {
+    max-width: 80px;
+    margin: 0 auto; }
+  .clients__text {
+    top: calc(-70px - 4.32em); }
+    .clients__text br {
+      display: block; } }
 
 .clients-block {
   align-items: center;

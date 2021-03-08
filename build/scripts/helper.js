@@ -17,15 +17,13 @@ var Helper = {
         state;
 
     var set_active_page = function set_active_page() {
-      var values = cleanUp(location.href).split('/'),
-          last_value = values[values.length - 1],
-          page = last_value == '' ? 'index.html' : last_value;
+      var value1 = cleanUp(location.pathname),
+          value2 = '.' + cleanUp(location.pathname);
       var $links = $block.querySelectorAll('a');
       $links.forEach(function ($this) {
-        var href_values = $this.getAttribute('href').split('/'),
-            href_page = href_values[href_values.length - 1];
+        var href = $this.getAttribute('href');
 
-        if (page == href_page) {
+        if (href == value1 || href == value2) {
           $this.classList.add('active');
         } else {
           $this.classList.remove('active');

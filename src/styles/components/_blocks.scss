@@ -1861,6 +1861,22 @@
       top: calc(-70px - 2.88em);
     }
   }
+  @media(max-width:360px) {
+    &__head {
+      &-txt {
+        p {
+          max-width: 80px;
+          margin: 0 auto;
+        }
+      }
+    }
+    &__text {
+      top: calc(-70px - 4.32em);
+      br {
+        display: block;
+      }
+    }
+  }
 }
 
 .clients-block {

@@ -210,11 +210,15 @@ const Transitions = {
 
 const ActiveLinks = {
   check: ()=> {
-    let value = cleanUp(location.pathname),
+    let value1 = cleanUp(location.pathname),
+        value2 = '.'+cleanUp(location.pathname),
         $links = document.querySelectorAll('a');
+
+    console.log(value1, value2)
+    
     $links.forEach($this=>{
       let href = $this.getAttribute('href');
-      if(href==value) {
+      if(href==value1 || href==value2) {
         $this.classList.add('is-active-page');
       } else {
         $this.classList.remove('is-active-page');
