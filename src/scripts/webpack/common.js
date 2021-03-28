@@ -1646,6 +1646,7 @@ const Parallax = {
   }
 }
 
+let sidx = 0;
 class ItemSlider {
   constructor($parent) {
     this.$parent = $parent;
@@ -1658,6 +1659,10 @@ class ItemSlider {
     this.$next = this.$parent.querySelector('.items-slider__next');
     this.index = 0;
     this.speed = 0.5;
+    //
+    sidx++;
+    this.ease = sidx==1?'ease':'ease-in-out';
+    
 
     this.animationsEnter = [];
     this.animationsExit = [];
@@ -1684,7 +1689,7 @@ class ItemSlider {
       gap: desktop_gap,
       arrows: false,
       pagination: true,
-      easing: 'ease',
+      easing: this.ease,
       waitForTransition: false,
       speed: this.speed*1000,
       //autoplay: true,
