@@ -41,7 +41,7 @@ html(lang='ru')
       include ../blocks/header
       
       .content
-        main.main(data-barba="container", data-barba-namespace=namespace, data-name=name)
+        main.main(data-barba="container", data-barba-namespace=namespace)
           block content
         include ../blocks/footer
 
@@ -52,12 +52,10 @@ html(lang='ru')
     link(rel='preconnect' href='https://fonts.gstatic.com')
     link(href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap' rel='stylesheet')
     //styles
-    block styles
     link(rel="stylesheet" href="./styles/common.css")
     //scripts
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
     script(src="./scripts/modernizr-custom.js")
-    block scripts
     script(src="./scripts/common.js")
 
 

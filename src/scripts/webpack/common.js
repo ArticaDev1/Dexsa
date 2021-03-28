@@ -1684,6 +1684,7 @@ class ItemSlider {
       gap: desktop_gap,
       arrows: false,
       pagination: true,
+      easing: 'ease',
       waitForTransition: false,
       speed: this.speed*1000,
       //autoplay: true,
@@ -1933,6 +1934,7 @@ class ImageSlider {
       arrows: false,
       pagination: true,
       waitForTransition: false,
+      easing: 'ease',
       speed: this.speed*1000,
       autoplay: true,
       interval: autoslide_interval*1000

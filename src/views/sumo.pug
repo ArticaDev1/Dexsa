@@ -1,0 +1,22 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Система управления мониторринга освещения'
+  -var namespace = sumo_namespace
+
+block content
+  section.section.category-head.screen.stp
+    .category-head__scene(data-parallax='0.2' data-parallax-top)
+      .category-head__scene-content.image.image_cover.image_mask-1
+        img(data-src="./img/GettyImages-1195765543 2.jpg", alt="bg").lazyload
+    .container.category-head__container
+      .category-head__content.row
+        h1.category-head__title.category-head__item.col-lg-6 Система управления мониторринга освещения
+        p.category-head__item.category-head__text.col-lg-6 Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
+
+  section.section.sumu-schema
+    .container 
+      h3.section__base-title Структурная схема системы управления освещением
+      .sumu-schema__container 
+        img(src="./img/shema.svg", alt="shema").sumu-schema__element
+        img(src="./img/Group 409.png", alt="shema-lights").lazyload.sumu-schema__lights
