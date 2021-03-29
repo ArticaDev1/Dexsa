@@ -3,7 +3,7 @@ header.header(data-scroll-lock-fill-gap)
   .container 
     .header__container
       a(href=home).logo.header__logo
-        img(src="./img/logos/logo.png", alt="logo").logo__image
+        img(src="./img/logos/logo.svg", alt="logo").logo__image
       nav.header-nav 
         ul.header-nav__list 
           li.header-nav__item   
@@ -38,8 +38,6 @@ header.header(data-scroll-lock-fill-gap)
                 li
                   a(href=sumo).header-nav__toggle-content-link Системы управления и мониторинга освещения
                 li
-                  a(href="#").header-nav__toggle-content-link Коммутационное оборудование
-                li
                   a(href="#").header-nav__toggle-content-link Электрообогрев
                 li
                   a(href="#").header-nav__toggle-content-link Щитовое оборудование
@@ -47,13 +45,13 @@ header.header(data-scroll-lock-fill-gap)
 
 
           li.header-nav__item   
-            a(href=certificates data-name=certificates_name).header-nav__link
+            a(href=certificates).header-nav__link
               span Сертификаты и аккредитации
           li.header-nav__item   
-            a(href=references data-name=references_name).header-nav__link
+            a(href=references).header-nav__link
               span Референс лист
           li.header-nav__item   
-            a(href=contacts data-name=contacts_name).header-nav__link 
+            a(href=contacts).header-nav__link 
               span Контакты
       button.nav-toggle
         span

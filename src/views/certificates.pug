@@ -1,0 +1,86 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Сертификаты, аккредитации и отзывы'
+  -var namespace = certificates_namespace
+
+block content
+  section.section.category-head.screen
+    .category-head__scene(data-parallax='0.2' data-parallax-top)
+      .category-head__scene-content.image.image_cover.image_mask-1
+        img(data-src="./img/DSC00493.jpg", alt="bg").lazyload
+    .container.category-head__container
+      .category-head__content.row
+        h1.category-head__title.category-head__item.col-lg-6 Сертификаты, аккредитации и отзывы
+        p.category-head__item.category-head__text.col-lg-6 Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.
+
+  section.section.documents-section
+    .container 
+      h3.section__base-title Сертификаты
+      .swiper.documents-slider
+        .swiper-container
+          .swiper-wrapper
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/documents/1.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/documents/2.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/documents/3.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/documents/4.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/documents/5.jpg", alt="document").swiper-lazy
+
+        .swiper-pagination
+        button.swiper-button.swiper-button-prev
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+        button.swiper-button.swiper-button-next
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+
+  section.section.documents-section
+    .container 
+      h3.section__base-title Отзывы
+      .swiper.documents-slider
+        .swiper-container
+          .swiper-wrapper
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/reviews/1.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/reviews/2.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/reviews/3.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/reviews/4.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/reviews/5.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/reviews/6.jpg", alt="document").swiper-lazy
+            //slide
+            .swiper-slide.documents-slider__slide.image.image_cover
+              img(data-src="./img/reviews/7.jpg", alt="document").swiper-lazy
+
+        .swiper-pagination
+        button.swiper-button.swiper-button-prev
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+        button.swiper-button.swiper-button-next
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+
+
+
+  -var contacts_type = 2;
+  include blocks/contacts-blocks   

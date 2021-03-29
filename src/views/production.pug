@@ -1,0 +1,56 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Наше производство'
+  -var namespace = production_namespace
+
+block content
+  section.section.category-head-slider.swiper
+    .swiper-container
+      .swiper-wrapper
+        //slide
+        .swiper-slide.screen.category-head-slider__slide
+          .image.image_cover.image_mask-1
+            img(src="./img/production/1.jpg", alt="document")
+          .container.category-head-slider__slide-content
+            .row 
+              h2.h1.col-lg-6.category-head-slider__slide-title Наше производство это:
+              p.col-lg-6 Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.
+        //slide
+        .swiper-slide.screen.category-head-slider__slide
+          .image.image_cover.image_mask-1
+            img(src="./img/production/2.jpg", alt="document")
+          .container.category-head-slider__slide-content
+            .row 
+              h2.h1.col-lg-6.category-head-slider__slide-title Инновации:
+              p.col-lg-6 Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.
+        //slide
+        .swiper-slide.screen.category-head-slider__slide
+          .image.image_cover.image_mask-1
+            img(src="./img/production/3.jpg", alt="document")
+          .container.category-head-slider__slide-content
+            .row 
+              h2.h1.col-lg-6.category-head-slider__slide-title Решения:
+              p.col-lg-6 Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.
+        //slide
+        .swiper-slide.screen.category-head-slider__slide
+          .image.image_cover.image_mask-1
+            img(src="./img/production/4.jpg", alt="document")
+          .container.category-head-slider__slide-content
+            .row 
+              h2.h1.col-lg-6.category-head-slider__slide-title Гарантия:
+              p.col-lg-6 Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.
+        //slide
+        .swiper-slide.screen.category-head-slider__slide
+          .image.image_cover.image_mask-1
+            img(src="./img/production/5.jpg", alt="document")
+          .container.category-head-slider__slide-content
+            .row 
+              h2.h1.col-lg-6.category-head-slider__slide-title Складская программа:
+              p.col-lg-6 Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.
+    
+    .category-head-slider__pagination.container 
+      .swiper-pagination
+    
+
+  include blocks/contacts-blocks   

@@ -1692,6 +1692,7 @@
 }
 
 .contacts-block {
+  z-index: 2;
   &_type-2 {
     margin: 0;
     padding: 250px 0;
@@ -2434,7 +2435,7 @@
 }
 
 
-.sumu-schema {
+.sumo-schema {
   &__container {
     position: relative;
   }
@@ -2450,5 +2451,119 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+  &__lights-active {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $trs4, visibility $trs4;
+  }
+  &.active {
+    .sumo-schema__lights-active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.system-features-section {
+  .bg-light {
+    right: -800px;
+  }
+}
+
+.system-features-slider {
+  padding-right: 8.33333%;
+  padding-bottom: 38px;
+  position: relative;
+  .swiper-button {
+    top: calc(50% - 19px);
+    background-color: transparent;
+  }
+  .swiper-pagination {
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+  }
+  &__slide {
+    &-icon {
+      display: block;
+      height: 100px;
+      margin-bottom: 36px;
+    }
+  }
+}
+
+.sumo-system-section {
+  .bg-light {
+    left: -900px;
+    top: -120px;
+  }
+}
+
+.documents-slider {
+  padding-bottom: 68px;
+  .swiper-button {
+    top: calc(50% - 34px);
+    &-next {
+      right: -52px;
+    }
+    &-prev {
+      left: -52px;
+    }
+  }
+  .swiper-pagination {
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+  }
+  &__slide {
+    display: block;
+    position: relative;
+    &::after {
+      content: '';
+      display: block;
+      padding-top: 144%;
+      z-index: 2;
+      pointer-events: none;
+      background-color: rgba(14, 14, 14, 0.7);
+      position: relative;
+      opacity: 0;
+      transition: opacity $trs1;
+    }
+    &[data-touch], &[data-hover] {
+      &::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.category-head-slider {
+  &__pagination {
+    position: absolute;
+    bottom: calc(20% - 30px);
+    left: calc(50% + 2px);
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  &__slide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    .image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+    }
+    &-title {
+      margin-top: -0.2em !important;
+      margin-bottom: 0 !important;
+    }
+    &-content {
+      bottom: 20%;
+    }
   }
 }

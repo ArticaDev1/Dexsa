@@ -36,14 +36,18 @@
 		"aos": "^3.0.0-beta.6",
 		"autosize": "^4.0.2",
 		"bootstrap": "^5.0.0-alpha1",
+		"fslightbox": "^3.2.3",
+		"glightbox": "^3.0.7",
 		"gsap": "^3.5.1",
 		"inputmask": "^5.0.5",
 		"lazysizes": "^5.2.2",
 		"normalize.css": "^8.0.1",
+		"photoswipe": "^4.1.3",
 		"rellax": "^1.12.1",
 		"scroll-lock": "^2.1.4",
 		"smooth-scrollbar": "^8.6.0",
 		"swipe-listener": "^1.3.0",
+		"swiper": "^6.5.1",
 		"validate.js": "^0.13.1",
 		"vinyl-ftp": "^0.6.1"
 	}

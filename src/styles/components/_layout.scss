@@ -75,6 +75,9 @@
       z-index: 2;
     }
   }
+  &__base-title {
+    margin-bottom: 100px;
+  }
   @include media-breakpoint-up(lg) {
     &__head {
       align-items: flex-start;

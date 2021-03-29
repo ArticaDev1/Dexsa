@@ -5,7 +5,7 @@ block variables
   -var namespace = sumo_namespace
 
 block content
-  section.section.category-head.screen.stp
+  section.section.category-head.screen
     .category-head__scene(data-parallax='0.2' data-parallax-top)
       .category-head__scene-content.image.image_cover.image_mask-1
         img(data-src="./img/GettyImages-1195765543 2.jpg", alt="bg").lazyload
@@ -14,9 +14,86 @@ block content
         h1.category-head__title.category-head__item.col-lg-6 Система управления мониторринга освещения
         p.category-head__item.category-head__text.col-lg-6 Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
 
-  section.section.sumu-schema
+  section.section.sumo-schema
     .container 
       h3.section__base-title Структурная схема системы управления освещением
-      .sumu-schema__container 
-        img(src="./img/shema.svg", alt="shema").sumu-schema__element
-        img(src="./img/Group 409.png", alt="shema-lights").lazyload.sumu-schema__lights
+      .sumo-schema__container 
+        img(src="./img/shema.svg", alt="shema").sumo-schema__element
+        .image.sumo-schema__lights
+          img(data-src="./img/shema-lights.png", alt="shema-lights").lazyload
+        .image.sumo-schema__lights.sumo-schema__lights-active
+          img(data-src="./img/shema-lights-active.png", alt="shema-lights").lazyload
+
+  section.section.system-features-section
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+    .container 
+      h3.section__base-title Ключевые особенности предлагаемой системы:
+      .system-features-slider
+        .swiper-container
+          .swiper-wrapper
+            //slide
+            .swiper-slide.system-features-slider__slide
+              .system-features-slider__slide-container  
+                img(src="./img/icons/sf1.svg", alt="image").system-features-slider__slide-icon
+                p.system-features-slider__slide-text Индивидуальное адресное управление каждым светильником по питающим проводам (технология PLC) – позволяет избежать прокладки дополнительных проводов и не иметь проблем с электромагнитной совместимостью и информационной безопасностью, характерных для решений, использующих связь по радиоканалу.
+            //slide
+            .swiper-slide.system-features-slider__slide
+              .system-features-slider__slide-container  
+                img(src="./img/icons/sf2.svg", alt="image").system-features-slider__slide-icon
+                p.system-features-slider__slide-text Отсутствие специализированного программного обеспечения АРМ оператора (веб интерфейс).  Количество подключаемых АРМ ограничено исключительно производительностью веб-сервера.
+            //slide
+            .swiper-slide.system-features-slider__slide
+              .system-features-slider__slide-container  
+                img(src="./img/icons/sf3.svg", alt="image").system-features-slider__slide-icon
+                p.system-features-slider__slide-text Возможность использования в качестве среды передачи данных между контроллерами и серверами любых имеющихся в распоряжении средств, включая мобильную связь. В контроллеры могут быть установлены сим-карты.
+            //slide
+            .swiper-slide.system-features-slider__slide
+              .system-features-slider__slide-container  
+                img(src="./img/icons/sf4.svg", alt="image").system-features-slider__slide-icon
+                p.system-features-slider__slide-text Применение в качестве хранилища данных телеметрии SQL сервера, что делает возможным чтение данных из него сторонними системами.
+            //slide
+            .swiper-slide.system-features-slider__slide
+              .system-features-slider__slide-container  
+                img(src="./img/icons/sf5.svg", alt="image").system-features-slider__slide-icon
+                p.system-features-slider__slide-text Полное отсутствие дополнительных устройств на участке энергораспределительной системы во взрывоопасной зоне. Вся дополнительная электроника спрятана внутрь светильника.
+            //slide
+            .swiper-slide.system-features-slider__slide
+              .system-features-slider__slide-container  
+                img(src="./img/icons/sf6.svg", alt="image").system-features-slider__slide-icon
+                p.system-features-slider__slide-text Низкая стоимость решения в пересчете на один светильник (обеспечивается возможностью применения обегающего контроля).
+            //slide
+            .swiper-slide.system-features-slider__slide
+              .system-features-slider__slide-container  
+                img(src="./img/icons/sf7.svg", alt="image").system-features-slider__slide-icon
+                p.system-features-slider__slide-text Общее количество светильников, управляемых от одного шкафа питания и управления – до 1000 штук.
+        
+        .swiper-pagination
+        button.swiper-button.swiper-button-next
+          svg.icon
+            use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+
+  section.section.sumo-system-section
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+    .container 
+      h3.section__base-title Назначение системы:
+      .row 
+        .col-xl-5.sumo-system-section__list
+          ul  
+            li Автоматизация контроля технического состояния систем освещения (светильники, драйверы, кабельная продукция, коммутационная аппаратура).
+            li Мониторинг параметров питающего напряжения на вводе энергораспределительной системы и контроль соответствия этих параметров действующим ГОСТ.
+            li Контроль спектрального состава тока в отходящих линиях. Позволяет выявлять аномалии в работе драйверов светодиодных источников света.
+            li Контроль токов отходящих линий, контроль нахождения значения тока в настраиваемом коридоре с выдачей предупреждений при выходе за граничные значения.
+            li Контроль токов утечки – позволяет своевременно обнаруживать падение сопротивления изоляции и осуществлять устранение недостатков в плановом, а не аварийном режимах.
+        .offset-xl-1.col-xl-5.sumo-system-section__list
+          ul 
+            li Сбор информации с объектов по подключенным системам освещения, первичная обработка собранной информации, передача ее по каналам связи в пункт управления и предоставление в удобном виде пользователям.
+            li Автоматизация технического учета электроэнергии.
+            li Автоматизация диспетчерского управления коммутационными аппаратами.
+            li Формирование и архивирование баз данных, содержащих информацию по учету электроэнергии и текущему состоянию объектов и контролируемых параметров.
+            li Получение эффективного инструмента для решения вопросов энергоэффективного производства, посредством решения задач энергосбережения, а также инструмента.
+
+  
+  -var contacts_type = 2;
+  include blocks/contacts-blocks     

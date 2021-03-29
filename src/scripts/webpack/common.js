@@ -50,7 +50,13 @@ import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
+import Swiper from 'swiper/bundle';
 import SwipeListener from 'swipe-listener';
+
+//photoswipe
+import PhotoSwipe from 'photoswipe';
+import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
+const photoSwipeTemplate = '<div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button><button class="pswp__button pswp__button--share" title="Share"></button><button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button><button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div> </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div>';
 
 const validate = require("validate.js");
 
@@ -140,6 +146,14 @@ const App = {
       this.afunctions.add(FadeBlocks, '.js-fade-blocks');
       this.afunctions.add(CategoryHead, '.category-head');
       this.afunctions.add(ImageSlider, '.image-slider');
+      this.afunctions.add(SfSlider, '.system-features-slider');
+      this.afunctions.add(ShemaLights, '.sumo-schema');
+      this.afunctions.add(DocsSlider, '.documents-slider');
+      this.afunctions.add(HeadSlider, '.category-head-slider');
+      
+      
+      
+      
       
       autosize(document.querySelectorAll('textarea.input__element'));
 
@@ -1646,7 +1660,6 @@ const Parallax = {
   }
 }
 
-let sidx = 0;
 class ItemSlider {
   constructor($parent) {
     this.$parent = $parent;
@@ -1659,10 +1672,6 @@ class ItemSlider {
     this.$next = this.$parent.querySelector('.items-slider__next');
     this.index = 0;
     this.speed = 0.5;
-    //
-    sidx++;
-    this.ease = sidx==1?'ease':'ease-in-out';
-    
 
     this.animationsEnter = [];
     this.animationsExit = [];
@@ -1689,11 +1698,11 @@ class ItemSlider {
       gap: desktop_gap,
       arrows: false,
       pagination: true,
-      easing: this.ease,
+      easing: 'ease',
       waitForTransition: false,
       speed: this.speed*1000,
-      //autoplay: true,
-      //interval: autoslide_interval*1000,
+      autoplay: true,
+      interval: autoslide_interval*1000,
       breakpoints: {
         576: {
           gap: mobile_gap
@@ -1954,6 +1963,39 @@ class ImageSlider {
   }
 }
 
+class SfSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  } 
+  init() {
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$next = this.$parent.querySelector('.swiper-button-next');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+    this.speed = 0.5;
+
+    this.swiper = new Swiper(this.$slider, {
+      loop: true,
+      slidesPerView: 2,
+      spaceBetween: 118,
+      speed: this.speed*1000,
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      },
+      navigation: {
+        nextEl: this.$next
+      }
+    });
+
+  }
+
+  destroy() {
+    this.swiper.destroy();
+    for(let child in this) delete this[child];
+  }
+}
+
 //screens anim
 class HomeScene {
   constructor($parent) {
@@ -2032,6 +2074,99 @@ class CategoryHead {
 
   destroy() {
     this.animation.kill();
+    for(let child in this) delete this[child];
+  }
+}
+
+class ShemaLights {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "center bottom",
+      end: "center top",
+      once: true,
+      toggleClass: 'active'
+    });
+  }
+  destroy() {
+    this.trigger.kill();
+    for(let child in this) delete this[child];
+  }
+}
+
+class DocsSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  } 
+  init() {
+    this.speed = 0.5;
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$prev = this.$parent.querySelector('.swiper-button-prev');
+    this.$next = this.$parent.querySelector('.swiper-button-next');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+
+    this.elements = [];
+
+    this.swiper = new Swiper(this.$slider, {
+      loop: true,
+      slidesPerView: 4,
+      spaceBetween: 24,
+      speed: this.speed*1000,
+      lazy: {
+        loadOnTransitionStart: true
+      },
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      },
+      navigation: {
+        prevEl: this.$prev,
+        nextEl: this.$next
+      }
+    });
+
+
+  }
+
+  destroy() {
+    this.swiper.destroy();
+    for(let child in this) delete this[child];
+  }
+}
+class HeadSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  } 
+  init() {
+    this.speed = 0.5;
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+
+    this.elements = [];
+
+    this.swiper = new Swiper(this.$slider, {
+      loop: true,
+      slidesPerView: 1,
+      speed: this.speed*1000,
+      lazy: {
+        loadOnTransitionStart: true
+      },
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      }
+    });
+
+
+  }
+
+  destroy() {
+    this.swiper.destroy();
     for(let child in this) delete this[child];
   }
 }

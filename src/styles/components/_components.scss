@@ -1,7 +1,7 @@
 img {
   display: block;
-  pointer-events: none;
   user-select: none;
+  width: 100%;
   &.lazyload, &.lazyloading {
     opacity: 0;
     visibility: hidden;
@@ -17,8 +17,7 @@ img {
 .image {
   display: block;
   position: relative;
-  &_cover,
-  &_contain {
+  &_contain, &_cover {
     img {
       position: absolute;
       top: 0;
@@ -46,7 +45,7 @@ img {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: rgba(14, 14, 14, 0.6);
+      background: rgba(14, 14, 14, 0.7);
       pointer-events: none;
     }
   }
@@ -106,9 +105,45 @@ img {
 }
 
 .splide {
+  &__arrows {
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  &__arrow {
+    pointer-events: all;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    display: flex;
+    transition: opacity $trs1;
+    margin: -13px -14px;
+    fill: currentColor;
+    svg {
+      display: block;
+      width: 22px;
+      height: 22px;
+      margin: auto;
+    }
+    &[data-touch], &[data-hover] {
+      opacity: 0.7;
+    }
+    &--prev {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
   &__pagination {
+    width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 20px;
     li {
       &:not(:last-child) {
         margin-right: 18px;
@@ -157,6 +192,86 @@ img {
     }
   }
 }
+
+.swiper {
+  position: relative;
+  &-lazy {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $trs3, visibility $trs3;
+    &-loaded {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &-wrapper {
+    transition-timing-function: ease;
+  }
+  &-pagination {
+    display: flex;
+    margin: -9px;
+    width: calc(100% + 18px);
+    &-bullet {
+      width: 26px;
+      height: 26px;
+      padding: 9px;
+      border-radius: 13px;
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        background-color: #5B5B5B;
+        transition: background-color $trs1, transform $trs1;
+      }
+      &[data-touch], &[data-hover] {
+        &::before {
+          transform: scale(1.75);
+        }
+      }
+      &-active {
+        pointer-events: none;
+        &::before {
+          background-color: #FFF;
+        }
+      }
+    }
+  }
+  &-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 48px;
+    background-color: #0E0E0E;
+    transition: opacity $trs1;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    margin-top: -24px;
+    margin: -24px -16px 0 -16px;
+    z-index: 2;
+    .icon {
+      width: 22px;
+      height: 22px;
+      margin: auto;
+    }
+    &[data-touch], &[data-hover] {
+      opacity: 0.7;
+    }
+    &-next {
+      right: 0;
+    }
+    &-prev {
+      left: 0;
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+
+
 
 .scrollbar-track-y {
   background-color: transparent;
