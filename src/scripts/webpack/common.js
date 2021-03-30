@@ -45,21 +45,13 @@ barba.init({
     }
   }]
 });
-
 import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
 import Swiper from 'swiper/bundle';
 import SwipeListener from 'swipe-listener';
-
-//photoswipe
-import PhotoSwipe from 'photoswipe';
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
-const photoSwipeTemplate = '<div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button><button class="pswp__button pswp__button--share" title="Share"></button><button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button><button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div> </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div>';
-
 const validate = require("validate.js");
-
 import Inputmask from "inputmask";
 
 const contentWidth = () => {
@@ -1054,6 +1046,9 @@ class AboutPreviewBlock {
     this.$ftext = this.$parent.querySelector('.section__head-txt');
     this.$mouse = this.$parent.querySelector('.mouse-icon');
 
+    this.canvas = this.$parent.querySelector('.about-preview__scene canvas');
+    this.context = this.canvas.getContext("2d");
+
     this.mousepos = ()=> {
       let h1 = this.$container.getBoundingClientRect().height,
           h2 = this.$mouse.getBoundingClientRect().height,
@@ -1065,29 +1060,43 @@ class AboutPreviewBlock {
     this.mousepos();
     window.addEventListener('resize', this.mousepos);
 
-
     this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
       .to(this.$text_item[0], {y:-30}, '-=1')
       .to(this.$text_item[0], {autoAlpha:0, duration:0.5}, '-=0.5')
-      .to(this.$lines[0], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
+      .to(this.$lines[0], {scaleX:0, xPercent:50, duration:0.75, ease:'power2.in'}, '-=0.5')
       .to(this.$blocks[0], {autoAlpha:0, duration:0.5, ease:'power2.out'}, '-=0.25')
 
-      .to(this.$blocks[1],    {autoAlpha:1, duration:0.5, ease:'power2.in'}, '-=0.5')
-      .fromTo(this.$lines[1], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
+      .fromTo(this.$blocks[1],  {autoAlpha:0},  {autoAlpha:1, duration:0.5, ease:'power2.in'}, '-=0.5')
+      .fromTo(this.$lines[1], {scaleX:0, xPercent:50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
       .fromTo(this.$text_item[1], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
       .fromTo(this.$text_item[1], {y:30}, {y:-30, duration:2}, '-=0.5')
       .to(this.$text_item[1], {autoAlpha:0, duration:0.5}, '-=0.5')
-      .to(this.$lines[1], {scaleX:0, xPercent:-50, duration:0.75, ease:'power2.in'}, '-=0.5')
+      .to(this.$lines[1], {scaleX:0, xPercent:50, duration:0.75, ease:'power2.in'}, '-=0.5')
       .to(this.$blocks[1], {autoAlpha:0, duration:0.5, ease:'power2.out'}, '-=0.25')
 
-      .to(this.$blocks[2], {autoAlpha:1, duration:0.5, ease:'power2.in'}, '-=0.5')
-      .fromTo(this.$lines[2], {scaleX:0, xPercent:-50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
+      .fromTo(this.$blocks[2], {autoAlpha:0}, {autoAlpha:1, duration:0.5, ease:'power2.in'}, '-=0.5')
+      .fromTo(this.$lines[2], {scaleX:0, xPercent:50}, {scaleX:1, xPercent:0, duration:0.75, ease:'power2.out'}, '-=0.25')
       .fromTo(this.$text_item[2], {autoAlpha:0}, {autoAlpha:1, duration:0.5}, '-=0.5')
       .fromTo(this.$text_item[2], {y:30}, {y:0}, '-=0.5')
-     
-      .fromTo(this.$light, {autoAlpha:0}, {autoAlpha:1}, '-=1')
 
       .to(this.$mouse, {autoAlpha:0, duration:1}, '-=4')
+    
+
+    this.canvas.width=1000;
+    this.canvas.height=1000;
+    this.framesCount = 152;
+    this.frames = [];
+    for(let i = 0; i < this.framesCount; i++) {
+      this.frames[i] = new Image();
+      this.frames[i].src = `../img/lightrender/2.${1000+i}.jpg`;
+    }
+    this.activeFrame = this.frames[0];
+    this.sceneRender = ()=> {
+      this.context.drawImage(this.activeFrame, 0, 0);
+      this.animationFrame = requestAnimationFrame(this.sceneRender);
+    }
+    this.sceneRender();
+
 
     this.triggers = [];
 
@@ -1100,6 +1109,8 @@ class AboutPreviewBlock {
       scrub: true,
       onUpdate: self => {
         this.animation.progress(self.progress);
+        let index = Math.round(self.progress*(this.framesCount-1));
+        this.activeFrame = this.frames[index];
       }
     });
 
@@ -1120,7 +1131,6 @@ class AboutPreviewBlock {
       pinType: pinType,
       scrub: true
     });
-
   }
 
   initMobile() {
@@ -1147,6 +1157,7 @@ class AboutPreviewBlock {
   }
 
   destroyDesktop() {
+    cancelAnimationFrame(this.animationFrame);
     window.removeEventListener('resize', this.mousepos);
     this.animation.kill();
     this.triggers.forEach($trigger => {
