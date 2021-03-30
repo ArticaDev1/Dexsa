@@ -1103,7 +1103,7 @@ class AboutPreviewBlock {
     this.triggers[0] = ScrollTrigger.create({
       trigger: this.$container,
       start: "center center",
-      end: '+=3000',
+      end: '+=1500',
       pin: true,
       pinType: pinType,
       scrub: true,
