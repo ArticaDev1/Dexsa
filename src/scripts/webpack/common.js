@@ -1088,7 +1088,7 @@ class AboutPreviewBlock {
     this.frames = [];
     for(let i = 0; i < this.framesCount; i++) {
       this.frames[i] = new Image();
-      this.frames[i].src = `../img/lightrender/2.${1000+i}.jpg`;
+      this.frames[i].src = `/img/lightrender/2.${1000+i}.jpg`;
     }
     this.activeFrame = this.frames[0];
     this.sceneRender = ()=> {
