@@ -45,7 +45,6 @@ block content
           .homepage-scene__trigger 8
           .homepage-scene__trigger 9
           .homepage-scene__trigger 10
-
     .homepage__container
       .homepage__top.stp.container 
         p.homepage__label Компания<br> Декса
@@ -54,63 +53,67 @@ block content
         .row
           .homepage__request.col-xl-4
             .container
-              p Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных
+              p По вопросам партнерства, технической консультации, сервисного и гарантийного обслуживания, будем рады вашему обращению
               a(href='#modal-form' data-modal='open').button.button_style-2 
                 span Оставить заявку
 
           .offset-xl-1.col-xl-7
-            .items-slider
+            .swiper.items-slider
               svg.icon.d-sm-none.items-slider__sliding-icon
                 use(xlink:href='./img/icons/icons-sprite.svg#slide')
               .items-slider__container.container
                 //arrows
-                button(aria-label='prev slide').items-slider__arrow.items-slider__prev
+                button(aria-label='slide prev').swiper-button.swiper-button-prev
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#arrow')
-                button(aria-label='next slide').items-slider__arrow.items-slider__next 
+                button(aria-label='slide next').swiper-button.swiper-button-next
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#arrow')
                 //images
                 .items-slider__images 
                   //image
-                  a(href=vo).items-slider__image
+                  a(href=obshhepromyshhlennoe_osveshhenie).items-slider__image
+                    | Взрывозащищенное освещение
                     .image
                       img(data-src="./img/homeslider/1.png", alt="img").lazyload
                     .image.items-slider__image-light
                       img(data-src="./img/homeslider/1_2.png", alt="img").lazyload
                   //image
-                  a(href='#').items-slider__image
+                  a(href=sistemy_upravleniya_i_monitoringa_osveshheniya).items-slider__image
+                    | СУМО
                     .image
                       img(data-src="./img/homeslider/2.png", alt="img").lazyload
                   //image
-                  a(href='#').items-slider__image
+                  a(href=elektroobogrev).items-slider__image
+                    | Электрообогрев
                     .image
                       img(data-src="./img/homeslider/3.png", alt="img").lazyload
                   //image
                   a(href='#').items-slider__image
+                    | Щитовое оборудование
                     .image
                       img(data-src="./img/homeslider/4.png", alt="img").lazyload
                   
                 //slider
-                .splide.items-slider__element
-                  .splide__track
-                    .splide__list
-                      //slide
-                      .splide__slide.items-slider__slide 
-                        h4.items-slider__slide-title Взрывозащищенное освещение
-                        p Первые в России светильники с возобновляемым ресурсом работы
-                      //slide
-                      .splide__slide.items-slider__slide 
-                        h4.items-slider__slide-title СУМО
-                        p Уникальная Система Управления Мониторингом Осветительного оборудования
-                      //slide
-                      .splide__slide.items-slider__slide 
-                        h4.items-slider__slide-title Электрообогрев
-                        p Комплексные решения по промышленному электрообогреву
-                      //slide
-                      .splide__slide.items-slider__slide 
-                        h4.items-slider__slide-title Щитовое оборудование
-                        p Весь спектр промышленного электрощитового оборудования
+                .swiper-container.items-slider__element
+                  .swiper-wrapper
+                    //slide
+                    .swiper-slide.items-slider__slide 
+                      h4.items-slider__slide-title Взрывозащищенное освещение
+                      p Первые в России светильники с возобновляемым ресурсом работы
+                    //slide
+                    .swiper-slide.items-slider__slide 
+                      h4.items-slider__slide-title СУМО
+                      p Уникальная Система Управления Мониторингом Осветительного оборудования
+                    //slide
+                    .swiper-slide.items-slider__slide 
+                      h4.items-slider__slide-title Электрообогрев
+                      p Комплексные решения по промышленному электрообогреву
+                    //slide
+                    .swiper-slide.items-slider__slide 
+                      h4.items-slider__slide-title Щитовое оборудование
+                      p Весь спектр промышленного электрощитового оборудования
+                .swiper-pagination
                 .items-slider__buttons
                   .d-none.d-lg-block
                     a(href=catalogue).button.button_style-1.items-slider__button 
@@ -119,16 +122,15 @@ block content
                     a(href=catalogue).button.button_style-3.items-slider__button 
                       span Посмотреть весь  каталог
 
-  //
+
   section.section.homepage-form.d-xl-none
     .container 
       .row
-        p.homepage-form__text.order-md-2.col-md-8.col-lg Анкерные кронштейны, монтажные и универсальные крюки производства EKF для крепления самонесущих изолированных         
+        p.homepage-form__text.order-md-2.col-md-8.col-lg По вопросам партнерства, технической консультации, сервисного и гарантийного обслуживания, будем рады вашему обращению
         .col-md-4.col-lg-auto
           a(href='#modal-form' data-modal='open').button.button_style-2 
             span Оставить заявку
 
-  //
   section.section.advantages
     .container.lights-content 
       .bg-light.bg-light_size-1.bg-light_color-1
@@ -167,88 +169,94 @@ block content
         .row.grid__row.m-catalogue__container
           //block
           .m-catalogue-item.grid__item.col-6.col-md-7
-            a(href='#').m-catalogue-item__container.js-3d
-              .image.m-catalogue-item__image.m-catalogue-item__image_1.js-3d__forward
-                img(data-src="./img/catalogue/1.png", alt="image").lazyload
-                img(data-src="./img/catalogue/1_2.png", alt="image").lazyload
+            a(href=obshhepromyshhlennoe_osveshhenie).m-catalogue-item__container.js-3d
+              .m-catalogue-item__image.m-catalogue-item__image_1.js-3d__forward
+                .image
+                  img(data-src="./img/catalogue/1.png", alt="image").lazyload
+                .image
+                  img(data-src="./img/catalogue/1_2.png", alt="image").lazyload
               .m-catalogue-item__back.js-3d__back
                 h5.m-catalogue-item__title.m-catalogue-item__title_1 Обще&shy;промышленное<br> освещение
               
           //block
           .m-catalogue-item.grid__item.col-6.col-md-5
-            a(href=vo).m-catalogue-item__container.js-3d  
+            a(href=vzryvozashhishhyonnoe_osveshhenie).m-catalogue-item__container.js-3d  
               .image.m-catalogue-item__image.m-catalogue-item__image_2.js-3d__forward
-                img(data-src="./img/catalogue/2.png", alt="image").lazyload
-                img(data-src="./img/catalogue/2_2.png", alt="image").lazyload
+                .image
+                  img(data-src="./img/catalogue/2.png", alt="image").lazyload
+                .image
+                  img(data-src="./img/catalogue/2_2.png", alt="image").lazyload
               .m-catalogue-item__back.js-3d__back
-                h5.m-catalogue-item__title.m-catalogue-item__title_2 Взрыво&shy;защищённые<br> светильники
+                h5.m-catalogue-item__title.m-catalogue-item__title_2 Взрыво&shy;защищённое<br> освещение
               
           //block
           .m-catalogue-item.grid__item.col-6
-            a(href="#").m-catalogue-item__container.js-3d
-              .image.m-catalogue-item__image.m-catalogue-item__image_3.js-3d__forward
-                img(data-src="./img/catalogue/3.png", alt="image").lazyload
-                img(data-src="./img/catalogue/3_2.png", alt="image").lazyload
+            a(href=ulichnoe_osveshhenie).m-catalogue-item__container.js-3d
+              .m-catalogue-item__image.m-catalogue-item__image_3.js-3d__forward
+                .image
+                  img(data-src="./img/catalogue/3.png", alt="image").lazyload
+                .image
+                  img(data-src="./img/catalogue/3_2.png", alt="image").lazyload
               .m-catalogue-item__back.js-3d__back
-                h5.m-catalogue-item__title.m-catalogue-item__title_3 Прожекторное<br> светильники
+                h5.m-catalogue-item__title.m-catalogue-item__title_3 Уличное<br> освещение
               
           //block
           .m-catalogue-item.grid__item.col-6
-            a(href="#").m-catalogue-item__container.js-3d
-              .image.m-catalogue-item__image.m-catalogue-item__image_4.js-3d__forward
-                img(data-src="./img/catalogue/4.png", alt="image").lazyload
-                img(data-src="./img/catalogue/4_2.png", alt="image").lazyload
+            a(href=zagraditelnye_ogni).m-catalogue-item__container.js-3d
+              .m-catalogue-item__image.m-catalogue-item__image_4.js-3d__forward
+                .image
+                  img(data-src="./img/catalogue/4.png", alt="image").lazyload
+                .image
+                  img(data-src="./img/catalogue/4_2.png", alt="image").lazyload
               .m-catalogue-item__back.js-3d__back
                 h5.m-catalogue-item__title.m-catalogue-item__title_4 Заградительные огни
               
           //block
           .m-catalogue-item.grid__item.col-md-5
-            a(href="#").m-catalogue-item__container.js-3d
+            a(href=kommutaczionnoe_oborudovanie).m-catalogue-item__container.js-3d
               .m-catalogue-item__back.js-3d__back
                 h5.m-catalogue-item__title.m-catalogue-item__title_5 Коммутационное<br> оборудование
-              .image.m-catalogue-item__image.m-catalogue-item__image_5.js-3d__forward
-                img(data-src="./img/catalogue/5.png", alt="image").lazyload
+              .m-catalogue-item__image.m-catalogue-item__image_5.js-3d__forward
+                .image
+                  img(data-src="./img/catalogue/5.png", alt="image").lazyload
           //block
           .m-catalogue-item.grid__item.col-md-7
-            a(href="#").m-catalogue-item__container.js-3d
+            a(href=sistemy_upravleniya_i_monitoringa_osveshheniya).m-catalogue-item__container.js-3d
               .m-catalogue-item__back.js-3d__back
                 h5.m-catalogue-item__title.m-catalogue-item__title_6 Системы управления<br> и мониторинга<br> освещения
-              .image.m-catalogue-item__image.m-catalogue-item__image_6.js-3d__forward
-                img(data-src="./img/catalogue/6.png", alt="image").lazyload
+              .m-catalogue-item__image.m-catalogue-item__image_6.js-3d__forward
+                .image
+                  img(data-src="./img/catalogue/6.png", alt="image").lazyload
+                .image
+                  img(data-src="./img/catalogue/6_2.png", alt="image").lazyload
           
           //block
           .m-catalogue-item.grid__item.col-12
-            a(href="#").m-catalogue-item__container.js-3d
+            a(href=elektroobogrev).m-catalogue-item__container.js-3d
               .m-catalogue-item__back.js-3d__back
                 h5.m-catalogue-item__title.m-catalogue-item__title_7 Электрообогрев
-              .image.m-catalogue-item__image.m-catalogue-item__image_7.js-3d__forward
-                img(data-src="./img/catalogue/7.png", alt="image").lazyload
+              .m-catalogue-item__image.m-catalogue-item__image_7.js-3d__forward
+                .image
+                  img(data-src="./img/catalogue/7.png", alt="image").lazyload
           //block
           .m-catalogue-item.grid__item.col-12
-            a(href="#").m-catalogue-item__container.js-3d
+            a(href=shhitovoe_oborudovanie).m-catalogue-item__container.js-3d
               .m-catalogue-item__back.js-3d__back
                 h5.m-catalogue-item__title.m-catalogue-item__title_8 Щитовое оборудование
-              .image.m-catalogue-item__image.m-catalogue-item__image_8.js-3d__forward
-                img(data-src="./img/catalogue/8.png", alt="image").lazyload
+              .m-catalogue-item__image.m-catalogue-item__image_8.js-3d__forward
+                .image
+                  img(data-src="./img/catalogue/8.png", alt="image").lazyload
 
   section.section.about-text
     .about-text__light.about-text__light_1
     .about-text__light.about-text__light_2
     .container.about-text__container 
       .row 
-        .about-text__block.offset-sm-2.offset-lg-1.col-lg-4.col-sm-8
-          span.about-text__block-light
-          span.about-text__block-light
+        .about-text__block.offset-xl-3.col-xl-6
           .about-text__block-content
-            .h1.about-text__title.about-text__title_1 50 000
-            p.about-text__text.about-text__text_1 осветительных констуркций в среднем на одном предприятии
-        .about-text__block.offset-sm-2.offset-lg-1.col-lg-4.col-sm-8
-          span.about-text__block-light
-          span.about-text__block-light
-          .about-text__block-content
-            .h1.about-text__title.about-text__title_2 2-5 млрд
-            p.about-text__text.about-text__text_2 рублей в год расходуется наоснащение предприятия осветительными конструкциями идругим электротехническим оборудованием
-
+            h2.h1.about-text__title Экспертиза в отрасли важна!
+            p.about-text__text Мы производим электротехнические решения, которые снижают эксплуатационные затраты на величину до 60% и значительно облегчают обслуживание объектов непрерывного цикла.
+        
   section.section.about-preview
     .container.lights-content 
       .bg-light.bg-light_size-3.bg-light_color-1(data-parallax='-0.15')

@@ -261,7 +261,7 @@ const windowSize = {
 }
 
 const TouchHoverEvents = {
-  targets: 'a, button, label, tr, .jsTouchHover',
+  targets: 'a, button, label, tr, .jsTouchHover, .scrollbar-track',
   touched: false,
   touchEndDelay: 100, //ms
   init: function() {
@@ -807,17 +807,22 @@ class AboutTextBlock {
     this.$parent = $parent;
   }
   init() {
+    this.$block = this.$parent.querySelector('.about-text__block');
+    this.$lights = this.$parent.querySelectorAll('.about-text__light');
+    this.$color1 = getComputedStyle(document.documentElement).getPropertyValue('--color-dark');
+    this.$color2 = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
+
     this.check = ()=> {
       if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
         if(this.initialized) {
-          this.destroyMobile();
+          this.destroyType();
         }
         this.initDesktop();
         this.flag = true;
       } 
       else if(window.innerWidth<brakepoints.lg && (!this.initialized || this.flag)) {
         if(this.initialized) {
-          this.destroyDesktop();
+          this.destroyType();
         }
         this.initMobile();
         this.flag = false;
@@ -830,21 +835,13 @@ class AboutTextBlock {
   }
 
   initDesktop() {
-    this.$blocks = this.$parent.querySelectorAll('.about-text__block');
-    this.$title = this.$parent.querySelectorAll('.about-text__title');
-    this.$ligts = this.$parent.querySelectorAll('.about-text__light');
-
-    let color1 = getComputedStyle(document.documentElement).getPropertyValue('--color-dark'),
-        color2 = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
-
     this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$blocks, {css:{color:color1}}, {css:{color:color2}, duration:0.8, ease:'power2.in'})
-      .to(this.$blocks, {css:{color:color1}, duration:0.8, ease:'power2.out'}, '+=0.4') //2
-      .fromTo(this.$ligts[0], {rotate:3}, {rotate:-3, duration:2, ease:'power1.inOut'}, '-=2') //2
-      .fromTo(this.$ligts[1], {rotate:3}, {rotate:-3, duration:2, ease:'power3.inOut'}, '-=2') //2
-      .fromTo(this.$ligts, {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:'power2.in'}, '-=2')
-      .to(this.$ligts, {autoAlpha:0, duration:0.8, ease:'power2.out'}, '-=0.8')
-
+      .fromTo(this.$block, {css:{color:this.$color1}}, {css:{color:this.$color2}, duration:0.8, ease:'power2.in'})
+      .to(this.$block, {css:{color:this.$color1}, duration:0.8, ease:'power2.out'}, '+=0.4') //2
+      .fromTo(this.$lights[0], {rotate:2}, {rotate:-2, duration:2, ease:'power1.inOut'}, '-=2') //2
+      .fromTo(this.$lights[1], {rotate:2}, {rotate:-2, duration:2, ease:'power3.inOut'}, '-=2') //2
+      .fromTo(this.$lights, {autoAlpha:0}, {autoAlpha:1, duration:0.8, ease:'power2.in'}, '-=2')
+      .to(this.$lights, {autoAlpha:0, duration:0.8, ease:'power2.out'}, '-=0.8')
     this.trigger = ScrollTrigger.create({
       trigger: this.$parent,
       start: "center bottom",
@@ -857,49 +854,29 @@ class AboutTextBlock {
   }
 
   initMobile() {
-    this.$blocks = this.$parent.querySelectorAll('.about-text__block');
-    this.$lights = this.$parent.querySelectorAll('.about-text__block-light');
-    this.mob_triggers = [];
-    this.mob_animations = [];
-    
-    let color1 = getComputedStyle(document.documentElement).getPropertyValue('--color-dark'),
-        color2 = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
-    
-    this.$blocks.forEach(($block, index)=>{
-      let $lights = $block.querySelectorAll('.about-text__block-light');
-
-      this.mob_animations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
-        .fromTo($block, {css:{color:color1}}, {css:{color:color2}})
-        .fromTo($lights, {autoAlpha:0}, {autoAlpha:1, duration:0.75, stagger:{amount:0.25}}, '-=1')
-
-      this.mob_triggers[index] = ScrollTrigger.create({
-        trigger: $block,
-        start: "center bottom",
-        end: 'center center',
-        scrub: true,
-        onUpdate: self => {
-          this.mob_animations[index].progress(self.progress);
-        }
-      });
-    })
+    this.animation = gsap.timeline({paused:true, defaults:{duration:1}})
+      .fromTo(this.$block, {css:{color:this.$color1}}, {css:{color:this.$color2}, ease:'power2.in'})
+      .fromTo(this.$lights, {autoAlpha:0}, {autoAlpha:1, ease:'power2.in'}, '-=1')
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "center bottom",
+      end: 'center center',
+      scrub: true,
+      onUpdate: self => {
+        this.animation.progress(self.progress);
+      }
+    });
   }
 
-  destroyDesktop() {
+  destroyType() {
     this.animation.kill();
     this.trigger.kill();
-    gsap.set([this.$ligts, this.$blocks], {clearProps: "all"})
-  }
-
-  destroyMobile() {
-    for(let child in this.mob_animations) this.mob_animations[child].kill();
-    for(let child in this.mob_triggers) this.mob_triggers[child].kill();
-    gsap.set(this.$lights, {clearProps: "all"})
+    gsap.set([this.$lights, this.$block], {clearProps: "all"})
   }
 
   destroy() {
     window.addEventListener('resize', this.check);
-    if(this.flag) this.destroyDesktop();
-    else this.destroyMobile();
+    this.destroyType();
     for(let child in this) delete this[child];
   }
 }
@@ -1103,7 +1080,7 @@ class AboutPreviewBlock {
     this.triggers[0] = ScrollTrigger.create({
       trigger: this.$container,
       start: "center center",
-      end: '+=1500',
+      end: '+=2500',
       pin: true,
       pinType: pinType,
       scrub: true,
@@ -1677,10 +1654,12 @@ class ItemSlider {
   } 
   init() {
     this.$slider = this.$parent.querySelector('.items-slider__element');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+    this.$prev = this.$parent.querySelector('.swiper-button-prev');
+    this.$next = this.$parent.querySelector('.swiper-button-next');
+
     this.$images_container = this.$parent.querySelector('.items-slider__images');
     this.$images = this.$parent.querySelectorAll('.items-slider__image');
-    this.$prev = this.$parent.querySelector('.items-slider__prev');
-    this.$next = this.$parent.querySelector('.items-slider__next');
     this.index = 0;
     this.speed = 0.5;
 
@@ -1702,38 +1681,37 @@ class ItemSlider {
 
     this.animationsEnter[this.index].play();
 
-    this.slider = new Splide(this.$slider, {
-      type: 'loop',
-      perPage: 1,
-      perMove: 1,
-      gap: desktop_gap,
-      arrows: false,
-      pagination: true,
-      easing: 'ease',
-      waitForTransition: false,
+    this.slider = new Swiper(this.$slider, {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 24,
       speed: this.speed*1000,
-      autoplay: true,
-      interval: autoslide_interval*1000,
-      breakpoints: {
-        576: {
-          gap: mobile_gap
-        },
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      },
+      navigation: {
+        prevEl: this.$prev,
+        nextEl: this.$next
       }
-    })
+    });
 
-    this.slider.on('move', (newIndex)=>{
-      if(this.index!==newIndex) {
+
+    this.slider.on('slideChange', (swiper)=>{
+      let index = swiper.realIndex;
+      if(this.index!==index) {
         if(this.animationsEnter[this.index].isActive()) {
           this.animationsEnter[this.index].pause();
         }
         this.animationsExit[this.index].play(0);
   
-        this.animationsEnter[newIndex].play(0);
-        this.index = newIndex;
+        this.animationsEnter[index].play(0);
+        this.index = index;
       }
     });
 
-    this.swipes = SwipeListener(this.$images_container);
+    /* this.swipes = SwipeListener(this.$images_container);
     this.$images_container.addEventListener('swipe', (event)=> {
       let dir = event.detail.directions;
       if(dir.left) this.slider.go('>');
@@ -1745,7 +1723,7 @@ class ItemSlider {
     })
     this.$next.addEventListener('click', ()=>{
       this.slider.go('>');
-    })
+    }) */
 
     this.slider.mount();
   }

@@ -7,17 +7,15 @@ header.header(data-scroll-lock-fill-gap)
       nav.header-nav 
         ul.header-nav__list 
           li.header-nav__item   
-            a(href=about).header-nav__link 
+            a(href=o_kompanii).header-nav__link 
               span О компании 
           li.header-nav__item   
-            a(href=production).header-nav__link
+            a(href=proizvodstvo).header-nav__link
               span Производство
           li.header-nav__item
             div(data-toggle-trigger).header-nav__link-toggle
-              a(href=catalogue).header-nav__link
+              a(href=produkcziya).header-nav__link
                 span Продукция
-                svg(viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg')
-                  path(d='M20.0205 20.276L0.0205078 20.276L0.0205096 0.275955C0.0205096 0.275955 -0.342781 8.03841 5.74934 14.3194C11.8415 20.6004 20.0205 20.276 20.0205 20.276Z' fill='currentColor')
             
             .header-nav__toggle-content(data-toggle-content)
               ul.header-nav__toggle-content-list
@@ -26,32 +24,42 @@ header.header(data-scroll-lock-fill-gap)
                 li 
                   ul.header-nav__toggle-content-list 
                     li 
-                      a(href="#").header-nav__toggle-content-link Общепромыщленное
+                      a(href=obshhepromyshhlennoe_osveshhenie).header-nav__toggle-content-link 
+                        svg.icon
+                          use(xlink:href='./img/icons/icons-sprite.svg#obshhepromyshhlennoe_osveshhenie')
+                        | Общепромыщленное
                     li 
-                      a(href=vo).header-nav__toggle-content-link Взрывозащищённое
+                      a(href=vzryvozashhishhyonnoe_osveshhenie).header-nav__toggle-content-link
+                        svg.icon
+                          use(xlink:href='./img/icons/icons-sprite.svg#vzryvozashhishhyonnoe_osveshhenie')
+                        | Взрывозащищённое
                     li 
-                      a(href="#").header-nav__toggle-content-link Прожекторное
+                      a(href=ulichnoe_osveshhenie).header-nav__toggle-content-link
+                        svg.icon
+                          use(xlink:href='./img/icons/icons-sprite.svg#ulichnoe_osveshhenie')
+                        | Уличное
                     li  
-                      a(href="#").header-nav__toggle-content-link Заградительные огни    
+                      a(href=zagraditelnye_ogni).header-nav__toggle-content-link
+                        svg.icon
+                          use(xlink:href='./img/icons/icons-sprite.svg#zagraditelnye_ogni')
+                        | Заградительные огни    
                 li 
-                  a(href="#").header-nav__toggle-content-link Коммутационное оборудование
+                  a(href=kommutaczionnoe_oborudovanie).header-nav__toggle-content-link Коммутационное оборудование
                 li
-                  a(href=sumo).header-nav__toggle-content-link Системы управления и мониторинга освещения
+                  a(href=sistemy_upravleniya_i_monitoringa_osveshheniya).header-nav__toggle-content-link Системы управления и мониторинга освещения
                 li
-                  a(href="#").header-nav__toggle-content-link Электрообогрев
+                  a(href=elektroobogrev).header-nav__toggle-content-link Электрообогрев
                 li
-                  a(href="#").header-nav__toggle-content-link Щитовое оборудование
-
-
+                  a(href=shhitovoe_oborudovanie).header-nav__toggle-content-link Щитовое оборудование
 
           li.header-nav__item   
-            a(href=certificates).header-nav__link
+            a(href=sertifikaty_i_akkreditaczii).header-nav__link
               span Сертификаты и аккредитации
           li.header-nav__item   
-            a(href=references).header-nav__link
+            a(href=referens_list).header-nav__link
               span Референс лист
           li.header-nav__item   
-            a(href=contacts).header-nav__link 
+            a(href=kontakty).header-nav__link 
               span Контакты
       button.nav-toggle
         span

@@ -11,12 +11,14 @@
   --color-gray2:    #3E3E3E;
   --color-footer: #DDDDDD;
   --color-main-bg: #0E0E0E;
-  --color-bg-transparent: rgba(255, 255, 255, 0.10);
+  --color-bg-transparent: rgba(255, 255, 255, 0.1);
   --color-bg-transparent2: rgba(255, 255, 255, 0.05);
   --color-scrollbar: #919191;
   --color-error: #A83535;
   --color-close-hover: #F02F3E;
   --color-input-bg-1: rgba(91, 91, 91, 0.4);
-  --color-input-bg-error: rgba(168, 53, 53, 0.5); }
+  --color-input-bg-error: rgba(168, 53, 53, 0.5);
+  --color-back-blur: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+  --color-back-no-blur: rgba(86, 86, 86, 0.8); }
 
 /*# sourceMappingURL=maps/theme.css.map */
