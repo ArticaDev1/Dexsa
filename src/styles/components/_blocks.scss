@@ -287,7 +287,7 @@
   @include media-breakpoint-down(sm) {
     &__content {
       text-align: center;
-      padding-bottom: 54px;
+      padding-bottom: 50px;
     }
   }
 }
@@ -891,15 +891,6 @@
       padding: 20px;
     }
     &__image {
-      &_1 {
-        top: 30px;
-      }
-      &_2 {
-        top: 30px;
-      }
-      &_4 {
-        top: 30px;
-      }
       &_5 {
         right: 32px;
         width: 100px;
@@ -936,6 +927,7 @@
         height: 100%;
       }
       .m-catalogue-item__image {
+        top: 20px;
         width: 100%;
         height: 100px;
         .image {
@@ -968,44 +960,20 @@
     position: relative;
     border-radius: 24px;
     height: 100%;
-    &::before, &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      border-radius: inherit;
-    }
-    &::before {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%), linear-gradient(180deg, rgba(32, 32, 32, 0.85) 0%, rgba(104, 104, 104, 0.85) 100%);
-    }
-    &::after {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%), linear-gradient(180deg, #272727 0%, #3F3F3F 50%, #747474 100%);
-      opacity: 0;
-      transition: opacity $trs2;
-    }
+    padding: 40px 24px 50px 24px;
+    box-shadow: $inset_shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color $trs2;
+    background-color: var(--color-bg-transparent2);
     &[data-touch], &[data-hover] {
-      &::after {
-        opacity: 1;
-      }
+      background-color: var(--color-bg-transparent);
       .catalogue-item__images .image:not(:first-child) {
         opacity: 1;
         visibility: visible;
       }
     }
-  }
-  &__inner {
-    border-radius: inherit;
-    padding: 40px $grid-gutter-width 50px $grid-gutter-width;
-    box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
   }
   &__images {
     width: 100%;
@@ -1029,22 +997,19 @@
     text-align: center;
   }
   @include media-breakpoint-down(xxl) {
-    &__inner {
-      padding: 40px $grid-gutter-width;
+    &__container {
+      padding: 40px 24px;
     }
     &__images {
       height: 180px;
-    }
-    &__title {
-      margin: 0;
     }
   }
   @include media-breakpoint-down(lg) {
     &__images {
       height: 140px;
     }
-    &__inner {
-      padding: 30px $grid-gutter-width 34px $grid-gutter-width;
+    &__container {
+      padding: 30px 24px 34px 24px;
     }
   }
   @include media-breakpoint-down(sm) {
@@ -1059,12 +1024,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0;
     }
-    &__inner {
-      padding: 120px 10px 20px 10px;
+    &__container {
+      padding: 140px 10px 20px 10px;
     }
   }
 }
+
+.backdropfilter .catalogue-item__container {
+  backdrop-filter: $blur;
+} 
 
 .catalogue-xl-item {
   &__container {
@@ -2359,7 +2329,6 @@
 }
 
 .image-slider {
-  margin-top: -230px;
   &__slide {
     height: 600px;
     position: relative;
@@ -2379,17 +2348,10 @@
       left: 0;
     }
   }
-  .splide__pagination {
-    position: relative;
-    justify-content: flex-start;
+  .swiper-pagination {
     margin-top: 35px;
-    left: $xxl-field;
   }
   @include media-breakpoint-down(xxl) {
-    margin-top: -210px;
-    .splide__pagination {
-      left: $xl-field;
-    }
     &__slide {
       height: 500px;
       .row {
@@ -2397,34 +2359,33 @@
       }
     }
   }
-  @include media-breakpoint-down(xl) {
-    .splide__pagination {
-      left: $lg-field;
-    }
-  }
   @include media-breakpoint-down(lg) {
-    margin-top: -220px;
     &__slide {
       height: 600px;
       text-align: center;
     }
-    .splide__pagination {
-      left: 0;
+    .swiper-pagination {
       justify-content: center;
       margin-top: 30px;
     }
   }
   @include media-breakpoint-down(sm) {
-    margin-top: -160px;
     &__slide {
       height: 500px;
       .row {
         padding-bottom: 50px;
       }
     }
-    .splide__pagination {
+    .swiper-pagination {
       margin-top: 20px;
     }
+  }
+}
+
+.backdropfilter .image-slider {
+  margin-top: -230px;
+  @include media-breakpoint-down(sm) {
+    margin-top: -160px;
   }
 }
 

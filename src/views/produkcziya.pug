@@ -10,7 +10,7 @@ block content
       .category-head__scene-content.image.image_cover.image_mask-1
         img(data-src="./img/ldlslld.jpg", alt="bg").lazyload
     .container.category-head__container
-      .category-head__content.row
+      .category-head__content.row.stp
         h1.category-head__title.category-head__item.col-lg-6 Продукция
         p.category-head__item.category-head__text.col-lg-6 Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
 
@@ -57,38 +57,36 @@ block content
               //block
               .catalogue-item.grid__item(class=classes)
                 a(href=link).catalogue-item__container
-                  .catalogue-item__inner
-                    .catalogue-item__images   
-                      .image.image_contain
-                        img(data-src=img1, alt="image").lazyload
-                      .image.image_contain
-                        img(data-src=img2, alt="image").lazyload
-                    h5.catalogue-item__title !{title}
+                  .catalogue-item__images   
+                    .image.image_contain
+                      img(data-src=img1, alt="image").lazyload
+                    .image.image_contain
+                      img(data-src=img2, alt="image").lazyload
+                  h5.catalogue-item__title !{title}
           
-            +block(ov, 'Обще&shy;промышленное',    './img/catalogue/1.png', './img/catalogue/1_2.png', 'col-xl-3 col-md-7 col-6')
-            +block(vo, 'Взрыво&shy;защищённое',    './img/catalogue/2.png', './img/catalogue/2_2.png', 'col-xl-3 col-md-5 col-6')
-            +block(pv, 'Прожекторное',        './img/catalogue/3.png', './img/catalogue/3_2.png', 'col-xl-3 col-6')
-            +block(zv, 'Заградитель&shy;ные огни', './img/catalogue/4.png', './img/catalogue/4_2.png', 'col-xl-3 col-6')
+            +block(obshhepromyshhlennoe_osveshhenie, 'Обще&shy;промышленное',    './img/catalogue/1.png', './img/catalogue/1_2.png', 'col-xl-3 col-md-7 col-6')
+            +block(vzryvozashhishhyonnoe_osveshhenie, 'Взрыво&shy;защищённое',    './img/catalogue/2.png', './img/catalogue/2_2.png', 'col-xl-3 col-md-5 col-6')
+            +block(ulichnoe_osveshhenie, 'Уличное',        './img/catalogue/3.png', './img/catalogue/3_2.png', 'col-xl-3 col-6')
+            +block(zagraditelnye_ogni, 'Заградитель&shy;ные огни', './img/catalogue/4.png', './img/catalogue/4_2.png', 'col-xl-3 col-6')
 
-
-    section.small-section.image-slider 
-      .splide
-        .splide__track
-          .splide__list
-            //slide
-            .image-slider__slide.splide__slide
-              .image.image_cover.image_mask-1
-                img(src="./img/ddsd.jpg", alt="image")
-              .container
-                .row
-                  .h4.col-xl-5 Передача данных от светильника к светильнику и автоматический контроль освещенности
-            //slide
-            .image-slider__slide.splide__slide
-              .image.image_cover.image_mask-1
-                img(src="./img/dddds.jpg", alt="image")
-              .container
-                .row
-                  .h4.col-xl-5 Доступ к каждому светильнику с планшета или телефона
+    section.small-section.swiper.image-slider 
+      .swiper-container
+        .swiper-wrapper
+          //slide
+          .swiper-slide.image-slider__slide
+            .image.image_cover.image_mask-1
+              img(src="./img/ddsd.jpg", alt="image")
+            .container
+              .row
+                .h4.col-xl-5 Передача данных от светильника к светильнику и автоматический контроль освещенности
+          //slide
+          .swiper-slide.image-slider__slide
+            .image.image_cover.image_mask-1
+              img(src="./img/dddds.jpg", alt="image")
+            .container
+              .row
+                .h4.col-xl-5 Доступ к каждому светильнику с планшета или телефона
+      .swiper-pagination.container
             
     section.small-section 
       .container 
@@ -104,7 +102,7 @@ block content
               li Взрывозащищённые корпуса из алюминиевого сплава
               li Посты управления из алюминия, нержавеющей стали и полиэстера
 
-            a(href='#').button.button_style-4
+            a(href=kommutaczionnoe_oborudovanie).button.button_style-4
               | Перейти к каталогу
               span.icon  
                 svg
@@ -124,7 +122,7 @@ block content
               li Вводно-распределительные устройства
               li Низковольтные комплектные устройства
 
-            a(href='#').button.button_style-4
+            a(href=shhitovoe_oborudovanie).button.button_style-4
               | Перейти к каталогу
               span.icon  
                 svg
@@ -148,7 +146,7 @@ block content
               li Аксессуары TubeTrace
               li Силовые трансформаторы
 
-            a(href='#').button.button_style-4
+            a(href=elektroobogrev).button.button_style-4
               | Перейти к каталогу
               span.icon  
                 svg

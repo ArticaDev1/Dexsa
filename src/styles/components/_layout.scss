@@ -145,18 +145,18 @@
 
 .grid {
   display: flex;
-  &__row {
+  & > .row {
     margin-bottom: -34px;
-  }
-  &__item {
-    margin-bottom: 34px;
+    & > * {
+      margin-bottom: 34px;
+    }
   }
   @include media-breakpoint-down(sm) {
-    &__row {
+    & > .row {
       margin-bottom: -20px;
-    }
-    &__item {
-      margin-bottom: 20px;
+      & > * {
+        margin-bottom: 20px;
+      }
     }
   }
 }

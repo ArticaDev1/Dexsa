@@ -102,6 +102,7 @@ const App = {
 
     if(!mobile()) {
       Parallax.init();
+      Cursor.init();
     }
     
     if(mobile()) {
@@ -315,11 +316,13 @@ const TouchHoverEvents = {
     //mouseenter
     if(event.type=='mouseenter' && !this.touched && $targets[0] && $targets[0]==event.target) {
       $targets[0].setAttribute('data-hover', '');
+      if(Cursor.initialized) Cursor.mouseenter();
     }
     //mouseleave
     else if(event.type=='mouseleave' && !this.touched && $targets[0] && $targets[0]==event.target) {
       $targets[0].removeAttribute('data-focus');
       $targets[0].removeAttribute('data-hover');
+      if(Cursor.initialized) Cursor.mouseleave();
     }
     //mousedown
     if(event.type=='mousedown' && !this.touched && $targets[0]) {
@@ -329,6 +332,39 @@ const TouchHoverEvents = {
     else if(event.type=='mouseup' && !this.touched  && $targets[0]) {
       $targets[0].removeAttribute('data-focus');
     }
+  }
+}
+
+const Cursor = {
+  init: function() {
+    this.$parent = document.querySelector('.cursor');
+
+    document.addEventListener('mousemove', (event)=>{
+      let x = event.clientX,
+          y = event.clientY;
+      gsap.to(this.$parent, {duration:0.5,x:x,y:y,ease:'power2.out'})
+    });
+    
+    document.addEventListener('mousedown',(event)=>{
+      this.$parent.classList.add('focus');
+    })
+    document.addEventListener('mouseup',(event)=>{
+      this.$parent.classList.remove('focus');
+    })
+    document.addEventListener('mouseleave', (event)=>{
+      this.$parent.classList.add('hidden');
+    })
+    document.addEventListener('mouseenter', (event)=>{
+      this.$parent.classList.remove('hidden');
+    })
+
+    this.initialized = true;
+  },
+  mouseenter: function() {
+    this.$parent.classList.add('hover');
+  },
+  mouseleave: function() {
+    this.$parent.classList.remove('hover');
   }
 }
 
@@ -1711,21 +1747,12 @@ class ItemSlider {
       }
     });
 
-    /* this.swipes = SwipeListener(this.$images_container);
+    this.swipes = SwipeListener(this.$images_container);
     this.$images_container.addEventListener('swipe', (event)=> {
       let dir = event.detail.directions;
-      if(dir.left) this.slider.go('>');
-      else if(dir.right) this.slider.go('<');
+      if(dir.left) this.slider.slideNext();
+      else if(dir.right) this.slider.slidePrev();
     });
-
-    this.$prev.addEventListener('click', ()=>{
-      this.slider.go('<');
-    })
-    this.$next.addEventListener('click', ()=>{
-      this.slider.go('>');
-    }) */
-
-    this.slider.mount();
   }
 
   destroy() {
@@ -1927,23 +1954,19 @@ class ImageSlider {
   } 
 
   init() {
-    this.$slider = this.$parent.querySelector('.image-slider .splide');
-    this.speed = Speed/2;
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
 
-    this.slider = new Splide(this.$slider, {
-      type: 'loop',
-      perPage: 1,
-      perMove: 1,
-      arrows: false,
-      pagination: true,
-      waitForTransition: false,
-      easing: 'ease',
-      speed: this.speed*1000,
-      autoplay: true,
-      interval: autoslide_interval*1000
-    })
-
-    this.slider.mount();
+    this.slider = new Swiper(this.$slider, {
+      loop: true,
+      slidesPerView: 1,
+      speed: 500,
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      }
+    });
   }
 
   destroy() {

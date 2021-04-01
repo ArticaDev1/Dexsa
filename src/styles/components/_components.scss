@@ -107,6 +107,31 @@ img {
   }
 }
 
+.cursor {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+  transition: opacity $trs2;
+  &.hidden {
+    opacity: 0;
+  }
+  &.hover {
+    .cursor__element {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  &__element {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    border: 2px solid var(--color-gray);
+    transition: width $trs2, height $trs2;
+  }
+}
+
 .splide {
   &__arrows {
     pointer-events: none;
@@ -214,6 +239,12 @@ img {
     display: flex;
     height: 8px;
     &-bullet {
+      &:first-child {
+        margin-left: -9px;
+      }
+      &:last-child {
+        margin-right: -9px;
+      }
       margin-top: -9px;
       width: 26px;
       height: 26px;
