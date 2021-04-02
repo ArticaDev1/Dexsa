@@ -2087,7 +2087,7 @@ class CategoryHead {
         init: false,
         touchStartPreventDefault: false,
         longSwipesRatio: 0.25,
-        loop: true,
+        effect: 'coverflow',
         loopPreventsSlide: false,
         slidesPerView: 1,
         speed: 500,
