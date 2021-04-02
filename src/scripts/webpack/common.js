@@ -1,7 +1,6 @@
 window.dev = false;
 
 const Speed = 1; //seconds
-const autoslide_interval = 5; //seconds
 
 const $body = document.body;
 const $wrapper = document.querySelector('.wrapper');
@@ -142,11 +141,6 @@ const App = {
       this.afunctions.add(SfSlider, '.system-features-slider');
       this.afunctions.add(ShemaLights, '.sumo-schema');
       this.afunctions.add(DocsSlider, '.documents-slider');
-      this.afunctions.add(HeadSlider, '.category-head-slider');
-      
-      
-      
-      
       
       autosize(document.querySelectorAll('textarea.input__element'));
 
@@ -262,7 +256,7 @@ const windowSize = {
 }
 
 const TouchHoverEvents = {
-  targets: 'a, button, label, tr, .jsTouchHover, .scrollbar-track',
+  targets: 'a, button, label, tr, [data-touch-hover], .scrollbar-track',
   touched: false,
   touchEndDelay: 100, //ms
   init: function() {
@@ -316,13 +310,17 @@ const TouchHoverEvents = {
     //mouseenter
     if(event.type=='mouseenter' && !this.touched && $targets[0] && $targets[0]==event.target) {
       $targets[0].setAttribute('data-hover', '');
-      if(Cursor.initialized) Cursor.mouseenter();
+      if(Cursor.initialized && event.target.closest('[data-cursor-slide]')) {
+        Cursor.slide_enter();
+      }
     }
     //mouseleave
     else if(event.type=='mouseleave' && !this.touched && $targets[0] && $targets[0]==event.target) {
       $targets[0].removeAttribute('data-focus');
       $targets[0].removeAttribute('data-hover');
-      if(Cursor.initialized) Cursor.mouseleave();
+      if(Cursor.initialized && event.target.closest('[data-cursor-slide]')) {
+        Cursor.slide_leave();
+      }
     }
     //mousedown
     if(event.type=='mousedown' && !this.touched && $targets[0]) {
@@ -360,11 +358,11 @@ const Cursor = {
 
     this.initialized = true;
   },
-  mouseenter: function() {
-    this.$parent.classList.add('hover');
+  slide_enter: function() {
+    this.$parent.classList.add('slide');
   },
-  mouseleave: function() {
-    this.$parent.classList.remove('hover');
+  slide_leave: function() {
+    this.$parent.classList.remove('slide');
   }
 }
 
@@ -1958,6 +1956,7 @@ class ImageSlider {
     this.$pagination = this.$parent.querySelector('.swiper-pagination');
 
     this.slider = new Swiper(this.$slider, {
+      touchStartPreventDefault: false,
       loop: true,
       slidesPerView: 1,
       speed: 500,
@@ -2073,19 +2072,57 @@ class CategoryHead {
   }
 
   init() {
-    this.$items = this.$parent.querySelectorAll('.category-head__item');
-    this.$bg = this.$parent.querySelectorAll('.category-head__scene-content');
+    let animate = ($elements, $image)=> {
+      this.animation = gsap.timeline()
+        .fromTo($image, {scale:1.2}, {scale:1, duration:Speed*1.5, ease:'power2.out'})
+        .fromTo($elements, {autoAlpha:0}, {autoAlpha:1, duration:Speed*1.3, stagger:{amount:Speed*0.2}}, `-=${Speed*1.5}`)
+        .fromTo($elements, {y:40}, {y:0, duration:Speed*1.3, ease:'power2.out', stagger:{amount:Speed*0.2}}, `-=${Speed*1.5}`)
+    }
 
-    this.animation = gsap.timeline({paused:true})
-      .fromTo(this.$bg, {scale:1.2}, {scale:1, duration:Speed*1.5, ease:'power2.out'})
-      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*1.25, stagger:{amount:Speed*0.25}},  `-=${Speed*1.5}`)
-      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*1.25, ease:'power2.out', stagger:{amount:Speed*0.25}}, `-=${Speed*1.5}`)
+    if(this.$parent.classList.contains('swiper')) {
+      this.$slider = this.$parent.querySelector('.swiper-container');
+      this.$pagination = this.$parent.querySelector('.swiper-pagination');
 
-    this.animation.play();
+      this.slider = new Swiper(this.$slider, {
+        init: false,
+        touchStartPreventDefault: false,
+        longSwipesRatio: 0.25,
+        loop: true,
+        loopPreventsSlide: false,
+        slidesPerView: 1,
+        speed: 500,
+        lazy: {
+          loadOnTransitionStart: true
+        },
+        pagination: {
+          el: this.$pagination,
+          clickable: true,
+          bulletElement: 'button'
+        }
+      });
+
+      this.slider.on('init', function(swiper) {
+        let $slide = swiper.slides[swiper.activeIndex],
+            $title = $slide.querySelector('.category-head__title'),
+            $text = $slide.querySelector('.category-head__text'),
+            $image = $slide.querySelector('.category-head__scene .image');
+        animate([$title, $text], $image);
+      });
+
+      this.slider.init();
+    } 
+    
+    else {
+      let $title = this.$parent.querySelector('.category-head__title'),
+          $text = this.$parent.querySelector('.category-head__text'),
+          $image = this.$parent.querySelector('.category-head__scene .image');
+      animate([$title, $text], $image);
+    }
   }
 
   destroy() {
-    this.animation.kill();
+    if(this.slider) this.slider.destroy();
+    if(this.animation) this.animation.kill();
     for(let child in this) delete this[child];
   }
 }
@@ -2138,39 +2175,6 @@ class DocsSlider {
       navigation: {
         prevEl: this.$prev,
         nextEl: this.$next
-      }
-    });
-
-
-  }
-
-  destroy() {
-    this.swiper.destroy();
-    for(let child in this) delete this[child];
-  }
-}
-class HeadSlider {
-  constructor($parent) {
-    this.$parent = $parent;
-  } 
-  init() {
-    this.speed = 0.5;
-    this.$slider = this.$parent.querySelector('.swiper-container');
-    this.$pagination = this.$parent.querySelector('.swiper-pagination');
-
-    this.elements = [];
-
-    this.swiper = new Swiper(this.$slider, {
-      loop: true,
-      slidesPerView: 1,
-      speed: this.speed*1000,
-      lazy: {
-        loadOnTransitionStart: true
-      },
-      pagination: {
-        el: this.$pagination,
-        clickable: true,
-        bulletElement: 'button'
       }
     });
 

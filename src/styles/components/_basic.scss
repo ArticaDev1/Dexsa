@@ -35,6 +35,11 @@ body {
     box-sizing: border-box;
   }
 }
+a, button, label, [data-touch-hover] {
+  * {
+    user-select: none;
+  }
+}
 button, input, textarea {
   outline: none;
   display: block;

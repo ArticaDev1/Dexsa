@@ -56,7 +56,14 @@
     <script src="./scripts/preloader.js"></script>
     <!--PRELOADER END-->
     <div class="cursor">
-      <div class="cursor__element"></div>
+      <div class="cursor-slide">
+        <svg class="icon">
+          <use xlink:href="./img/icons/icons-sprite.svg#arrow2"></use>
+        </svg>
+        <svg class="icon">
+          <use xlink:href="./img/icons/icons-sprite.svg#arrow2"></use>
+        </svg>
+      </div>
     </div>
     <div class="wrapper" data-barba="wrapper" style="opacity:0;visibility:hidden;">
       <header class="header" data-scroll-lock-fill-gap>
@@ -162,62 +169,72 @@
       </header>
       <div class="content">
         <main class="main" data-barba="container">
-          <section class="section category-head-slider swiper">
-            <div class="swiper-container">
+          <section class="section category-head swiper">
+            <div class="swiper-container" data-touch-hover data-cursor-slide>
               <div class="swiper-wrapper">
-                <!--slide-->
-                <div class="swiper-slide screen category-head-slider__slide">
-                  <div class="image image_cover image_mask-1"><img src="./img/production/1.jpg" alt="document"></div>
-                  <div class="container category-head-slider__slide-content">
-                    <div class="row">
-                      <h2 class="h1 col-lg-6 category-head-slider__slide-title">Наше производство это:</h2>
-                      <p class="col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
-                    </div>
-                  </div>
-                </div>
-                <!--slide-->
-                <div class="swiper-slide screen category-head-slider__slide">
-                  <div class="image image_cover image_mask-1"><img src="./img/production/2.jpg" alt="document"></div>
-                  <div class="container category-head-slider__slide-content">
-                    <div class="row">
-                      <h2 class="h1 col-lg-6 category-head-slider__slide-title">Инновации:</h2>
-                      <p class="col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
-                    </div>
-                  </div>
-                </div>
-                <!--slide-->
-                <div class="swiper-slide screen category-head-slider__slide">
-                  <div class="image image_cover image_mask-1"><img src="./img/production/3.jpg" alt="document"></div>
-                  <div class="container category-head-slider__slide-content">
-                    <div class="row">
-                      <h2 class="h1 col-lg-6 category-head-slider__slide-title">Решения:</h2>
-                      <p class="col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
-                    </div>
-                  </div>
-                </div>
-                <!--slide-->
-                <div class="swiper-slide screen category-head-slider__slide">
-                  <div class="image image_cover image_mask-1"><img src="./img/production/4.jpg" alt="document"></div>
-                  <div class="container category-head-slider__slide-content">
-                    <div class="row">
-                      <h2 class="h1 col-lg-6 category-head-slider__slide-title">Гарантия:</h2>
-                      <p class="col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
-                    </div>
-                  </div>
-                </div>
-                <!--slide-->
-                <div class="swiper-slide screen category-head-slider__slide">
-                  <div class="image image_cover image_mask-1"><img src="./img/production/5.jpg" alt="document"></div>
-                  <div class="container category-head-slider__slide-content">
-                    <div class="row">
-                      <h2 class="h1 col-lg-6 category-head-slider__slide-title">Складская программа:</h2>
-                      <p class="col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
-                    </div>
-                  </div>
-                </div>
+                                <!--slide-->
+                                <div class="swiper-slide screen category-head__slide" data-touch-hover>
+                                  <div class="category-head__scene" data-parallax="0.2" data-parallax-top>
+                                    <div class="image image_cover image_mask-1"><img class="swiper-lazy" data-src="./img/production/1.jpg" alt="bg"></div>
+                                  </div>
+                                  <div class="container category-head__container">
+                                    <div class="category-head__content row stp">
+                                      <h2 class="h1 category-head__title col-lg-6">Наше производство это:</h2>
+                                      <p class="category-head__text col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--slide-->
+                                <div class="swiper-slide screen category-head__slide" data-touch-hover>
+                                  <div class="category-head__scene" data-parallax="0.2" data-parallax-top>
+                                    <div class="image image_cover image_mask-1"><img class="swiper-lazy" data-src="./img/production/2.jpg" alt="bg"></div>
+                                  </div>
+                                  <div class="container category-head__container">
+                                    <div class="category-head__content row stp">
+                                      <h2 class="h1 category-head__title col-lg-6">Инновации</h2>
+                                      <p class="category-head__text col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--slide-->
+                                <div class="swiper-slide screen category-head__slide" data-touch-hover>
+                                  <div class="category-head__scene" data-parallax="0.2" data-parallax-top>
+                                    <div class="image image_cover image_mask-1"><img class="swiper-lazy" data-src="./img/production/3.jpg" alt="bg"></div>
+                                  </div>
+                                  <div class="container category-head__container">
+                                    <div class="category-head__content row stp">
+                                      <h2 class="h1 category-head__title col-lg-6">Решения</h2>
+                                      <p class="category-head__text col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--slide-->
+                                <div class="swiper-slide screen category-head__slide" data-touch-hover>
+                                  <div class="category-head__scene" data-parallax="0.2" data-parallax-top>
+                                    <div class="image image_cover image_mask-1"><img class="swiper-lazy" data-src="./img/production/4.jpg" alt="bg"></div>
+                                  </div>
+                                  <div class="container category-head__container">
+                                    <div class="category-head__content row stp">
+                                      <h2 class="h1 category-head__title col-lg-6">Гарантия</h2>
+                                      <p class="category-head__text col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--slide-->
+                                <div class="swiper-slide screen category-head__slide" data-touch-hover>
+                                  <div class="category-head__scene" data-parallax="0.2" data-parallax-top>
+                                    <div class="image image_cover image_mask-1"><img class="swiper-lazy" data-src="./img/production/5.jpg" alt="bg"></div>
+                                  </div>
+                                  <div class="container category-head__container">
+                                    <div class="category-head__content row stp">
+                                      <h2 class="h1 category-head__title col-lg-6">Складская программа</h2>
+                                      <p class="category-head__text col-lg-6">Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.</p>
+                                    </div>
+                                  </div>
+                                </div>
               </div>
             </div>
-            <div class="category-head-slider__pagination container">
+            <div class="category-head__pagination container">
               <div class="swiper-pagination"></div>
             </div>
           </section>
