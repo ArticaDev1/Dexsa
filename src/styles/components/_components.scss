@@ -134,7 +134,7 @@ img {
   &-slide {
     display: flex;
     justify-content: space-between;
-    width: 110px;
+    width: 70px;
     transform: translate(-50%, -50%);
     opacity: 0;
     visibility: hidden;
@@ -153,8 +153,8 @@ img {
       transition: width $trs1, height $trs1, border-color $trs1;
     }
     .icon {
-      width: 37px;
-      height: 32px;
+      width: 16px;
+      height: 16px;
       color: var(--color-gray);
       &:first-child {
         transform: rotate(180deg);
@@ -453,6 +453,18 @@ img {
     &_size-3 {
       width: 200px;
       height: 200px;
+    }
+  }
+}
+
+.desktop [data-cursor-slide] {
+  .image img {
+    transition: opacity $trs3, visibility $trs3, transform $trs2;
+    transform: scale(1.05);
+  }
+  &[data-focus] {
+    .image img {
+      transform: scale(1.01);
     }
   }
 }

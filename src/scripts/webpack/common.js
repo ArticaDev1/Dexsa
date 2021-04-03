@@ -99,15 +99,14 @@ const App = {
     toggle();
     windowSize.init();
 
-    if(!mobile()) {
-      Parallax.init();
-      Cursor.init();
-    }
-    
     if(mobile()) {
+      $body.classList.add('mobile');
       $body.style.cssText = 'position:initial;height:initial;width:initial;overflow:auto;';
       disablePageScroll();
     } else {
+      $body.classList.add('desktop');
+      Parallax.init();
+      Cursor.init();
       $body.classList.add('hidden');
     }
     
@@ -1946,34 +1945,6 @@ class FadeBlocks {
   }
 }
 
-class ImageSlider {
-  constructor($parent) {
-    this.$parent = $parent;
-  } 
-
-  init() {
-    this.$slider = this.$parent.querySelector('.swiper-container');
-    this.$pagination = this.$parent.querySelector('.swiper-pagination');
-
-    this.slider = new Swiper(this.$slider, {
-      touchStartPreventDefault: false,
-      loop: true,
-      slidesPerView: 1,
-      speed: 500,
-      pagination: {
-        el: this.$pagination,
-        clickable: true,
-        bulletElement: 'button'
-      }
-    });
-  }
-
-  destroy() {
-    this.slider.destroy();
-    for(let child in this) delete this[child];
-  }
-}
-
 class SfSlider {
   constructor($parent) {
     this.$parent = $parent;
@@ -2066,6 +2037,37 @@ class ProductHead {
   }
 }
 
+class ImageSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  } 
+
+  init() {
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+
+    this.slider = new Swiper(this.$slider, {
+      touchStartPreventDefault: false,
+      longSwipesRatio: 0.1,
+      slidesPerView: 1,
+      speed: 500,
+      lazy: {
+        loadOnTransitionStart: true
+      },
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      }
+    });
+  }
+
+  destroy() {
+    this.slider.destroy();
+    for(let child in this) delete this[child];
+  }
+}
+
 class CategoryHead {
   constructor($parent) {
     this.$parent = $parent;
@@ -2086,9 +2088,7 @@ class CategoryHead {
       this.slider = new Swiper(this.$slider, {
         init: false,
         touchStartPreventDefault: false,
-        longSwipesRatio: 0.25,
-        effect: 'coverflow',
-        loopPreventsSlide: false,
+        longSwipesRatio: 0.1,
         slidesPerView: 1,
         speed: 500,
         lazy: {

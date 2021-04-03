@@ -72,20 +72,16 @@ block content
     section.small-section.swiper.image-slider 
       .swiper-container
         .swiper-wrapper
-          //slide
-          .swiper-slide.image-slider__slide
-            .image.image_cover.image_mask-1
-              img(src="./img/ddsd.jpg", alt="image")
-            .container
-              .row
-                .h4.col-xl-5 Передача данных от светильника к светильнику и автоматический контроль освещенности
-          //slide
-          .swiper-slide.image-slider__slide
-            .image.image_cover.image_mask-1
-              img(src="./img/dddds.jpg", alt="image")
-            .container
-              .row
-                .h4.col-xl-5 Доступ к каждому светильнику с планшета или телефона
+          mixin slide(image, text)
+            //slide
+            .swiper-slide.image-slider__slide(data-touch-hover data-cursor-slide)
+              .image.image_cover.image_mask-1
+                img(data-src=image, alt="image").swiper-lazy
+              .container
+                .row
+                  .h4.col-xl-5=text
+          +slide('./img/ddsd.jpg', 'Передача данных от светильника к светильнику и автоматический контроль освещенности')
+          +slide('./img/dddds.jpg', 'Доступ к каждому светильнику с планшета или телефона')
       .swiper-pagination.container
             
     section.small-section 

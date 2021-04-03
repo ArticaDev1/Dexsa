@@ -3855,7 +3855,7 @@ img {
   .cursor-slide {
     display: flex;
     justify-content: space-between;
-    width: 110px;
+    width: 70px;
     transform: translate(-50%, -50%);
     opacity: 0;
     visibility: hidden;
@@ -3873,8 +3873,8 @@ img {
       transform: translate(-50%, -50%);
       transition: width 0.15s ease-in-out, height 0.15s ease-in-out, border-color 0.15s ease-in-out; }
     .cursor-slide .icon {
-      width: 37px;
-      height: 32px;
+      width: 16px;
+      height: 16px;
       color: var(--color-gray); }
       .cursor-slide .icon:first-child {
         transform: rotate(180deg); }
@@ -4098,6 +4098,13 @@ img {
     .bg-light_size-3 {
       width: 200px;
       height: 200px; } }
+
+.desktop [data-cursor-slide] .image img {
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.3s ease-in-out;
+  transform: scale(1.05); }
+
+.desktop [data-cursor-slide][data-focus] .image img {
+  transform: scale(1.01); }
 
 /*========== Helpers ==========*/
 /*========== Buttons ==========*/
@@ -4742,11 +4749,6 @@ img {
       width: 100%;
       height: 100%;
       top: 0; }
-  .category-head__slide .image img {
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.3s ease-in-out;
-    transform: scale(1.05); }
-  .category-head__slide[data-focus] .image img {
-    transform: scale(1); }
   .category-head__container {
     height: 100%;
     display: flex;

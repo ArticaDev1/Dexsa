@@ -6,11 +6,11 @@ block variables
 
 block content
   section.section.category-head.swiper
-    .swiper-container(data-touch-hover data-cursor-slide)
+    .swiper-container
       .swiper-wrapper
         mixin slide(title, text, image)
           //slide
-          .swiper-slide.screen.category-head__slide(data-touch-hover)
+          .swiper-slide.screen.category-head__slide(data-touch-hover data-cursor-slide)
             .category-head__scene(data-parallax='0.2' data-parallax-top)
               .image.image_cover.image_mask-1
                 img(data-src=image, alt="bg").swiper-lazy

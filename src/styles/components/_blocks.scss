@@ -255,17 +255,6 @@
       top: 0;
     }
   }
-  &__slide {
-    .image img {
-      transition: opacity $trs3, visibility $trs3, transform $trs2;
-      transform: scale(1.05);
-    }
-    &[data-focus] {
-      .image img {
-        transform: scale(1);
-      }
-    }
-  }
   &__container {
     height: 100%;
     display: flex;
