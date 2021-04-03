@@ -140,6 +140,8 @@ const App = {
       this.afunctions.add(SfSlider, '.system-features-slider');
       this.afunctions.add(ShemaLights, '.sumo-schema');
       this.afunctions.add(DocsSlider, '.documents-slider');
+      this.afunctions.add(RefSlider, '.ref-slider');
+      
       
       autosize(document.querySelectorAll('textarea.input__element'));
 
@@ -379,7 +381,9 @@ const Scroll = {
       localStorage.setItem('scroll', this.scrollbar.offset.y);
       this.y = this.scrollbar.offset.y;
     })
-    this.scrollbar.setPosition(0, +localStorage.getItem('scroll'));
+    if(dev) {
+      this.scrollbar.setPosition(0, +localStorage.getItem('scroll'));
+    }
     this.$scrollbar = document.querySelector('.scrollbar-track-y');
 
     //gsap trigger
@@ -2183,6 +2187,48 @@ class DocsSlider {
 
   destroy() {
     this.swiper.destroy();
+    for(let child in this) delete this[child];
+  }
+}
+
+class RefSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+
+    this.slider = new Swiper(this.$slider, {
+      init: false,
+      touchStartPreventDefault: false,
+      longSwipesRatio: 0.1,
+      slidesPerView: 1,
+      speed: 500,
+      lazy: {
+        loadOnTransitionStart: true
+      },
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      }
+    });
+
+    this.slider.on('slideChange', (swiper)=>{
+      if(swiper.realIndex!==0) {
+        this.$pagination.classList.add('bg');
+      } else {
+        this.$pagination.classList.remove('bg');
+      }
+    });
+
+    this.slider.init();
+  }
+
+  destroy() {
+    this.slider.destroy();
     for(let child in this) delete this[child];
   }
 }
