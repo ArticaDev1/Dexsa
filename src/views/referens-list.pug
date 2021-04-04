@@ -1,10 +1,10 @@
 extends layout/layout
 block variables
-  -var title = sitename+' - Наше производство'
+  -var title = sitename+' - Референс лист'
 
 
 block content
-  section.section.ref-slider.swiper
+  section.section.ref-slider.swiper.animation-head
     .swiper-container
       .swiper-wrapper
         -let index1 = 0;
@@ -12,8 +12,21 @@ block content
           //slide 
           .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor-slide)
             .ref-slider__slide-scene(data-parallax='0.2' data-parallax-top)
-              .image.image_cover(class=index1==0?'image_mask-1':'')
+              .image.image_cover(class=index1==0?'image_mask-1':'').animation-head__image
                 img(data-src=image, alt="bg").swiper-lazy
+            if index1==0
+              .container.ref-slider__slide-container
+                .ref-slider__slide-content.row.stp 
+                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
+                    span.ref-slider__slide-label Заказчик
+                    .image.image_contain.ref-slider__slide-logo
+                      img(data-src="./img/clients/1.png", alt="logo").lazyload
+                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Объект
+                    h4.ref-slider__slide-text.ref-slider__slide-title Трубопрокатный цех №8
+                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Выполненные работы:
+                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
           -index1++
 
         +slide('./img/referens/1.jpg')
@@ -34,8 +47,21 @@ block content
           //slide 
           .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor-slide)
             .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index2==0?'image_mask-1':'')
+              .image.image_cover(class=index2==0?'image_mask-1':'').animation-head__image
                 img(data-src=image, alt="bg").swiper-lazy
+            if index2==0
+              .container.ref-slider__slide-container
+                .ref-slider__slide-content.row.stp 
+                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
+                    span.ref-slider__slide-label Заказчик
+                    .image.image_contain.ref-slider__slide-logo
+                      img(data-src="./img/clients/2.png", alt="logo").lazyload
+                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Объект
+                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
+                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Выполненные работы:
+                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
           -index2++
         +slide('./img/referens/2.jpg')
         +slide('./img/referens/3.jpg')
@@ -53,8 +79,21 @@ block content
           //slide 
           .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor-slide)
             .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index3==0?'image_mask-1':'')
+              .image.image_cover(class=index3==0?'image_mask-1':'').animation-head__image
                 img(data-src=image, alt="bg").swiper-lazy
+            if index3==0
+              .container.ref-slider__slide-container
+                .ref-slider__slide-content.row.stp 
+                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
+                    span.ref-slider__slide-label Заказчик
+                    .image.image_contain.ref-slider__slide-logo
+                      img(data-src="./img/clients/3.png", alt="logo").lazyload
+                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Объект
+                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
+                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Выполненные работы:
+                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
           -index3++
         +slide('./img/referens/3.jpg')
         +slide('./img/referens/4.jpg')
@@ -72,8 +111,21 @@ block content
           //slide 
           .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor-slide)
             .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index4==0?'image_mask-1':'')
+              .image.image_cover(class=index4==0?'image_mask-1':'').animation-head__image
                 img(data-src=image, alt="bg").swiper-lazy
+            if index4==0
+              .container.ref-slider__slide-container
+                .ref-slider__slide-content.row.stp 
+                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
+                    span.ref-slider__slide-label Заказчик
+                    .image.image_contain.ref-slider__slide-logo
+                      img(data-src="./img/clients/4.png", alt="logo").lazyload
+                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Объект
+                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
+                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Выполненные работы:
+                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
           -index4++
         +slide('./img/referens/4.jpg')
         +slide('./img/referens/5.jpg')
@@ -91,8 +143,21 @@ block content
           //slide 
           .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor-slide)
             .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index5==0?'image_mask-1':'')
+              .image.image_cover(class=index5==0?'image_mask-1':'').animation-head__image
                 img(data-src=image, alt="bg").swiper-lazy
+            if index5==0
+              .container.ref-slider__slide-container
+                .ref-slider__slide-content.row.stp 
+                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
+                    span.ref-slider__slide-label Заказчик
+                    .image.image_contain.ref-slider__slide-logo
+                      img(data-src="./img/clients/5.png", alt="logo").lazyload
+                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Объект
+                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
+                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
+                    span.ref-slider__slide-label Выполненные работы:
+                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
           -index5++
         +slide('./img/referens/5.jpg')
         +slide('./img/referens/1.jpg')

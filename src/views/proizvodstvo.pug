@@ -6,16 +6,19 @@ block content
   section.section.category-head.swiper
     .swiper-container
       .swiper-wrapper
+        -let index = 0;
         mixin slide(title, text, image)
           //slide
-          .swiper-slide.screen.category-head__slide(data-touch-hover data-cursor-slide)
+          .swiper-slide.screen.category-head__slide(class=index==0?'animation-head':'' data-touch-hover data-cursor-slide)
             .category-head__scene(data-parallax='0.2' data-parallax-top)
-              .image.image_cover.image_mask-1
+              .image.image_cover.image_mask-1(class=index==0?'animation-head__image':'')
                 img(data-src=image, alt="bg").swiper-lazy
             .container.category-head__container
               .category-head__content.row.stp
-                h2.h1.category-head__title.col-lg-6=title
-                p.category-head__text.col-lg-6=text
+                h2.h1.category-head__title.col-lg-6(class=index==0?'animation-head__item':'')=title
+                p.category-head__text.col-lg-6(class=index==0?'animation-head__item':'')=text
+          -index++
+
         +slide('Наше производство это:', 'Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.', './img/production/1.jpg')
         +slide('Инновации', 'Наши инновации решают сразу несколько актуальных проблем, стоящих перед заказчиком это вопрос энергоэффективности, надежности и долговечности.', './img/production/2.jpg')
         +slide('Решения', 'Мы можем предложить Вам решения, не имеющие аналогов на Российском рынке. Это существенно сократит Ваши расходы и время, а также значительно упростит Вашу работу.', './img/production/3.jpg')

@@ -18,8 +18,6 @@ const desktop_gap = 24;
 const mobile_gap = 16;
 
 import 'lazysizes';
-lazySizes.cfg.preloadAfterLoad = true;
-lazySizes.cfg.init = false;
 
 import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -89,7 +87,6 @@ const App = {
 
     //functions
     Scroll.init();
-    lazySizes.init();
     TouchHoverEvents.init();
     Header.init();
     Nav.init();
@@ -135,12 +132,16 @@ const App = {
       this.afunctions.add(ProductHead, '.product-head');
       this.afunctions.add(ProductBlock, '.product-item');
       this.afunctions.add(FadeBlocks, '.js-fade-blocks');
-      this.afunctions.add(CategoryHead, '.category-head');
       this.afunctions.add(ImageSlider, '.image-slider');
       this.afunctions.add(SfSlider, '.system-features-slider');
       this.afunctions.add(ShemaLights, '.sumo-schema');
       this.afunctions.add(DocsSlider, '.documents-slider');
       this.afunctions.add(RefSlider, '.ref-slider');
+      this.afunctions.add(HeadSlider, '.category-head.swiper');
+
+
+      //animation final
+      this.afunctions.add(AnimationHead, '.animation-head');
       
       
       autosize(document.querySelectorAll('textarea.input__element'));
@@ -912,7 +913,7 @@ class AboutTextBlock {
   }
 
   destroy() {
-    window.addEventListener('resize', this.check);
+    window.removeEventListener('resize', this.check);
     this.destroyType();
     for(let child in this) delete this[child];
   }
@@ -2072,61 +2073,53 @@ class ImageSlider {
   }
 }
 
-class CategoryHead {
+class AnimationHead {
   constructor($parent) {
     this.$parent = $parent;
   }
 
   init() {
-    let animate = ($elements, $image)=> {
-      this.animation = gsap.timeline()
-        .fromTo($image, {scale:1.2}, {scale:1, duration:Speed*1.5, ease:'power2.out'})
-        .fromTo($elements, {autoAlpha:0}, {autoAlpha:1, duration:Speed*1.3, stagger:{amount:Speed*0.2}}, `-=${Speed*1.5}`)
-        .fromTo($elements, {y:40}, {y:0, duration:Speed*1.3, ease:'power2.out', stagger:{amount:Speed*0.2}}, `-=${Speed*1.5}`)
-    }
+    this.$image = this.$parent.querySelector('.animation-head__image');
+    this.$items = this.$parent.querySelectorAll('.animation-head__item');
 
-    if(this.$parent.classList.contains('swiper')) {
-      this.$slider = this.$parent.querySelector('.swiper-container');
-      this.$pagination = this.$parent.querySelector('.swiper-pagination');
-
-      this.slider = new Swiper(this.$slider, {
-        init: false,
-        touchStartPreventDefault: false,
-        longSwipesRatio: 0.1,
-        slidesPerView: 1,
-        speed: 500,
-        lazy: {
-          loadOnTransitionStart: true
-        },
-        pagination: {
-          el: this.$pagination,
-          clickable: true,
-          bulletElement: 'button'
-        }
-      });
-
-      this.slider.on('init', function(swiper) {
-        let $slide = swiper.slides[swiper.activeIndex],
-            $title = $slide.querySelector('.category-head__title'),
-            $text = $slide.querySelector('.category-head__text'),
-            $image = $slide.querySelector('.category-head__scene .image');
-        animate([$title, $text], $image);
-      });
-
-      this.slider.init();
-    } 
-    
-    else {
-      let $title = this.$parent.querySelector('.category-head__title'),
-          $text = this.$parent.querySelector('.category-head__text'),
-          $image = this.$parent.querySelector('.category-head__scene .image');
-      animate([$title, $text], $image);
-    }
+    this.animation = gsap.timeline()
+      .fromTo(this.$image, {scale:1.2}, {scale:1, duration:Speed*1.5, ease:'power2.out'})
+      .fromTo(this.$items, {autoAlpha:0}, {autoAlpha:1, duration:Speed*1.3, stagger:{amount:Speed*0.2}}, `-=${Speed*1.5}`)
+      .fromTo(this.$items, {y:40}, {y:0, duration:Speed*1.3, ease:'power2.out', stagger:{amount:Speed*0.2}}, `-=${Speed*1.5}`)
   }
 
   destroy() {
-    if(this.slider) this.slider.destroy();
-    if(this.animation) this.animation.kill();
+    this.animation.kill();
+    for(let child in this) delete this[child];
+  }
+}
+
+class HeadSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+
+    this.slider = new Swiper(this.$slider, {
+      touchStartPreventDefault: false,
+      longSwipesRatio: 0.1,
+      slidesPerView: 1,
+      speed: 500,
+      lazy: {
+        loadOnTransitionStart: true
+      },
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
+      }
+    });
+  }
+  destroy() {
+    this.slider.destroy();
     for(let child in this) delete this[child];
   }
 }
@@ -2164,7 +2157,6 @@ class DocsSlider {
     this.elements = [];
 
     this.swiper = new Swiper(this.$slider, {
-      loop: true,
       slidesPerView: 4,
       spaceBetween: 24,
       speed: this.speed*1000,
@@ -2199,6 +2191,27 @@ class RefSlider {
   init() {
     this.$slider = this.$parent.querySelector('.swiper-container');
     this.$pagination = this.$parent.querySelector('.swiper-pagination');
+    this.$images = this.$parent.querySelectorAll('.ref-slider__slide-scene');
+
+    if(this.$parent.classList.contains('animation-head')) {
+      this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'linear'}})
+        .to(this.$images, {autoAlpha:0}, '+=2')
+    } else {
+      this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'linear'}})
+        .fromTo(this.$images, {autoAlpha:0}, {autoAlpha:1})
+        .to(this.$images, {autoAlpha:0}, '+=1')
+    }
+    
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: self => {
+        this.animation.progress(self.progress);
+      }
+    });
 
     this.slider = new Swiper(this.$slider, {
       init: false,
@@ -2228,6 +2241,8 @@ class RefSlider {
   }
 
   destroy() {
+    this.animation.kill();
+    this.trigger.kill();
     this.slider.destroy();
     for(let child in this) delete this[child];
   }

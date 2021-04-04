@@ -269,6 +269,7 @@ img {
   &-pagination {
     display: flex;
     height: 8px;
+    pointer-events: all;
     &-bullet {
       &:first-child {
         margin-left: -9px;
@@ -460,12 +461,12 @@ img {
 }
 
 .desktop [data-cursor-slide] {
-  .image img {
+  .swiper-lazy {
     transition: opacity $trs3, visibility $trs3, transform $trs2;
     transform: scale(1.05);
   }
   &[data-focus] {
-    .image img {
+    .swiper-lazy {
       transform: scale(1.01);
     }
   }
