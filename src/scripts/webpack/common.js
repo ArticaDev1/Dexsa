@@ -2191,15 +2191,17 @@ class RefSlider {
   init() {
     this.$slider = this.$parent.querySelector('.swiper-container');
     this.$pagination = this.$parent.querySelector('.swiper-pagination');
-    this.$images = this.$parent.querySelectorAll('.ref-slider__slide-scene');
 
-    if(this.$parent.classList.contains('animation-head')) {
-      this.animation = gsap.timeline({paused:true, defaults:{duration:1.5, ease:'linear'}})
-        .to(this.$images, {autoAlpha:0}, '+=1.5')
-    } else {
-      this.animation = gsap.timeline({paused:true, defaults:{duration:1.5, ease:'linear'}})
-        .fromTo(this.$images, {autoAlpha:0}, {autoAlpha:1})
-        .to(this.$images, {autoAlpha:0})
+    if(!mobile()) {
+      this.$images = this.$parent.querySelectorAll('.ref-slider__slide-scene');
+      if(this.$parent.classList.contains('animation-head')) {
+        this.animation = gsap.timeline({paused:true, defaults:{duration:1.5, ease:'linear'}})
+          .to(this.$images, {autoAlpha:0}, '+=1.5')
+      } else {
+        this.animation = gsap.timeline({paused:true, defaults:{duration:1.5, ease:'linear'}})
+          .fromTo(this.$images, {autoAlpha:0}, {autoAlpha:1})
+          .to(this.$images, {autoAlpha:0})
+      }
     }
 
     this.slider = new Swiper(this.$slider, {
@@ -2230,8 +2232,14 @@ class RefSlider {
       start: "top bottom",
       end: "bottom top",
       scrub: true,
+      snap: {
+        snapTo: 0.5, 
+        duration: {min: 0.1, max: 1}, 
+        delay: 0.1, 
+        ease: "power2.inOut"
+      },
       onUpdate: self => {
-        this.animation.progress(self.progress);
+        if(this.animation) this.animation.progress(self.progress);
         if((self.progress<=0.25 || self.progress>=0.75) && this.slider.realIndex!==0) {
           this.slider.slideTo(0, 1000);
         }
@@ -2240,7 +2248,7 @@ class RefSlider {
   }
 
   destroy() {
-    this.animation.kill();
+    if(this.animation) this.animation.kill();
     this.trigger.kill();
     this.slider.destroy();
     for(let child in this) delete this[child];
