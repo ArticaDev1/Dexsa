@@ -5766,6 +5766,17 @@ img {
   .decoration-light__image {
     width: 84%; } }
 
+.contacts-head {
+  margin-bottom: 150px; }
+  @media (max-width: 1023.98px) {
+    .contacts-head__scene img {
+      -o-object-position: left center;
+         object-position: left center;
+      height: 115%; } }
+  @media (max-width: 575.98px) {
+    .contacts-head {
+      margin-bottom: 100px; } }
+
 .contacts-block {
   z-index: 2; }
   .contacts-block_type-2 {
@@ -5782,13 +5793,39 @@ img {
     left: -600px; }
   .contacts-block__head {
     margin-bottom: 100px; }
-  .contacts-block__info {
+  .contacts-block__map {
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.05);
+    position: relative; }
+    .contacts-block__map:not(:last-child) {
+      margin-bottom: 150px; }
+    .contacts-block__map-loader {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+    .contacts-block__map-element {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2; }
+  .contacts-block__info:not(:first-child) {
     margin-top: 60px; }
+  .contacts-block__info:not(:last-child) {
+    margin-bottom: 150px; }
   @media (max-width: 1599.98px) {
     .contacts-block_type-2 {
       padding: 200px 0; }
+    .contacts-block__map {
+      height: 600px; }
     .contacts-block .bg-light:first-child {
       top: -180px; } }
+  @media (max-width: 1279.98px) {
+    .contacts-block__map {
+      height: 500px; } }
   @media (max-width: 1023.98px) {
     .contacts-block .bg-light:first-child {
       top: initial;
@@ -5798,7 +5835,11 @@ img {
       text-align: center; }
     .contacts-block__head {
       margin-bottom: 70px; }
-    .contacts-block__info {
+    .contacts-block__map {
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%); }
+    .contacts-block__info:not(:first-child) {
       margin-top: 100px; }
     .contacts-block__sub-title {
       margin-top: 100px;
@@ -5812,7 +5853,13 @@ img {
     .contacts-block__sub-title {
       margin-top: 70px; }
     .contacts-block__head {
-      margin-bottom: 40px; } }
+      margin-bottom: 40px; }
+    .contacts-block__map {
+      height: 350px; }
+      .contacts-block__map:not(:last-child) {
+        margin-bottom: 100px; }
+    .contacts-block__info:not(:last-child) {
+      margin-bottom: 100px; } }
 
 .contacts-block-item:not(:last-child) {
   margin-bottom: 46px; }

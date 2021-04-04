@@ -46,7 +46,10 @@ import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Splide from '@splidejs/splide';
-import Swiper from 'swiper/bundle';
+
+import Swiper, {Navigation, Pagination, Lazy, Autoplay} from 'swiper/core';
+Swiper.use([Navigation, Pagination, Lazy, Autoplay]);
+
 import SwipeListener from 'swipe-listener';
 const validate = require("validate.js");
 import Inputmask from "inputmask";
@@ -138,6 +141,7 @@ const App = {
       this.afunctions.add(DocsSlider, '.documents-slider');
       this.afunctions.add(RefSlider, '.ref-slider');
       this.afunctions.add(HeadSlider, '.category-head.swiper');
+      this.afunctions.add(Map, '.contacts-block__map');
 
 
       //animation final
@@ -2108,6 +2112,10 @@ class HeadSlider {
       longSwipesRatio: 0.1,
       slidesPerView: 1,
       speed: 500,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
       lazy: {
         loadOnTransitionStart: true
       },
@@ -2246,6 +2254,62 @@ class RefSlider {
     if(this.animation) this.animation.kill();
     this.trigger.kill();
     this.slider.destroy();
+    for(let child in this) delete this[child];
+  }
+}
+
+class Map {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.apiKey = '528c7ae6-b79c-4821-ac7d-091492c64261';
+
+    let loadMap = ()=> {
+      if(typeof ymaps === 'undefined') {
+        let callback = ()=> {
+          ymaps.ready(createMap);
+        }
+        let script = document.createElement("script");
+        script.type = 'text/javascript';
+        script.onload = callback;
+        script.src = `https://api-maps.yandex.ru/2.1/?apikey=${this.apiKey}&lang=ru_RU`;
+        $body.appendChild(script);
+      } else {
+        createMap();
+      }
+    }
+    
+    let createMap = ()=> {
+      this.map = new ymaps.Map(this.$parent, {
+        center: [55.581215, 37.769442],
+        controls: ['zoomControl'],
+        zoom: 14
+      });
+      this.map.behaviors.disable(['scrollZoom']);
+      this.placemarks = [];
+      this.$map = this.map.container._element;
+      this.$map.classList.add('contacts-block__map-element');
+      gsap.fromTo(this.$map, {autoAlpha:0}, {autoAlpha:1})
+
+      let placemark = new ymaps.Placemark(this.map.getCenter(), {
+        balloonContent: ' Московская область, Ленинский район, сельское поселение Совхоз им. Ленина, территория Восточная Промзона, владение 3, стр. 1'
+      }, {
+        iconLayout: 'default#image',
+        iconImageHref: './img/icons/map-point.svg',
+        iconImageSize: [40, 60],
+        iconImageOffset: [-20, -60],
+        hideIconOnBalloonOpen: false
+      });
+      this.map.geoObjects.add(placemark);
+    }
+
+
+    loadMap();
+  }
+
+  destroy() {
     for(let child in this) delete this[child];
   }
 }

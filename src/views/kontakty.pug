@@ -1,0 +1,87 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Контакты'
+
+block content
+  section.section.category-head.screen.animation-head.contacts-head
+    .category-head__scene.contacts-head__scene(data-parallax='0.2' data-parallax-top)
+      .image.image_cover.image_mask-1.animation-head__image
+        img(data-src="./img/ghk.jpg", alt="bg").lazyload
+    .container.category-head__container
+      .category-head__content.row.stp
+        h1.category-head__title.col-lg-6.animation-head__item Контакты
+
+  section.section.contacts-block
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+
+    .container
+
+      .contacts-block__info 
+        .contacts-block-item.row  
+          .contacts-block-item__label.col-sm-4.col-lg-3 Номер телефона
+          .contacts-block-item__text.col-sm-8.col-lg-7   
+            a(href="tel:+73232323233").h6.btn-link +7 323 232-3233
+        .contacts-block-item.row  
+          .contacts-block-item__label.col-sm-4.col-lg-3 E-mail
+          .contacts-block-item__text.col-sm-8.col-lg-7
+            a(href="mailto:email@gmail.com").h6.btn-link email@gmail.com
+        .contacts-block-item.row  
+          .contacts-block-item__label.col-sm-4.col-lg-3 Офис
+          .contacts-block-item__text.col-sm-8.col-lg-7
+            .h6 107078 г. Москва, Орликов переулок, 5, стр.1А
+        .contacts-block-item.row  
+          .contacts-block-item__label.col-sm-4.col-lg-3 Завод
+          .contacts-block-item__text.col-sm-8.col-lg-7
+            .h6 142715, Московская область, Ленинский район, сельское поселение Совхоз им. Ленина, территория Восточная Промзона, владение 3, стр. 1
+
+      .contacts-block__map
+        svg.contacts-block__map-loader(viewBox='0 0 120 30' fill='currentColor')
+          circle(cx='15' cy='15' r='15')
+            animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+            animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+          circle(cx='60' cy='15' r='9' fill-opacity='0.3')
+            animate(attributeName='r' from='9' to='9' begin='0s' dur='0.8s' values='9;15;9' calcMode='linear' repeatCount='indefinite')
+            animate(attributeName='fill-opacity' from='0.5' to='0.5' begin='0s' dur='0.8s' values='.5;1;.5' calcMode='linear' repeatCount='indefinite')
+          circle(cx='105' cy='15' r='15')
+            animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+            animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+
+      .contacts-block__head.section__head.row 
+        .section__head-txt.col-lg-3.col-xl-2
+          p Контакты
+        .section__head-title.col-lg-10
+          h3 По вопросам партнерства, технической консультации, сервисного и гарантийного обслуживания, будем рады помочь по телефону или при встрече на нашем производстве
+          h4.contacts-block__sub-title Оставьте контакты и мы вам перезвоним
+      
+      form.form
+        .form__group.row
+          .form__item.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
+            label.input
+              span.input__title Имя
+              input(type="text" name="name" data-validate='name' data-required).input__element
+          .form__item.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
+            label.input
+              span.input__title Номер телефона
+              input(type="text" name="phone" data-validate='phone' data-required).input__element
+          .form__item.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
+            label.input
+              span.input__title Комментарий
+              textarea(name="message" data-validate='message').input__element
+          .form__submit.offset-sm-1.offset-md-2.offset-lg-0.col-sm-10.col-md-8.col-lg-6.col-xl-3
+            button.button.button_style-2.button_loader 
+              span Оставить заявку
+              svg(viewBox='0 0 120 30' fill='currentColor')
+                circle(cx='15' cy='15' r='15')
+                  animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+                  animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+                circle(cx='60' cy='15' r='9' fill-opacity='0.3')
+                  animate(attributeName='r' from='9' to='9' begin='0s' dur='0.8s' values='9;15;9' calcMode='linear' repeatCount='indefinite')
+                  animate(attributeName='fill-opacity' from='0.5' to='0.5' begin='0s' dur='0.8s' values='.5;1;.5' calcMode='linear' repeatCount='indefinite')
+                circle(cx='105' cy='15' r='15')
+                  animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+                  animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+            p.form__message Нажимая кнопку “Отправить” вы принимаете 
+              <br>
+              a(href="privacy.html" rel='noopener' target='_blank') Политику конфиденциальности
