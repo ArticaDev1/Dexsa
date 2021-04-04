@@ -2232,12 +2232,6 @@ class RefSlider {
       start: "top bottom",
       end: "bottom top",
       scrub: true,
-      snap: {
-        snapTo: 0.5, 
-        duration: {min: 0.1, max: 1}, 
-        delay: 0.1, 
-        ease: "power2.inOut"
-      },
       onUpdate: self => {
         if(this.animation) this.animation.progress(self.progress);
         if((self.progress<=0.25 || self.progress>=0.75) && this.slider.realIndex!==0) {
@@ -2245,6 +2239,7 @@ class RefSlider {
         }
       }
     });
+
   }
 
   destroy() {
