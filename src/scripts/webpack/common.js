@@ -2194,27 +2194,15 @@ class RefSlider {
     this.$images = this.$parent.querySelectorAll('.ref-slider__slide-scene');
 
     if(this.$parent.classList.contains('animation-head')) {
-      this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'linear'}})
-        .to(this.$images, {autoAlpha:0}, '+=2')
+      this.animation = gsap.timeline({paused:true, defaults:{duration:1.5, ease:'linear'}})
+        .to(this.$images, {autoAlpha:0}, '+=1.5')
     } else {
-      this.animation = gsap.timeline({paused:true, defaults:{duration:1, ease:'linear'}})
+      this.animation = gsap.timeline({paused:true, defaults:{duration:1.5, ease:'linear'}})
         .fromTo(this.$images, {autoAlpha:0}, {autoAlpha:1})
-        .to(this.$images, {autoAlpha:0}, '+=1')
+        .to(this.$images, {autoAlpha:0})
     }
-    
-
-    this.trigger = ScrollTrigger.create({
-      trigger: this.$parent,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true,
-      onUpdate: self => {
-        this.animation.progress(self.progress);
-      }
-    });
 
     this.slider = new Swiper(this.$slider, {
-      init: false,
       touchStartPreventDefault: false,
       longSwipesRatio: 0.1,
       slidesPerView: 1,
@@ -2237,7 +2225,18 @@ class RefSlider {
       }
     });
 
-    this.slider.init();
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: self => {
+        this.animation.progress(self.progress);
+        if((self.progress<=0.25 || self.progress>=0.75) && this.slider.realIndex!==0) {
+          this.slider.slideTo(0, 1000);
+        }
+      }
+    });
   }
 
   destroy() {
