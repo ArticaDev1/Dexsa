@@ -50,6 +50,8 @@ img {
       height: 100%;
       background: rgba(14, 14, 14, 0.7);
       pointer-events: none;
+      z-index: 2;
+      transform: translateZ(500px);
     }
   }
   &_mask-2 {
@@ -61,6 +63,8 @@ img {
       height: 100%;
       background: rgba(14, 14, 14, 0.9);
       pointer-events: none;
+      z-index: 2;
+      transform: translateZ(500px);
     }
   }
 }
@@ -462,11 +466,15 @@ img {
 
 .desktop [data-cursor-slide] {
   .swiper-lazy {
-    transition: opacity $trs3, visibility $trs3, transform $trs2;
+    transition: opacity $trs3, visibility $trs3, transform $trs3;
     transform: scale(1.05);
+  }
+  .container {
+    transform: translateZ(500px);
   }
   &[data-focus] {
     .swiper-lazy {
+      transition: opacity $trs3, visibility $trs3, transform $trs2;
       transform: scale(1.01);
     }
   }

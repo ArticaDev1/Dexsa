@@ -1,0 +1,65 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - О компании'
+
+block content
+  section.section.category-head.screen.animation-head
+    .category-head__scene(data-parallax='0.2' data-parallax-top)
+      .image.image_cover.image_mask-1.animation-head__image
+        img(data-src="./img/ddsddds.jpg", alt="bg").lazyload
+    .container.category-head__container
+      .category-head__content.row.stp
+        h1.category-head__title.col-lg-6.animation-head__item О компании
+        .category-head__text.col-lg-6.animation-head__item 
+          p ГК ДЕКСА - EPC интегратор в области электротехнического оборудования для ТЭК. 
+          p Ведение проектирования, поставок, логистики и строительства под ключ для предприятий нефтегазового рынка.
+
+  section.section.product-destination
+    .container
+      h3.section__base-title В ГК ДЕКСА входят: 
+      .row.js-fade-blocks.product-destination__row
+        .product-destination__block.js-fade-blocks__block.col-sm-6.offset-md-1.offset-lg-0.col-md-5.col-lg-3
+          svg.icon(viewBox="0 0 110 67")
+            use(xlink:href='./img/icons/icons-sprite.svg#f1')
+          p Нефтегазовая отрасль
+        .product-destination__block.js-fade-blocks__block.col-sm-6.col-md-5.col-lg-3
+          svg.icon(viewBox="0 0 110 67")
+            use(xlink:href='./img/icons/icons-sprite.svg#f2')
+          p Нефтехимическая отрасль
+        .product-destination__block.js-fade-blocks__block.col-sm-6.offset-md-1.offset-lg-0.col-md-5.col-lg-3
+          svg.icon(viewBox="0 0 110 67")
+            use(xlink:href='./img/icons/icons-sprite.svg#f3')
+          p Добыча , хранение и транспортировка нефти
+        .product-destination__block.js-fade-blocks__block.col-sm-6.col-md-5.col-lg-3
+          svg.icon(viewBox="0 0 110 67")
+            use(xlink:href='./img/icons/icons-sprite.svg#f4')
+          p Объекты пищевой промышленности
+
+  section.section.bg-text-section
+    .bg-text-section__bg.image.image_cover.image_mask-1
+      img(data-src="./img/ghk.jpg", alt="bg").lazyload
+    .container
+      .row 
+        .col-xl-10
+          h3.bg-text-section__title ГК Декса - это эксклюзивный инжиниринг и разработка проекта под ключ, также производственная база.
+      
+  section.section.section-history
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+    .container 
+      h3.section__base-title История компании
+      .section-history__container 
+        mixin block(date, text)
+          .section-history__block.row 
+            .h1.section-history__date.col-xl-5.col-lg-4.col-md-3=date
+            .col-xl-7.col-lg-8.col-md-9
+              p=text
+        +block('1980', '1980 год в истории Apple ознаменовался провальным по ряду причин проектом Apple III, но тогда же компания провела самое крупное в истории (после 1956 года, когда на фондовую биржу вышла Ford) первичное размещение акций (IPO).')
+        +block('1984', 'В 1984 году фирма Apple впервые представила новый 32-разрядный компьютер Macintosh. В дальнейшем выпуск компьютеров этой серии стал основным бизнесом компании.')
+        +block('1994 — 1996', 'В 1994—1996 гг. компания вывела на рынок последовательно три модели цветных фотокамер QuickTake 100, 150 и 200 с матрицей 640×480 и 24-битным цветом.')
+        +block('2010', 'В 2010 году на рынок был выпущен планшетный компьютер iPad.')
+        +block('2016', 'В 2016 году на ежегодной конференции WWDC-2016 корпорацией Apple анонсировано, что устройства бренда будут работать по принципу оконечного шифрования: информация будет кодироваться на устройстве, которое её передает, и декодироваться принимающим гаджетом.')
+        +block('2020', '1 февраля 2020 года компания Apple сообщила о временном закрытии собственных офисов, магазинов и сервисных центров в Китае до 9 февраля, из-за эпидемии коронавируса.')
+
+  include blocks/contacts-blocks

@@ -142,6 +142,7 @@ const App = {
       this.afunctions.add(RefSlider, '.ref-slider');
       this.afunctions.add(HeadSlider, '.category-head.swiper');
       this.afunctions.add(Map, '.contacts-block__map');
+      this.afunctions.add(HistoryBlock, '.section-history');
 
 
       //animation final
@@ -223,6 +224,7 @@ const ActiveLinks = {
     
     $links.forEach($this=>{
       let href = $this.getAttribute('href');
+      console.log(href, value)
       if(href==value) {
         $this.classList.add('is-active-page');
       } else {
@@ -1284,17 +1286,10 @@ class ClientsBlock {
           .to($value, {css:{textShadow:start_shadow}}, '-=1')
       }
 
-      let getm = ()=> {
-        return +window.getComputedStyle(this.$blocks[0]).getPropertyValue("margin-bottom").replace(/\D/g, "");
-      }
       this.blocksTriggers[index] = ScrollTrigger.create({
         trigger: $block,
-        start: ()=> {
-          return `top-=${getm()} center`;
-        },
-        end: ()=> {
-          return `bottom+=${getm()} center`;
-        },
+        start: 'top-=100 center',
+        end: 'bottom+=100 center',
         scrub: true,
         onUpdate: self => {
           this.blockAnimations[index].progress(self.progress);
@@ -2310,6 +2305,85 @@ class Map {
   }
 
   destroy() {
+    for(let child in this) delete this[child];
+  }
+}
+
+class HistoryBlock {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.check = ()=> {
+      if(window.innerWidth >= brakepoints.md && (!this.initialized || !this.flag)) {
+        this.initDesktop();
+        this.flag = true;
+      } 
+      else if(window.innerWidth<brakepoints.md && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.flag = false;
+      }
+    }
+    this.check();
+    window.addEventListener('resize', this.check);
+    this.initialized = true;
+  }
+
+  initDesktop() {
+    this.$blocks = this.$parent.querySelectorAll('.section-history__block');
+    
+    this.triggers = [];
+    this.animations = [];
+
+    this.$blocks.forEach(($block, index)=>{
+      let $value = $block.querySelector('.section-history__date'),
+          start_shadow = '0 0 4px transparent',
+          end_shadow = '0 0 4px #D9D9D9';
+
+      if(index==0) {
+        this.animations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+          .fromTo($value, {autoAlpha:1, css:{textShadow:end_shadow}}, {autoAlpha:0.1, css:{textShadow:start_shadow}}, '+=1')
+          .fromTo($value, {autoAlpha:1}, {autoAlpha:0.1}, '-=1')
+      } 
+      else if(index==this.$blocks.length-1) {
+        this.animations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+          .fromTo($value, {css:{textShadow:start_shadow}}, {css:{textShadow:end_shadow}})
+          .fromTo($value, {autoAlpha:0.1}, {autoAlpha:1}, '-=1')
+          .to($value, {autoAlpha:1})
+      } 
+      else {
+        this.animations[index] = gsap.timeline({paused:true, defaults:{duration:1, ease:'none'}})
+          .fromTo($value, {css:{textShadow:start_shadow}}, {css:{textShadow:end_shadow}})
+          .fromTo($value, {autoAlpha:0.1}, {autoAlpha:1}, '-=1')
+          .to($value, {autoAlpha:0.1})
+          .to($value, {css:{textShadow:start_shadow}}, '-=1')
+      }
+
+      this.triggers[index] = ScrollTrigger.create({
+        trigger: $block,
+        start: 'top-=100 center',
+        end: 'bottom+=100 center',
+        scrub: true,
+        onUpdate: self => {
+          this.animations[index].progress(self.progress);
+        }
+      });
+
+    })
+  }
+
+  destroyDesktop() {
+    gsap.set(this.$parent.querySelectorAll('.section-history__date'), {clearProps: "all"});
+    for(let child in this.animations) this.animations[child].kill();
+    for(let child in this.triggers) this.triggers[child].kill();
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.check);
+    if(this.flag) this.destroyDesktop();
     for(let child in this) delete this[child];
   }
 }

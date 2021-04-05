@@ -191,14 +191,6 @@
     &_style-1 {
       padding-left: 30px;
     }
-    &_style-2 {
-      line-height: 50px;
-      padding: 0 30px;
-    }
-    &_style-3 {
-      padding: 0 29px;
-      line-height: 48px;
-    }
     &_style-4 {
       .icon {
         width: 54px;
@@ -209,6 +201,17 @@
           right: 12px;
         }
       }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    &_style-2 {
+      line-height: 50px;
+      padding: 0 30px;
+    }
+    &_style-3 {
+      padding: 0 29px;
+      line-height: 48px;
     }
   }
 }

@@ -100,6 +100,9 @@
     }
   }
   @include media-breakpoint-down(lg) {
+    &__base-title {
+      margin-bottom: 80px;
+    }
     &__head {
       margin-bottom: 100px;
       &-txt {
@@ -114,6 +117,10 @@
   }
   @include media-breakpoint-down(sm) {
     margin: 0 0 120px 0;
+    &__base-title {
+      margin-bottom: 60px;
+      text-align: center;
+    }
     &__head {
       margin-bottom: 70px;
       &-txt {

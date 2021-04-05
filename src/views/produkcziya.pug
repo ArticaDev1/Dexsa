@@ -52,21 +52,46 @@ block content
         h3.small-section__title Освещение
         .grid
           .row   
-            mixin block(link, title, img1, img2, classes)
-              //block
-              .catalogue-item.grid__item(class=classes)
-                a(href=link).catalogue-item__container
-                  .catalogue-item__images   
-                    .image.image_contain
-                      img(data-src=img1, alt="image").lazyload
-                    .image.image_contain
-                      img(data-src=img2, alt="image").lazyload
-                  h5.catalogue-item__title !{title}
-          
-            +block(obshhepromyshhlennoe_osveshhenie, 'Обще&shy;промышленное',    './img/catalogue/1.png', './img/catalogue/1_2.png', 'col-xl-3 col-md-7 col-6')
-            +block(vzryvozashhishhyonnoe_osveshhenie, 'Взрыво&shy;защищённое',    './img/catalogue/2.png', './img/catalogue/2_2.png', 'col-xl-3 col-md-5 col-6')
-            +block(ulichnoe_osveshhenie, 'Уличное',        './img/catalogue/3.png', './img/catalogue/3_2.png', 'col-xl-3 col-6')
-            +block(zagraditelnye_ogni, 'Заградитель&shy;ные огни', './img/catalogue/4.png', './img/catalogue/4_2.png', 'col-xl-3 col-6')
+            //block
+            .catalogue-item.grid__item.col-6.col-md-7.col-lg-3
+              a(href=obshhepromyshhlennoe_osveshhenie).catalogue-item__container
+                .catalogue-item__image.catalogue-item__image_1
+                  .image
+                    img(data-src="./img/catalogue/1.png", alt="image").lazyload
+                  .image
+                    img(data-src="./img/catalogue/1_2.png", alt="image").lazyload
+                .catalogue-item__back
+                  h5.catalogue-item__title.catalogue-item__title_1 Обще&shy;промышленное     
+            //block
+            .catalogue-item.grid__item.col-6.col-md-5.col-lg-3
+              a(href=vzryvozashhishhyonnoe_osveshhenie).catalogue-item__container  
+                .image.catalogue-item__image.catalogue-item__image_2
+                  .image
+                    img(data-src="./img/catalogue/2.png", alt="image").lazyload
+                  .image
+                    img(data-src="./img/catalogue/2_2.png", alt="image").lazyload
+                .catalogue-item__back
+                  h5.catalogue-item__title.catalogue-item__title_2 Взрыво&shy;защищённое   
+            //block
+            .catalogue-item.grid__item.col-6.col-lg-3
+              a(href=ulichnoe_osveshhenie).catalogue-item__container
+                .catalogue-item__image.catalogue-item__image_3
+                  .image
+                    img(data-src="./img/catalogue/3.png", alt="image").lazyload
+                  .image
+                    img(data-src="./img/catalogue/3_2.png", alt="image").lazyload
+                .catalogue-item__back
+                  h5.catalogue-item__title.catalogue-item__title_3 Уличное
+            //block
+            .catalogue-item.grid__item.col-6.col-lg-3
+              a(href=zagraditelnye_ogni).catalogue-item__container
+                .catalogue-item__image.catalogue-item__image_4
+                  .image
+                    img(data-src="./img/catalogue/4.png", alt="image").lazyload
+                  .image
+                    img(data-src="./img/catalogue/4_2.png", alt="image").lazyload
+                .catalogue-item__back
+                  h5.catalogue-item__title.catalogue-item__title_4 Заградительные огни
 
     section.small-section.swiper.image-slider 
       .swiper-container

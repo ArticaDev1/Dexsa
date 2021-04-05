@@ -66,4 +66,16 @@
   <symbol fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 33" id="arrow2">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M23.668.878a1.5 1.5 0 012.11.218l11.784 14.506a1.5 1.5 0 010 1.892L25.778 32a1.5 1.5 0 11-2.328-1.892l9.797-12.06H1.795a1.5 1.5 0 110-3h31.452L23.45 2.988a1.5 1.5 0 01.218-2.11z"></path>
   </symbol>
+  <symbol fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 60" id="f1">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.107 13.717h28.93V0l21.322 13.16V0l21.323 13.16V0l22.211 13.717v38.476H110V60H0v-7.807h8.107V13.718zm72.741 14.26v12.521h15.659v-12.52H80.848zm-21.878 0v12.521h15.66v-12.52H58.97zm-21.878 0v12.521h15.66v-12.52h-15.66z"></path>
+  </symbol>
+  <symbol fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 67" id="f2">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.921 27.133h4.67v-6.841h15.312v-4.75h2.128V4.09h4.532v11.526h2.06V0h4.532v15.542h2.678v11.516h58.214v32.266h-7.14H110V67H0v-7.676h7.921V27.133zm8.176 13.848v8.116h12.094V40.98H16.097zm0-6.23v6.23h12.094v-6.23H16.097zm15.81 6.23v8.116h12.094V40.98H31.908zm0-6.23v6.23h12.094v-6.23H31.908zm15.81 6.23v8.116h12.095V40.98H47.718zm0-6.23v6.23h12.095v-6.23H47.718z"></path>
+  </symbol>
+  <symbol fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 52" id="f3">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 44.304h7.413V22.477H46.23V2.475H10.206v20.002H7.413V0h57.831v6.535h19.857v4.554h6.315c5.636 0 10.434 3.656 10.434 13.455v19.28H110V52H0v-7.696zm92.364-.48V25.199c-.052-1.678-.474-2.207-1.58-2.207h-5.736v20.832h7.316zm7.116 0v-19.28c0-7.68-3.797-10.682-8.117-10.682h-6.315v2.472h5.736c1.528 0 3.108.441 4.32 2.119 1.368 1.854 1.843 4.414 1.843 7.239v18.132h2.533z"></path>
+  </symbol>
+  <symbol fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 56" id="f4">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.304 10.893H7.914v37.363H0V56h110v-7.744h-8.495V10.892L74.003 0v10.38L47.653 0v10.38L21.303 0v10.893zM93.01 31.907v15.97H71.7v-15.97c6.91-2.947 13.966-3.203 21.31 0zm-28.078 0v15.97h-21.31v-15.97c6.767-2.947 13.967-3.203 21.31 0zm-28.221 0v15.97H15.4v-15.97c6.91-2.947 13.966-3.203 21.31 0z"></path>
+  </symbol>
 </svg>

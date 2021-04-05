@@ -829,20 +829,21 @@
       padding: 20px 25px;
     }
     &__image {
-      &_1, &_2, &_3, &_4 {
-        top: 20px;
-      }
       &_1 {
         width: 220px;
+        top: 35px;
       }
       &_2 {
         width: 160px;
+        top: 30px;
       }
       &_3 {
-        width: 95px;
+        width: 100px;
+        top: 30px;
       }
       &_4 {
-        width: 136px;
+        width: 130px;
+        top: 25px;
       }
       &_5 {
         bottom: 40px;
@@ -885,7 +886,7 @@
         width: 80px;
       }
       &_4 {
-        width: 94px;
+        width: 84px;
       }
       &_5 {
         right: 40px;
@@ -945,15 +946,24 @@
         height: 100%;
       }
       .m-catalogue-item__image {
-        top: 20px;
-        width: 100%;
-        height: 100px;
+        &_1 {
+          height: 105px;
+          top: 30px;
+        }
+        &_2 {
+          height: 110px;
+          top: 24px;
+        }
+        &_3 {
+          height: 90px;
+          top: 25px;
+        }
+        &_4 {
+          height: 100px;
+          top: 30px;
+        }
         .image {
-          position: absolute;
-          width: 100%;
           height: 100%;
-          top: 0;
-          left: 0;
           img {
             position: absolute;
             width: 100%;
@@ -973,84 +983,208 @@
 }
 
 .catalogue-item {
+  height: 330px;
   &__container {
-    display: block;
     position: relative;
-    border-radius: 24px;
     height: 100%;
-    padding: 40px 24px 50px 24px;
-    box-shadow: $inset_shadow;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: background-color $trs2;
-    background-color: var(--color-bg-transparent2);
+    justify-content: center;
     &[data-touch], &[data-hover] {
-      background-color: var(--color-bg-transparent);
-      .catalogue-item__images .image:not(:first-child) {
+      .catalogue-item__image .image:not(:first-child) {
         opacity: 1;
         visibility: visible;
       }
-    }
-  }
-  &__images {
-    width: 100%;
-    height: 200px;
-    position: relative;
-    .image {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      transition: opacity $trs2, visibility $trs2;
-      &:not(:first-child) {
-        opacity: 0;
-        visibility: hidden;
+      .catalogue-item__back {
+        background-color: var(--color-bg-transparent);
       }
     }
   }
+  &__back {
+    background-color: var(--color-bg-transparent2);
+    border-radius: 24px;
+    box-shadow: $inset_shadow;
+    padding: 50px 30px;
+    position: relative;
+    transition: background-color $trs2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
   &__title {
-    margin: 20px 0 0 0;
+    width: 100%;
     text-align: center;
   }
-  @include media-breakpoint-down(xxl) {
-    &__container {
-      padding: 40px 24px;
+  &__image {
+    position: absolute;
+    z-index: 2;
+    .image {
+      &:not(:first-child) {
+        transition: opacity $trs2, visibility $trs2;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
     }
-    &__images {
-      height: 180px;
+    &_1 {
+      width: 300px;
+      top: 50px;
+    }
+    &_2 {
+      width: 230px;
+      top: 36px;
+    }
+    &_3 {
+      width: 160px;
+      top: 34px;
+    }
+    &_4 {
+      width: 160px;
+      top: 44px;
+    }
+  }
+  @include media-breakpoint-down(xxl) {
+    height: 300px;
+    &__back {
+      padding: 46px 30px;
+    }
+    &__image {
+      &_1 {
+        width: 250px;
+      }
+      &_2 {
+        width: 190px;
+        top: 42px;
+      }
+      &_3 {
+        width: 136px;
+      }
+      &_4 {
+        width: 140px;
+      }
+    }
+  }
+  @include media-breakpoint-down(xl) {
+    height: 260px;
+    &__back {
+      padding: 30px;
+    }
+    &__image {
+      &_1 {
+        width: 200px;
+        top: 44px;
+      }
+      &_2 {
+        width: 160px;
+        top: 30px;
+      }
+      &_3 {
+        width: 110px;
+      }
+      &_4 {
+        width: 110px;
+        top: 38px;
+      }
     }
   }
   @include media-breakpoint-down(lg) {
-    &__images {
-      height: 140px;
+    height: 230px;
+    &__back {
+      padding: 20px 25px;
     }
-    &__container {
-      padding: 30px 24px 34px 24px;
+    &__image {
+      &_1 {
+        width: 220px;
+        top: 35px;
+      }
+      &_2 {
+        width: 160px;
+        top: 30px;
+      }
+      &_3 {
+        width: 100px;
+        top: 30px;
+      }
+      &_4 {
+        width: 130px;
+        top: 25px;
+      }
+    }
+    &__title {
+      &_1, &_2, &_3, &_4 {
+        bottom: 20px;
+        text-align: center;
+      }
+    }
+  }
+  @include media-breakpoint-down(md) {
+    height: 200px;
+    &__image {
+      &_1 {
+        width: 170px;
+      }
+      &_2 {
+        width: 132px;
+      }
+      &_3 {
+        width: 80px;
+      }
+      &_4 {
+        width: 84px;
+      }
     }
   }
   @include media-breakpoint-down(sm) {
-    &__images {
-      height: 100px;
-      position: absolute;
-      top: 20px;
-      left: 0;
+    height: auto;
+    &__back {
+      padding: 140px 10px 20px 10px;
     }
     &__title {
-      height: 100%;
+      position: initial;
+      padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0;
+      height: 100%;
     }
-    &__container {
-      padding: 140px 10px 20px 10px;
+    &__image {
+      width: 100%;
+      &_1, &_2, &_3, &_4 {
+        .image {
+          height: 100%;
+          img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+      &_1 {
+        height: 105px;
+        top: 30px;
+      }
+      &_2 {
+        height: 110px;
+        top: 24px;
+      }
+      &_3 {
+        height: 90px;
+        top: 25px;
+      }
+      &_4 {
+        height: 100px;
+        top: 30px;
+      }
     }
   }
 }
 
-.backdropfilter .catalogue-item__container {
+.backdropfilter .catalogue-item__back {
   backdrop-filter: $blur;
 } 
 
@@ -1060,7 +1194,7 @@
     border-radius: 24px;
     box-shadow: inset -2px -2px 1px rgba(255, 255, 255, 0.05);
     background-color: rgba(255, 255, 255, 0.05);
-    padding: 55px 40px 55px 90px;
+    padding: 50px 40px 50px 90px;
     overflow: hidden;
   }
   ul {
@@ -2087,29 +2221,21 @@
     margin-bottom: 100px;
     .icon {
       width: 110px;
-      height: 110px;
-      margin-bottom: 50px;
+      height: auto;
       color: #fff;
+      display: block;
+      margin: 0 auto 50px auto;
     }
   }
   @include media-breakpoint-down(xl) {
     &__block {
       .icon {
         width: 80px;
-        height: 80px;
         margin-bottom: 30px;
       }
     }
   }
   @include media-breakpoint-down(lg) {
-    &__block {
-      .icon {
-        width: 90px;
-        height: 90px;
-      }
-    }
-  }
-  @include media-breakpoint-down(sm) {
     &__head {
       margin-bottom: 80px;
     }
@@ -2119,10 +2245,22 @@
     &__block {
       margin-bottom: 80px;
       .icon {
-        margin-bottom: 25px;
-        width: 80px;
-        height: auto;
-        max-height: 80px;
+        width: 90px;
+      }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__head {
+      margin-bottom: 60px;
+    }
+    &__row {
+      margin-bottom: -60px;
+    }
+    &__block {
+      margin-bottom: 60px;
+      .icon {
+        margin-bottom: 20px;
+        width: 60px;
       }
     }
   }
@@ -2733,6 +2871,66 @@
     }
     &__pagination {
       bottom: 41px;
+    }
+  }
+}
+
+.bg-text-section {
+  padding: 250px 0;
+  &__bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  @include media-breakpoint-down(xxl) {
+    padding: 200px 0;
+  }
+  @include media-breakpoint-down(sm) {
+    padding: 120px 0;
+    text-align: center;
+  }
+}
+
+.section-history {
+  .bg-light {
+    top: -250px;
+    right: -600px;
+  }
+  &__block {
+    align-items: center;
+    &:not(:last-child) {
+      margin-bottom: 60px;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    &__date {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    &__date {
+      font-size: 3.875rem;
+    }
+  }
+  @include media-breakpoint-up(xxl) {
+    &__date {
+      font-size: 4.125rem;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    .bg-light {
+      right: -500px;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    .bg-light {
+      top: 0;
+    }
+    &__block {
+      text-align: center;
     }
   }
 }
