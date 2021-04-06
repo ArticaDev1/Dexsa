@@ -3858,10 +3858,29 @@ img {
     border-color: var(--color-grayish);
     width: 12px;
     height: 12px; }
+  .cursor.focus .cursor-magnifier {
+    color: var(--color-grayish); }
+  .cursor.magnifier .cursor-magnifier {
+    opacity: 1;
+    visibility: visible; }
   .cursor.slide .cursor-slide {
     opacity: 1;
     visibility: visible; }
+  .cursor-magnifier {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    color: var(--color-gray);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out, color 0.15s ease-in-out; }
+    .cursor-magnifier .icon {
+      display: block;
+      width: 100%;
+      height: 100%; }
   .cursor-slide {
+    position: absolute;
     display: flex;
     justify-content: space-between;
     width: 70px;
@@ -3999,7 +4018,7 @@ img {
     height: 48px;
     border-radius: 48px;
     background-color: #0E0E0E;
-    transition: opacity 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
     display: flex;
     position: absolute;
     top: 50%;
@@ -4018,6 +4037,10 @@ img {
       left: 0; }
       .swiper-button-prev .icon {
         transform: rotate(180deg); }
+    .swiper-button-disabled {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none; }
 
 .scrollbar-track-y {
   background-color: transparent;
@@ -4111,14 +4134,14 @@ img {
       width: 200px;
       height: 200px; } }
 
-.desktop [data-cursor-slide] .swiper-lazy {
+.desktop [data-cursor='slide'] .swiper-lazy {
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
   transform: scale(1.05); }
 
-.desktop [data-cursor-slide] .container {
+.desktop [data-cursor='slide'] .container {
   transform: translateZ(500px); }
 
-.desktop [data-cursor-slide][data-focus] .swiper-lazy {
+.desktop [data-cursor='slide'][data-focus] .swiper-lazy {
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.3s ease-in-out;
   transform: scale(1.01); }
 
@@ -6480,8 +6503,8 @@ img {
     top: calc(50% - 19px);
     background-color: transparent; }
   .system-features-slider .swiper-pagination {
-    justify-content: flex-end;
     position: absolute;
+    right: 0;
     bottom: 0; }
   .system-features-slider__slide-icon {
     display: block;
@@ -6503,7 +6526,8 @@ img {
   .documents-slider .swiper-pagination {
     position: absolute;
     bottom: 0;
-    justify-content: center; }
+    left: 50%;
+    transform: translateX(-50%); }
   .documents-slider__slide {
     display: block;
     position: relative; }

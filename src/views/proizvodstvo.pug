@@ -9,7 +9,7 @@ block content
         -let index = 0;
         mixin slide(title, text, image)
           //slide
-          .swiper-slide.screen.category-head__slide(class=index==0?'animation-head':'' data-touch-hover data-cursor-slide)
+          .swiper-slide.screen.category-head__slide(class=index==0?'animation-head':'' data-touch-hover data-cursor='slide')
             .category-head__scene(data-parallax='0.2' data-parallax-top)
               .image.image_cover.image_mask-1(class=index==0?'animation-head__image':'')
                 img(data-src=image, alt="bg").swiper-lazy

@@ -2660,8 +2660,8 @@
     background-color: transparent;
   }
   .swiper-pagination {
-    justify-content: flex-end;
     position: absolute;
+    right: 0;
     bottom: 0;
   }
   &__slide {
@@ -2694,7 +2694,8 @@
   .swiper-pagination {
     position: absolute;
     bottom: 0;
-    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
   }
   &__slide {
     display: block;

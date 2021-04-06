@@ -56,6 +56,11 @@
     <script src="./scripts/preloader.js"></script>
     <!--PRELOADER END-->
     <div class="cursor">
+      <div class="cursor-magnifier">
+        <svg class="icon">
+          <use xlink:href="./img/icons/icons-sprite.svg#magnifier"></use>
+        </svg>
+      </div>
       <div class="cursor-slide">
         <svg class="icon">
           <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
@@ -169,14 +174,14 @@
       </header>
       <div class="content">
         <main class="main" data-barba="container">
-          <section class="section category-head screen">
+          <section class="section category-head screen animation-head">
             <div class="category-head__scene" data-parallax="0.2" data-parallax-top>
-              <div class="category-head__scene-content image image_cover image_mask-1"><img class="lazyload" data-src="./img/GettyImages-1195765543 2.jpg" alt="bg"></div>
+              <div class="image image_cover image_mask-1 animation-head__image"><img class="lazyload" data-src="./img/GettyImages-1195765543 2.jpg" alt="bg"></div>
             </div>
             <div class="container category-head__container">
-              <div class="category-head__content row">
-                <h1 class="category-head__title category-head__item col-lg-6">Система управления мониторринга освещения</h1>
-                <p class="category-head__item category-head__text col-lg-6">Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.</p>
+              <div class="category-head__content row stp">
+                <h1 class="category-head__title col-lg-6 animation-head__item">Система управления мониторринга освещения</h1>
+                <p class="category-head__text col-lg-6 animation-head__item">Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.</p>
               </div>
             </div>
           </section>
@@ -196,7 +201,7 @@
             <div class="container">
               <h3 class="section__base-title">Ключевые особенности предлагаемой системы:</h3>
               <div class="system-features-slider">
-                <div class="swiper-container">
+                <div class="swiper-container" data-cursor="slide">
                   <div class="swiper-wrapper">
                     <!--slide-->
                     <div class="swiper-slide system-features-slider__slide">

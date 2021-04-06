@@ -53,6 +53,7 @@ Swiper.use([Navigation, Pagination, Lazy, Autoplay]);
 import SwipeListener from 'swipe-listener';
 const validate = require("validate.js");
 import Inputmask from "inputmask";
+require('fslightbox');
 
 const contentWidth = () => {
   return $wrapper.getBoundingClientRect().width;
@@ -143,15 +144,14 @@ const App = {
       this.afunctions.add(HeadSlider, '.category-head.swiper');
       this.afunctions.add(Map, '.contacts-block__map');
       this.afunctions.add(HistoryBlock, '.section-history');
-
-
-      //animation final
       this.afunctions.add(AnimationHead, '.animation-head');
       
       
       autosize(document.querySelectorAll('textarea.input__element'));
 
       this.afunctions.init();
+
+      refreshFsLightbox();
     })
 
     window.addEventListener('enterfinish', ()=>{
@@ -318,17 +318,11 @@ const TouchHoverEvents = {
     //mouseenter
     if(event.type=='mouseenter' && !this.touched && $targets[0] && $targets[0]==event.target) {
       $targets[0].setAttribute('data-hover', '');
-      if(Cursor.initialized && event.target.closest('[data-cursor-slide]')) {
-        Cursor.slide_enter();
-      }
     }
     //mouseleave
     else if(event.type=='mouseleave' && !this.touched && $targets[0] && $targets[0]==event.target) {
       $targets[0].removeAttribute('data-focus');
       $targets[0].removeAttribute('data-hover');
-      if(Cursor.initialized && event.target.closest('[data-cursor-slide]')) {
-        Cursor.slide_leave();
-      }
     }
     //mousedown
     if(event.type=='mousedown' && !this.touched && $targets[0]) {
@@ -345,32 +339,39 @@ const Cursor = {
   init: function() {
     this.$parent = document.querySelector('.cursor');
 
-    document.addEventListener('mousemove', (event)=>{
-      let x = event.clientX,
-          y = event.clientY;
-      gsap.to(this.$parent, {duration:0.5,x:x,y:y,ease:'power2.out'})
-    });
-    
-    document.addEventListener('mousedown',(event)=>{
-      this.$parent.classList.add('focus');
-    })
-    document.addEventListener('mouseup',(event)=>{
-      this.$parent.classList.remove('focus');
-    })
-    document.addEventListener('mouseleave', (event)=>{
-      this.$parent.classList.add('hidden');
-    })
-    document.addEventListener('mouseenter', (event)=>{
-      this.$parent.classList.remove('hidden');
-    })
+    let events = (event)=> {
+      let $target = event.target!==document?event.target.closest('[data-cursor]'):null;
+      if($target) {
+        let attr = $target.getAttribute('data-cursor');
+        if(event.type=='mouseenter' && $target==event.target) {
+          this.$parent.classList.add(attr);
+        } 
+        else if(event.type=='mouseleave' && $target==event.target) {
+          this.$parent.classList.remove(attr);
+          this.$parent.classList.remove('focus');
+        } 
+        else if(event.type=='mousedown') {
+          this.$parent.classList.add('focus');
+        } 
+        else if(event.type=='mouseup') {
+          this.$parent.classList.remove('focus');
+        }
+      }
+
+      if(event.type=='mousemove') {
+        let x = event.clientX,
+            y = event.clientY;
+        gsap.to(this.$parent, {duration:0.5,x:x,y:y,ease:'power2.out'})
+      }
+    }
+
+    document.addEventListener('mouseenter',  (event)=>{events(event)},true);
+    document.addEventListener('mouseleave',  (event)=>{events(event)},true);
+    document.addEventListener('mousedown',   (event)=>{events(event)});
+    document.addEventListener('mouseup',     (event)=>{events(event)});
+    document.addEventListener('mousemove',     (event)=>{events(event)});
 
     this.initialized = true;
-  },
-  slide_enter: function() {
-    this.$parent.classList.add('slide');
-  },
-  slide_leave: function() {
-    this.$parent.classList.remove('slide');
   }
 }
 
@@ -1957,13 +1958,13 @@ class SfSlider {
     this.$slider = this.$parent.querySelector('.swiper-container');
     this.$next = this.$parent.querySelector('.swiper-button-next');
     this.$pagination = this.$parent.querySelector('.swiper-pagination');
-    this.speed = 0.5;
 
     this.swiper = new Swiper(this.$slider, {
+      touchStartPreventDefault: false,
       loop: true,
       slidesPerView: 2,
       spaceBetween: 118,
-      speed: this.speed*1000,
+      speed: 500,
       pagination: {
         el: this.$pagination,
         clickable: true,
@@ -2151,7 +2152,6 @@ class DocsSlider {
     this.$parent = $parent;
   } 
   init() {
-    this.speed = 0.5;
     this.$slider = this.$parent.querySelector('.swiper-container');
     this.$prev = this.$parent.querySelector('.swiper-button-prev');
     this.$next = this.$parent.querySelector('.swiper-button-next');
@@ -2160,9 +2160,10 @@ class DocsSlider {
     this.elements = [];
 
     this.swiper = new Swiper(this.$slider, {
+      touchStartPreventDefault: false,
       slidesPerView: 4,
       spaceBetween: 24,
-      speed: this.speed*1000,
+      speed: 500,
       lazy: {
         loadOnTransitionStart: true
       },
