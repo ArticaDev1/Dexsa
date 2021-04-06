@@ -4314,7 +4314,7 @@ img {
       line-height: 48px; } }
 
 .btn-link {
-  display: block;
+  display: inline-block;
   transition: opacity 0.15s ease-in-out; }
   .btn-link span {
     transition: border-color 0.15s ease-in-out, color 0.15s ease-in-out;
@@ -5036,7 +5036,10 @@ img {
   bottom: -300px; }
 
 .catalogue-items-section__top-section {
-  z-index: 3; }
+  z-index: 3;
+  pointer-events: none; }
+  .catalogue-items-section__top-section .catalogue-item__container, .catalogue-items-section__top-section .small-section__title {
+    pointer-events: all; }
 
 @media (max-width: 1023.98px) {
   .catalogue-items-section .bg-light:first-child {
@@ -6495,8 +6498,12 @@ img {
 .system-features-section .bg-light {
   right: -800px; }
 
+@media (max-width: 1023.98px) {
+  .system-features-section .bg-light {
+    right: -500px;
+    top: 0; } }
+
 .system-features-slider {
-  padding-right: 8.33333%;
   padding-bottom: 38px;
   position: relative; }
   .system-features-slider .swiper-button {
@@ -6510,10 +6517,35 @@ img {
     display: block;
     height: 100px;
     margin-bottom: 36px; }
+  @media (max-width: 1023.98px) {
+    .system-features-slider {
+      padding-bottom: 88px; }
+      .system-features-slider__slide {
+        text-align: center; }
+        .system-features-slider__slide-icon {
+          margin: 0 auto 36px auto; }
+      .system-features-slider .swiper-pagination {
+        right: 50%;
+        transform: translateX(50%); } }
+  @media (max-width: 575.98px) {
+    .system-features-slider {
+      padding-bottom: 58px; }
+      .system-features-slider__slide-icon {
+        height: 80px; } }
 
 .sumo-system-section .bg-light {
   left: -900px;
   top: -120px; }
+
+@media (max-width: 1023.98px) {
+  .sumo-system-section .bg-light {
+    left: -500px;
+    top: 100px; } }
+
+@media (max-width: 575.98px) {
+  .sumo-system-section .bg-light {
+    top: initial;
+    bottom: -200px; } }
 
 .documents-slider {
   padding-bottom: 68px; }
@@ -6676,6 +6708,9 @@ img {
     height: 100%;
     top: 0;
     left: 0; }
+    .bg-text-section__bg img {
+      height: 300%;
+      top: -100%; }
   @media (max-width: 1599.98px) {
     .bg-text-section {
       padding: 200px 0; } }

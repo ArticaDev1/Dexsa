@@ -599,6 +599,10 @@
   }
   &__top-section {
     z-index: 3;
+    pointer-events: none;
+    .catalogue-item__container, .small-section__title {
+      pointer-events: all;
+    }
   }
   @include media-breakpoint-down(lg) {
     .bg-light {
@@ -2649,10 +2653,15 @@
   .bg-light {
     right: -800px;
   }
+  @include media-breakpoint-down(lg) {
+    .bg-light {
+      right: -500px;
+      top: 0;
+    }
+  }
 }
 
 .system-features-slider {
-  padding-right: 8.33333%;
   padding-bottom: 38px;
   position: relative;
   .swiper-button {
@@ -2671,12 +2680,45 @@
       margin-bottom: 36px;
     }
   }
+  @include media-breakpoint-down(lg) {
+    padding-bottom: 88px;
+    &__slide {
+      text-align: center;
+      &-icon {
+        margin: 0 auto 36px auto;
+      }
+    }
+    .swiper-pagination {
+      right: 50%;
+      transform: translateX(50%);
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 58px;
+    &__slide {
+      &-icon {
+        height: 80px;
+      }
+    }
+  }
 }
 
 .sumo-system-section {
   .bg-light {
     left: -900px;
     top: -120px;
+  }
+  @include media-breakpoint-down(lg) {
+    .bg-light {
+      left: -500px;
+      top: 100px;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    .bg-light {
+      top: initial;
+      bottom: -200px;
+    }
   }
 }
 
@@ -2884,6 +2926,10 @@
     height: 100%;
     top: 0;
     left: 0;
+    img {
+      height: 300%;
+      top: -100%;
+    }
   }
   @include media-breakpoint-down(xxl) {
     padding: 200px 0;

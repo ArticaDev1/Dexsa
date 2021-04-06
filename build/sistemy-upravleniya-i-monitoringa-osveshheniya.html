@@ -188,9 +188,10 @@
           <section class="section sumo-schema">
             <div class="container">
               <h3 class="section__base-title">Структурная схема системы управления освещением</h3>
-              <div class="sumo-schema__container"> <img class="sumo-schema__element" src="./img/shema.svg" alt="shema">
-                <div class="image sumo-schema__lights"><img class="lazyload" data-src="./img/shema-lights.png" alt="shema-lights"></div>
-                <div class="image sumo-schema__lights sumo-schema__lights-active"><img class="lazyload" data-src="./img/shema-lights-active.png" alt="shema-lights"></div>
+              <div class="sumo-schema__container"> <img class="sumo-schema__element d-none d-sm-block" src="./img/shema.svg" alt="shema"><img class="sumo-schema__element d-sm-none" src="./img/shema-mobile.svg" alt="shema">
+                <div class="image image_contain sumo-schema__lights d-sm-none"><img class="lazyload" data-src="./img/shema-lights-mobile.png" alt="shema-lights"></div>
+                <div class="image image_contain sumo-schema__lights d-none d-sm-block"><img class="lazyload" data-src="./img/shema-lights.png" alt="shema-lights"></div>
+                <div class="image image_contain sumo-schema__lights sumo-schema__lights-active d-none d-sm-block"><img class="lazyload" data-src="./img/shema-lights-active.png" alt="shema-lights"></div>
               </div>
             </div>
           </section>
@@ -201,54 +202,58 @@
             <div class="container">
               <h3 class="section__base-title">Ключевые особенности предлагаемой системы:</h3>
               <div class="system-features-slider">
-                <div class="swiper-container" data-cursor="slide">
-                  <div class="swiper-wrapper">
-                    <!--slide-->
-                    <div class="swiper-slide system-features-slider__slide">
-                      <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf1.svg" alt="image">
-                        <p class="system-features-slider__slide-text">Индивидуальное адресное управление каждым светильником по питающим проводам (технология PLC) — позволяет избежать прокладки дополнительных проводов и не иметь проблем с электромагнитной совместимостью и информационной безопасностью, характерных для решений, использующих связь по радиоканалу.</p>
-                      </div>
-                    </div>
-                    <!--slide-->
-                    <div class="swiper-slide system-features-slider__slide">
-                      <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf2.svg" alt="image">
-                        <p class="system-features-slider__slide-text">Отсутствие специализированного программного обеспечения АРМ оператора (веб интерфейс). Количество подключаемых АРМ ограничено исключительно производительностью веб-сервера.</p>
-                      </div>
-                    </div>
-                    <!--slide-->
-                    <div class="swiper-slide system-features-slider__slide">
-                      <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf3.svg" alt="image">
-                        <p class="system-features-slider__slide-text">Возможность использования в качестве среды передачи данных между контроллерами и серверами любых имеющихся в распоряжении средств, включая мобильную связь. В контроллеры могут быть установлены сим-карты.</p>
-                      </div>
-                    </div>
-                    <!--slide-->
-                    <div class="swiper-slide system-features-slider__slide">
-                      <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf4.svg" alt="image">
-                        <p class="system-features-slider__slide-text">Применение в качестве хранилища данных телеметрии SQL сервера, что делает возможным чтение данных из него сторонними системами.</p>
-                      </div>
-                    </div>
-                    <!--slide-->
-                    <div class="swiper-slide system-features-slider__slide">
-                      <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf5.svg" alt="image">
-                        <p class="system-features-slider__slide-text">Полное отсутствие дополнительных устройств на участке энергораспределительной системы во взрывоопасной зоне. Вся дополнительная электроника спрятана внутрь светильника.</p>
-                      </div>
-                    </div>
-                    <!--slide-->
-                    <div class="swiper-slide system-features-slider__slide">
-                      <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf6.svg" alt="image">
-                        <p class="system-features-slider__slide-text">Низкая стоимость решения в пересчете на один светильник (обеспечивается возможностью применения обегающего контроля).</p>
-                      </div>
-                    </div>
-                    <!--slide-->
-                    <div class="swiper-slide system-features-slider__slide">
-                      <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf7.svg" alt="image">
-                        <p class="system-features-slider__slide-text">Общее количество светильников, управляемых от одного шкафа питания и управления — до 1000 штук.</p>
+                <div class="row">
+                  <div class="col-xl-11">
+                    <div class="swiper-container" data-cursor="slide">
+                      <div class="swiper-wrapper">
+                        <!--slide-->
+                        <div class="swiper-slide system-features-slider__slide">
+                          <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf1.svg" alt="image">
+                            <p class="system-features-slider__slide-text">Индивидуальное адресное управление каждым светильником по питающим проводам (технология PLC) — позволяет избежать прокладки дополнительных проводов и не иметь проблем с электромагнитной совместимостью и информационной безопасностью, характерных для решений, использующих связь по радиоканалу.</p>
+                          </div>
+                        </div>
+                        <!--slide-->
+                        <div class="swiper-slide system-features-slider__slide">
+                          <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf2.svg" alt="image">
+                            <p class="system-features-slider__slide-text">Отсутствие специализированного программного обеспечения АРМ оператора (веб интерфейс). Количество подключаемых АРМ ограничено исключительно производительностью веб-сервера.</p>
+                          </div>
+                        </div>
+                        <!--slide-->
+                        <div class="swiper-slide system-features-slider__slide">
+                          <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf3.svg" alt="image">
+                            <p class="system-features-slider__slide-text">Возможность использования в качестве среды передачи данных между контроллерами и серверами любых имеющихся в распоряжении средств, включая мобильную связь. В контроллеры могут быть установлены сим-карты.</p>
+                          </div>
+                        </div>
+                        <!--slide-->
+                        <div class="swiper-slide system-features-slider__slide">
+                          <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf4.svg" alt="image">
+                            <p class="system-features-slider__slide-text">Применение в качестве хранилища данных телеметрии SQL сервера, что делает возможным чтение данных из него сторонними системами.</p>
+                          </div>
+                        </div>
+                        <!--slide-->
+                        <div class="swiper-slide system-features-slider__slide">
+                          <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf5.svg" alt="image">
+                            <p class="system-features-slider__slide-text">Полное отсутствие дополнительных устройств на участке энергораспределительной системы во взрывоопасной зоне. Вся дополнительная электроника спрятана внутрь светильника.</p>
+                          </div>
+                        </div>
+                        <!--slide-->
+                        <div class="swiper-slide system-features-slider__slide">
+                          <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf6.svg" alt="image">
+                            <p class="system-features-slider__slide-text">Низкая стоимость решения в пересчете на один светильник (обеспечивается возможностью применения обегающего контроля).</p>
+                          </div>
+                        </div>
+                        <!--slide-->
+                        <div class="swiper-slide system-features-slider__slide">
+                          <div class="system-features-slider__slide-container"> <img class="system-features-slider__slide-icon" src="./img/icons/sf7.svg" alt="image">
+                            <p class="system-features-slider__slide-text">Общее количество светильников, управляемых от одного шкафа питания и управления — до 1000 штук.</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="swiper-pagination"></div>
-                <button class="swiper-button swiper-button-next">
+                <button class="swiper-button swiper-button-next d-none d-xl-flex">
                   <svg class="icon">
                     <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
                   </svg>
@@ -263,7 +268,7 @@
             <div class="container">
               <h3 class="section__base-title">Назначение системы:</h3>
               <div class="row">
-                <div class="col-xl-5 sumo-system-section__list">
+                <div class="col-lg-6 col-xl-5 sumo-system-section__list">
                   <ul>
                     <li>Автоматизация контроля технического состояния систем освещения (светильники, драйверы, кабельная продукция, коммутационная аппаратура).</li>
                     <li>Мониторинг параметров питающего напряжения на вводе энергораспределительной системы и контроль соответствия этих параметров действующим ГОСТ.</li>
@@ -272,7 +277,7 @@
                     <li>Контроль токов утечки — позволяет своевременно обнаруживать падение сопротивления изоляции и осуществлять устранение недостатков в плановом, а не аварийном режимах.</li>
                   </ul>
                 </div>
-                <div class="offset-xl-1 col-xl-5 sumo-system-section__list">
+                <div class="col-lg-6 offset-xl-1 col-xl-5 sumo-system-section__list">
                   <ul>
                     <li>Сбор информации с объектов по подключенным системам освещения, первичная обработка собранной информации, передача ее по каналам связи в пункт управления и предоставление в удобном виде пользователям.</li>
                     <li>Автоматизация технического учета электроэнергии.</li>

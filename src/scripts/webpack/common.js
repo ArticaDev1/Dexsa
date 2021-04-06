@@ -150,16 +150,24 @@ const App = {
       autosize(document.querySelectorAll('textarea.input__element'));
 
       this.afunctions.init();
-
-      refreshFsLightbox();
     })
 
     window.addEventListener('enterfinish', ()=>{
+      refreshFsLightbox();
       ScrollTrigger.refresh();
       if(Scroll.scrollbar) Scroll.scrollbar.track.yAxis.element.classList.remove('hidden');
     })
 
     window.addEventListener('exitstart', ()=>{
+      
+      for(let instance in fsLightboxInstances) {
+        if(fsLightboxInstances[instance].data.isInitialized) {
+          if(document.documentElement.classList.contains('fslightbox-open')) {
+            fsLightboxInstances[instance].close();
+          }
+        }
+      }
+
       ActiveLinks.reset();
       $wrapper.classList.add('disabled');
       Scroll.scrollTop(Math.max(Scroll.y-window.innerHeight/2, 0), Speed);
@@ -224,7 +232,6 @@ const ActiveLinks = {
     
     $links.forEach($this=>{
       let href = $this.getAttribute('href');
-      console.log(href, value)
       if(href==value) {
         $this.classList.add('is-active-page');
       } else {
@@ -1962,9 +1969,10 @@ class SfSlider {
     this.swiper = new Swiper(this.$slider, {
       touchStartPreventDefault: false,
       loop: true,
-      slidesPerView: 2,
-      spaceBetween: 118,
+      slidesPerView: 1,
+      spaceBetween: 16,
       speed: 500,
+      autoHeight: true,
       pagination: {
         el: this.$pagination,
         clickable: true,
@@ -1972,6 +1980,27 @@ class SfSlider {
       },
       navigation: {
         nextEl: this.$next
+      },
+      breakpoints: {
+        576: {
+          slidesPerView: 1,
+          spaceBetween: 24
+        },
+        1024: {
+          slidesPerView: 2,
+          spaceBetween: 24,
+          autoHeight: false
+        },
+        1280: {
+          slidesPerView: 2,
+          spaceBetween: 102,
+          autoHeight: false
+        },
+        1600: {
+          slidesPerView: 2,
+          spaceBetween: 118,
+          autoHeight: false
+        }
       }
     });
 
@@ -2124,25 +2153,6 @@ class HeadSlider {
   }
   destroy() {
     this.slider.destroy();
-    for(let child in this) delete this[child];
-  }
-}
-
-class ShemaLights {
-  constructor($parent) {
-    this.$parent = $parent;
-  }
-  init() {
-    this.trigger = ScrollTrigger.create({
-      trigger: this.$parent,
-      start: "center bottom",
-      end: "center top",
-      once: true,
-      toggleClass: 'active'
-    });
-  }
-  destroy() {
-    this.trigger.kill();
     for(let child in this) delete this[child];
   }
 }
@@ -2380,6 +2390,51 @@ class HistoryBlock {
     gsap.set(this.$parent.querySelectorAll('.section-history__date'), {clearProps: "all"});
     for(let child in this.animations) this.animations[child].kill();
     for(let child in this.triggers) this.triggers[child].kill();
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.check);
+    if(this.flag) this.destroyDesktop();
+    for(let child in this) delete this[child];
+  }
+}
+
+class ShemaLights {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.check = ()=> {
+      if(window.innerWidth >= brakepoints.sm && (!this.initialized || !this.flag)) {
+        this.initDesktop();
+        this.flag = true;
+      } 
+      else if(window.innerWidth<brakepoints.sm && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.flag = false;
+      }
+    }
+    this.check();
+    window.addEventListener('resize', this.check);
+    this.initialized = true;
+  }
+
+  initDesktop() {
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "center bottom",
+      end: "center top",
+      once: true,
+      toggleClass: 'active'
+    });
+  }
+
+  destroyDesktop() {
+    this.$parent.classList.remove('active');
+    this.trigger.kill();
   }
 
   destroy() {

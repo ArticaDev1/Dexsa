@@ -217,7 +217,7 @@
 }
 
 .btn-link {
-  display: block;
+  display: inline-block;
   transition: opacity $trs1;
   span {
     transition: border-color $trs1, color $trs1;
