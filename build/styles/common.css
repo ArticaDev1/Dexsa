@@ -6576,6 +6576,9 @@ img {
     .documents-slider__slide[data-touch]::after, .documents-slider__slide[data-hover]::after {
       opacity: 1;
       visibility: visible; }
+  @media (max-width: 1023.98px) {
+    .documents-slider {
+      padding-bottom: 58px; } }
 
 .ref-slider ~ .ref-slider {
   margin-top: -250px; }

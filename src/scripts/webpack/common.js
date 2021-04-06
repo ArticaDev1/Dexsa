@@ -2171,8 +2171,8 @@ class DocsSlider {
 
     this.swiper = new Swiper(this.$slider, {
       touchStartPreventDefault: false,
-      slidesPerView: 4,
-      spaceBetween: 24,
+      slidesPerView: 1,
+      spaceBetween: 16,
       speed: 500,
       lazy: {
         loadOnTransitionStart: true
@@ -2185,6 +2185,18 @@ class DocsSlider {
       navigation: {
         prevEl: this.$prev,
         nextEl: this.$next
+      },
+      breakpoints: {
+        576: {
+          slidesPerView: 2,
+          spaceBetween: 24
+        },
+        1024: {
+          slidesPerView: 3
+        },
+        1280: {
+          slidesPerView: 4
+        }
       }
     });
 
