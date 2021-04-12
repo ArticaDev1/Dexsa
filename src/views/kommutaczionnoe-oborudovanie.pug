@@ -1,0 +1,357 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Коммутационное оборудование'
+
+block content
+  section.section.product-head.product-head_type-2.screen.stp
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+    .container.product-head__container
+      .row.product-head__row
+        h1.product-head__title.product-head__item.offset-lg-6.col-lg-6 Коммутационное оборудование
+        .product-head__image.offset-4.offset-lg-0.col-8.col-lg-5
+          .product-head__image-wrapper.product-head__image-wrapper_type-2
+            .image.image_contain
+              img(data-src="./img/kommutaczionnoe_oborudovanie/Group 468.png", alt="image").lazyload
+
+        .product-head__text.offset-lg-6.col-lg-6
+          .row
+            p.product-head__text.product-head__item.order-sm-2.order-lg-1.col-sm.col-md-8.col-lg-10 Взрывозащищенное оборудование повышенной надежности против взрыва
+            .order-sm-1.order-lg-2.col-sm-auto.col-md-4.col-lg-12
+              a(href='#modal-form' data-modal='open').button.button_style-2.product-head__item 
+                span Заказать
+  
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element КК-ВА 
+          span.product-item__label 1 EX E, 0 EX IA
+        .product-item__head-text.col-md-6 
+          p Клеммные коробки серии КК-ВА из алюминиевого сплава
+
+      //images
+      -var images = ['./img/kommutaczionnoe_oborudovanie/1_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='1' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+
+        //если контент существует
+        .product-item__text-description 
+          p Коробки КК-ВА предназначены для промышленного применения во взрывоопасных средах в помещениях и наружных установках (группа II) с содержанием газа и горючей пыли соответственно для взрывоопасных зон 0 – 1 – 2.
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Назначение:
+          ul.info-features__list
+            li.info-features__item Организация коммутации контрольных и силовых кабельных линий промышленных сетей.
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Степень защиты', 'IP65/66')
+            +item('Зона применения', 'Зона 0, Зона 1, Зона 2')
+            +item('Диапазон рабочих температур', '-60...40/60/85° С')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Сертификат соответствия', '№ТС RU C-RU.ГБ08.В.02616')
+            +item('Вид взрывазащиты', '0 Ex ia IIC «T6…T4» Ga Х, 1 Ex e II «T6…T4» Gb Х, 1 Ex e ia IIC «T6…T4» Gb Х, 1 Ex e ib IIC «T6…T4» Gb Х, 1 Ex e d IIC «T6…T4» Gb Х, 1 Ex e mb IIC «T6…T4» Gb Х, Ex tb IIIC «T85°C…T135°C» Db Х, Ex tb ia/ib IIIC «T85°C…T135°C» Db Х')
+            +item('Соответствие стандартам таможенного союза', 'ГОСТ Р МЭК 60079-0-2011, ГОСТ Р МЭК 60079-7-2012, ГОСТ Р МЭК 60079-1-2011, ГОСТ Р МЭК 60079-11-2010, ГОСТ Р МЭК 60079-31-2010, ГОСТ Р МЭК 60079-18-2012')
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element КК-ВП
+          span.product-item__label 1 EX E, 0 EX IA
+        .product-item__head-text.col-md-6 
+          p Клеммные коробки серии КК-ВП из армированного полиэстера
+      //images
+      -var images = ['./img/kommutaczionnoe_oborudovanie/2_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='2' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+      //content
+      .product-item__content
+        //если контент существует
+        .product-item__text-description 
+          p Коробки КК-Вп предназначены для промышленного применения во взрывоопасных средах в помещениях и наружных установках (группа II) с содержанием газа и горючей пыли соответственно для взрывоопасных зон 0 – 1 – 2.
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Назначение:
+          ul.info-features__list
+            li.info-features__item Организация коммутации контрольных и силовых кабельных линий промышленных сетей.
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Степень защиты', 'IP65/66')
+            +item('Зона применения', 'Зона 0, Зона 1, Зона 2')
+            +item('Диапазон рабочих температур', '-60...40/60/85° С')
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Сертификат соответствия', '№ТС RU C-RU.ГБ08.В.06126')
+            +item('Вид взрывазащиты', '0 Ex ia IIC «T6…T4» Ga Х, 1 Ex e II «T6…T4» Gb Х, 1 Ex e ia IIC «T6…T4» Gb Х, 1 Ex e ib IIC «T6…T4» Gb Х, 1 Ex e d IIC «T6…T4» Gb , 1 Ex e mb IIC «T6…T4» Gb Х, Ex tb IIIC «T85°C…T135°C» Db Х, Ex tb ia/ib IIIC «T85°C…T135°C» Db Х')
+            +item('Соответствие стандартам таможенного союза', 'ГОСТ Р МЭК 60079-0-2011, ГОСТ Р МЭК 60079-7-2012, ГОСТ Р МЭК 60079-1-2011, ГОСТ Р МЭК 60079-11-2010, ГОСТ Р МЭК 60079-31-2010, ГОСТ Р МЭК 60079-18-2012')
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element IIB+H2 / IIС
+          span.product-item__label 1Ex d IIC T6.. T3 Gb
+        .product-item__head-text.col-md-6 
+          p Взрывозащищенные протяжные и распределительные коробки
+
+      //images
+      -var images = ['./img/kommutaczionnoe_oborudovanie/3_1.png', './img/kommutaczionnoe_oborudovanie/3_2.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='3' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+        .product-item__bottom-images
+          each val in images
+            //slide
+            .product-item__bottom-image.image.image_contain
+              img(data-src=val, alt="image").lazyload
+
+      //content
+      .product-item__content
+
+        //если контент существует
+        .product-item__text-description 
+          p Взрывозащищенные распределительные и протяжные коробки серии DjB1 выпускаются с количеством отверстий от 1 до 5 для соединения кабелей в трубной и в открытой разводке.
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Материал:
+          ul.info-features__list
+            li.info-features__item алюминий с низким содержанием меди (менее 0,1%), устойчивый к особо агрессивной среде, насыщенной солью, сероводородом и другими химическими веществами;
+            li.info-features__item нержавеющая сталь марки AISI316, устойчивая к крайне агрессивным средам: кислотам, щелочам, соли, морской среде и т. д.
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Вид взрывозащиты', '1Ex d IIC T6.. T3 Gb')
+            +item('Степень защиты', 'IP66')
+            +item('Максимальное напряжение', '440DC, 690AC')
+            +item('Диапазон рабочих температур', '-60...130° С')
+            +item('Максимальный ток', '315A')
+            +item('Класс защиты от поражения электрическим током', 'I')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Покрытие', 'Эпоксидное покрытие с антистатическими свойствами')
+            +item('Заземление', 'Внутренний и внешний зажимы заземления из нержавеющей стали')
+            +item('Крепление крышки к корпусу', 'Резьбовое соединение')
+            +item('Крепление корпуса', '3 или 4 внешних монтажных точек') 
+            +item('Зоны применения', 'Зона 1, Зона 2')     
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element КК-БА (0)
+          span.product-item__label 1 EX D IIC T6…T3 GB X (без ацетилена), 1 EX D IIB+Н2, EX D IIC, DIP
+        .product-item__head-text.col-md-6 
+          p Взрывозащищенные корпуса из алюминиевого йысплава серии КК-БА и КК-БА(0) (с окном)
+
+      //images
+      -var images = ['./img/kommutaczionnoe_oborudovanie/4_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='4' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+
+        //если контент существует
+        .product-item__text-description 
+          p Корпуса КК-БА(О) предназначены для промышленного применения во взрывоопасных средах в помещениях и наружных установках (группа II) с содержанием газа и горючей пыли соответственно для взрывоопасных зон 1 – 2.
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Назначение:
+          ul.info-features__list
+            li.info-features__item Корпуса для клеммных зажимов и сборных шин
+            li.info-features__item Корпуса для предохранителей, трансформаторов, ПРА и др. электрооборудования с независимой функциональностью
+            li.info-features__item Посты управления и системы мониторинга
+            li.info-features__item Распред. щиты освещения, управления и сигнализации
+            li.info-features__item Различные конфигурации пусковой аппаратуры эл. двигателей
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Степень защиты', 'IP65/66')
+            +item('Зона применения', 'Зона 1, Зона 2')
+            +item('Диапазон рабочих температур', '-60/-40/-20...40/60° С')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Сертификат соответствия', '№ТС RU C-RU.ГБ08.В.02616')
+            +item('Вид взрывазащиты', '1 Ex d IIC T6…T3 Gb X (без ацетилена), 1 Ex d [ib IIA/IIB/IIC] IIC «T6…T3» Gb Х (без ацетилена), 1 Ex d IIB+H2 «T6…T3» Gb Х, Ex tb IIIC «T85°C…T200°C» Db Х, 1 Ex d [ia IIA/IIB/IIC Ga] IIB+H2 «T6…T3» Gb Х, 1 Ex d [ib IIA/IIB/IIC] IIB+H2 «T6…T3» Gb Х, Ex tb [ia Da] IIIC «T85°C…T200°C» Db Х, Ex tb [ib] IIIC «T85°C…T200°C» Db Х')
+            +item('Соответствие стандартам таможенного союза', 'ГОСТ Р МЭК 60079-0-2011, ГОСТ Р МЭК 60079-1-2011, ГОСТ Р МЭК 60079-11-2010, ГОСТ Р МЭК 60079-31-2010')
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element УНВЕ
+          span.product-item__label EX D IIB, EX D IIC, EX ED IIC
+        .product-item__head-text.col-md-6 
+          p Посты управления из алюминия, нержавеющей стали и полиэстера УНВЕ-А, УНВЕ-Н и УНВЕ-П
+
+      //images
+      -var images = ['./img/kommutaczionnoe_oborudovanie/5_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='5' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+
+        //если контент существует
+        .product-item__text-description 
+          p Посты управления УНВЕ-А, УНВЕ-Н и УНВЕ-П предназначены для промышленного применения во взрывоопасных средах в помещениях и наружных установках (группа II) с содержанием газа и горючей пыли соответственно для взрывоопасных зон 1 – 2.
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Основные функции данных корпусов:
+          ul.info-features__list
+            li.info-features__item Управление и пуск-остановка двигателей, вентиляторов, насосов и т.д.
+            li.info-features__item Установка в системах считывания показаний таких физических величин, как поток, уровень, давление, температура, ток, напряжение, частота, скорость и т.д.
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Степень защиты', 'IP65/66')
+            +item('Зона применения', 'Зона 1, Зона 2')
+            +item('Диапазон рабочих температур', '-60...40/60/85° С')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Сертификат соответствия', '№ТС RU C-RU.ГБ08.В.02616')
+            +item('Вид взрывазащиты', '1 Ex ed IIC «T6…T4» Gb Х, 1 Ex e mb IIC «T6…T4» Gb Х, Ex tb IIIC «T85°C…T135°C» Db Х, Ex tb ia/ib IIIC «T85°C…T135°C» Db Х')
+            +item('Соответствие стандартам таможенного союза', 'ГОСТ Р МЭК 60079-0-2011, ГОСТ Р МЭК 60079-7-2012, ГОСТ Р МЭК 60079-1-2011, ГОСТ Р МЭК 60079-11-2010, ГОСТ Р МЭК 60079-31-2010, ГОСТ Р МЭК 60079-18-2012')
+
+  include blocks/contacts-blocks

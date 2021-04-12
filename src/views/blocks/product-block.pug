@@ -1,79 +1,71 @@
-mixin block(title, text, images, doc)
   section.section.product-item 
-    .container 
+    .container.product-item__container
+      //head
       .product-item__head.row 
-        h3.product-item__title.offset-xl-6.col-md-6.col-xl-3=title
-        p.col-md-6.col-xl-3=text
-      .product-item__container.row 
-        .product-item__images.col-lg-6.col-xl-5 
-          .product-item__top-slides 
-            each val in images
-              //slide
-              .image.image_contain 
-                img(data-src=val, alt="image").lazyload
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element текст
+          span.product-item__label 1 EX E, 0 EX IA
+        .product-item__head-text.col-md-6 
+          p текст
 
-          .product-item__bottom-slides.splide
-            .splide__track
-              .splide__list
+      //images
+      -var images = ['']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
                 each val in images
                   //slide
-                  .splide__slide.product-item__bottom-slide 
-                    .image.image_contain 
-                      img(data-src=val, alt="image").lazyload
+                  a(href=val data-fslightbox='1' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
 
-        .product-item__content.offset-xl-1.col-lg-6.col-xl-6   
-          ul.info-list.product-item__list
-            li.info-list__item.row
-              span.col-auto.col-sm-6 
-                span Ресурс:
-              span.col-auto.col-sm-6 100000 часов работы
-            li.info-list__item.row
-              span.col-auto.col-sm-6  
-                span Световой поток:
-              span.col-auto.col-sm-6 От 1000 до 8000 lm
-            li.info-list__item.row
-              span.col-auto.col-sm-6 
-                span Мощность:
-              span.col-auto.col-sm-6 От 10 до 70 Вт
-            li.info-list__item.row
-              span.col-auto.col-sm-6 
-                span Ударопрочность:
-              span.col-auto.col-sm-6 IKO8
-          ul.features-list.product-item__list
-            li.features-list__item Модульная замена компонентов
-            li.features-list__item Может комплектоваться блоком аварийного питания
+        .product-item__bottom-images
+          each val in images
+            //slide
+            .product-item__bottom-image.image.image_contain
+              img(data-src=val, alt="image").lazyload
 
-          .row.product-item__buttons
-            .col-md-6.col-lg-12
-              button.product-item__more-button 
-                span Показать подробные характеристики ↓
-                span Свернуть подробные характеристики ↑
-            .col-md-6.col-lg-12
-              a(href=doc target='_blank' rel='noopener').button.button_style-2 
-                span Техническая документация (PDF) 
+      //content
+      .product-item__content
 
+        //если контент существует
+        .product-item__text-description 
+          p текст
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Назначение
+          ul.info-features__list
+            li.info-features__item текст
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
       .product-item__more-content
-        ul.info-list.row
+        .row
           mixin item(text1, text2)
-            li.info-list__item.col-lg-6 
-              .row
-                span.col-sm-6 
-                  span=text1
-                span.col-sm-6=text2
-          +item('Класс взрывоопасной зоны:', '1')
-          +item('Класс защиты от поражения электрическим током:', '1')
-          +item('Вид взрывозащиты:', 'Ex d')
-          +item('Ударопрочность:', 'IK08')
-          +item('Группа электрооборудования:', 'IIC')
-          +item('Группа механического исполнения:', 'M1, M2')
-          +item('Температурный класс:', 'T6')
-          +item('Температура эксплуатации:', '-60°C … +55°C')
-          +item('Питание от сети:', '90-305 В AC (по запросу 9-36 В DC)')
-          +item('Степень защиты от проникновения влаги и пыли:', 'IP 66')
-          +item('Цветовая температура:', '3000 / 4000 / 5000 °К')
-          +item('Масса в базовой комплектации:', '2 кг')
-          +item('Индекс цветопередачи:', '70 / 80 / 90 Ra')
-          +item('Гарантия:', '5 лет')
-          +item('Коэффициент мощности:', 'COS ф ≥ 0,95')
-          +item('Габариты упаковки:', '205х190х215 мм')
-          +item('Система управления:', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('', '')
+            +item('', '')
+            +item('', '')
+            +item('', '')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('', '')
+            +item('', '')
+            +item('', '')
+            +item('', '')

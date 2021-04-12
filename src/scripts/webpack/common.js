@@ -14,8 +14,6 @@ const brakepoints = {
   xl: 1280,
   xxl: 1600
 }
-const desktop_gap = 24;
-const mobile_gap = 16;
 
 import 'lazysizes';
 
@@ -1841,33 +1839,36 @@ class ProductBlock {
       }
     });
 
-    this.$bottom_images[0].classList.add('is-active');
+    
 
-    this.slider.on('slideChange', (event)=> {
-      this.$bottom_images.forEach($this => {
-        $this.classList.remove('is-active')
+    if(this.$bottom_images.length>1) {
+      this.$bottom_images[0].classList.add('is-active');
+      this.slider.on('slideChange', (event)=> {
+        this.$bottom_images.forEach($this => {
+          $this.classList.remove('is-active')
+        })
+        this.$bottom_images[event.realIndex].classList.add('is-active');
       })
-      this.$bottom_images[event.realIndex].classList.add('is-active');
-    })
-
-    this.events = [];
-    this.$bottom_images.forEach(($this, index)=>{
-      this.events[index] = ()=> {
-        this.slider.slideTo(index)
-      }
-      $this.addEventListener('mouseenter', this.events[index])
-      $this.addEventListener('click', this.events[index])
-    })
-
+      this.events = [];
+      this.$bottom_images.forEach(($this, index)=>{
+        this.events[index] = ()=> {
+          this.slider.slideTo(index)
+        }
+        $this.addEventListener('mouseenter', this.events[index])
+        $this.addEventListener('click', this.events[index])
+      })
+    }
   }
   
   destroyDesktop() {
     this.slider.destroy();
-    this.$bottom_images.forEach(($this, index)=>{
-      $this.classList.remove('is-active');
-      $this.removeEventListener('mouseenter', this.events[index]);
-      $this.removeEventListener('click', this.events[index]);
-    })
+    if(this.$bottom_images.length>1) {
+      this.$bottom_images.forEach(($this, index)=>{
+        $this.classList.remove('is-active');
+        $this.removeEventListener('mouseenter', this.events[index]);
+        $this.removeEventListener('click', this.events[index]);
+      })
+    }
   }
 
   initMobile() {
@@ -1875,6 +1876,7 @@ class ProductBlock {
       touchStartPreventDefault: false,
       longSwipesRatio: 0.1,
       slidesPerView: 1,
+      spaceBetween: 16,
       speed: 500,
       lazy: {
         loadOnTransitionStart: true,
@@ -1884,6 +1886,11 @@ class ProductBlock {
         el: this.$pagination,
         clickable: true,
         bulletElement: 'button'
+      },
+      breakpoints: {
+        576: {
+          spaceBetween: 24
+        }
       }
     });
   }
@@ -2030,6 +2037,10 @@ class ProductHead {
     if(this.$parent.classList.contains('product-head_type-1')) {
       this.animation.add(
         gsap.fromTo(this.$images_wrapper, {yPercent:15, xPercent:-20, scale:0.9}, {yPercent:0, xPercent:0, scale:1, duration:Speed*1.5, ease:'power2.out'}),
+      `-=${Speed*1.5}`)
+    } else {
+      this.animation.add(
+        gsap.fromTo(this.$images_wrapper, {yPercent:15, scale:0.9}, {yPercent:0, scale:1, duration:Speed*1.5, ease:'power2.out'}),
       `-=${Speed*1.5}`)
     }
 
