@@ -45,10 +45,9 @@ barba.init({
 import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
-import Splide from '@splidejs/splide';
 
-import Swiper, {Navigation, Pagination, Lazy, Autoplay} from 'swiper/core';
-Swiper.use([Navigation, Pagination, Lazy, Autoplay]);
+import Swiper, {Navigation, Pagination, Lazy, Autoplay, EffectFade} from 'swiper/core';
+Swiper.use([Navigation, Pagination, Lazy, Autoplay, EffectFade]);
 
 import SwipeListener from 'swipe-listener';
 const validate = require("validate.js");
@@ -1775,19 +1774,16 @@ class ProductBlock {
     this.$parent = $parent;
   }
   init() {
-    this.$bslider = this.$parent.querySelector('.product-item__bottom-slides');
-    this.$bslides = this.$parent.querySelectorAll('.product-item__bottom-slide');
-    this.$tslider = this.$parent.querySelector('.product-item__top-slides');
-    this.$tslides = this.$parent.querySelectorAll('.product-item__top-slides .image');
+    this.$slider = this.$parent.querySelector('.swiper-container');
+    this.$pagination = this.$parent.querySelector('.swiper-pagination');
+    this.$bottom_images = this.$parent.querySelectorAll('.product-item__bottom-image');
+
     this.$more = this.$parent.querySelector('.product-item__more-content');
     this.$morebtn = this.$parent.querySelector('.product-item__more-button');
-    this.index = 0;
-    this.length = this.$tslides.length;
-    this.speed = 0.5;
 
     let toggleContent = ()=> {
-      if(!this.$morebtn.classList.contains('active')) {
-        this.$morebtn.classList.add('active');
+      if(!this.$morebtn.classList.contains('is-active')) {
+        this.$morebtn.classList.add('is-active');
         this.$more.style.display = 'block';
 
         let y;
@@ -1800,9 +1796,10 @@ class ProductBlock {
       } 
       
       else {
-        this.$morebtn.classList.remove('active');
+        this.$morebtn.classList.remove('is-active');
         this.$more.style.display = 'none';
       }
+      ScrollTrigger.refresh();
     }
     this.$morebtn.addEventListener('click', toggleContent)
 
@@ -1832,84 +1829,63 @@ class ProductBlock {
   }
 
   initDesktop() {
-    let flag;
+    this.slider = new Swiper(this.$slider, {
+      effect: 'fade',
+      touchStartPreventDefault: false,
+      longSwipesRatio: 0.1,
+      slidesPerView: 1,
+      speed: 500,
+      lazy: {
+        loadOnTransitionStart: true,
+        loadPrevNext: true
+      }
+    });
 
-    let getNext = (index)=> {
-      let val = index==this.length-1?0:index+1;
-      return val;
-    }
-    let getPrev = (index)=> {
-      let val = index==0?this.length-1:index-1;
-      return val;
-    }
+    this.$bottom_images[0].classList.add('is-active');
 
-    this.animations = [];
-    this.$tslides.forEach(($image, index)=>{
-      this.animations[index] = gsap.timeline({paused:true})
-        .fromTo($image, {autoAlpha:0}, {autoAlpha:1, duration:this.speed})
+    this.slider.on('slideChange', (event)=> {
+      this.$bottom_images.forEach($this => {
+        $this.classList.remove('is-active')
+      })
+      this.$bottom_images[event.realIndex].classList.add('is-active');
     })
 
-    this.slide = (index) => {
-      if(!flag) {
-        this.$tslides[this.index].style.zIndex = '1';
-        this.animations[this.index].duration(this.speed/2).reverse();
-        this.$bslides[this.index].classList.remove('active');
-      } 
-      else flag = true;
-
-      this.$tslides[index].style.zIndex = '2';
-      this.animations[index].duration(this.speed).play();
-      this.$bslides[index].classList.add('active');
-
-      this.index = index;
-    }
-
-    this.slide(this.index);
-
     this.events = [];
-    this.$bslides.forEach(($this, index)=>{
+    this.$bottom_images.forEach(($this, index)=>{
       this.events[index] = ()=> {
-        this.slide(index);
+        this.slider.slideTo(index)
       }
       $this.addEventListener('mouseenter', this.events[index])
       $this.addEventListener('click', this.events[index])
     })
 
-    this.swipes = SwipeListener(this.$tslider);
-    this.$tslider.addEventListener('swipe', (event)=> {
-      let dir = event.detail.directions;
-      if(dir.left) this.slide(getNext(this.index))
-      else if(dir.right) this.slide(getPrev(this.index))
-    });
   }
   
   destroyDesktop() {
-    this.swipes.off();
-    this.$bslides.forEach(($this, index)=>{
-      $this.removeEventListener('mouseenter', this.events[index])
-      $this.removeEventListener('click', this.events[index])
+    this.slider.destroy();
+    this.$bottom_images.forEach(($this, index)=>{
+      $this.classList.remove('is-active');
+      $this.removeEventListener('mouseenter', this.events[index]);
+      $this.removeEventListener('click', this.events[index]);
     })
   }
 
   initMobile() {
-    this.slider = new Splide(this.$bslider, {
-      type: 'loop',
-      arrows: false,
-      pagination: true,
-      perPage: 1,
-      trimSpace: false,
-      waitForTransition: false,
-      speed: this.speed*1000,
-      gap: desktop_gap,
-      start: this.index,
-      perMove: 1,
-      breakpoints: {
-        576: {
-          gap: mobile_gap
-        },
+    this.slider = new Swiper(this.$slider, {
+      touchStartPreventDefault: false,
+      longSwipesRatio: 0.1,
+      slidesPerView: 1,
+      speed: 500,
+      lazy: {
+        loadOnTransitionStart: true,
+        loadPrevNext: true
+      },
+      pagination: {
+        el: this.$pagination,
+        clickable: true,
+        bulletElement: 'button'
       }
-    })
-    this.slider.mount();
+    });
   }
 
   destroyMobile() {
@@ -2086,7 +2062,8 @@ class ImageSlider {
       slidesPerView: 1,
       speed: 500,
       lazy: {
-        loadOnTransitionStart: true
+        loadOnTransitionStart: true,
+        loadPrevNext: true
       },
       pagination: {
         el: this.$pagination,
@@ -2142,7 +2119,8 @@ class HeadSlider {
         disableOnInteraction: false
       },
       lazy: {
-        loadOnTransitionStart: true
+        loadOnTransitionStart: true,
+        loadPrevNext: true
       },
       pagination: {
         el: this.$pagination,
@@ -2175,7 +2153,8 @@ class DocsSlider {
       spaceBetween: 16,
       speed: 500,
       lazy: {
-        loadOnTransitionStart: true
+        loadOnTransitionStart: true,
+        loadPrevNext: true
       },
       pagination: {
         el: this.$pagination,
@@ -2236,7 +2215,8 @@ class RefSlider {
       slidesPerView: 1,
       speed: 500,
       lazy: {
-        loadOnTransitionStart: true
+        loadOnTransitionStart: true,
+        loadPrevNext: true
       },
       pagination: {
         el: this.$pagination,

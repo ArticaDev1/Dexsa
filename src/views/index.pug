@@ -62,10 +62,10 @@ block content
                 use(xlink:href='./img/icons/icons-sprite.svg#slide')
               .items-slider__container.container
                 //arrows
-                button(aria-label='slide prev').swiper-button.swiper-button-prev
+                .swiper-button.swiper-button-prev(data-touch-hover)
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#arrow')
-                button(aria-label='slide next').swiper-button.swiper-button-next
+                .swiper-button.swiper-button-next(data-touch-hover)
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#arrow')
                 //images
@@ -200,7 +200,7 @@ block content
               
           //block
           .m-catalogue-item.grid__item.col-6
-            a(href=zagraditelnye_ogni).m-catalogue-item__container.js-3d
+            .m-catalogue-item__container.js-3d(data-touch-hover)
               .m-catalogue-item__image.m-catalogue-item__image_4.js-3d__forward
                 .image
                   img(data-src="./img/catalogue/4.png", alt="image").lazyload

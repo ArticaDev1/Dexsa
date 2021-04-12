@@ -45,24 +45,86 @@ block content
             use(xlink:href='./img/icons/icons-sprite.svg#spikelet')
           p Объекты пищевой промышленности
 
-  include blocks/product-block
-  +block(
-    'Компакт 1Ex', 
-    'Самый компактный на рынке светильник с возобновляемым ресурсом работы',
-    ['./img/products/1_1.png', './img/products/1_2.png', './img/products/1_3.png'],
-    './docs/Prom-inn_A4_v3.pdf#page=7'
-  )
-  +block(
-    'Новатор 1Ex', 
-    'Самый компактный на рынке светильник с возобновляемым ресурсом работы',
-    ['./img/products/2_1.png', './img/products/2_2.png', './img/products/2_3.png'],
-    './docs/Prom-inn_A4_v3.pdf#page=11'
-  )
-  +block(
-    'EXTREME-C 1Ex', 
-    'Самый мощный',
-    ['./img/products/3_1.png', './img/products/3_2.png', './img/products/3_3.png'],
-    './docs/Prom-inn_A4_v3.pdf#page=14'
-  )
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element Компакт 1Ex
+        .product-item__head-text.col-md-6 
+          p Легко разместить внутри блочно-модульных конструкций
+
+      //images
+      -var images = ['./img/vzryvozashhishhyonnoe_osveshhenie/1_1.png', './img/vzryvozashhishhyonnoe_osveshhenie/1_2.png', './img/vzryvozashhishhyonnoe_osveshhenie/1_3.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='1' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+        .product-item__bottom-images
+          each val in images
+            //slide
+            .product-item__bottom-image.image.image_contain
+              img(data-src=val, alt="image").lazyload
+
+      //content
+      .product-item__content
+
+        //если контент существует
+        .product-item__text-description 
+          p НОВАТОР 1Ex 10 Д(120) С + 1 КВ-НБ(М20) + 1ЗГ(М20) — светильник светодиодный взрывозащищенный Новатор 1ExdIICT6, мощность — 10 Вт, КСС — Д(120°), тип крепления — на скобу (выяснить необходимость наличия), в комплекте с одним кабельными вводами М20 под не бронированный кабель.
+        //если контент существует
+        .info-features.product-item__info-features
+          ul.info-features__list
+            li.info-features__item Модульная замена компонентов
+            li.info-features__item Может комплектоваться блоком аварийного питания
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Класс взрывоопасной зоны', '1')
+            +item('Вид взрывозащиты', 'Ex d')
+            +item('Группа электрооборудования', 'IIC')
+            +item('Температурный класс', 'T6')
+            +item('Питание от сети', '90-305 В AC (по запросу 9-36 В DC)')
+            +item('Цветовая температура', '3000 / 4000 / 5000 °К')
+            +item('Индекс цветопередачи', '70 / 80 / 90 Ra')
+            +item('Коэффициент мощности', 'COS ф ≥ 0,95')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')
+            +item('Класс защиты от поражения электрическим током', 'I')
+            +item('Ударопрочность', 'IK08')
+            +item('Группа механического исполнения', 'M1, M2')
+            +item('Температура эксплуатации', '-60°C … +55°C')
+            +item('Степень защиты от проникновения влаги и пыли', 'IP 66')
+            +item('Масса в базовой комплектации', '2 кг')
+            +item('Гарантия', '5 лет')
+            +item('Габариты упаковки', '205х190х215 мм')
+
+
 
   include blocks/contacts-blocks

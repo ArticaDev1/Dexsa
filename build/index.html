@@ -98,10 +98,12 @@
                               <svg class="icon">
                                 <use xlink:href="./img/icons/icons-sprite.svg#ulichnoe_osveshhenie"></use>
                               </svg>Уличное</a></li>
-                          <li> <a class="header-nav__toggle-content-link" href="/Dexsa/build/zagraditelnye-ogni.html">
-                              <svg class="icon">
-                                <use xlink:href="./img/icons/icons-sprite.svg#zagraditelnye_ogni"></use>
-                              </svg>Заградительные огни </a></li>
+                          <!--li  
+                          a(href=zagraditelnye_ogni).header-nav__toggle-content-link
+                            svg.icon
+                              use(xlink:href='./img/icons/icons-sprite.svg#zagraditelnye_ogni')
+                            | Заградительные огни    
+                          -->
                         </ul>
                       </li>
                       <li> <a class="header-nav__toggle-content-link" href="/Dexsa/build/kommutaczionnoe-oborudovanie.html">Коммутационное оборудование</a></li>
@@ -143,10 +145,12 @@
                             <svg class="icon">
                               <use xlink:href="./img/icons/icons-sprite.svg#ulichnoe_osveshhenie"></use>
                             </svg><span>Уличное</span></a></li>
-                        <li class="nav__sub-item"> <a class="nav__sub-link btn-link" href="/Dexsa/build/zagraditelnye-ogni.html">
-                            <svg class="icon">
-                              <use xlink:href="./img/icons/icons-sprite.svg#zagraditelnye_ogni"></use>
-                            </svg><span>Заградительные огни </span></a></li>
+                        <!--li.nav__sub-item  
+                        a(href=zagraditelnye_ogni).nav__sub-link.btn-link
+                          svg.icon
+                            use(xlink:href='./img/icons/icons-sprite.svg#zagraditelnye_ogni')
+                          span Заградительные огни    
+                        -->
                       </ul>
                     </li>
                     <li class="nav__sub-item"> <a class="nav__sub-link btn-link" href="/Dexsa/build/kommutaczionnoe-oborudovanie.html"> <span>Коммутационное оборудование</span></a></li>
@@ -224,16 +228,16 @@
                       </svg>
                       <div class="items-slider__container container">
                         <!--arrows-->
-                        <button class="swiper-button swiper-button-prev" aria-label="slide prev">
+                        <div class="swiper-button swiper-button-prev" data-touch-hover>
                           <svg class="icon">
                             <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
                           </svg>
-                        </button>
-                        <button class="swiper-button swiper-button-next" aria-label="slide next">
+                        </div>
+                        <div class="swiper-button swiper-button-next" data-touch-hover>
                           <svg class="icon">
                             <use xlink:href="./img/icons/icons-sprite.svg#arrow"></use>
                           </svg>
-                        </button>
+                        </div>
                         <!--images-->
                         <div class="items-slider__images">
                           <!--image--><a class="items-slider__image" href="/Dexsa/build/obshhepromyshhlennoe-osveshhenie.html">Взрывозащищенное освещение
@@ -364,14 +368,17 @@
                         <h5 class="m-catalogue-item__title m-catalogue-item__title_3">Уличное<br> освещение</h5>
                       </div></a></div>
                   <!--block-->
-                  <div class="m-catalogue-item grid__item col-6"><a class="m-catalogue-item__container js-3d" href="/Dexsa/build/zagraditelnye-ogni.html">
+                  <div class="m-catalogue-item grid__item col-6">
+                    <div class="m-catalogue-item__container js-3d" data-touch-hover>
                       <div class="m-catalogue-item__image m-catalogue-item__image_4 js-3d__forward">
                         <div class="image"><img class="lazyload" data-src="./img/catalogue/4.png" alt="image"></div>
                         <div class="image"><img class="lazyload" data-src="./img/catalogue/4_2.png" alt="image"></div>
                       </div>
                       <div class="m-catalogue-item__back js-3d__back">
                         <h5 class="m-catalogue-item__title m-catalogue-item__title_4">Заградительные огни</h5>
-                      </div></a></div>
+                      </div>
+                    </div>
+                  </div>
                   <!--block-->
                   <div class="m-catalogue-item grid__item col-md-5"><a class="m-catalogue-item__container js-3d" href="/Dexsa/build/kommutaczionnoe-oborudovanie.html">
                       <div class="m-catalogue-item__back js-3d__back">
