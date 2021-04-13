@@ -95,9 +95,9 @@ const App = {
     Modal.init();
     inputs();
     toggle();
-    windowSize.init();
 
     if(mobile()) {
+      windowSize.init();
       $body.classList.add('mobile');
       $body.style.cssText = 'position:initial;height:initial;width:initial;overflow:auto;';
       disablePageScroll();
@@ -250,19 +250,12 @@ const windowSize = {
     $el.style.cssText = 'position:fixed;height:100%;';
     $body.insertAdjacentElement('beforeend', $el);
     let h = $el.getBoundingClientRect().height;
-    
-    let check = (height)=> {
-      //screen
-      let $el = App.$container.querySelectorAll('.screen');
-      $el.forEach($this => {
-        $this.style.height = `${height}px`;
-      })
-    }
 
     window.addEventListener('enterstart', ()=>{
-      if(mobile()) {
-        check(h);
-      }
+      let $el = App.$container.querySelectorAll('.screen');
+      $el.forEach($this => {
+        $this.style.minHeight = `${h}px`;
+      })
     })
   }
 }

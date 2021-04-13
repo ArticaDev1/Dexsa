@@ -1,0 +1,139 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Электрообогрев'
+
+block content
+  section.section.product-head.screen.stp
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+    .container.product-head__container
+      .row.product-head__row
+        h1.product-head__title.product-head__item.offset-xl-6.offset-lg-5.col-lg-7.col-xl-6 Электрообогрев
+        .product-head__image.offset-5.offset-lg-1.col-6.col-lg-3
+          .product-head__image-wrapper.product-head__image-wrapper_type-5
+            .image.image_contain
+              img(data-src="./img/elektroobogrev/head.png", alt="image").lazyload
+
+        .product-head__text.offset-xl-6.offset-lg-5.col-lg-7.col-xl-6
+          .row
+            p.product-head__text.product-head__item.order-sm-2.order-lg-1.col-sm.col-md-8.col-lg-12 Система «ЭССЭО» предназначена для автоматизированного управления комплексными системами электрообогрева с большим числом отходящих линий. При своей работе система использует энергосберегающие алгоритмы управления и имеет в своем составе расширенную диагностику, позволяющую предсказывать появлениет неисправностей.
+            .order-sm-1.order-lg-2.col-sm-auto.col-md-4.col-lg-12
+              a(href='#modal-form' data-modal='open').button.button_style-2.product-head__item 
+                span Заказать
+  
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-12 
+          h3.product-item__title-element Система "ЭССЭО"
+
+      //images
+      -var images = ['./img/elektroobogrev/1_1.jpg', './img/elektroobogrev/1_2.jpg', './img/elektroobogrev/1_3.jpg', './img/elektroobogrev/1_4.jpg']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='1' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+        .product-item__bottom-images
+          each val in images
+            //slide
+            .product-item__bottom-image.image.image_contain
+              img(data-src=val, alt="image").lazyload
+
+      //content
+      .product-item__content
+        //если контент существует
+        .info-features.product-item__info-features
+          ul.info-features__list
+            li.info-features__item Количество линий - до 1200 (30 шкафов по 40 линий)
+            li.info-features__item Линии электрообогрева - независимые
+            li.info-features__item Ток линии электрообогрева - до 80А (одно или трехфазный)  
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          .col-lg-6.product-item__more-section
+            p Система масштабируема. Максимальное число линий компоненты для питания и управления которыми могут быть размещены в одном корпусе с габаритами 800*500*2000 – 40; Максимальное количество линий, управляемых с одного АРМ оператора — 1200 (30 шкафов по 40 линий) при использовании монитора с диагональю не менее 24 дюймов.
+            p Линии электрообогрева независимы. Алгоритм и параметры работы настраиваются индивидуально для каждой линии.
+            p Для управления одной системой возможно использование нескольких АРМ оператора.
+            p Система использует встроенный веб-интерфейс контроллера для наладки, управления и наблюдения за работой системы. В качестве АРМ оператора может быть использовано любое устройство, имеющее в составе своего ПО браузер (компьютер, планшет, мобильный телефон…).
+          .col-lg-6.product-item__more-section
+            .info-features
+              span.info-features__title В составе системы предусмотрены и могут быть по потребности включены в состав каждого шкафа управления следующие диагностические возможности:
+              ul.info-features__list
+                li.info-features__item Контроль тока отходящей линии (превышение и обрыв);контроль утечки отходящей линии
+                li.info-features__item Контроль срабатывания автомата
+                li.info-features__item Контроль срабатывания УЗО
+                li.info-features__item Контроль исправности контактора
+                li.info-features__item Контроль нахождения потребляемой мощности в установленных пределах
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-12
+          h3.product-item__title-element Обогрев трубопроводов
+
+      //images
+      -var images = ['./img/elektroobogrev/2_1.jpg']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='2' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+        //если контент существует
+        .info-features.product-item__info-features
+          ul.info-features__list
+            li.info-features__item Обогрев саморегулируемыми кабелями со сроком службы более 20 лет
+            li.info-features__item Уникальный высокотемпературный кабель
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          .col-lg-6.product-item__more-section
+            .info-features
+              ul.info-features__list
+                li.info-features__item Различные решения для защиты от замерзания
+                li.info-features__item Удобные в эксплуатации при сильно-отрицательных температурах соединительные коробки
+                li.info-features__item Российское производство с 2017
+
+  include blocks/contacts-blocks

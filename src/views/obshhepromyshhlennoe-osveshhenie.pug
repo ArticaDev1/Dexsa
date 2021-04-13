@@ -1,0 +1,381 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Общепромышленное освещение'
+
+block content
+  section.section.product-head.screen.stp
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+    .container.product-head__container
+      .row.product-head__row
+        h1.product-head__title.product-head__item.offset-lg-6.col-lg-6 Общепромышленное освещение
+        .product-head__image.offset-3.offset-lg-0.col-9.col-lg-6
+          .product-head__image-wrapper.product-head__image-wrapper_type-4
+            .image.image_contain
+              img(data-src="./img/obshhepromyshhlennoe_osveshhenie/Group 537.png", alt="image").lazyload
+
+        .product-head__text.offset-lg-6.col-lg-6
+          .row
+            p.product-head__text.product-head__item.order-sm-2.order-lg-1.col-sm.col-md-8.col-lg-10 Первый в России взрывозащищённый светодиодный светильник с возобновляемум ресурсом работы!
+            .order-sm-1.order-lg-2.col-sm-auto.col-md-4.col-lg-12
+              a(href='#modal-form' data-modal='open').button.button_style-2.product-head__item 
+                span Заказать
+  
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element Лайн-лайт
+        .product-item__head-text.col-md-6 
+          p Промышленный универсальный светодиодный светильник
+
+      //images
+      -var images = ['./img/obshhepromyshhlennoe_osveshhenie/1_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='1' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Область применения:
+          ul.info-features__list
+            li.info-features__item Освещение промышленных объектов
+            li.info-features__item Освещение парков торговых центров
+            li.info-features__item Периметральное охранное освещение
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Класс взрывоопасной зоны', '1')
+            +item('Вид взрывозащиты', 'Ex d')
+            +item('Группа электрооборудования', 'IIB')
+            +item('Температурный класс', 'T4 / T6')
+            +item('Питание от сети', '90-305 В AC (по запросу 9-36 В DC)')
+            +item('Цветовая температура', '3000 / 4000 / 5000 °К')
+            +item('Индекс цветопередачи', '70 / 80 / 90 Ra')
+            +item('Коэффициент мощности', 'COS ф ≥ 0,95')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')
+            +item('Класс защиты от поражения электрическим током', 'I')
+            +item('Ударопрочность', 'IK08')
+            +item('Группа механического исполнения', 'M1, M2')
+            +item('Температура эксплуатации', '-60°C … +55°C')
+            +item('Степень защиты от проникновения влаги и пыли', 'IP 66')
+            +item('Масса в базовой комплектации', '14.5 кг')
+            +item('Гарантия', '5 лет')
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element HPL
+        .product-item__head-text.col-md-6 
+          p Промышленные светодиодные светильники подвесного типа
+
+      //images
+      -var images = ['./img/obshhepromyshhlennoe_osveshhenie/2_1.png', './img/obshhepromyshhlennoe_osveshhenie/2_2.png', './img/obshhepromyshhlennoe_osveshhenie/2_3.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='2' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+        .product-item__bottom-images
+          each val in images
+            //slide
+            .product-item__bottom-image.image.image_contain
+              img(data-src=val, alt="image").lazyload
+
+      //content
+      .product-item__content
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Область применения:
+          ul.info-features__list
+            li.info-features__item Промышленные производственные помещения
+            li.info-features__item Освещение горячих и сборочных цехов
+            li.info-features__item Освещение складов и магазинов
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Питание от сети', '176-277 В AC')
+            +item('Цветовая температура', '3000 / 4000 / 5000 / 6500 °К')
+            +item('Индекс цветопередачи', '70 / 80 / 90 Ra')
+            +item('Коэффициент мощности', 'COS ф ≥ 0,95')
+            +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')
+            +item('Класс защиты от поражения электрическим током', 'II')
+            +item('Ударопрочность', 'IK07')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Группа механического исполнения', 'M1, M2')
+            +item('Степень защиты от проникновения влаги и пыли', 'IP67')
+            +item('Температура эксплуатации', '-50°C … +60°C')
+            +item('Защита', 'SCP,OTP,OVP; от высоковольтных импульсов L/N-PE: 4кВ, LN 4 кВ')
+            +item('Масса в базовой комплектации', '2,4 кг')
+            +item('Гарантия', '5 лет')
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element Север-1
+          span.product-item__label Мод 2.0
+        .product-item__head-text.col-md-6 
+          p Серия промышленных универсальных светильников Север-1
+
+      //images
+      -var images = ['./img/obshhepromyshhlennoe_osveshhenie/3_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='3' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Область применения:
+          ul.info-features__list
+            li.info-features__item Мачтовое освещение объектов нефтегазовой отрасли
+            li.info-features__item Освещение промышленных объектов
+            li.info-features__item Освещение парков, торговых центров
+            li.info-features__item Периметральное охранное освещение
+            li.info-features__item Освещение складов
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Максимальный световой поток', '7 210 лм')
+            +item('Максимальная потребляемая мощность', '56 Вт')
+            +item('Коэффициент мощности', 'не ниже 0,95')
+            +item('Рабочее напряжение', '176-264 В')
+            +item('Температура свечения', '3000 / 4000 / 5000 / 6500 °К')
+            +item('Индекс цветопередачи', '70-90 Ra')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')
+            +item('Степень защиты от проникновения влаги и пыли', 'IP67')
+            +item('Температура эксплуатации', 'от -50 до +60 oС')
+            +item('Вес', '2,2 кг')
+            +item('Гарантия', '5 лет')
+
+  section.section.product-separator 
+    .container
+      h2.product-separator__title Офисное освещение
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element Элара
+        .product-item__head-text.col-md-6 
+          p Офисный светодиодный светильник
+
+      //images
+      -var images = ['./img/obshhepromyshhlennoe_osveshhenie/4_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='4' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+
+        //если контент существует
+        .product-item__text-description 
+          p Новый офисный светодиодный светильник Элара является недорогим и эффективным решением для освещения офисных и административных помещений с потолками типа Армстронг.
+        //если контент существует
+        .info-features.product-item__info-features
+          ul.info-features__list
+            li.info-features__item Опционально управление по протоколу PLC, DALI, 0-10В
+            li.info-features__item Может комплектоваться блоком аварийного питания.
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Световой поток (Лм)*', '2 460')
+            +item('Напряжение питания (В)', '176-264 В (AC), 50-60 Гц')
+            +item('Мощность, не более (Вт)', '24')
+            +item('Коэффициент мощности', '0,95')
+            +item('Температура свечения (oК)', '4000/5000')
+            +item('Угол обзора (град)', '120')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Степень защиты от проникновения влаги и пыли', 'IP20')
+            +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')
+            +item('Тип источника тока', 'С гальванической развязкой')
+            +item('Температура эксплуатации (oС)', '-40...+40')
+            +item('Габаритные размеры (мм)', '595 x 595 x 35')
+            +item('Гарантийный срок', '.5 лет')
+
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element Леона
+        .product-item__head-text.col-md-6 
+          p Технологическая платформа
+
+      //images
+      -var images = ['./img/obshhepromyshhlennoe_osveshhenie/5_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='5' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+        //если контент существует
+        .product-item__text-description 
+          p Этот светильник имеет платформу для самостоятельной сборки. Наши разработки технологичны и требуют минимальный набор оборудования,ти 10 минут времени на сборку.
+        //если контент существует
+        .info-features.product-item__info-features
+          ul.info-features__list
+            li.info-features__item Опционально управление по протоколу PLC, DALI, 0-10В
+            li.info-features__item Может комплектоваться блоком аварийного питания.
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Световой поток (Лм)*', '2 460')
+            +item('Напряжение питания (В)', '176-264 В (AC), 50-60 Гц')
+            +item('Мощность, не более (Вт)', '24')
+            +item('Коэффициент мощности', '0,95')
+            +item('Температура свечения (oК)', '4000/5000')
+            +item('Угол обзора (град)', '120')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Степень защиты от проникновения влаги и пыли', ' IP20')
+            +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК)')
+            +item('Тип источника тока', 'С гальванической развязкой')
+            +item('Температура эксплуатации (oС)', '-40...+40')
+            +item('Габаритные размеры (мм)', '595 x 595 x 35')
+            +item('Гарантийный срок', '5 лет')
+
+
+  include blocks/contacts-blocks

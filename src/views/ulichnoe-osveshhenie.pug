@@ -1,0 +1,94 @@
+extends layout/layout
+
+block variables
+  -var title = sitename+' - Уличное освещение'
+
+block content
+  section.section.product-head.screen.stp
+    .container.lights-content 
+      .bg-light.bg-light_size-1.bg-light_color-1
+    .container.product-head__container
+      .row.product-head__row
+        h1.product-head__title.product-head__item.offset-lg-6.col-lg-6 Уличное освещение
+        .product-head__image.offset-4.offset-lg-0.col-8.col-lg-6
+          .product-head__image-wrapper.product-head__image-wrapper_type-3
+            .image.image_contain
+              img(data-src="./img/ulichnoe_osveshhenie/h1.png", alt="image").lazyload
+            .image.image_contain
+              img(data-src="./img/ulichnoe_osveshhenie/h2.png", alt="image").lazyload
+
+        .product-head__text.offset-lg-6.col-lg-6
+          .row
+            p.product-head__text.product-head__item.order-sm-2.order-lg-1.col-sm.col-md-8.col-lg-10 Первый в России взрывозащищённый светодиодный светильник с возобновляемум ресурсом работы!
+            .order-sm-1.order-lg-2.col-sm-auto.col-md-4.col-lg-12
+              a(href='#modal-form' data-modal='open').button.button_style-2.product-head__item 
+                span Заказать
+  
+  section.section.product-item 
+    .container.product-item__container
+      //head
+      .product-item__head.row 
+        .product-item__head-title.col-md-6 
+          h3.product-item__title-element Север-стрит
+        .product-item__head-text.col-md-6 
+          p Промышленный светодиодный светильник консольного типа север-стрит
+
+      //images
+      -var images = ['./img/ulichnoe_osveshhenie/1_1.png']
+      .product-item__images 
+        .row
+          .swiper.product-item__top-slider.offset-lg-0.offset-2.col-8.col-lg-12
+            .swiper-container
+              .swiper-wrapper
+                each val in images
+                  //slide
+                  a(href=val data-fslightbox='1' data-barba-prevent data-cursor='magnifier').swiper-slide.image.image_contain.product-item__top-slide 
+                    img(data-src=val, alt="image").swiper-lazy
+            .swiper-pagination
+
+      //content
+      .product-item__content
+        //если контент существует
+        .info-features.product-item__info-features
+          span.info-features__title Область применения:
+          ul.info-features__list
+            li.info-features__item Автодороги
+            li.info-features__item Освещение промышленных объектов
+            li.info-features__item Освещение парков, торговых центров
+
+        .row.product-item__buttons
+          //если доп информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            button.product-item__more-button 
+              span Показать подробные характеристики ↓
+              span Свернуть подробные характеристики ↑
+          //если пдф информация существует то эта кнопка существует
+          .col-md-6.col-lg-12
+            a(href='./docs/Prom-inn_A4_v3.pdf#page=11' target='_blank' rel='noopener').button.button_style-2 
+              span Техническая документация (PDF) 
+              
+      //else content  
+      .product-item__more-content
+        .row
+          mixin item(text1, text2)
+            li.info-list__item.row
+              span.col-sm-6 
+                span=text1
+              span.col-sm-6=text2
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Питание от сети', '176-264 В AC')
+            +item('Цветовая температура', '3000 / 4000 / 5000 °К')
+            +item('Индекс цветопередачи', '75 Ra')
+            +item('Коэффициент мощности', 'COS ф ≥ 0,95')
+            +item('Класс защиты от поражения электрическим током', 'I')
+            +item('Ударопрочность', 'IK07')
+            
+          ul.info-list.product-item__info-list.col-lg-6
+            +item('Группа механического исполнения', 'M1, M2')
+            +item('Температура эксплуатации', '-40°C … +50°C')
+            +item('Степень защиты от проникновения влаги и пыли', 'IP 66')
+            +item('Система управления', 'PLC (ЛК) / PLCD (ЛКД) / Wi-Fi (РК) / Смешанного типа (СК')
+            +item('Масса в базовой комплектации', '6 кг')
+            +item('Гарантия', '5 лет')
+
+  include blocks/contacts-blocks
