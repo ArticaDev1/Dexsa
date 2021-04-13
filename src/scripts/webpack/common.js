@@ -6,7 +6,7 @@ const $body = document.body;
 const $wrapper = document.querySelector('.wrapper');
 const $content = document.querySelector('.content');
 const $header = document.querySelector('.header');
-const $footer = document.querySelector('.footer');
+const $overlay = document.querySelector('.transition-overlay');
 const brakepoints = {
   sm: 576,
   md: 768,
@@ -201,7 +201,7 @@ const Transitions = {
     window.dispatchEvent(new Event("enterstart"));
 
     this.enterAnimation = gsap.timeline() 
-      .fromTo([$container, $footer], {autoAlpha:0}, {autoAlpha:1})
+      .to($overlay, {autoAlpha:0})
     .eventCallback('onComplete', ()=>{
       this.active = false;
       window.dispatchEvent(new Event("enterfinish"));
@@ -213,7 +213,7 @@ const Transitions = {
     window.dispatchEvent(new Event("exitstart"));
     
     this.exitAnimation = gsap.timeline()
-      .to([$container, $footer], {autoAlpha:0})
+    .to($overlay, {autoAlpha:1})
     .eventCallback('onComplete', ()=>{
       window.dispatchEvent(new Event("exitfinish"));
       barba.done();
@@ -1777,11 +1777,14 @@ class ProductBlock {
         this.$morebtn.classList.add('is-active');
         this.$more.style.display = 'block';
 
+        let hh = $header.getBoundingClientRect().height,
+            wh = window.innerHeight
+
         let y;
-        if(window.innerWidth>=brakepoints.sm) {
-          y = this.$more.getBoundingClientRect().bottom + Scroll.y + 50 - window.innerHeight;
+        if(window.innerWidth>=brakepoints.sm && this.$more.getBoundingClientRect().height < wh - hh) {
+          y = this.$more.getBoundingClientRect().bottom + Scroll.y + 50 - wh;
         } else {
-          y = this.$more.getBoundingClientRect().top + Scroll.y - $header.getBoundingClientRect().height + 1;
+          y = this.$more.getBoundingClientRect().top + Scroll.y - hh;
         }
         Scroll.scrollTop(y, Speed)
       } 
@@ -1944,6 +1947,7 @@ class SfSlider {
 
     this.swiper = new Swiper(this.$slider, {
       touchStartPreventDefault: false,
+      longSwipesRatio: 0.1,
       loop: true,
       slidesPerView: 1,
       spaceBetween: 16,
@@ -2030,6 +2034,10 @@ class ProductHead {
     if(this.$parent.classList.contains('product-head_type-1')) {
       this.animation.add(
         gsap.fromTo(this.$images_wrapper, {yPercent:15, xPercent:-20, scale:0.9}, {yPercent:0, xPercent:0, scale:1, duration:Speed*1.5, ease:'power2.out'}),
+      `-=${Speed*1.5}`)
+    } else if(this.$parent.classList.contains('product-head_type-2')) {
+      this.animation.add(
+        gsap.fromTo(this.$images_wrapper, {yPercent:15, xPercent:10, scale:0.9}, {yPercent:0, xPercent:0, scale:1, duration:Speed*1.5, ease:'power2.out'}),
       `-=${Speed*1.5}`)
     } else {
       this.animation.add(

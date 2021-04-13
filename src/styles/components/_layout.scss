@@ -10,6 +10,7 @@
 }
 
 .content {
+  position: relative;
   &[data-scrollbar="true"] {
     height: 100vh;
     .scroll-content {
@@ -23,6 +24,17 @@
     flex-direction: column;
     min-height: 100vh;
   }
+}
+
+.transition-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-color: var(--color-main-bg);
+  z-index: 1000;
 }
 
 .main {
