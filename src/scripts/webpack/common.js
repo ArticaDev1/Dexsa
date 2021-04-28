@@ -120,6 +120,12 @@ const App = {
         gsap.set($wrapper, {autoAlpha:1})
       }
 
+      Inputmask({
+        mask: "+7 999 999-9999",
+        showMaskOnHover: false,
+        clearIncomplete: false
+      }).mask("[data-validate='phone']");
+
       this.afunctions.add(LightsScene, '.homepage-scene');
       this.afunctions.add(HomeScene, '.homepage');
       this.afunctions.add(ItemSlider, '.items-slider');
@@ -1451,11 +1457,6 @@ const Validation = {
         }
       }
     };
-    this.mask = Inputmask({
-      mask: "+7 999 999-9999",
-      showMaskOnHover: false,
-      clearIncomplete: false
-    }).mask("[data-validate='phone']");
 
     gsap.registerEffect({
       name: "fadeMessages",
