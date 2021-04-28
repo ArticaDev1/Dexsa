@@ -11,7 +11,7 @@ block content
     .container.category-head__container
       .category-head__content.row.stp
         h1.category-head__title.col-lg-6.animation-head__item Продукция
-        p.category-head__text.col-lg-6.animation-head__item Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
+        h6.category-head__text.col-lg-6.animation-head__item Российская компания «Декса» занимается разработкой и внедрением инновационных светотехнических решений во взрывозащищенном исполнении, отвечающих всем потребностям заказчика нефтегазовой и нефтехимической отраслей.
 
   section.section.advantages
     .container.lights-content 
@@ -93,12 +93,12 @@ block content
                 .catalogue-item__back
                   h5.catalogue-item__title.catalogue-item__title_4 Заградительные огни
 
-    section.small-section.swiper.image-slider 
+    section.small-section.swiper.image-slider.full-screen-slider
       .swiper-container
         .swiper-wrapper
           mixin slide(image, text)
             //slide
-            .swiper-slide.image-slider__slide(data-touch-hover data-cursor='slide')
+            .swiper-slide.image-slider__slide
               .image.image_cover.image_mask-1
                 img(data-src=image, alt="image").swiper-lazy
               .container
@@ -107,6 +107,12 @@ block content
           +slide('./img/ddsd.jpg', 'Передача данных от светильника к светильнику и автоматический контроль освещенности')
           +slide('./img/dddds.jpg', 'Доступ к каждому светильнику с планшета или телефона')
       .swiper-pagination.container
+      .swiper-button.swiper-button-prev.d-none.d-lg-flex(data-touch-hover)
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+      .swiper-button.swiper-button-next.d-none.d-lg-flex(data-touch-hover)
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow')
             
     section.small-section 
       .container 

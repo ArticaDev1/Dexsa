@@ -2067,6 +2067,8 @@ class ImageSlider {
   init() {
     this.$slider = this.$parent.querySelector('.swiper-container');
     this.$pagination = this.$parent.querySelector('.swiper-pagination');
+    this.$prev = this.$parent.querySelector('.swiper-button-prev');
+    this.$next = this.$parent.querySelector('.swiper-button-next');
 
     this.slider = new Swiper(this.$slider, {
       touchStartPreventDefault: false,
@@ -2081,6 +2083,10 @@ class ImageSlider {
         el: this.$pagination,
         clickable: true,
         bulletElement: 'button'
+      },
+      navigation: {
+        prevEl: this.$prev,
+        nextEl: this.$next
       }
     });
   }
@@ -2120,6 +2126,8 @@ class HeadSlider {
   init() {
     this.$slider = this.$parent.querySelector('.swiper-container');
     this.$pagination = this.$parent.querySelector('.swiper-pagination');
+    this.$prev = this.$parent.querySelector('.swiper-button-prev');
+    this.$next = this.$parent.querySelector('.swiper-button-next');
 
     this.slider = new Swiper(this.$slider, {
       touchStartPreventDefault: false,
@@ -2138,6 +2146,10 @@ class HeadSlider {
         el: this.$pagination,
         clickable: true,
         bulletElement: 'button'
+      },
+      navigation: {
+        prevEl: this.$prev,
+        nextEl: this.$next
       }
     });
   }
@@ -2208,6 +2220,8 @@ class RefSlider {
   init() {
     this.$slider = this.$parent.querySelector('.swiper-container');
     this.$pagination = this.$parent.querySelector('.swiper-pagination');
+    this.$prev = this.$parent.querySelector('.swiper-button-prev');
+    this.$next = this.$parent.querySelector('.swiper-button-next');
 
     if(!mobile()) {
       this.$images = this.$parent.querySelectorAll('.ref-slider__slide-scene');
@@ -2234,6 +2248,10 @@ class RefSlider {
         el: this.$pagination,
         clickable: true,
         bulletElement: 'button'
+      },
+      navigation: {
+        prevEl: this.$prev,
+        nextEl: this.$next
       }
     });
 

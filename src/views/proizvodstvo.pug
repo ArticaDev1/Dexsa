@@ -3,20 +3,20 @@ block variables
   -var title = sitename+' - Референс лист'
 
 block content
-  section.section.category-head.swiper
+  section.section.category-head.full-screen-slider.swiper
     .swiper-container
       .swiper-wrapper
         -let index = 0;
         mixin slide(title, text, image)
           //slide
-          .swiper-slide.screen.category-head__slide(class=index==0?'animation-head':'' data-touch-hover data-cursor='slide')
+          .swiper-slide.screen.category-head__slide(class=index==0?'animation-head':'')
             .category-head__scene(data-parallax='0.2' data-parallax-top)
               .image.image_cover.image_mask-1(class=index==0?'animation-head__image':'')
                 img(data-src=image, alt="bg").swiper-lazy
             .container.category-head__container
               .category-head__content.row.stp
                 h2.h1.category-head__title.col-lg-6(class=index==0?'animation-head__item':'')=title
-                p.category-head__text.col-lg-6(class=index==0?'animation-head__item':'')=text
+                h6.category-head__text.col-lg-6(class=index==0?'animation-head__item':'')=text
           -index++
 
         +slide('Наше производство это:', 'Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений в зависимости от характера объекта.', './img/production/1.jpg')
@@ -27,6 +27,12 @@ block content
         
     .category-head__pagination.container 
       .swiper-pagination
+    .swiper-button.swiper-button-prev.d-none.d-lg-flex(data-touch-hover)
+      svg.icon
+        use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+    .swiper-button.swiper-button-next.d-none.d-lg-flex(data-touch-hover)
+      svg.icon
+        use(xlink:href='./img/icons/icons-sprite.svg#arrow')
     
 
   include blocks/contacts-blocks   

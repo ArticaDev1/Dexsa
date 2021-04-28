@@ -46,8 +46,8 @@ block content
           .homepage-scene__trigger 10
     .homepage__container
       .homepage__top.stp.container 
-        p.homepage__label ГК ДЕКСА
-        h1.homepage__title EPC интегратор в области электротехнического оборудования для&nbsp;ТЭК
+        //p.homepage__label ГК ДЕКСА
+        h1.homepage__title EPC интегратор электротехнического оборудования<br> для предприятий&nbsp;ТЭК
       .homepage__bottom.container
         .row
           .homepage__request.col-xl-4
@@ -69,7 +69,12 @@ block content
                   svg.icon
                     use(xlink:href='./img/icons/icons-sprite.svg#arrow')
                 //images
-                .items-slider__images 
+                .items-slider__images
+                  //image
+                  .items-slider__image
+                    | Инжиниринг
+                    .image
+                      img(data-src="../img/homeslider/Group 615.png", alt="img").lazyload
                   //image
                   a(href=obshhepromyshhlennoe_osveshhenie).items-slider__image
                     | Взрывозащищенное освещение
@@ -96,6 +101,10 @@ block content
                 //slider
                 .swiper-container.items-slider__element
                   .swiper-wrapper
+                    //slide
+                    .swiper-slide.items-slider__slide 
+                      h4.items-slider__slide-title Инжиниринг
+                      p Эксклюзивный инжиниринг и разработка проекта под ключ
                     //slide
                     .swiper-slide.items-slider__slide 
                       h4.items-slider__slide-title Взрывозащищенное освещение

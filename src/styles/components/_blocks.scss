@@ -1,6 +1,7 @@
 .screen {
   min-height: 100vh;
 }
+
 .stp {
   padding-top: 150px;
   @include media-breakpoint-down(xxl) {
@@ -154,6 +155,7 @@
   }
   &__title {
     margin: 0;
+    text-align: center;
   }
   @include media-breakpoint-up(xl) {
     &__request {
@@ -175,6 +177,11 @@
     }
   }
   @include media-breakpoint-down(xl) {
+    &__title {
+      br {
+        display: none;
+      }
+    }
     &__top {
       padding-bottom: 80px;
     }
@@ -209,6 +216,15 @@
         display: none;
       }
     }
+  }
+}
+
+.full-screen-slider {
+  .swiper-button-next {
+    right: 65px;
+  }
+  .swiper-button-prev {
+    left: 65px;
   }
 }
 
@@ -2969,6 +2985,7 @@
     }
     &-content {
       padding-bottom: 200px;
+      width: calc(100% + 24px);
     }
     &-text {
       margin: 58px 0 0 0;
@@ -3097,6 +3114,7 @@
       &-content {
         padding-bottom: 50px;
         flex-direction: column;
+        width: calc(100% + 16px);
       }
       &-logo {
         height: 80px;

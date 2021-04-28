@@ -4,13 +4,13 @@ block variables
 
 
 block content
-  section.section.ref-slider.swiper.animation-head
+  section.section.ref-slider.swiper.animation-head.full-screen-slider
     .swiper-container
       .swiper-wrapper
         -let index1 = 0;
         mixin slide(image) 
           //slide 
-          .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor='slide')
+          .swiper-slide.screen.ref-slider__slide
             .ref-slider__slide-scene(data-parallax='0.2' data-parallax-top)
               .image.image_cover(class=index1==0?'image_mask-1':'').animation-head__image
                 img(data-src=image, alt="bg").swiper-lazy
@@ -21,12 +21,12 @@ block content
                     span.ref-slider__slide-label Заказчик
                     .image.image_contain.ref-slider__slide-logo
                       img(data-src="./img/clients/1.png", alt="logo").lazyload
-                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
+                  .col-lg-5.col-sm-6.ref-slider__slide-block.animation-head__item
                     span.ref-slider__slide-label Объект
-                    h4.ref-slider__slide-text.ref-slider__slide-title Трубопрокатный цех №8
-                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
+                    h4.ref-slider__slide-text.ref-slider__slide-title Строительство Комплекса ЭЛОУ-АВТ на территории действующего завода  АО «Газпромнефть-Омский НПЗ»
+                  .col-lg-4.ref-slider__slide-block.animation-head__item
                     span.ref-slider__slide-label Выполненные работы:
-                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
+                    p.ref-slider__slide-text Производство и комплексная поставка оборудования:взрывозащищённое освещение шкафы управления освещением, заградительные огни.
           -index1++
 
         +slide('./img/referens/1.jpg')
@@ -37,142 +37,90 @@ block content
 
     .ref-slider__pagination.container 
       .swiper-pagination
+    .swiper-button.swiper-button-prev.d-none.d-lg-flex(data-touch-hover)
+      svg.icon
+        use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+    .swiper-button.swiper-button-next.d-none.d-lg-flex(data-touch-hover)
+      svg.icon
+        use(xlink:href='./img/icons/icons-sprite.svg#arrow')
 
+  mixin slider(logo, title, text)
+    section.section.ref-slider.swiper.full-screen-slider
+      .swiper-container
+        .swiper-wrapper
+          -let index2 = 0;
+          mixin slide(image) 
+            //slide 
+            .swiper-slide.screen.ref-slider__slide
+              .ref-slider__slide-scene(data-parallax='0.2')
+                .image.image_cover(class=index2==0?'image_mask-1':'')
+                  img(data-src=image, alt="bg").swiper-lazy
+              if index2==0
+                .container.ref-slider__slide-container
+                  .ref-slider__slide-content.row.stp 
+                    .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block
+                      span.ref-slider__slide-label Заказчик
+                      .image.image_contain.ref-slider__slide-logo
+                        img(data-src=logo, alt="logo").lazyload
+                    .col-lg-5.col-sm-6.ref-slider__slide-block
+                      span.ref-slider__slide-label Объект
+                      h4.ref-slider__slide-text.ref-slider__slide-title !{title}
+                    .col-lg-4.ref-slider__slide-block
+                      span.ref-slider__slide-label Выполненные работы:
+                      p.ref-slider__slide-text !{text}
+            -index2++
+          +slide('./img/referens/1.jpg')
+          +slide('./img/referens/2.jpg')
+          +slide('./img/referens/3.jpg')
+          +slide('./img/referens/4.jpg')
+          +slide('./img/referens/5.jpg')
+      .ref-slider__pagination.container 
+        .swiper-pagination
+      .swiper-button.swiper-button-prev.d-none.d-lg-flex(data-touch-hover)
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow')
+      .swiper-button.swiper-button-next.d-none.d-lg-flex(data-touch-hover)
+        svg.icon
+          use(xlink:href='./img/icons/icons-sprite.svg#arrow')
 
-  section.section.ref-slider.swiper
-    .swiper-container
-      .swiper-wrapper
-        -let index2 = 0;
-        mixin slide(image) 
-          //slide 
-          .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor='slide')
-            .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index2==0?'image_mask-1':'').animation-head__image
-                img(data-src=image, alt="bg").swiper-lazy
-            if index2==0
-              .container.ref-slider__slide-container
-                .ref-slider__slide-content.row.stp 
-                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
-                    span.ref-slider__slide-label Заказчик
-                    .image.image_contain.ref-slider__slide-logo
-                      img(data-src="./img/clients/2.png", alt="logo").lazyload
-                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Объект
-                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
-                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Выполненные работы:
-                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
-          -index2++
-        +slide('./img/referens/2.jpg')
-        +slide('./img/referens/3.jpg')
-        +slide('./img/referens/4.jpg')
-        +slide('./img/referens/5.jpg')
-        +slide('./img/referens/1.jpg')
-    .ref-slider__pagination.container 
-      .swiper-pagination
+  
 
-  section.section.ref-slider.swiper
-    .swiper-container
-      .swiper-wrapper
-        -let index3 = 0;
-        mixin slide(image) 
-          //slide 
-          .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor='slide')
-            .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index3==0?'image_mask-1':'').animation-head__image
-                img(data-src=image, alt="bg").swiper-lazy
-            if index3==0
-              .container.ref-slider__slide-container
-                .ref-slider__slide-content.row.stp 
-                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
-                    span.ref-slider__slide-label Заказчик
-                    .image.image_contain.ref-slider__slide-logo
-                      img(data-src="./img/clients/3.png", alt="logo").lazyload
-                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Объект
-                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
-                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Выполненные работы:
-                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
-          -index3++
-        +slide('./img/referens/3.jpg')
-        +slide('./img/referens/4.jpg')
-        +slide('./img/referens/5.jpg')
-        +slide('./img/referens/1.jpg')
-        +slide('./img/referens/2.jpg')
-    .ref-slider__pagination.container 
-      .swiper-pagination
+  +slider('./img/clients/1.png', 
+    'Установка каталитического риформинга Л-35/11-600', 
+    'Производство и комплексная поставка оборудования:взрывозащищённое освещение, коробки распределительные взрывозащищенные, посты управления взрывозащищенные.')
+  
+  +slider('./img/clients/1.png', 
+    'Установка гидроочистки / депарафинизации ДТ для нужд АО «Газпромнефть-ОНПЗ»', 
+    'Проектирование, комплексная поставка системы электрообогрева.</br> Производство и комплексная поставка оборудования: взрывозащищенное освещение, коробки распределительные взрывозащищенные, посты управления взрывозащищенные.')
 
-  section.section.ref-slider.swiper
-    .swiper-container
-      .swiper-wrapper
-        -let index4 = 0;
-        mixin slide(image) 
-          //slide 
-          .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor='slide')
-            .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index4==0?'image_mask-1':'').animation-head__image
-                img(data-src=image, alt="bg").swiper-lazy
-            if index4==0
-              .container.ref-slider__slide-container
-                .ref-slider__slide-content.row.stp 
-                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
-                    span.ref-slider__slide-label Заказчик
-                    .image.image_contain.ref-slider__slide-logo
-                      img(data-src="./img/clients/4.png", alt="logo").lazyload
-                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Объект
-                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
-                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Выполненные работы:
-                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
-          -index4++
-        +slide('./img/referens/4.jpg')
-        +slide('./img/referens/5.jpg')
-        +slide('./img/referens/1.jpg')
-        +slide('./img/referens/2.jpg')
-        +slide('./img/referens/3.jpg')
-    .ref-slider__pagination.container 
-      .swiper-pagination
+  +slider('./img/clients/2.png', 
+    '«Установка подготовки нефти» в составе стройки «Обустройство нефтяной части Яро-Яхинского нефтегазоконденсатного месторождения»', 
+    'Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.')
+  
+  +slider('./img/clients/2.png', 
+    'Техническое перевооружение комплекса инженерно-технических средств (КИТСО) УКПГ-В, УКПГ-С Берегового НГКМ', 
+    'Комплексная поставка взрывозащищенного осветительного оборудования.')
 
-  section.section.ref-slider.swiper
-    .swiper-container
-      .swiper-wrapper
-        -let index5 = 0;
-        mixin slide(image) 
-          //slide 
-          .swiper-slide.screen.ref-slider__slide(data-touch-hover data-cursor='slide')
-            .ref-slider__slide-scene(data-parallax='0.2')
-              .image.image_cover(class=index5==0?'image_mask-1':'').animation-head__image
-                img(data-src=image, alt="bg").swiper-lazy
-            if index5==0
-              .container.ref-slider__slide-container
-                .ref-slider__slide-content.row.stp 
-                  .col-lg-3.col-sm-6.ref-slider__slide-block.ref-slider__slide-logo-block.animation-head__item
-                    span.ref-slider__slide-label Заказчик
-                    .image.image_contain.ref-slider__slide-logo
-                      img(data-src="./img/clients/5.png", alt="logo").lazyload
-                  .offset-xl-1.col-lg-3.col-sm-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Объект
-                    h4.ref-slider__slide-text.ref-slider__slide-title Завод по переработки нефти в Подмосковье
-                  .col-xl-5.col-lg-6.ref-slider__slide-block.animation-head__item
-                    span.ref-slider__slide-label Выполненные работы:
-                    p.ref-slider__slide-text Мы производим взрывозащищенные светодиодные светильники для всех классов взрывоопасных зон, различных конструктивных исполнений.
-          -index5++
-        +slide('./img/referens/5.jpg')
-        +slide('./img/referens/1.jpg')
-        +slide('./img/referens/2.jpg')
-        +slide('./img/referens/3.jpg')
-        +slide('./img/referens/4.jpg')
-    .ref-slider__pagination.container 
-      .swiper-pagination
+  +slider('./img/clients/2.png', 
+    'Северо-Русское месторождение. Объекты подготовки', 
+    'Комплексная поставка взрывозащищенного осветительного оборудования.')
 
-
-
-
-
-
-
+  +slider('./img/clients/2.png', 
+    'Объекты подготовки газа и конденсата на Харбейском месторождении', 
+    'Комплексная поставка взрывозащищенного осветительного оборудования.')
+  
+  +slider('./img/clients/8.png', 
+    '«Комплекс по производству и отгрузке сжиженного природного газа производительностью 21 тонна в час»', 
+    'Комплексная поставка взрывозащищенного осветительного оборудования.</br> Разработка и внедрение системы управления освещением (СУМО) с комплексной поставкой периметрального освещения.')
+  
+  +slider('./img/clients/3.png', 
+    'Предприятия ТЭК', 
+    'Комплексная поставка взрывозащищенного осветительного оборудования.</br> Разработка специализированных решений по освещению блочно-модульных установок.')
+  
+  +slider('./img/clients/7.png', 
+    'Предприятия ТЭК', 
+    'Комплексная поставка взрывозащищенного осветительного оборудования.<br> Разработка специализированных решений по освещению блочно-модульных установок.')
+    
 
 
 
