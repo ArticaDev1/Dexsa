@@ -242,10 +242,24 @@
   }
 }
 
+.animation-head {
+  &__item {
+    will-change: transform;
+  }
+}
+
 .category-head {
   position: relative;
   overflow: hidden;
   display: flex;
+  &__mouse-icon {
+    position: absolute;
+    z-index: 2;
+    bottom: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-color: var(--color-gray);
+  }
   &__pagination {
     position: absolute;
     bottom: 162px;
@@ -264,6 +278,7 @@
       width: 100%;
       height: 100%;
       top: 0;
+      will-change: transform;
     }
   }
   &__slide {
@@ -287,6 +302,9 @@
     }
   }
   @include media-breakpoint-down(xxl) {
+    &__mouse-icon {
+      bottom: 46px;
+    }
     &__content {
       padding-bottom: 140px;
     }
@@ -303,6 +321,9 @@
     }
   }
   @include media-breakpoint-down(lg) {
+    &__mouse-icon {
+      bottom: 60px;
+    }
     &__pagination {
       bottom: 61px;
       justify-content: center;
@@ -324,6 +345,9 @@
     }
   }
   @include media-breakpoint-down(sm) {
+    &__mouse-icon {
+      bottom: 50px;
+    }
     &__content {
       text-align: center;
       padding-bottom: 50px;
@@ -3158,7 +3182,10 @@
     right: -600px;
   }
   &__block {
-    align-items: center;
+    position: relative;
+    & > .row {
+      align-items: center;
+    }
     &:not(:last-child) {
       margin-bottom: 60px;
     }
@@ -3167,6 +3194,28 @@
     &__date {
       margin: 0;
       font-size: 2.5rem;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    &__block {
+      .image {
+        position: absolute;
+        overflow: hidden;
+        width: 370px;
+        height: 220px;
+        top: 0;
+        left: 0;
+        margin-top: -110px;
+        margin-left: -185px;
+        transition: visibility $trs1, opacity $trs1;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 2;
+        &.active {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
     }
   }
   @include media-breakpoint-up(xl) {
@@ -3183,6 +3232,22 @@
     .bg-light {
       right: -500px;
     }
+    &__block {
+      &:not(:last-child) {
+        margin-bottom: 40px;
+        .image {
+          margin-bottom: 70px;
+        }
+      }
+      .image {
+        margin-top: 70px;
+        &::before {
+          content: '';
+          display: block;
+          padding-top: 58%;
+        }
+      }
+    }
   }
   @include media-breakpoint-down(sm) {
     .bg-light {
@@ -3190,6 +3255,17 @@
     }
     &__block {
       text-align: center;
+      &:not(:last-child) {
+        margin-bottom: 60px;
+        .image {
+          margin-bottom: 60px;
+        }
+      }
+      .image {
+        margin-top: 60px;
+        margin-left: -16px;
+        margin-right: -16px;
+      }
     }
   }
 }

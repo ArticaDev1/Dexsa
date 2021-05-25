@@ -147,6 +147,7 @@ const App = {
       this.afunctions.add(HeadSlider, '.category-head.swiper');
       this.afunctions.add(Map, '.contacts-block__map');
       this.afunctions.add(HistoryBlock, '.section-history');
+      this.afunctions.add(HistoryBlockImage, '.section-history__block .image');
       this.afunctions.add(AnimationHead, '.animation-head');
       
       
@@ -2417,6 +2418,81 @@ class HistoryBlock {
 
   destroy() {
     window.removeEventListener('resize', this.check);
+    if(this.flag) this.destroyDesktop();
+    for(let child in this) delete this[child];
+  }
+}
+
+class HistoryBlockImage {
+  constructor($element) {
+    this.$element = $element;
+  }
+
+  init() {
+    this.check = ()=> {
+      if(window.innerWidth >= brakepoints.lg && (!this.initialized || !this.flag)) {
+        this.initDesktop();
+        this.flag = true;
+      } 
+      else if(window.innerWidth < brakepoints.lg && (!this.initialized || this.flag)) {
+        if(this.initialized) {
+          this.destroyDesktop();
+        }
+        this.flag = false;
+      }
+    }
+    this.check();
+    window.addEventListener('resize', this.check);
+    this.initialized = true;
+  }
+
+  initDesktop() {
+    this.$parent = this.$element.parentNode;
+    this.x = 0;
+    this.y = 0;
+    
+    this.check = (event) => {
+      if(event.type=='mousemove') {
+        this.x = event.clientX;
+        this.y = event.clientY;
+      }
+      let h = this.$parent.getBoundingClientRect().height,
+          w = this.$parent.getBoundingClientRect().width,
+          y = this.$parent.getBoundingClientRect().top,
+          x = this.$parent.getBoundingClientRect().left;
+
+      if(this.x>=x && this.x<=x+w && this.y>=y && this.y<=y+h) {
+        let x2 = this.x - x,
+            y2 = this.y - y;
+        
+        if(!this.visible) {
+          this.visible = true;
+          this.$element.classList.add('active');
+          gsap.set(this.$element, {x:x2, y:y2});
+        } else {
+          gsap.to(this.$element, {duration:0.5, x:x2, y:y2, ease:'power2.out'});
+        }
+      } 
+      
+      else if(this.visible) {
+        this.visible = false;
+        this.$element.classList.remove('active');
+      }
+    }
+
+    document.addEventListener('mousemove', this.check);
+    Scroll.addListener(this.check);
+  }
+
+  destroyDesktop() {
+    Scroll.removeListener(this.check);
+    document.removeEventListener('mousemove', this.check);
+    gsap.set(this.$element, {clearProps: "all"});
+    this.$element.classList.remove('active');
+    delete this.visible;
+  }
+
+  destroy() {
     if(this.flag) this.destroyDesktop();
     for(let child in this) delete this[child];
   }
