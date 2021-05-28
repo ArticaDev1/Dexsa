@@ -1564,22 +1564,29 @@ const Validation = {
   submitEvent: function ($form) {
     let $submit = $form.querySelector('button'),
         $inputs = $form.querySelectorAll('input, textarea');
-    $inputs.forEach(($input) => {
-      $input.parentNode.classList.add('loading');
-    })
+    
+    $inputs.forEach($input => $input.parentNode.classList.add('loading'));
     $submit.classList.add('loading');
-    //test
-    setTimeout(() => {
-      $inputs.forEach(($input) => {
-        $input.parentNode.classList.remove('loading');
-      })
+
+    let finished = ()=> {
+      $inputs.forEach($input => $input.parentNode.classList.remove('loading'));
       $submit.classList.remove('loading');
       this.reset($form);
       Modal.open(document.querySelector('#modal-succes'));
+      setTimeout(()=>{Modal.close()}, 3000)
+    }
+
+    if(!dev) {
+      $($form).request('onSend', {
+        success: ()=>{
+          finished();
+        }
+      })
+    } else {
       setTimeout(()=>{
-        Modal.close();
-      }, 3000)
-    }, 2000)
+        finished();
+      }, 2000)
+    }
   }
 }
 
@@ -1606,8 +1613,9 @@ const Modal = {
       //open
       if ($open) {
         event.preventDefault();
-        let $modal = document.querySelector(`${$open.getAttribute('href')}`);
-        this.open($modal);
+        let $modal = document.querySelector(`${$open.getAttribute('href')}`),
+            modalSubject = $open.getAttribute('data-modal-subject');
+        this.open($modal, modalSubject);
       }
       //close 
       else if ($close || (!$block && $wrap)) {
@@ -1625,7 +1633,7 @@ const Modal = {
       })
     }
   },
-  open: function ($modal) {
+  open: function ($modal, modalSubject) {
     let play = () => {
       this.$active = $modal;
       disablePageScroll();
@@ -1636,6 +1644,12 @@ const Modal = {
     if ($modal) {
       if (this.$active) this.close(play);
       else play();
+    }
+
+    //значение формы
+    let $input = $modal.querySelector('.form__subject');
+    if(modalSubject && $input) {
+      $input.setAttribute('value', modalSubject);
     }
   },
   close: function (callback) {

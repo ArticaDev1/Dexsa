@@ -220,7 +220,7 @@
                 <div class="row">
                   <div class="homepage__request col-xl-4">
                     <div class="container">
-                      <p>По вопросам партнерства, технической консультации, сервисного и гарантийного обслуживания, будем рады вашему обращению</p><a class="button button_style-2" href="#modal-form" data-modal="open"> <span>Оставить заявку</span></a>
+                      <p>По вопросам партнерства, технической консультации, сервисного и гарантийного обслуживания, будем рады вашему обращению</p><a class="button button_style-2" href="#modal-form" data-modal="open" data-modal-subject="Оставить заявку"> <span>Оставить заявку</span></a>
                     </div>
                   </div>
                   <div class="offset-xl-1 col-xl-7">
@@ -592,6 +592,7 @@
                 </div>
               </div>
               <form class="form">
+                <input class="form__subject" type="text" name="subject" value="Форма обратной связи на главной" hidden>
                 <div class="form__group row">
                   <div class="form__item offset-sm-1 offset-md-2 offset-lg-0 col-sm-10 col-md-8 col-lg-6 col-xl-3">
                     <label class="input"><span class="input__title">Имя</span>
@@ -692,6 +693,7 @@
             </div>
             <div class="modal-form__content offset-lg-3 offset-sm-2 col-lg-6 col-sm-8">
               <form class="form">
+                <input class="form__subject" type="text" name="subject" value="" hidden>
                 <div class="form__group row">
                   <div class="form__item col-12">
                     <label class="input"><span class="input__title">Имя</span>
