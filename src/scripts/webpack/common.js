@@ -43,6 +43,7 @@ barba.init({
 import Scrollbar from 'smooth-scrollbar';
 import autosize from 'autosize';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
+import device from "current-device";
 
 import Swiper, {Navigation, Pagination, Lazy, Autoplay, EffectFade} from 'swiper/core';
 Swiper.use([Navigation, Pagination, Lazy, Autoplay, EffectFade]);
@@ -342,6 +343,7 @@ const TouchHoverEvents = {
 const Cursor = {
   init: function() {
     this.$parent = document.querySelector('.cursor');
+    this.$parent.setAttribute('style', '');
 
     let events = (event)=> {
       let $target = event.target!==document?event.target.closest('[data-cursor]'):null;

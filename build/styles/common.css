@@ -3608,6 +3608,12 @@ table tr:nth-child(odd) td {
         .section__head-txt:last-child {
           margin-top: 70px; } }
 
+.section-head {
+  padding: 200px 0 0 0; }
+  @media (max-width: 575.98px) {
+    .section-head {
+      padding: 140px 0 0 0; } }
+
 @media (max-width: 575.98px) {
   .container {
     padding-right: 16px;
@@ -3736,9 +3742,10 @@ img {
   position: fixed;
   z-index: 10000;
   pointer-events: none;
-  transition: opacity 0.3s ease-in-out; }
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
   .cursor.hidden {
-    opacity: 0; }
+    opacity: 0;
+    visibility: hidden; }
   .cursor.focus .cursor-slide::before {
     border-color: var(--color-grayish);
     width: 12px;
@@ -4339,7 +4346,7 @@ img {
         width: 30px;
         height: 2px; } }
 
-.backdropfilter .modal {
+.backdropfilter:not(.android) .modal {
   background: var(--color-back-blur);
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px); }
@@ -4801,7 +4808,7 @@ img {
       margin: 20px 0 0 0;
       left: initial; } }
 
-.backdropfilter .items-slider {
+.backdropfilter:not(.android) .items-slider {
   background: var(--color-back-blur);
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px); }
@@ -5300,7 +5307,7 @@ img {
           height: 100px;
           top: 30px; } }
 
-.backdropfilter .catalogue-item__back {
+.backdropfilter:not(.android) .catalogue-item__back {
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px); }
 
@@ -6409,10 +6416,10 @@ img {
   .image-slider .swiper-pagination {
     margin-top: 20px; } }
 
-.backdropfilter .image-slider {
+.backdropfilter:not(.android) .image-slider {
   margin-top: -230px; }
   @media (max-width: 575.98px) {
-    .backdropfilter .image-slider {
+    .backdropfilter:not(.android) .image-slider {
       margin-top: -160px; } }
 
 .sumo-schema__container {
@@ -7026,7 +7033,7 @@ img {
     .nav__sub-items li:not(:last-child) {
       margin-bottom: 12px; } }
 
-.backdropfilter .header__bg, .backdropfilter .header-nav__toggle-content, .backdropfilter .nav__bg {
+.backdropfilter:not(.android) .header__bg, .backdropfilter:not(.android) .header-nav__toggle-content, .backdropfilter:not(.android) .nav__bg {
   background: var(--color-back-blur);
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px); }

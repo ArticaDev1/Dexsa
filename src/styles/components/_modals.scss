@@ -105,7 +105,7 @@
   }
 }
 
-.backdropfilter .modal {
+.backdropfilter:not(.android) .modal {
   background: var(--color-back-blur);
   backdrop-filter: $blur;
 }

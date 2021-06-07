@@ -537,7 +537,7 @@
     }
   }
 }
-.backdropfilter .items-slider {
+.backdropfilter:not(.android) .items-slider {
   background: var(--color-back-blur);
   backdrop-filter: $blur;
 }
@@ -1239,7 +1239,7 @@
   }
 }
 
-.backdropfilter .catalogue-item__back {
+.backdropfilter:not(.android) .catalogue-item__back {
   backdrop-filter: $blur;
 } 
 
@@ -2826,7 +2826,7 @@
   }
 }
 
-.backdropfilter .image-slider {
+.backdropfilter:not(.android) .image-slider {
   margin-top: -230px;
   @include media-breakpoint-down(sm) {
     margin-top: -160px;

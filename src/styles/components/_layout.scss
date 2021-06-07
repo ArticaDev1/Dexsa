@@ -147,6 +147,13 @@
   }
 }
 
+.section-head {
+  padding: 200px 0 0 0;
+  @include media-breakpoint-down(sm) {
+    padding: 140px 0 0 0;
+  }
+}
+
 @include media-breakpoint-down(sm) {
   .container {
     padding-right: $mobile-container-padding-x;

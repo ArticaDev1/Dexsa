@@ -349,7 +349,7 @@
   }
 }
 
-.backdropfilter {
+.backdropfilter:not(.android) {
   .header__bg, .header-nav__toggle-content, .nav__bg {
     background: var(--color-back-blur);
     backdrop-filter: $blur;

@@ -116,9 +116,10 @@ img {
   position: fixed;
   z-index: 10000;
   pointer-events: none;
-  transition: opacity $trs2;
+  transition: opacity $trs2, visibility $trs2;
   &.hidden {
     opacity: 0;
+    visibility: hidden;
   }
   &.focus {
     .cursor-slide {
