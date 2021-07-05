@@ -2343,7 +2343,7 @@ class Map {
         balloonContent: ' Московская область, Ленинский район, сельское поселение Совхоз им. Ленина, территория Восточная Промзона, владение 3, стр. 1'
       }, {
         iconLayout: 'default#image',
-        iconImageHref: './img/icons/map-point.svg',
+        iconImageHref: '/themes/dexsa/assets/img/icons/map-point.svg',
         iconImageSize: [40, 60],
         iconImageOffset: [-20, -60],
         hideIconOnBalloonOpen: false
